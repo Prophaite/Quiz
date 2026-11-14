@@ -95,12 +95,6 @@
   .qpin { background: none; border: 0; }
   .leaflet-tooltip.pin-tip { font-weight: 800; font-size: 1.8vh; padding: .3vh .8vw; border-radius: 99px; }
   .leaflet-tooltip.pin-tip.target { font-size: 2.4vh; background: #2b1670; color: #fff; border-color: #2b1670; }
-  /* Entrée des ninjas en fumée */
-  .smoke { position: relative; }
-  .smoke .nm, .smoke .who, span.smoke { animation: ninjaIn 1.6s ease both; }
-  .puff { position: absolute; left: 12vw; top: 50%; z-index: 2; font-size: 7vh; transform: translateY(-50%); animation: puff 1.6s ease-out both; pointer-events: none; }
-  @keyframes ninjaIn { 0%, 35% { opacity: 0; filter: blur(8px); letter-spacing: .4em; } 100% { opacity: 1; filter: none; letter-spacing: normal; } }
-  @keyframes puff { 0% { opacity: 0; transform: translateY(-50%) scale(.3); } 25% { opacity: 1; transform: translateY(-50%) scale(1.5); } 100% { opacity: 0; transform: translateY(-70%) scale(2.6); } }
   .cheater { color: #fff; background: #e5484d; font-size: .55em; font-weight: 900; padding: .15em .6em; border-radius: 99px; vertical-align: middle; text-transform: uppercase; letter-spacing: .05em; }
   .p1 .block { height: 32vh; background: linear-gradient(#ffd34d, #e6a700); color: #6b4a00; }
   .p2 .block { height: 22vh; background: linear-gradient(#e6e9f2, #a9b0c4); color: #3c4256; }
@@ -384,45 +378,28 @@ function showRevealMap(r) {
   }).catch(() => {});
 }
 
-/* Ninjas (#ninja) : absents de la salle d'attente, ils surgissent en fumée la première fois
-   qu'ils apparaissent dans un classement. On retient ceux déjà apparus pour ce salon. */
-const ninjaKey = () => `quiz-ninja-${code}`;
-function ninjaEntrance(p) {
-  if (!p.ninja) return false;
-  let seen = [];
-  try { seen = JSON.parse(sessionStorage.getItem(ninjaKey()) || '[]'); } catch {}
-  if (seen.includes(p.name)) return false;
-  seen.push(p.name);
-  try { sessionStorage.setItem(ninjaKey(), JSON.stringify(seen)); } catch {}
-  return true;
-}
-const smoke = (on) => (on ? '<span class="puff" aria-hidden="true">💨</span>' : '');
 const cheaterTag = (p) => (p.cheater ? ' <span class="cheater">Tricheur</span>' : '');
 
 function renderBoard(s) {
   const b = s.leaderboard;
   $('#stage').innerHTML = `<h1 class="center fade">🏆 Classement</h1>
-    <div class="board">${b.map((p, i) => {
-      const ninja = ninjaEntrance(p);
-      return `<div class="brow${ninja ? ' smoke' : ''}" style="animation-delay:${i * 70}ms">${smoke(ninja)}
+    <div class="board">${b.map((p, i) => `<div class="brow" style="animation-delay:${i * 70}ms">
       <span class="rk">${p.rank}</span>
       <span class="mv ${p.move > 0 ? 'up' : p.move < 0 ? 'down' : ''}">${p.move > 0 ? '▲' + p.move : p.move < 0 ? '▼' + -p.move : ''}</span>
-      <span class="nm">${ninja ? '🥷 ' : ''}${esc(p.name)}</span>
+      <span class="nm">${esc(p.name)}</span>
       ${p.last ? `<span class="gain">+${p.last}</span>` : ''}
-      <span class="sc">${p.score}</span></div>`;
-    }).join('') || '<p class="center">Aucun joueur</p>'}</div>`;
+      <span class="sc">${p.score}</span></div>`).join('') || '<p class="center">Aucun joueur</p>'}</div>`;
 }
 
 function renderPodium(s) {
   const b = s.leaderboard;
   const step = (p, cls, n) => {
     if (!p) return `<div class="step ${cls}"></div>`;
-    const ninja = ninjaEntrance(p);
-    return `<div class="step ${cls}${ninja ? ' smoke' : ''}">${smoke(ninja)}<div class="who">${esc(p.name)}${cheaterTag(p)}</div><div class="pts">${p.score} pts</div><div class="block">${n}</div></div>`;
+    return `<div class="step ${cls}"><div class="who">${esc(p.name)}${cheaterTag(p)}</div><div class="pts">${p.score} pts</div><div class="block">${n}</div></div>`;
   };
   $('#stage').innerHTML = `<h1 class="center fade">🎉 Résultats finaux</h1>
     <div class="podium">${step(b[1], 'p2', 2)}${step(b[0], 'p1', 1)}${step(b[2], 'p3', 3)}</div>
-    <div class="rest">${b.slice(3).map((p) => { const ninja = ninjaEntrance(p); return `<span class="${ninja ? 'smoke' : ''}">${smoke(ninja)}${ordinal(p.rank)} ${esc(p.name)}${cheaterTag(p)} — ${p.score}</span>`; }).join('')}</div>`;
+    <div class="rest">${b.slice(3).map((p) => `<span>${ordinal(p.rank)} ${esc(p.name)}${cheaterTag(p)} — ${p.score}</span>`).join('')}</div>`;
 }
 </script>
 </body>

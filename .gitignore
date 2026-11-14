@@ -12,9 +12,6 @@ data/quizzes.abime-*.json
 cloudflared
 cloudflared.exe
 
-# Musique d'attente personnelle (droits de diffusion, fichiers lourds)
-public/musique-attente.*
-
 # Variables d'environnement / mots de passe
 .env
 .env.*

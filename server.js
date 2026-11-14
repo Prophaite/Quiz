@@ -860,8 +860,7 @@ function displayView(room) {
     netReady: tunnel.mode !== 'starting',
     title: room.quiz.title,
     state: room.state,
-    // Les ninjas (#ninja) n'apparaissent pas dans la salle d'attente
-    players: [...room.players.values()].filter((p) => !p.ninja).map((p) => ({ name: p.name, connected: playerConnected(p) })),
+    players: [...room.players.values()].map((p) => ({ name: p.name, connected: playerConnected(p) })),
     question: publicQuestion(room, true),
     remaining: remaining(room),
     answeredCount: room.answers.size,
@@ -870,15 +869,15 @@ function displayView(room) {
     leaderboard: showBoard
       ? ranking(room).slice(0, room.state === 'end' ? 20 : 10).map((e) => {
         const p = room.players.get(e.id);
-        // ninja : l'écran le fait surgir en fumée la première fois ; cheater : démasqué en fin de partie
-        return { ...e, ninja: !!p?.ninja, cheater: room.state === 'end' && !!p?.busted };
+        // cheater : démasqué en fin de partie
+        return { ...e, cheater: room.state === 'end' && !!p?.busted };
       })
       : null,
   };
 }
 
-// Pseudos visibles par les joueurs dans le salon d'attente (ordre d'arrivée), sans les ninjas.
-const lobbyNames = (room) => (room.state === 'lobby' ? [...room.players.values()].filter((p) => !p.ninja).map((p) => p.name) : null);
+// Pseudos visibles par les joueurs dans le salon d'attente (ordre d'arrivée).
+const lobbyNames = (room) => (room.state === 'lobby' ? [...room.players.values()].map((p) => p.name) : null);
 
 // Classement complet envoyé aux téléphones à l'écran « Classement » entre les
 // questions et à la fin (pas à l'écran de la réponse).
@@ -901,9 +900,8 @@ function playerView(room, p, board, names = lobbyNames(room), pub = publicBoard(
     name: p.name,
     score: me?.score ?? 0,
     rank: revealed ? me?.rank : null,
-    // Dans la salle d'attente, un ninja ne compte pas pour les autres… mais il se voit lui-même
-    playerCount: names ? names.length + (p.ninja ? 1 : 0) : room.players.size,
-    players: names && p.ninja ? [...names, p.name] : names,
+    playerCount: room.players.size,
+    players: names,
     board: pub,
     question: publicQuestion(room, false),
     remaining: remaining(room),
@@ -983,7 +981,7 @@ function hostView(room) {
     ranking: ranking(room, false).map((e) => {
       const p = room.players.get(e.id);
       return {
-        ...e, dev: !!p?.dev, ninja: !!p?.ninja, cheats: p?.cheats || 0, busted: !!p?.busted,
+        ...e, dev: !!p?.dev, cheats: p?.cheats || 0, busted: !!p?.busted,
         risk: p ? Math.round(cheatRisk(room, p) * 100) : 0, offer: !!p?.offer, cheatNext: !!p?.cheatNext,
       };
     }),
@@ -1234,7 +1232,7 @@ function hostAction(room, action, payload = {}) {
   broadcast(room);
 }
 
-const NAME_TAGS = ['dev', 'ninja'];
+const NAME_TAGS = ['dev'];
 
 function playerJoin(body) {
   const room = rooms.get(String(body.code ?? '').trim());
@@ -1243,10 +1241,9 @@ function playerJoin(body) {
   if (p && p.key !== body.key) p = null;
   if (!p) {
     if (body.playerId && !body.name) fail('Session expirée, rejoins à nouveau', 404);
-    // Étiquettes en fin de pseudo, cumulables (« Lucas#dev#ninja », « Lucas #ninja #dev ») :
-    //   #dev   : mode test, le joueur voit les bonnes réponses sur son téléphone
-    //   #ninja : invisible dans la salle d'attente, surgit au premier classement
-    // Elles sont retirées du nom affiché partout. Une étiquette inconnue reste dans le pseudo.
+    // Étiquette en fin de pseudo (« Lucas#dev », « Lucas #dev ») :
+    //   #dev : mode test, le joueur voit les bonnes réponses sur son téléphone
+    // Elle est retirée du nom affiché partout. Une étiquette inconnue reste dans le pseudo.
     let raw = String(body.name ?? '').replace(/\s+/g, ' ').trim();
     const tags = new Set();
     for (let m; (m = /\s*#([a-z]+)$/i.exec(raw)) && NAME_TAGS.includes(m[1].toLowerCase());) {
@@ -1254,13 +1251,12 @@ function playerJoin(body) {
       raw = raw.slice(0, m.index);
     }
     const dev = tags.has('dev');
-    const ninja = tags.has('ninja');
     const clean = raw.slice(0, 20).trim();
     if (!clean) fail('Choisis un pseudo');
     if ([...room.players.values()].some((x) => x.name.toLowerCase() === clean.toLowerCase())) fail('Ce pseudo est déjà pris');
     if (room.players.size >= 300) fail('Le salon est complet');
     p = {
-      id: uid(), key: uid() + uid(), name: clean, dev, ninja, history: {}, bonus: 0, streams: 0, polls: 0, lastPoll: 0,
+      id: uid(), key: uid() + uid(), name: clean, dev, history: {}, bonus: 0, streams: 0, polls: 0, lastPoll: 0,
       cheats: 0, busted: false, offer: false, cheatNext: false, wipes: {}, wipeAt: new Set(), // tentation de triche
     };
     room.players.set(p.id, p);

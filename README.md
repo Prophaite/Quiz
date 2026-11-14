@@ -132,13 +132,6 @@ L'écran de projection joue une petite musique d'attente pendant la salle d'atte
 - Les navigateurs n'autorisent le son qu'après un clic : si un bandeau « Cliquez n'importe où pour activer la musique » apparaît, cliquez une fois sur l'écran (le bouton Plein écran suffit).
 - **Votre propre musique** : déposez un fichier `musique-attente.mp3` (ou `.ogg`, `.m4a`, `.wav`) dans le dossier `public` ; il sera joué en boucle à la place. Utilisez une musique dont vous avez les droits de diffusion.
 
-## Étiquettes de pseudo
-
-On peut ajouter une ou plusieurs étiquettes à la fin de son pseudo, dans n'importe quel ordre : `Lucas#dev#ninja`, `Lucas #ninja #dev`… Elles sont retirées du nom affiché. Une étiquette inconnue reste dans le pseudo.
-
-- `#ninja` : le joueur n'apparaît pas dans la salle d'attente (ni sur l'écran de projection, ni sur les téléphones des autres), puis surgit dans un nuage de fumée 💨 au premier classement.
-- `#dev` : mode test, voir ci-dessous.
-
 ## Mode test (#dev)
 
 Un joueur qui s'inscrit avec un pseudo terminé par `#dev` (ex. `Lucas#dev`) voit la bonne réponse sur son téléphone pendant chaque question. Partout ailleurs (projection, classements, autres joueurs), son nom s'affiche sans `#dev` et rien ne le distingue.

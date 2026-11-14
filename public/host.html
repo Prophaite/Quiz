@@ -865,10 +865,9 @@ function questionPanel(s) {
   return h;
 }
 
-// Badges : ninja et triches visibles seulement en mode dev ; « Tricheur » démasqué en fin de partie pour tous
+// Badges de triche ; « Tricheur » démasqué en fin de partie pour tous
 function playerTags(p, s) {
   let h = '';
-  if (DEV && p.ninja) h += ' <span class="tag" style="background:#2b2b3a;color:#fff" title="Inscrit avec #ninja">🥷</span>';
   if (s.settings.luck && (p.cheats || p.offer || p.cheatNext)) {
     const what = p.cheatNext ? 'va tricher à la prochaine question' : p.offer ? 'a une proposition en cours' : `a triché ${p.cheats} fois`;
     h += ` <span class="tag" style="background:#ecebfd;color:#5b4bdb" title="${esc(p.name)} ${what}. Risque de tout perdre à sa prochaine triche : ${p.risk} %${p.busted ? ' — a déjà tout perdu (révélé au classement final)' : ''}">🎲${p.cheats}${p.offer ? ' ?' : ''}${p.cheatNext ? ' 😈' : ''} · ${p.risk} %${p.busted ? ' 💀' : ''}</span>`;
