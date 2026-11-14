@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz Live</title>
+<script>
+  // Sur téléphone on va directement à la page joueur, sur PC à la gestion
+  location.replace(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ? '/play' + location.search : '/host');
+</script>
+</head>
+<body></body>
+</html>

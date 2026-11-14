@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz Live — Gestion</title>
+<style>
+  :root {
+    --bg: #f4f5f9; --panel: #fff; --text: #1b1d29; --muted: #6b7088; --line: #e3e5ee;
+    --accent: #5b4bdb; --accent-soft: #ecebfd; --ok: #1f9d55; --ok-soft: #e3f6eb; --ko: #d83a3a; --ko-soft: #fde8e8;
+    --warn: #b7791f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--text);
+    background: #4b3bc4 linear-gradient(160deg, #4b3bc4 0%, #6d3fd8 55%, #7e3fe0 100%) fixed; min-height: 100vh; }
+  header { display: flex; align-items: center; gap: 24px; padding: 0 24px; height: 56px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+  header h1 { font-size: 17px; margin: 0; letter-spacing: -.01em; }
+  header h1 span { color: var(--accent); }
+  nav { display: flex; gap: 4px; }
+  nav button { background: none; border: 0; padding: 8px 14px; border-radius: 8px; font: inherit; font-weight: 600; color: var(--muted); cursor: pointer; }
+  nav button.active { background: var(--accent-soft); color: var(--accent); }
+  .room-pill { margin-left: auto; font-weight: 600; color: var(--muted); }
+  .room-pill b { color: var(--accent); font-size: 16px; letter-spacing: .08em; }
+  main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+  .hidden { display: none !important; }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; box-shadow: 0 8px 24px rgba(25, 10, 70, .25); }
+  .panel h2 { font-size: 15px; margin: 0 0 12px; }
+  .panel h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 18px 0 8px; }
+  button, .btn { font: inherit; font-weight: 600; border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 8px 14px; border-radius: 8px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  button:hover, .btn:hover { border-color: #c9cce0; }
+  button.primary, .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.primary:hover { filter: brightness(1.08); }
+  button.big { padding: 12px 20px; font-size: 15px; }
+  button.danger { color: var(--ko); }
+  button.small { padding: 4px 9px; font-size: 12px; }
+  button:disabled { opacity: .45; cursor: default; }
+  input, select, textarea { font: inherit; color: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: #fff; width: 100%; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 54px; }
+  label.field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
+  label.check { display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; }
+  label.check input { width: auto; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .grow { flex: 1; }
+  .muted { color: var(--muted); }
+
+  /* ---------- Éditeur ---------- */
+  .editor { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
+  .quiz-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+  .quiz-list button { justify-content: space-between; border: 0; text-align: left; font-weight: 500; }
+  .quiz-list button.active { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+  .quiz-list small { color: var(--muted); font-weight: 500; }
+  .side-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .title-input { font-size: 20px; font-weight: 700; border-color: transparent; padding: 6px 8px; }
+  .title-input:hover { border-color: var(--line); }
+  .save-status { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  /* L'éditeur n'a pas de cadre blanc : chaque question est une carte posée sur le fond violet. */
+  #quizEditor { background: transparent; border: 0; padding: 0; box-shadow: none; }
+  #quizEditor .title-input { color: #fff; background: transparent; }
+  #quizEditor .title-input::placeholder { color: rgba(255, 255, 255, .6); }
+  #quizEditor .title-input:hover { border-color: rgba(255, 255, 255, .35); }
+  #quizEditor .title-input:focus { outline: 2px solid rgba(255, 255, 255, .5); border-color: transparent; background: rgba(255, 255, 255, .1); }
+  #quizEditor .save-status { color: rgba(255, 255, 255, .8); }
+  #quizEditor .empty { color: rgba(255, 255, 255, .85); background: rgba(255, 255, 255, .1); border: 2px dashed rgba(255, 255, 255, .35); border-radius: 12px; margin-top: 16px; }
+  .add-bar button { box-shadow: 0 4px 12px rgba(25, 10, 70, .2); }
+  .qcard { border: 0; border-radius: 14px; padding: 16px; margin-top: 16px; background: #fff; box-shadow: 0 8px 24px rgba(25, 10, 70, .28); }
+  .qcard.trap { box-shadow: 0 0 0 3px #f5a524, 0 8px 24px rgba(25, 10, 70, .28); }
+  .map-edit { height: 320px; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 8px; z-index: 0; }
+  .qpin { background: none; border: 0; }
+  .steal-line { background: #fff4e5; border: 1px solid #f5c37a; border-radius: 8px; padding: 6px 10px; margin: 6px 0; }
+  .trap-check { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .qcard.trap .trap-check { color: #b7791f; font-weight: 600; }
+  .qcard-head { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .qnum { width: 30px; height: 30px; border-radius: 8px; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 700; flex: none; }
+  .qcard-head select { width: auto; }
+  .qcard-grid { display: grid; grid-template-columns: 1fr 110px 110px; gap: 10px; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .choice { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 4px 6px 4px 4px; }
+  .choice.correct { border-color: var(--ok); background: var(--ok-soft); }
+  .choice .shape { width: 30px; height: 30px; border-radius: 6px; color: #fff; display: grid; place-items: center; flex: none; font-size: 13px; }
+  .choice input[type=text] { border: 0; padding: 4px; background: transparent; }
+  .choice label { font-size: 12px; white-space: nowrap; display: flex; align-items: center; gap: 4px; color: var(--muted); cursor: pointer; }
+  .choice label input { width: auto; }
+  .type-box { margin-top: 10px; display: grid; gap: 10px; }
+  .num-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1.4fr; gap: 10px; }
+  .hint { font-size: 12px; color: var(--muted); }
+  .add-bar { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .empty { text-align: center; padding: 40px; color: var(--muted); }
+
+  /* ---------- Partie ---------- */
+  .live { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
+  .setup { max-width: 560px; margin: 40px auto; display: grid; gap: 14px; }
+  .join-box { display: flex; gap: 16px; align-items: center; }
+  .join-box img { width: 120px; height: 120px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+  .join-code { font-size: 38px; font-weight: 800; letter-spacing: .1em; color: var(--accent); line-height: 1; }
+  .join-url { font-size: 12px; color: var(--muted); word-break: break-all; }
+  .state-badge { display: inline-block; padding: 3px 10px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 12px; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+  .qview { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-top: 10px; }
+  .qview .qtext { font-size: 18px; font-weight: 700; margin: 6px 0; }
+  .answer-line { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); margin-top: 6px; }
+  .answer-line.ok { background: var(--ok-soft); border-color: #b5e3c7; }
+  .answer-line.ko { background: var(--ko-soft); border-color: #f4c3c3; }
+  .answer-line.part { background: #fff6e0; border-color: #f0d48a; }
+  .answer-line .val { flex: 1; font-weight: 600; word-break: break-word; }
+  .answer-line .who { color: var(--muted); font-size: 12px; }
+  .tag { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; }
+  .tag.ok { background: var(--ok); color: #fff; }
+  .tag.ko { background: var(--ko); color: #fff; }
+  .timer { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 22px; }
+  .progress { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .progress > div { height: 100%; background: var(--accent); transition: width .3s; }
+  .players { display: flex; flex-direction: column; gap: 4px; max-height: 70vh; overflow: auto; }
+  .player { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; }
+  .player:hover { background: var(--bg); }
+  .player .rank { width: 26px; font-weight: 800; color: var(--muted); text-align: right; }
+  .player .name { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .player .score { font-weight: 800; font-variant-numeric: tabular-nums; }
+  .player .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; }
+  .player .dot.off { background: #c4c7d6; }
+  .player .answered { font-size: 11px; color: var(--ok); font-weight: 700; }
+  .player .acts { display: none; gap: 2px; }
+  .player:hover .acts { display: flex; }
+  .player .acts button { padding: 1px 6px; font-size: 11px; }
+  .tag .undev { border: 0; background: rgba(0,0,0,.12); color: inherit; padding: 0 5px; margin-left: 3px; border-radius: 99px; font-size: 10px; line-height: 1.4; }
+  .bars { display: grid; gap: 6px; margin-top: 8px; }
+  .bar { display: grid; grid-template-columns: 26px 1fr 40px; align-items: center; gap: 8px; }
+  .bar .fill { height: 24px; border-radius: 6px; min-width: 4px; }
+  .bar .label { font-size: 12px; color: var(--muted); grid-column: 2 / 4; margin-top: -4px; }
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1b1d29; color: #fff; padding: 10px 18px; border-radius: 10px; font-weight: 600; z-index: 100; }
+  @media (max-width: 900px) {
+    .editor, .live { grid-template-columns: 1fr; }
+    .qcard-grid, .num-grid, .choices { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Quiz <span>Live</span></h1>
+  <nav>
+    <button data-tab="editor" class="active">📝 Questions</button>
+    <button data-tab="live">🎮 Partie</button>
+  </nav>
+  <div class="room-pill" id="roomPill"></div>
+</header>
+
+<main>
+  <!-- ================= ÉDITEUR ================= -->
+  <section id="tab-editor" class="editor">
+    <aside class="panel">
+      <h2>Mes quiz</h2>
+      <div class="quiz-list" id="quizList"></div>
+      <div class="side-actions">
+        <button id="newQuiz" class="primary">+ Nouveau</button>
+        <button id="dupQuiz">Dupliquer</button>
+        <button id="exportXlsx" title="Télécharger ce quiz en tableur Excel (modifiable puis réimportable)">Exporter Excel</button>
+        <button id="exportQuiz" title="Télécharger ce quiz en fichier JSON">Exporter JSON</button>
+        <button id="importQuiz" title="Fichier Excel (.xlsx) ou JSON">Importer</button>
+        <button id="xlsxTemplate" title="Télécharger le tableur vierge à remplir, puis l’importer">📊 Modèle Excel</button>
+        <button id="deleteQuiz" class="danger" style="grid-column: span 2">Supprimer ce quiz</button>
+      </div>
+      <input type="file" id="importFile" accept=".xlsx,.json,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="hidden">
+    </aside>
+
+    <section class="panel" id="quizEditor">
+      <div class="row">
+        <input class="title-input grow" id="quizTitle" placeholder="Titre du quiz">
+        <span class="save-status" id="saveStatus"></span>
+      </div>
+      <div id="questions"></div>
+      <div class="add-bar">
+        <button data-add="choice">+ Choix multiple</button>
+        <button data-add="truefalse">+ Vrai / Faux</button>
+        <button data-add="text">+ Mot / nom à écrire</button>
+        <button data-add="number">+ Valeur à trouver</button>
+        <button data-add="map">+ Carte (repère)</button>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= PARTIE ================= -->
+  <section id="tab-live" class="hidden">
+    <div id="liveSetup" class="panel setup">
+      <h2>Lancer une partie</h2>
+      <label class="field">Quiz
+        <select id="setupQuiz"></select>
+      </label>
+      <label class="check"><input type="checkbox" id="setupSpeed" checked> ⏱ Points selon la rapidité (questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 %)</label>
+      <label class="check"><input type="checkbox" id="setupAuto" checked> Fermer automatiquement quand tout le monde a répondu</label>
+      <button class="primary big" id="createRoom">Créer le salon</button>
+      <p class="hint" id="netHint"></p>
+    </div>
+
+    <div id="liveRoom" class="live hidden">
+      <div>
+        <div class="panel">
+          <div class="join-box">
+            <img id="qrImg" alt="QR code">
+            <div class="grow">
+              <div class="muted">Code du salon</div>
+              <div class="join-code" id="roomCode"></div>
+              <div class="join-url" id="joinUrl"></div>
+              <div class="row" style="margin-top:10px">
+                <a class="btn primary" id="openDisplay" target="quiz-display">📺 Ouvrir l’écran de projection</a>
+                <button id="copyLink">Copier le lien joueur</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:16px">
+          <div class="row">
+            <h2 style="margin:0" id="liveTitle"></h2>
+            <span class="state-badge" id="stateBadge"></span>
+            <span class="grow"></span>
+            <span class="timer" id="liveTimer"></span>
+          </div>
+          <div class="controls" id="controls"></div>
+          <div id="liveBody"></div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="row"><h2 class="grow" style="margin:0">Joueurs <span class="muted" id="playerCount"></span></h2></div>
+        <p class="hint">Survolez un joueur pour ajuster son score ou l’exclure.</p>
+        <div class="players" id="players"></div>
+        <h3>Réglages</h3>
+        <label class="check" title="Questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 % à la fin du temps"><input type="checkbox" id="setSpeed"> ⏱ Points selon la rapidité</label>
+        <label class="check"><input type="checkbox" id="setAuto"> Fermeture auto.</label>
+        <label class="check" title="Décoché : aucun joueur inscrit avec #dev ne voit plus les réponses"><input type="checkbox" id="setDev"> Mode test (#dev) autorisé</label>
+        <label class="check" title="Entre deux questions, certains joueurs se voient proposer de tricher : la bonne réponse est remplie pour eux, mais ils risquent de tout perdre (révélé au classement final)"><input type="checkbox" id="setLuck"> 🎲 Tentation de triche</label>
+        <h3>Salon</h3>
+        <div class="row">
+          <select id="reloadSelect" class="grow"></select>
+          <button id="reloadQuiz" class="small">Charger</button>
+        </div>
+        <p class="hint">Change de quiz en gardant les joueurs (salon d’attente ou fin de partie).</p>
+        <button id="leaveRoom" class="danger small">Fermer ce salon sur ce PC</button>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<script src="/common.js"></script>
+<script src="/xlsx-import.js"></script>
+<script>
+const { esc, COLORS, SHAPES, TYPE_LABELS, fmt } = Q;
+// Mode dev de la page de gestion (/host?dev=1, ouvert par Lancer-Quiz-Dev.bat) :
+// c'est le seul cas où les joueurs inscrits avec #dev sont signalés par un badge.
+const DEV = Q.params.get('dev') === '1';
+if (DEV) {
+  document.title += ' (dev)';
+  document.querySelector('header h1').insertAdjacentHTML('beforeend',
+    ' <span class="tag" style="background:#ffd34d;color:#3a2a00;font-size:11px;vertical-align:middle" title="Les joueurs inscrits avec #dev sont signalés">🛠 dev</span>');
+}
+const $ = (s) => document.querySelector(s);
+
+function toast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2600);
+}
+
+/* ===================== Onglets ===================== */
+function showTab(name) {
+  document.querySelectorAll('nav button').forEach((b) => b.classList.toggle('active', b.dataset.tab === name));
+  $('#tab-editor').classList.toggle('hidden', name !== 'editor');
+  $('#tab-live').classList.toggle('hidden', name !== 'live');
+  if (name === 'live') fillQuizSelects();
+}
+document.querySelectorAll('nav button').forEach((b) => (b.onclick = () => showTab(b.dataset.tab)));
+
+/* ===================== Éditeur de quiz ===================== */
+let quizzes = [];
+let current = null;
+let saveTimer = null;
+
+async function loadQuizzes() {
+  try {
+    quizzes = await Q.get('/api/quizzes');
+  } catch (e) {
+    document.querySelector('main').innerHTML = `<div class="panel setup"><h2>Accès refusé</h2><p>${esc(e.message)}</p>
+      <p class="muted">Ouvrez la gestion sur le PC qui fait tourner le quiz (http://localhost:3000/host), ou définissez un mot de passe ADMIN_PASSWORD (voir README).</p></div>`;
+    throw e;
+  }
+  if (!current || !quizzes.find((q) => q.id === current.id)) current = quizzes[0] || null;
+  else current = quizzes.find((q) => q.id === current.id);
+  renderQuizList();
+  renderEditor();
+}
+
+function renderQuizList() {
+  $('#quizList').innerHTML = quizzes
+    .map((q) => `<button data-id="${esc(q.id)}" class="${current && q.id === current.id ? 'active' : ''}">
+      <span>${esc(q.title)}</span><small>${q.questions.length} q.</small></button>`)
+    .join('') || '<p class="muted">Aucun quiz</p>';
+  $('#quizList').querySelectorAll('button').forEach((b) => {
+    b.onclick = async () => {
+      await flushSave();
+      current = quizzes.find((q) => q.id === b.dataset.id);
+      renderQuizList();
+      renderEditor();
+    };
+  });
+}
+
+function scheduleSave() {
+  $('#saveStatus').textContent = 'Modifications…';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(save, 700);
+}
+async function flushSave() {
+  if (saveTimer) { clearTimeout(saveTimer); await save(); }
+}
+async function save() {
+  saveTimer = null;
+  if (!current) return;
+  let saved;
+  try { saved = await Q.api('/api/quizzes', current); }
+  catch (e) { $('#saveStatus').textContent = '⚠ ' + e.message; return; }
+  const i = quizzes.findIndex((q) => q.id === saved.id);
+  if (i >= 0) quizzes[i] = current; else quizzes.push(current);
+  $('#saveStatus').textContent = '✓ Enregistré';
+  renderQuizList();
+}
+
+const uid = () => Math.random().toString(36).slice(2, 10);
+function blankQuestion(kind) {
+  const base = { id: uid(), text: '', image: '', points: 100, time: 30 };
+  if (kind === 'truefalse') return { ...base, type: 'choice', time: 15, choices: [{ text: 'Vrai', correct: true }, { text: 'Faux', correct: false }] };
+  if (kind === 'choice') return { ...base, type: 'choice', choices: [{ text: '', correct: true }, { text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }] };
+  if (kind === 'text') return { ...base, type: 'text', answers: [], fuzzy: true };
+  if (kind === 'map') return { ...base, type: 'map', lat: 46.6, lng: 2.4, label: '', tolerance: 25, maxKm: 300, mode: 'gradual', view: { lat: 46.6, lng: 2.4, zoom: 5 } };
+  return { ...base, type: 'number', value: 0, tolerance: 0, mode: 'closest', unit: '' };
+}
+function convertQuestion(q, type) {
+  const n = blankQuestion(type);
+  return { ...n, id: q.id, text: q.text, image: q.image, points: q.points, time: q.time, trap: !!q.trap };
+}
+
+function renderEditor() {
+  const box = $('#questions');
+  if (!current) {
+    $('#quizEditor').classList.add('hidden');
+    return;
+  }
+  $('#quizEditor').classList.remove('hidden');
+  $('#quizTitle').value = current.title;
+  $('#saveStatus').textContent = '';
+  if (!current.questions.length) {
+    box.innerHTML = '<div class="empty">Aucune question pour l’instant.<br>Ajoutez-en une avec les boutons ci-dessous.</div>';
+    return;
+  }
+  box.innerHTML = current.questions.map((q, i) => questionCard(q, i)).join('');
+  initEditorMaps();
+}
+
+/* Cartes des questions « Carte » dans l'éditeur (avec noms de lieux, pour placer le point) */
+const editorMaps = new Map(); // id de question → { map, refresh }
+async function initEditorMaps() {
+  for (const m of editorMaps.values()) m.map.remove();
+  editorMaps.clear();
+  const els = [...qbox.querySelectorAll('[data-map]')];
+  if (!els.length) return;
+  let L;
+  try { L = await Q.leaflet(); } catch (e) { els.forEach((el) => (el.innerHTML = `<p class="hint" style="padding:12px">${esc(e.message)}</p>`)); return; }
+  for (const el of els) {
+    if (!el.isConnected) continue;
+    const q = current.questions[Number(el.dataset.map)];
+    if (!q || q.type !== 'map') continue;
+    const map = Q.makeMap(el, { view: q.view, labels: true });
+    const marker = L.marker([q.lat, q.lng], { icon: Q.pinIcon('#30a46c'), draggable: true }).addTo(map);
+    const full = L.circle([q.lat, q.lng], { radius: 1, color: '#30a46c', weight: 2, fillOpacity: 0.12 }).addTo(map);
+    const zero = L.circle([q.lat, q.lng], { radius: 1, color: '#f5a524', weight: 1, dashArray: '6 6', fill: false }).addTo(map);
+    const refresh = () => {
+      const p = [q.lat, q.lng];
+      marker.setLatLng(p);
+      full.setLatLng(p).setRadius(Math.max(0, q.tolerance) * 1000);
+      zero.setLatLng(p).setRadius(q.mode === 'closest' ? 0 : Math.max(0, q.maxKm) * 1000);
+      marker.bindTooltip(q.label || 'Point à trouver');
+    };
+    const place = (ll) => { q.lat = +ll.lat.toFixed(5); q.lng = +ll.lng.toFixed(5); refresh(); scheduleSave(); };
+    map.on('click', (e) => place(e.latlng));
+    marker.on('dragend', () => place(marker.getLatLng()));
+    refresh();
+    editorMaps.set(q.id, { map, refresh });
+  }
+}
+
+function questionCard(q, i) {
+  let specific = '';
+  if (q.type === 'choice') {
+    specific = `<div class="choices">${q.choices.map((c, j) => `
+      <div class="choice ${c.correct ? 'correct' : ''}">
+        <span class="shape" style="background:${COLORS[j]}">${SHAPES[j]}</span>
+        <input type="text" data-q="${i}" data-choice="${j}" value="${esc(c.text)}" placeholder="Réponse ${j + 1}">
+        <label><input type="checkbox" data-q="${i}" data-correct="${j}" ${c.correct ? 'checked' : ''}>Bonne</label>
+        ${q.choices.length > 2 ? `<button class="small" data-q="${i}" data-delchoice="${j}" title="Retirer">✕</button>` : ''}
+      </div>`).join('')}
+    </div>
+    ${q.choices.length < 6 ? `<div style="margin-top:8px"><button class="small" data-q="${i}" data-act="addchoice">+ Ajouter une réponse</button></div>` : ''}
+    <label class="field" style="margin-top:10px">Réponse du joueur
+      <select data-q="${i}" data-f="multimode">
+        <option value="single" ${!q.multi ? 'selected' : ''}>Une seule réponse à toucher</option>
+        <option value="all" ${q.multi && !q.partial ? 'selected' : ''}>Cocher toutes les bonnes réponses — tout ou rien</option>
+        <option value="partial" ${q.multi && q.partial ? 'selected' : ''}>Cocher toutes les bonnes réponses — points partiels</option>
+      </select>
+    </label>
+    <p class="hint">${!q.multi
+      ? 'Cochez « Bonne » pour la ou les réponses correctes. Le joueur touche une seule réponse : si plusieurs sont bonnes, n’importe laquelle rapporte tous les points.'
+      : q.partial
+        ? 'Le joueur coche plusieurs cases puis valide. Points = (bonnes cochées − mauvaises cochées) ÷ nombre de bonnes réponses. Ex. : 1 bonne sur 2 = moitié des points.'
+        : 'Le joueur coche plusieurs cases puis valide. Il gagne les points seulement s’il coche exactement toutes les bonnes réponses, et aucune mauvaise.'}
+      ${q.multi ? ' Le joueur voit combien de réponses sont attendues.' : ''}</p>`;
+  } else if (q.type === 'map') {
+    specific = `<div class="type-box">
+      <div class="map-edit" data-map="${i}"></div>
+      <p class="hint">Cliquez sur la carte (ou déplacez le repère) pour placer le point à trouver. Les joueurs voient une carte <b>sans aucun nom de lieu</b>.</p>
+      <div class="num-grid">
+        <label class="field">Réponse affichée<input data-q="${i}" data-f="label" value="${esc(q.label)}" placeholder="ex : Lyon"></label>
+        <label class="field">Tous les points jusqu’à (km)<input type="number" min="0" step="any" data-q="${i}" data-f="tolerance" value="${esc(q.tolerance)}"></label>
+        <label class="field">0 point au-delà de (km)<input type="number" min="1" step="any" data-q="${i}" data-f="maxKm" value="${esc(q.maxKm)}" ${q.mode === 'closest' ? 'disabled' : ''}></label>
+        <label class="field">Attribution des points
+          <select data-q="${i}" data-f="mode">
+            <option value="gradual" ${q.mode !== 'closest' ? 'selected' : ''}>Dégressif selon la distance</option>
+            <option value="closest" ${q.mode === 'closest' ? 'selected' : ''}>Le(s) plus proche(s) + dans le rayon</option>
+          </select>
+        </label>
+      </div>
+      <div class="row"><button class="small" data-q="${i}" data-act="mapview">📌 Utiliser cette vue comme vue de départ des joueurs</button>
+        <span class="hint" data-viewinfo="${i}">Vue de départ : zoom ${q.view?.zoom ?? 5}</span></div>
+    </div>`;
+  } else if (q.type === 'text') {
+    specific = `<div class="type-box">
+      <label class="field">Réponses acceptées (séparées par |)
+        <input data-q="${i}" data-f="answers" value="${esc(q.answers.join(' | '))}" placeholder="ex : Léonard de Vinci | De Vinci | Vinci">
+      </label>
+      <label class="check"><input type="checkbox" data-q="${i}" data-f="fuzzy" ${q.fuzzy ? 'checked' : ''}> Tolérer les fautes de frappe (1 à 2 lettres)</label>
+      <p class="hint">Majuscules, accents, ponctuation et articles (le, la, les…) sont ignorés. Vous pourrez aussi valider ou refuser des réponses à la main pendant la partie.</p>
+    </div>`;
+  } else {
+    specific = `<div class="type-box"><div class="num-grid">
+      <label class="field">Valeur exacte<input type="number" step="any" data-q="${i}" data-f="value" value="${esc(q.value)}"></label>
+      <label class="field">Tolérance (±)<input type="number" step="any" min="0" data-q="${i}" data-f="tolerance" value="${esc(q.tolerance)}"></label>
+      <label class="field">Unité<input data-q="${i}" data-f="unit" value="${esc(q.unit)}" placeholder="m, km, €…"></label>
+      <label class="field">Attribution des points
+        <select data-q="${i}" data-f="mode">
+          <option value="closest" ${q.mode === 'closest' ? 'selected' : ''}>Le(s) plus proche(s) + dans la tolérance</option>
+          <option value="tolerance" ${q.mode === 'tolerance' ? 'selected' : ''}>Uniquement dans la tolérance</option>
+        </select>
+      </label>
+    </div></div>`;
+  }
+  return `<div class="qcard${q.trap ? ' trap' : ''}">
+    <div class="qcard-head">
+      <span class="qnum">${i + 1}</span>
+      <select data-q="${i}" data-act="type">
+        ${Object.entries(TYPE_LABELS).map(([k, v]) => `<option value="${k}" ${q.type === k ? 'selected' : ''}>${v}</option>`).join('')}
+      </select>
+      <span class="grow"></span>
+      <button class="small" data-q="${i}" data-act="up" ${i === 0 ? 'disabled' : ''} title="Monter">↑</button>
+      <button class="small" data-q="${i}" data-act="down" ${i === current.questions.length - 1 ? 'disabled' : ''} title="Descendre">↓</button>
+      <button class="small" data-q="${i}" data-act="dup" title="Dupliquer">⧉</button>
+      <button class="small danger" data-q="${i}" data-act="del" title="Supprimer">🗑</button>
+    </div>
+    <div class="qcard-grid">
+      <label class="field">Question<textarea data-q="${i}" data-f="text" placeholder="Intitulé de la question">${esc(q.text)}</textarea></label>
+      <label class="field">Points<input type="number" min="0" data-q="${i}" data-f="points" value="${q.points}"></label>
+      <label class="field">Temps (s)<input type="number" min="0" data-q="${i}" data-f="time" value="${q.time}" title="0 = pas de limite"></label>
+    </div>
+    <label class="field" style="margin-top:10px">Image (URL, optionnelle — affichée sur l’écran de projection)
+      <input data-q="${i}" data-f="image" value="${esc(q.image)}" placeholder="https://…">
+    </label>
+    ${specific}
+    <label class="check trap-check" title="Aucune bonne réponse : seuls les joueurs qui ne répondent pas gagnent les points"><input type="checkbox" data-q="${i}" data-f="trap" ${q.trap ? 'checked' : ''}> 🪤 Question piège — aucune bonne réponse, seuls ceux qui <b>ne répondent pas</b> gagnent les points</label>
+  </div>`;
+}
+
+$('#quizTitle').addEventListener('input', (e) => { current.title = e.target.value; scheduleSave(); });
+
+const qbox = $('#questions');
+qbox.addEventListener('input', (e) => {
+  const el = e.target;
+  const q = current.questions[el.dataset.q];
+  if (!q) return;
+  if (el.dataset.choice !== undefined) q.choices[el.dataset.choice].text = el.value;
+  else if (el.dataset.f) {
+    const f = el.dataset.f;
+    if (f === 'answers') q.answers = el.value.split('|').map((s) => s.trim()).filter(Boolean);
+    else if (f === 'fuzzy') q.fuzzy = el.checked;
+    else if (f === 'trap') { q.trap = el.checked; el.closest('.qcard').classList.toggle('trap', el.checked); }
+    else if (f === 'multimode') return; // géré par l'événement « change »
+    else if (['points', 'time', 'value', 'tolerance', 'maxKm'].includes(f)) {
+      q[f] = el.value === '' ? 0 : Number(el.value);
+      if (q.type === 'map') editorMaps.get(q.id)?.refresh();
+    }
+    else q[f] = el.value;
+  } else return;
+  scheduleSave();
+});
+qbox.addEventListener('change', (e) => {
+  const el = e.target;
+  const i = Number(el.dataset.q);
+  const q = current.questions[i];
+  if (!q) return;
+  if (el.dataset.correct !== undefined) {
+    q.choices[el.dataset.correct].correct = el.checked;
+    el.closest('.choice').classList.toggle('correct', el.checked);
+    scheduleSave();
+  } else if (el.dataset.act === 'type') {
+    current.questions[i] = convertQuestion(q, el.value);
+    renderEditor();
+    scheduleSave();
+  } else if (el.dataset.f === 'mode') {
+    q.mode = el.value;
+    if (q.type === 'map') el.closest('.qcard').querySelector('[data-f="maxKm"]').disabled = q.mode === 'closest';
+    scheduleSave();
+  } else if (el.dataset.f === 'multimode') {
+    q.multi = el.value !== 'single';
+    q.partial = el.value === 'partial';
+    renderEditor();
+    scheduleSave();
+  }
+});
+qbox.addEventListener('click', (e) => {
+  const el = e.target.closest('button');
+  if (!el) return;
+  const i = Number(el.dataset.q);
+  const qs = current.questions;
+  const q = qs[i];
+  if (el.dataset.act === 'mapview') {
+    const m = editorMaps.get(q.id)?.map;
+    if (!m) return;
+    const c = m.getCenter();
+    q.view = { lat: +c.lat.toFixed(4), lng: +c.lng.toFixed(4), zoom: m.getZoom() };
+    qbox.querySelector(`[data-viewinfo="${i}"]`).textContent = `✓ Vue de départ enregistrée (zoom ${q.view.zoom})`;
+    scheduleSave();
+    return;
+  }
+  if (el.dataset.delchoice !== undefined) q.choices.splice(Number(el.dataset.delchoice), 1);
+  else if (el.dataset.act === 'addchoice') q.choices.push({ text: '', correct: false });
+  else if (el.dataset.act === 'up' && i > 0) [qs[i - 1], qs[i]] = [qs[i], qs[i - 1]];
+  else if (el.dataset.act === 'down' && i < qs.length - 1) [qs[i + 1], qs[i]] = [qs[i], qs[i + 1]];
+  else if (el.dataset.act === 'dup') qs.splice(i + 1, 0, { ...JSON.parse(JSON.stringify(q)), id: uid() });
+  else if (el.dataset.act === 'del') { if (!confirm('Supprimer cette question ?')) return; qs.splice(i, 1); }
+  else return;
+  renderEditor();
+  scheduleSave();
+});
+
+document.querySelectorAll('[data-add]').forEach((b) => {
+  b.onclick = () => {
+    current.questions.push(blankQuestion(b.dataset.add));
+    renderEditor();
+    scheduleSave();
+    const cards = qbox.querySelectorAll('.qcard');
+    const last = cards[cards.length - 1];
+    last?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    last?.querySelector('textarea')?.focus();
+  };
+});
+
+$('#newQuiz').onclick = async () => {
+  await flushSave();
+  current = { id: uid() + uid(), title: 'Nouveau quiz', questions: [] };
+  quizzes.push(current);
+  renderQuizList(); renderEditor(); await save();
+  $('#quizTitle').select();
+};
+$('#dupQuiz').onclick = async () => {
+  if (!current) return;
+  await flushSave();
+  current = { ...JSON.parse(JSON.stringify(current)), id: uid() + uid(), title: current.title + ' (copie)' };
+  quizzes.push(current);
+  renderQuizList(); renderEditor(); await save();
+};
+$('#deleteQuiz').onclick = async () => {
+  if (!current || !confirm(`Supprimer définitivement « ${current.title} » ?`)) return;
+  clearTimeout(saveTimer); saveTimer = null;
+  await Q.api('/api/quizzes/delete', { id: current.id });
+  current = null;
+  await loadQuizzes();
+};
+function download(blob, ext) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = ((current.title || '').replace(/[\\/:*?"<>|]+/g, ' ').trim() || 'quiz') + ext;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+$('#exportQuiz').onclick = () => {
+  if (!current) return;
+  download(new Blob([JSON.stringify(current, null, 2)], { type: 'application/json' }), '.json');
+};
+$('#exportXlsx').onclick = () => {
+  if (!current) return;
+  download(QuizXlsx.buildQuizXlsx(current), '.xlsx');
+};
+$('#importQuiz').onclick = () => $('#importFile').click();
+$('#importFile').onchange = async (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  let data, warnings = [];
+  try {
+    if (/\.xlsx$/i.test(file.name)) {
+      ({ warnings, ...data } = await QuizXlsx.parseQuizXlsx(await file.arrayBuffer(), file.name));
+    } else {
+      data = JSON.parse(await file.text());
+    }
+  } catch (err) {
+    alert('Import impossible : ' + (err instanceof SyntaxError ? 'fichier JSON invalide.' : err.message));
+    return;
+  }
+  try {
+    await flushSave();
+    current = { ...data, id: uid() + uid() };
+    current = await Q.api('/api/quizzes', current);
+    await loadQuizzes();
+    const n = current.questions?.length || 0;
+    toast(`Quiz importé : ${n} question${n > 1 ? 's' : ''}`);
+    if (warnings.length) {
+      alert(`Quiz importé, mais à vérifier :\n\n• ${warnings.slice(0, 15).join('\n• ')}`
+        + (warnings.length > 15 ? `\n… et ${warnings.length - 15} autre(s)` : ''));
+    }
+  } catch { toast('Erreur lors de l’enregistrement du quiz'); }
+};
+$('#xlsxTemplate').onclick = () => {
+  const a = document.createElement('a');
+  a.href = '/Modele-Questions.xlsx';
+  a.download = 'Modele-Questions.xlsx';
+  a.click();
+};
+
+/* ===================== Partie en direct ===================== */
+const timer = Q.countdown();
+let room = JSON.parse(localStorage.getItem('quiz-host-room') || 'null');
+let S = null; // dernier état reçu
+let live = null; // flux temps réel
+
+function fillQuizSelects() {
+  const opts = quizzes.map((q) => `<option value="${esc(q.id)}">${esc(q.title)} (${q.questions.length} questions)</option>`).join('');
+  const sel = $('#setupQuiz');
+  const prev = sel.value;
+  sel.innerHTML = opts;
+  if (prev && quizzes.find((q) => q.id === prev)) sel.value = prev; else if (current) sel.value = current.id;
+  $('#reloadSelect').innerHTML = opts;
+  if (S) $('#reloadSelect').value = S.quizId;
+}
+
+/* Indique comment les joueurs vont se connecter (Wi-Fi local ou Internet) */
+async function refreshNetHint() {
+  let info;
+  try { info = await (await fetch('/api/info', { cache: 'no-store' })).json(); } catch { return; }
+  const { publicUrl, tunnel, tunnelError } = info;
+  let h;
+  if (tunnel === 'internet' || tunnel === 'custom') {
+    h = `🌍 <b>Mode Internet</b> — les joueurs se connectent de n’importe où (4G, autre Wi-Fi) via <b>${esc(publicUrl)}</b>`;
+  } else if (tunnel === 'starting') {
+    h = '⏳ Ouverture et vérification de l’adresse Internet… (15 à 30 secondes). Le QR code apparaîtra quand elle fonctionnera vraiment.';
+    setTimeout(refreshNetHint, 1500);
+  } else if (tunnel === 'error') {
+    h = `⚠ Mode Internet indisponible : ${esc(tunnelError)}.<br>Les joueurs doivent être sur le même Wi-Fi que ce PC (${esc(publicUrl)}).`;
+  } else if (/localhost|127\.0\.0\.1/.test(publicUrl)) {
+    h = '⚠ Aucune adresse réseau détectée. Lancez le quiz avec <b>Lancer-Quiz-Internet.bat</b> pour que les téléphones puissent se connecter.';
+  } else {
+    h = `📶 Mode Wi-Fi local : les joueurs doivent être sur le même réseau que ce PC (${esc(publicUrl)}).<br>
+      Pour jouer depuis n’importe où, lancez <b>Lancer-Quiz-Internet.bat</b> à la place.`;
+  }
+  $('#netHint').innerHTML = h;
+}
+refreshNetHint();
+
+$('#createRoom').onclick = async () => {
+  await flushSave();
+  try {
+    room = await Q.api('/api/room/create', {
+      quizId: $('#setupQuiz').value,
+      settings: { autoClose: $('#setupAuto').checked, speed: $('#setupSpeed').checked },
+    });
+  } catch (e) { return toast(e.message); }
+  localStorage.setItem('quiz-host-room', JSON.stringify(room));
+  joinRoom();
+};
+
+function joinRoom() {
+  live?.stop();
+  if (!room) return showSetup();
+  live = Q.stream(`/api/events?role=host&code=${encodeURIComponent(room.code)}&token=${encodeURIComponent(room.token)}`, {
+    onState: onState,
+    onGone: () => {
+      room = null;
+      localStorage.removeItem('quiz-host-room');
+      showSetup();
+      toast('Le salon précédent a expiré');
+    },
+    onStatus: (ok) => $('#roomPill').classList.toggle('muted', !ok),
+  });
+}
+function showSetup() {
+  S = null;
+  live?.stop();
+  $('#liveSetup').classList.remove('hidden');
+  $('#liveRoom').classList.add('hidden');
+  $('#roomPill').innerHTML = '';
+}
+
+$('#leaveRoom').onclick = () => {
+  if (!confirm('Quitter ce salon ? Les joueurs resteront connectés mais vous ne pourrez plus le piloter.')) return;
+  room = null;
+  localStorage.removeItem('quiz-host-room');
+  showSetup();
+};
+
+function act(action, payload) {
+  Q.api('/api/room/action', { code: room.code, token: room.token, action, payload }).catch((e) => toast(e.message));
+}
+
+$('#setSpeed').onchange = $('#setAuto').onchange = $('#setDev').onchange = $('#setLuck').onchange = () =>
+  act('settings', { speed: $('#setSpeed').checked, autoClose: $('#setAuto').checked, allowDev: $('#setDev').checked, luck: $('#setLuck').checked });
+$('#reloadQuiz').onclick = async () => { await flushSave(); act('reloadQuiz', { quizId: $('#reloadSelect').value }); };
+$('#copyLink').onclick = () => { navigator.clipboard?.writeText(S.joinUrl); toast('Lien copié'); };
+
+const STATE_LABELS = {
+  lobby: 'Salle d’attente', question: 'Question en cours', closed: 'Réponses fermées',
+  reveal: 'Réponse affichée', leaderboard: 'Classement', end: 'Partie terminée',
+};
+
+timer.on((left, total) => {
+  const el = $('#liveTimer');
+  if (!S || S.state !== 'question') { el.textContent = ''; return; }
+  el.textContent = S.question.time ? `⏱ ${Math.ceil(left / 1000)} s` : '⏱ ∞';
+});
+
+function onState(s) {
+  const first = !S || S.code !== s.code;
+  S = s;
+  $('#liveSetup').classList.add('hidden');
+  $('#liveRoom').classList.remove('hidden');
+  if (first) {
+    $('#roomCode').textContent = s.code;
+    $('#openDisplay').href = `/display?room=${s.code}`;
+    fillQuizSelects();
+  }
+  // l'adresse change quand le tunnel Internet devient disponible ; pas de QR avant qu'elle soit vérifiée
+  const urlLabel = s.netReady === false ? '⏳ Préparation de l’adresse Internet… le QR code apparaît dans quelques secondes' : s.joinUrl;
+  if ($('#joinUrl').textContent !== urlLabel) {
+    $('#qrImg').style.visibility = s.netReady === false ? 'hidden' : '';
+    if (s.netReady !== false) $('#qrImg').src = `/api/qr/${s.code}?u=${encodeURIComponent(s.joinUrl)}`;
+    $('#joinUrl').textContent = urlLabel;
+  }
+  $('#roomPill').innerHTML = `Salon <b>${esc(s.code)}</b>`;
+  $('#setAuto').checked = s.settings.autoClose;
+  $('#setSpeed').checked = s.settings.speed !== false;
+  $('#setDev').checked = s.settings.allowDev !== false;
+  $('#setLuck').checked = !!s.settings.luck;
+  timer.set(s.remaining, s.question?.time);
+  renderLive();
+}
+
+function renderLive() {
+  const s = S;
+  const total = s.questions.length;
+  const last = s.qIndex >= total - 1;
+  $('#liveTitle').textContent = s.title;
+  $('#stateBadge').textContent = STATE_LABELS[s.state] + (s.qIndex >= 0 && s.state !== 'lobby' && s.state !== 'end' ? ` · ${s.qIndex + 1}/${total}` : '');
+
+  // Contrôles
+  const btn = (label, action, cls = '', payload) =>
+    `<button class="${cls}" data-action="${action}" ${payload ? `data-payload='${esc(JSON.stringify(payload))}'` : ''}>${label}</button>`;
+  let c = '';
+  if (s.state === 'lobby') c += btn('▶ Démarrer le quiz', 'next', 'primary big');
+  if (s.state === 'question') {
+    c += btn('⏹ Fermer les réponses', 'close', 'primary big');
+    if (s.question.time) c += btn('+10 s', 'addTime');
+  }
+  if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big');
+  if (s.state === 'reveal') {
+    c += btn('🏆 Classement', 'leaderboard', 'primary big');
+    c += btn(last ? '🏁 Résultats finaux' : '⏭ Question suivante', 'next', 'big');
+  }
+  if (s.state === 'leaderboard') {
+    c += btn(last ? '🏁 Résultats finaux' : '⏭ Question suivante', 'next', 'primary big');
+    c += btn('↩ Revoir la réponse', 'reveal');
+  }
+  if (s.state === 'end') c += btn('🔄 Rejouer (remise à zéro des scores)', 'reset', 'primary big');
+  if (s.state !== 'lobby') {
+    c += `<select id="gotoSel" style="width:auto"><option value="">Aller à la question…</option>${s.questions
+      .map((q, i) => `<option value="${i}">${i + 1}. ${esc(q.text.slice(0, 50) || '(sans texte)')}</option>`).join('')}</select>`;
+  }
+  if (s.state !== 'end' && s.state !== 'lobby') c += btn('Terminer la partie', 'end', 'danger');
+  $('#controls').innerHTML = c;
+  $('#controls').querySelectorAll('[data-action]').forEach((b) => {
+    b.onclick = () => {
+      if (b.dataset.action === 'reset' && !confirm('Remettre tous les scores à zéro et revenir au salon d’attente ?')) return;
+      if (b.dataset.action === 'end' && !confirm('Terminer la partie maintenant ?')) return;
+      act(b.dataset.action, b.dataset.payload ? JSON.parse(b.dataset.payload) : undefined);
+    };
+  });
+  const goto = $('#gotoSel');
+  if (goto) goto.onchange = () => {
+    if (goto.value !== '' && confirm(`Lancer la question ${Number(goto.value) + 1} ? Les points déjà gagnés sur cette question seront recalculés.`)) act('goto', { index: Number(goto.value) });
+    else goto.value = '';
+  };
+
+  // Corps
+  let b = '';
+  if (s.state === 'lobby') {
+    b = `<p class="muted">Les joueurs scannent le QR code ou ouvrent le lien et saisissent le code <b>${esc(s.code)}</b>.
+      Ouvrez l’écran de projection sur l’écran partagé, puis démarrez quand tout le monde est là.</p>
+      <p><b>${s.questions.length}</b> questions prêtes.</p>`;
+  } else if (s.state === 'end') {
+    b = '<p class="muted">Le podium est affiché sur l’écran de projection.</p>';
+  } else if (s.question) {
+    b = questionPanel(s);
+  }
+  $('#liveBody').innerHTML = b;
+  $('#liveBody').querySelectorAll('[data-group]').forEach((el) => (el.onclick = () => act('toggleGroup', { key: el.dataset.group })));
+  $('#liveBody').querySelectorAll('[data-toggle]').forEach((el) => (el.onclick = () => act('togglePlayer', { playerId: el.dataset.toggle })));
+
+  renderPlayers();
+}
+
+function questionPanel(s) {
+  const q = s.question;
+  const scored = s.state !== 'question';
+  const connected = s.ranking.filter((p) => p.connected).length;
+  let h = `<div class="qview">
+    <div class="muted">Question ${s.qIndex + 1} · ${TYPE_LABELS[q.type]}${q.multi ? ` · plusieurs réponses (${q.partial ? 'points partiels' : 'tout ou rien'})` : ''}${q.trap ? ' · 🪤 piège' : ''} · ${q.points} pts${q.time ? ` · ${q.time} s` : ''}</div>
+    <div class="qtext">${esc(q.text)}</div>
+    ${s.steal ? `<div class="steal-line">🦹 <b>${esc(s.steal.thief)}</b> a volé <b>${s.steal.amount} pts</b> à <b>${esc(s.steal.victim)}</b></div>` : s.stealPending ? `<div class="steal-line">🦹 <b>${esc(s.stealPending)}</b>, seul à avoir trouvé, peut voler des points…</div>` : ''}
+    <div>Bonne réponse : <b>${esc(q.answerText)}</b>${q.type === 'number' && q.tolerance ? ` <span class="muted">(± ${fmt(q.tolerance)})</span>` : ''}${q.type === 'map' ? ` <span class="muted">(tous les points à moins de ${fmt(q.tolerance)} km${q.mode === 'closest' ? ', ou le plus proche' : `, 0 au-delà de ${fmt(q.maxKm)} km`})</span>` : ''}</div>
+    <div class="row" style="margin-top:10px"><b>${s.answers.length}</b> / ${connected} réponses
+      ${scored && s.reveal ? `<span class="muted">· ${s.reveal.correctCount} correcte(s)${s.reveal.partialCount ? ` · ${s.reveal.partialCount} partielle(s)` : ''}</span>` : ''}</div>
+    <div class="progress"><div style="width:${connected ? (100 * s.answers.length) / connected : 0}%"></div></div>
+  </div>`;
+
+  if (scored && q.type === 'choice' && s.reveal) {
+    const max = Math.max(1, ...s.reveal.counts);
+    h += `<h3>Répartition</h3><div class="bars">${q.choices.map((c, i) => `
+      <div class="bar"><span style="color:${COLORS[i]};font-size:18px">${SHAPES[i]}</span>
+        <div class="fill" style="width:${(100 * s.reveal.counts[i]) / max}%;background:${COLORS[i]};opacity:${c.correct ? 1 : .35}"></div>
+        <b>${s.reveal.counts[i]}</b>
+        <span class="label">${esc(c.text)} ${c.correct ? '✓' : ''}</span></div>`).join('')}</div>`;
+  }
+
+  if (scored && q.type === 'text' && s.groups) {
+    h += `<h3>Réponses regroupées — cliquez pour valider / refuser</h3>
+      ${s.groups.map((g) => `<div class="answer-line ${g.correct ? 'ok' : 'ko'}" data-group="${esc(g.key)}" style="cursor:pointer">
+        <span class="val">${esc(g.text)}</span><span class="who">${g.count} × — ${esc(g.players.slice(0, 4).join(', '))}${g.players.length > 4 ? '…' : ''}</span>
+        <span class="tag ${g.correct ? 'ok' : 'ko'}">${g.correct ? 'ACCEPTÉE' : 'REFUSÉE'}</span></div>`).join('') || '<p class="muted">Aucune réponse</p>'}`;
+  }
+
+  if (s.answers.length) {
+    h += `<h3>Réponses individuelles${scored ? ' — cliquez sur ✓/✗ pour corriger' : ''}</h3>
+      ${s.answers.map((a) => `<div class="answer-line ${a.correct === true ? 'ok' : a.partial ? 'part' : a.correct === false ? 'ko' : ''}">
+        <span class="val">${esc(typeof a.value === 'number' ? fmt(a.value) : a.value)}</span>
+        <span class="who">${esc(a.name)} · ${(a.ms / 1000).toFixed(1)} s</span>
+        ${scored ? `<b>+${a.points}</b><button class="small" data-toggle="${esc(a.playerId)}">${a.correct ? '✓' : '✗'}</button>` : ''}
+      </div>`).join('')}`;
+  }
+  return h;
+}
+
+// Badges : ninja et triches visibles seulement en mode dev ; « Tricheur » démasqué en fin de partie pour tous
+function playerTags(p, s) {
+  let h = '';
+  if (DEV && p.ninja) h += ' <span class="tag" style="background:#2b2b3a;color:#fff" title="Inscrit avec #ninja">🥷</span>';
+  if (s.settings.luck && (p.cheats || p.offer || p.cheatNext)) {
+    const what = p.cheatNext ? 'va tricher à la prochaine question' : p.offer ? 'a une proposition en cours' : `a triché ${p.cheats} fois`;
+    h += ` <span class="tag" style="background:#ecebfd;color:#5b4bdb" title="${esc(p.name)} ${what}. Risque de tout perdre à sa prochaine triche : ${p.risk} %${p.busted ? ' — a déjà tout perdu (révélé au classement final)' : ''}">🎲${p.cheats}${p.offer ? ' ?' : ''}${p.cheatNext ? ' 😈' : ''} · ${p.risk} %${p.busted ? ' 💀' : ''}</span>`;
+  }
+  if (p.busted) h += ` <span class="tag ko" title="${s.state === 'end' ? 'A triché et a tout perdu' : 'S’est fait prendre en trichant : ses points sont retombés à 0 (score réel affiché ici ; les joueurs ne le verront qu’au classement final). Chaque nouvelle triche le remet à 0.'}">Tricheur</span>`;
+  return h;
+}
+
+function renderPlayers() {
+  const s = S;
+  const answered = new Set(s.answers.map((a) => a.playerId));
+  $('#playerCount').textContent = `(${s.ranking.length})`;
+  $('#players').innerHTML = s.ranking.map((p) => `<div class="player">
+      <span class="rank">${p.rank}</span>
+      <span class="dot ${p.connected ? '' : 'off'}" title="${p.connected ? 'Connecté' : 'Déconnecté'}"></span>
+      <span class="name">${esc(p.name)}${playerTags(p, s)}${DEV && p.dev ?` <span class="tag" style="background:#ffd34d;color:#3a2a00${s.settings.allowDev === false ? ';opacity:.45' : ''}" title="Inscrit avec #dev : voit les réponses sur son téléphone${s.settings.allowDev === false ? ' (désactivé pour tout le salon)' : ''}">🛠 test <button class="undev" data-undev="${esc(p.id)}" title="Retirer le mode test à ce joueur">✕</button></span>` : ''}</span>
+      ${s.state === 'question' && answered.has(p.id) ? '<span class="answered">✓ répondu</span>' : ''}
+      <span class="acts">
+        <button data-adj="${esc(p.id)}" data-d="-10">−10</button>
+        <button data-adj="${esc(p.id)}" data-d="10">+10</button>
+        <button data-kick="${esc(p.id)}" class="danger" title="Exclure">✕</button>
+      </span>
+      <span class="score">${p.score}</span>
+    </div>`).join('') || '<p class="muted">En attente de joueurs…</p>';
+  $('#players').querySelectorAll('[data-adj]').forEach((b) => (b.onclick = () => act('adjust', { playerId: b.dataset.adj, delta: Number(b.dataset.d) })));
+  $('#players').querySelectorAll('[data-undev]').forEach((b) => (b.onclick = () => {
+    const p = s.ranking.find((x) => x.id === b.dataset.undev);
+    if (confirm(`Retirer le mode test à ${p?.name} ? Il ne verra plus les réponses.`)) act('undev', { playerId: b.dataset.undev });
+  }));
+  $('#players').querySelectorAll('[data-kick]').forEach((b) => (b.onclick = () => {
+    const p = s.ranking.find((x) => x.id === b.dataset.kick);
+    if (confirm(`Exclure ${p?.name} ?`)) act('kick', { playerId: b.dataset.kick });
+  }));
+}
+
+/* ===================== Démarrage ===================== */
+loadQuizzes().then(() => {
+  if (room) { showTab('live'); joinRoom(); }
+});
+</script>
+</body>
+</html>

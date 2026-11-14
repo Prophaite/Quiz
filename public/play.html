@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b1670">
+<title>Quiz Live</title>
+<style>
+  :root { --bg: #2b1670; --card: rgba(255,255,255,.12); --line: rgba(255,255,255,.2); --ok: #22b86a; --ko: #e5484d; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #fff; background: linear-gradient(160deg, #3a1b8f, #1f2a7a); transition: background .4s; }
+  body.ok { background: linear-gradient(160deg, #1f9d55, #0f6b3a); }
+  body.ko { background: linear-gradient(160deg, #d83a3a, #8f1f2b); }
+  #app { min-height: 100%; display: flex; flex-direction: column; padding: max(14px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)); }
+  .bar { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 15px; min-height: 32px; gap: 10px; }
+  .bar .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar .score { background: var(--card); padding: 5px 12px; border-radius: 99px; white-space: nowrap; }
+  .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 16px 0; }
+  .center { text-align: center; }
+  h1 { font-size: 28px; margin: 0; }
+  p { margin: 0; opacity: .9; font-size: 17px; line-height: 1.4; }
+  .big-icon { font-size: 72px; line-height: 1; animation: pop .5s ease both; }
+  @keyframes pop { 0% { transform: scale(.3); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+  input { font: inherit; font-size: 22px; width: 100%; padding: 16px; border-radius: 14px; border: 2px solid transparent; background: #fff; color: #1b1d29; text-align: center; }
+  input:focus { outline: none; border-color: #ffd34d; }
+  button.go { font: inherit; font-size: 20px; font-weight: 800; padding: 16px; border-radius: 14px; border: 0; background: #ffd34d; color: #3a2a00; cursor: pointer; width: 100%; box-shadow: 0 5px 0 #c99a00; }
+  button.go:active { transform: translateY(3px); box-shadow: 0 2px 0 #c99a00; }
+  button.go:disabled { opacity: .5; }
+  .err { color: #ffd0d2; text-align: center; min-height: 20px; font-weight: 600; }
+  .qtext { font-size: 21px; font-weight: 800; text-align: center; line-height: 1.3; }
+  .qmeta { display: flex; justify-content: space-between; font-size: 14px; opacity: .85; font-weight: 600; }
+  .tbar { height: 8px; background: var(--card); border-radius: 99px; overflow: hidden; }
+  .tbar div { height: 100%; background: #ffd34d; width: 100%; transition: width .1s linear; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; max-height: 60vh; }
+  .choices.n2 { grid-template-columns: 1fr; }
+  .choice { font: inherit; border: 0; border-radius: 16px; color: #fff; font-size: 18px; font-weight: 800; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 5px 0 rgba(0,0,0,.3); cursor: pointer; min-height: 90px; word-break: break-word; }
+  .choice .shape { font-size: 30px; }
+  .choices.multi .choice { position: relative; opacity: .55; transition: opacity .15s, transform .15s; }
+  .choices.multi .choice.sel { opacity: 1; outline: 4px solid #fff; outline-offset: -4px; transform: scale(1.02); }
+  .choices.multi .choice .tick { position: absolute; top: 8px; right: 10px; width: 26px; height: 26px; border-radius: 50%; border: 3px solid #fff; display: grid; place-items: center; font-size: 15px; }
+  .choices.multi .choice.sel .tick { background: #fff; color: #2b1670; }
+  .pick { text-align: center; font-weight: 800; font-size: 16px; background: var(--card); border-radius: 99px; padding: 6px 14px; align-self: center; }
+  body.part { background: linear-gradient(160deg, #e08a1e, #a5551a); }
+  .choice:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,.3); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; text-align: center; }
+  .card .lbl { font-size: 14px; opacity: .8; }
+  .card .val { font-size: 24px; font-weight: 800; word-break: break-word; }
+  .points { font-size: 44px; font-weight: 900; animation: pop .6s ease .2s both; }
+  .rank { font-size: 64px; font-weight: 900; line-height: 1; animation: pop .6s ease both; }
+  .spinner { width: 46px; height: 46px; border: 5px solid var(--line); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .unit { display: flex; gap: 8px; align-items: center; }
+  .unit span { font-size: 20px; font-weight: 700; }
+  .lobby-count { font-weight: 800; font-size: 18px; text-align: center; }
+  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-height: 34vh; overflow: auto; padding: 2px; }
+  .chip { background: var(--card); border: 1px solid var(--line); padding: 6px 12px; border-radius: 99px; font-weight: 700; font-size: 15px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chip.me { background: #ffd34d; color: #3a2a00; border-color: #ffd34d; }
+  .chip.new { animation: pop .5s ease both; border-color: #ffd34d; }
+  .chip.more { opacity: .75; }
+  .toast { position: fixed; left: 50%; top: max(12px, env(safe-area-inset-top)); transform: translateX(-50%); background: #fff; color: #2b1670; font-weight: 800; padding: 10px 18px; border-radius: 99px; box-shadow: 0 6px 20px rgba(0,0,0,.3); z-index: 10; max-width: calc(100% - 32px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; animation: toastIn .35s ease both; }
+  .toast.out { opacity: 0; transition: opacity .4s; }
+  @keyframes toastIn { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  .devtag { font-size: 11px; background: #ffd34d; color: #3a2a00; padding: 2px 7px; border-radius: 99px; vertical-align: middle; }
+  .devbanner { background: rgba(255, 211, 77, .16); border: 2px dashed #ffd34d; color: #ffe8a3; border-radius: 12px; padding: 8px 12px; text-align: center; font-size: 15px; }
+  .choice.devgood { box-shadow: 0 0 0 4px #ffd34d, 0 5px 0 rgba(0,0,0,.3); }
+  .choice.devgood::after { content: '🛠 bonne'; position: absolute; left: 8px; top: 6px; font-size: 11px; background: #ffd34d; color: #3a2a00; padding: 1px 6px; border-radius: 99px; }
+  .choice { position: relative; }
+  .board { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 10px 6px 6px; }
+  .board-title { font-size: 13px; font-weight: 800; opacity: .8; text-align: center; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+  .board ol { list-style: none; margin: 0; padding: 0; max-height: 42vh; overflow: auto; position: relative; }
+  .board li { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 10px; font-weight: 700; font-size: 15px; }
+  .board li + li { margin-top: 2px; }
+  .board li.me { background: #ffd34d; color: #3a2a00; }
+  .board .r { width: 30px; text-align: center; flex: none; font-variant-numeric: tabular-nums; }
+  .board .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .board .n small { font-weight: 600; opacity: .7; }
+  .board .l { font-size: 12px; opacity: .75; font-variant-numeric: tabular-nums; }
+  .board .mv { font-size: 11px; font-weight: 800; }
+  .board .mv.up { color: #5ee09a; } .board .mv.down { color: #ff9a9e; }
+  .board li.me .mv.up { color: #1f7a45; } .board li.me .mv.down { color: #b4232a; }
+  .board .s { min-width: 48px; text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; }
+  .offer { background: linear-gradient(135deg, rgba(229,72,77,.3), rgba(140,40,160,.35)); border: 2px solid #ff8a8f; border-radius: 16px; padding: 14px; text-align: center; animation: pop .5s ease both; }
+  .offer.done { border-style: dashed; font-weight: 700; font-size: 15px; }
+  .offer-title { font-size: 22px; font-weight: 900; }
+  .offer p { font-size: 15px; margin: 6px 0; }
+  .offer-risk { font-size: 14px; opacity: .9; margin-bottom: 10px; }
+  .offer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .offer-btns .go { font-size: 16px; padding: 12px 8px; }
+  .offer-btns .go.no { background: #fff; color: #2b1670; box-shadow: 0 5px 0 #b9b2e0; }
+  .cheater { background: #e5484d; color: #fff; font-size: 10px; font-weight: 900; padding: 1px 6px; border-radius: 99px; text-transform: uppercase; vertical-align: middle; }
+  .busted { background: #e5484d; color: #fff; border-radius: 14px; padding: 12px; text-align: center; font-size: 22px; font-weight: 900; animation: pop .5s ease both; box-shadow: 0 0 0 4px rgba(255,255,255,.25); }
+  .busted small { display: block; font-size: 14px; font-weight: 600; margin-top: 4px; }
+  .map-box { height: 50vh; min-height: 260px; border-radius: 14px; overflow: hidden; border: 2px solid rgba(255,255,255,.35); z-index: 0; }
+  .map-box.small { height: 30vh; min-height: 180px; }
+  .qpin { background: none; border: 0; }
+  .steal { background: linear-gradient(135deg, rgba(245,165,36,.35), rgba(229,72,77,.3)); border: 2px solid #ffd34d; border-radius: 16px; padding: 14px; text-align: center; animation: pop .5s ease both; }
+  .steal.done, .steal.hit { font-size: 16px; }
+  .steal.hit { border-color: #ff8a8f; background: rgba(229,72,77,.35); }
+  .steal-title { font-size: 21px; font-weight: 900; }
+  .steal p { font-size: 15px; margin: 6px 0 10px; }
+  .steal-list { display: grid; gap: 6px; max-height: 32vh; overflow: auto; }
+  .steal-list button { font: inherit; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; border: 0; background: #fff; color: #2b1670; font-weight: 800; font-size: 16px; cursor: pointer; }
+  .steal-list button small { font-weight: 600; opacity: .6; margin-left: 4px; }
+  .steal-list button b { color: #c62f35; }
+  .steal-list button:disabled { opacity: .5; }
+  .link { background: none; border: 0; color: #fff; opacity: .7; font: inherit; text-decoration: underline; cursor: pointer; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar" id="bar"></div>
+  <div class="main" id="main"></div>
+</div>
+
+<script src="/common.js"></script>
+<script>
+const { esc, COLORS, SHAPES, fmt, params, ordinal } = Q;
+const $ = (s) => document.querySelector(s);
+const timer = Q.countdown();
+
+let code = (params.get('room') || '').trim();
+let session = null; // { code, playerId, key, name }
+let S = null;
+let lastKey = '';
+let live = null;
+const storeKey = (c) => `quiz-player-${c}`;
+
+if (code) session = JSON.parse(localStorage.getItem(storeKey(code)) || 'null');
+
+function showJoin(err = '') {
+  S = null;
+  lastKey = '';
+  document.body.className = '';
+  $('#bar').innerHTML = '';
+  $('#main').innerHTML = `<form id="joinForm" class="main" style="padding:0">
+    <div class="center"><div class="big-icon">🎯</div><h1>Quiz Live</h1></div>
+    <input id="jCode" inputmode="numeric" maxlength="6" placeholder="Code du salon" value="${esc(code)}" ${code ? 'style="display:none"' : ''}>
+    ${code ? `<p class="center">Salon <b>${esc(code)}</b></p>` : ''}
+    <input id="jName" maxlength="26" placeholder="Ton pseudo" autocomplete="nickname" value="${esc(localStorage.getItem('quiz-name') || '')}">
+    <button class="go">C’est parti !</button>
+    <div class="err">${esc(err)}</div>
+  </form>`;
+  const name = $('#jName');
+  (code ? name : $('#jCode')).focus();
+  $('#joinForm').onsubmit = (e) => {
+    e.preventDefault();
+    code = $('#jCode').value.trim();
+    const n = name.value.trim();
+    if (!code || !n) return;
+    localStorage.setItem('quiz-name', n);
+    join({ code, name: n });
+  };
+}
+
+async function join(data) {
+  const btn = document.querySelector('#joinForm button');
+  if (btn) btn.disabled = true;
+  try {
+    const res = await Q.api('/api/player/join', data);
+    code = res.code;
+    session = { code, playerId: res.playerId, key: res.key, name: res.name };
+    localStorage.setItem(storeKey(code), JSON.stringify(session));
+    if (params.get('room') !== code) history.replaceState(null, '', `?room=${encodeURIComponent(code)}`);
+    connect();
+  } catch (e) {
+    if (btn) btn.disabled = false;
+    forget();
+    showJoin(e.message);
+  }
+}
+
+function forget() {
+  localStorage.removeItem(storeKey(code));
+  session = null;
+  live?.stop();
+}
+
+function connect() {
+  live?.stop();
+  const q = new URLSearchParams({ role: 'player', code: session.code, playerId: session.playerId, key: session.key });
+  live = Q.stream(`/api/events?${q}`, {
+    onState: (s) => {
+      S = s;
+      timer.set(s.remaining, s.question?.time);
+      render();
+    },
+    onGone: () => { forget(); showJoin('La partie n’existe plus. Rejoins un nouveau salon.'); },
+    onKicked: () => { forget(); showJoin('Tu as été retiré de la partie par l’animateur.'); },
+  });
+}
+
+timer.on((left, total) => {
+  const el = $('#tbar');
+  if (el) el.style.width = total ? `${(100 * left) / total}%` : '100%';
+  const t = $('#tleft');
+  if (t && S?.question?.time) t.textContent = `${Math.ceil(left / 1000)} s`;
+});
+
+function render() {
+  const s = S;
+  $('#bar').innerHTML = `<span class="name">👤 ${esc(s.name)}${s.dev ? ' <span class="devtag">🛠 test</span>' : ''}</span><span class="score">${s.score} pts</span>`;
+  const key = [s.state, s.question?.index, s.answered, s.rank, s.state === 'question' ? '' : s.score, s.result?.correct, s.result?.partial, s.result?.points, !!s.devAnswer, s.offer?.risk, s.cheatPending, s.cheated, s.busted, !!s.stealOffer, s.steal ? s.steal.victim + s.steal.amount : '', (s.board || []).map((e) => e.name + ':' + e.score).join(',')].join('|');
+  if (s.state !== 'lobby') known = null;
+  if (key === lastKey) {
+    if (s.state === 'lobby') updateLobby(s); // nouveaux joueurs : mise à jour sans tout redessiner
+    return;
+  }
+  lastKey = key;
+  document.body.className = '';
+  const m = $('#main');
+
+  if (s.state === 'lobby') {
+    m.innerHTML = `<div class="center"><div class="big-icon">✅</div><h1>Tu es dans la partie !</h1></div>
+      <p class="center">Regarde l’écran : le quiz va bientôt commencer.</p>
+      <div class="spinner"></div>
+      <div class="lobby-count" id="lobbyCount"></div>
+      <div class="chips" id="lobbyPlayers"></div>`;
+    updateLobby(s);
+    return;
+  }
+
+  if (s.state === 'question' && !s.answered && s.cheated) {
+    m.innerHTML = `<div class="center"><div class="big-icon">😈</div><h1>Triche activée</h1></div>
+      <div class="card"><div class="lbl">La bonne réponse ici…</div><div class="val">Ne rien répondre !</div></div>
+      <p class="center">Ne touche à rien, on s’occupe de tout.</p>`;
+    return;
+  }
+  if (s.state === 'question' && !s.answered) return renderAnswer(s);
+
+  if (s.state === 'question' || s.state === 'closed') {
+    m.innerHTML = `<div class="center"><div class="big-icon">${s.cheated ? '😈' : s.answered ? '📨' : '⌛'}</div>
+      <h1>${s.cheated ? 'Réponse remplie pour toi…' : s.answered ? 'Réponse envoyée !' : 'Temps écoulé'}</h1></div>
+      ${s.answered ? `<div class="card"><div class="lbl">Ta réponse</div><div class="val">${esc(typeof s.myAnswer === 'number' ? fmt(s.myAnswer) : s.myAnswer)}</div></div>` : ''}
+      <p class="center">${s.state === 'question' ? 'En attente des autres joueurs…' : 'Regarde l’écran pour la réponse !'}</p>
+      ${s.state === 'question' ? '<div class="tbar"><div id="tbar"></div></div>' : ''}`;
+    return;
+  }
+
+  if (s.state === 'reveal' && s.result?.trap) {
+    const r = s.result;
+    document.body.className = r.correct ? 'ok' : 'ko';
+    m.innerHTML = `<div class="center"><div class="big-icon">🪤</div>
+      <h1>${r.correct ? 'Bien joué, tu ne t’es pas fait avoir !' : 'Piégé !'}</h1>
+      ${r.points ? `<div class="points">+${r.points}</div>` : ''}</div>
+      <div class="card"><div class="lbl">C’était une question piège</div><div class="val">Il ne fallait pas répondre</div></div>
+      ${s.rank ? `<p class="center">Tu es <b>${ordinal(s.rank)}</b> sur ${s.playerCount}</p>` : ''}
+      ${offerHtml(s)}`;
+    bindOffer();
+    return;
+  }
+
+  if (s.state === 'reveal' && s.result) {
+    const r = s.result;
+    document.body.className = r.correct ? 'ok' : r.partial ? 'part' : 'ko';
+    m.innerHTML = `<div class="center"><div class="big-icon">${r.correct ? '🎉' : r.partial ? '👍' : r.answered ? '😬' : '💤'}</div>
+      <h1>${r.correct ? 'Bonne réponse !' : r.partial ? 'En partie !' : r.answered ? 'Raté !' : 'Pas de réponse'}</h1>
+      ${r.correct || r.partial ? `<div class="points">+${r.points}</div>` : ''}</div>
+      ${r.map ? `<div class="card"><div class="lbl">${esc(r.answer)}${r.map.d != null ? ' · ton repère est à' : ''}</div><div class="val">${r.map.d != null ? Q.fmtKm(r.map.d) : 'Pas de repère'}</div></div><div class="map-box small" id="mapResult"></div>`
+        : !r.correct ? `<div class="card"><div class="lbl">${r.answer.includes(' / ') ? 'Les bonnes réponses' : 'La bonne réponse'}</div><div class="val">${esc(r.answer)}</div></div>` : ''}
+      ${s.rank ? `<p class="center">Tu es <b>${ordinal(s.rank)}</b> sur ${s.playerCount}</p>` : ''}
+      ${stealHtml(s)}
+      ${offerHtml(s)}`;
+    bindOffer();
+    bindSteal();
+    if (r.map) showResultMap(r.map);
+    return;
+  }
+
+  if (s.state === 'leaderboard') {
+    m.innerHTML = `<div class="center"><div class="lbl" style="opacity:.8">Ta position</div><div class="rank">${ordinal(s.rank)}</div>
+      <p>sur ${s.playerCount} joueur${s.playerCount > 1 ? 's' : ''}</p></div>
+      ${stealHtml(s)}
+      ${offerHtml(s)}
+      ${boardHtml(s, { last: true, title: 'Classement' })}
+      <p class="center">Prochaine question bientôt…</p>`;
+    bindOffer();
+    bindSteal();
+    scrollToMe();
+    return;
+  }
+
+  if (s.state === 'end') {
+    const medal = { 1: '🥇', 2: '🥈', 3: '🥉' }[s.rank] || '🏁';
+    if (s.busted) document.body.className = 'ko';
+    m.innerHTML = `${s.busted ? '<div class="busted">🚨 Tricheur démasqué !<small>Ta triche a été découverte : chaque triche prise a remis tes points à 0.</small></div>' : ''}<div class="center"><div class="big-icon">${s.busted ? '🙈' : medal}</div><h1>Partie terminée !</h1>
+      <div class="rank" style="margin-top:10px">${ordinal(s.rank)}</div><p>sur ${s.playerCount}</p></div>
+      ${boardHtml(s, { title: 'Classement final' })}
+      <p class="center">Merci d’avoir joué !</p>`;
+    scrollToMe();
+  }
+}
+
+/* Carte du résultat : la bonne réponse (vert), mon repère (rouge) et la distance */
+function showResultMap(r) {
+  Q.leaflet().then((L) => {
+    const box = $('#mapResult');
+    if (!box) return;
+    const map = Q.makeMap(box, { labels: true });
+    const target = [r.target.lat, r.target.lng];
+    L.marker(target, { icon: Q.pinIcon('#30a46c') }).addTo(map);
+    if (r.tolerance) L.circle(target, { radius: r.tolerance * 1000, color: '#30a46c', weight: 1, fillOpacity: 0.1 }).addTo(map);
+    if (r.mine) {
+      const mine = [r.mine.lat, r.mine.lng];
+      L.marker(mine, { icon: Q.pinIcon('#e5484d') }).addTo(map);
+      L.polyline([target, mine], { color: '#fff', weight: 2, dashArray: '6 6' }).addTo(map);
+      map.fitBounds([target, mine], { padding: [30, 30], maxZoom: 9 });
+    } else map.setView(target, 6);
+  }).catch(() => {});
+}
+
+/* ---------- Vol de points (seul à avoir bien répondu) ---------- */
+function stealHtml(s) {
+  const st = s.steal;
+  if (st && st.thief === s.name) return `<div class="steal done">🦹 Tu as volé <b>${st.amount} pts</b> à <b>${esc(st.victim)}</b> !</div>`;
+  if (st && st.victim === s.name) return `<div class="steal hit">🦹 <b>${esc(st.thief)}</b> t’a volé <b>${st.amount} pts</b> !</div>`;
+  const o = s.stealOffer;
+  if (!o) return '';
+  if (!o.targets.length) return '<div class="steal done">🦹 Tu es le seul à avoir trouvé… mais personne n’a de points à voler !</div>';
+  return `<div class="steal">
+    <div class="steal-title">🦹 Tu es le seul à avoir trouvé !</div>
+    <p>Choisis à qui voler un peu de points :</p>
+    <div class="steal-list">${o.targets.map((t) => `<button data-steal="${esc(t.name)}"><span>${esc(t.name)} <small>${t.score} pts</small></span><b>−${t.take}</b></button>`).join('')}</div>
+    <div class="err" id="stealErr"></div>
+  </div>`;
+}
+function bindSteal() {
+  document.querySelectorAll('[data-steal]').forEach((b) => (b.onclick = () => {
+    document.querySelectorAll('[data-steal]').forEach((x) => (x.disabled = true));
+    if (navigator.vibrate) navigator.vibrate([20, 30, 60]);
+    Q.api('/api/player/steal', { code: session.code, playerId: session.playerId, key: session.key, target: b.dataset.steal })
+      .catch((err) => {
+        const e = $('#stealErr');
+        if (e) e.textContent = err.message;
+        document.querySelectorAll('[data-steal]').forEach((x) => (x.disabled = false));
+      });
+  }));
+}
+
+/* ---------- Tentation de triche ---------- */
+function offerHtml(s) {
+  if (s.cheatPending) return '<div class="offer done">😈 C’est noté… la bonne réponse sera remplie pour toi à la prochaine question.</div>';
+  if (!s.offer) return '';
+  return `<div class="offer">
+    <div class="offer-title">🎲 Tentation !</div>
+    <p>Tricher à la prochaine question ? La bonne réponse sera remplie automatiquement… mais tu peux <b>tout perdre</b>.</p>
+    <div class="offer-risk">Risque : <b>${esc(s.offer.risk)}</b></div>
+    <div class="offer-btns"><button class="go" data-cheat="1">😈 Je triche</button><button class="go no" data-cheat="0">😇 Non merci</button></div>
+    <div class="err" id="offerErr"></div>
+  </div>`;
+}
+function bindOffer() {
+  document.querySelectorAll('[data-cheat]').forEach((b) => (b.onclick = () => {
+    document.querySelectorAll('[data-cheat]').forEach((x) => (x.disabled = true));
+    if (navigator.vibrate) navigator.vibrate(b.dataset.cheat === '1' ? [30, 40, 30] : 20);
+    Q.api('/api/player/cheat', { code: session.code, playerId: session.playerId, key: session.key, accept: b.dataset.cheat === '1' })
+      .catch((err) => { const e = $('#offerErr'); if (e) e.textContent = err.message; });
+  }));
+}
+
+/* ---------- Classement de tout le groupe (après chaque question et à la fin) ---------- */
+function boardHtml(s, { last = false, title = 'Classement' } = {}) {
+  const b = s.board;
+  if (!b || !b.length) return '';
+  const medal = { 1: '🥇', 2: '🥈', 3: '🥉' };
+  const rows = b.map((e) => {
+    const me = e.name === s.name;
+    const mv = last && e.move ? `<span class="mv ${e.move > 0 ? 'up' : 'down'}">${e.move > 0 ? '▲' : '▼'}${Math.abs(e.move)}</span>` : '';
+    return `<li class="${me ? 'me' : ''}"${me ? ' id="meRow"' : ''}>
+      <span class="r">${medal[e.rank] || e.rank}</span>
+      <span class="n">${esc(e.name)}${me ? ' <small>(toi)</small>' : ''}${e.cheater ? ' <span class="cheater">Tricheur</span>' : ''}</span>
+      ${last && e.last ? `<span class="l">+${e.last}</span>` : ''}${mv}
+      <span class="s">${e.score}</span></li>`;
+  }).join('');
+  return `<div class="board"><div class="board-title">${esc(title)} · ${b.length} joueur${b.length > 1 ? 's' : ''}</div><ol>${rows}</ol></div>`;
+}
+// Fait défiler la liste jusqu'à sa propre ligne (utile dans les grands groupes)
+function scrollToMe() {
+  const row = $('#meRow');
+  const list = row?.closest('ol');
+  if (row && list && list.scrollHeight > list.clientHeight) list.scrollTop = row.offsetTop - list.clientHeight / 2;
+}
+
+/* ---------- Salon d'attente : liste des joueurs + annonce des arrivées ---------- */
+let known = null; // pseudos déjà affichés (null = premier affichage, pas d'annonce)
+const MAX_CHIPS = 60;
+
+function updateLobby(s) {
+  const names = s.players || [];
+  const n = s.playerCount ?? names.length;
+  const count = $('#lobbyCount');
+  if (count) count.textContent = `👥 ${n} joueur${n > 1 ? 's' : ''} dans la salle`;
+  const fresh = known ? names.filter((x) => !known.has(x) && x !== s.name) : [];
+  known = new Set(names);
+  const box = $('#lobbyPlayers');
+  if (box) {
+    const isNew = new Set(fresh);
+    const list = names.slice().reverse(); // les derniers arrivés en premier
+    const shown = list.slice(0, MAX_CHIPS);
+    box.innerHTML = shown.map((x) => `<span class="chip${x === s.name ? ' me' : ''}${isNew.has(x) ? ' new' : ''}">${esc(x)}${x === s.name ? ' (toi)' : ''}</span>`).join('')
+      + (list.length > MAX_CHIPS ? `<span class="chip more">+${list.length - MAX_CHIPS} autres</span>` : '');
+  }
+  if (fresh.length) {
+    toast(fresh.length === 1 ? `🎉 ${fresh[0]} a rejoint la partie` : `🎉 ${fresh.length} nouveaux joueurs`);
+    if (navigator.vibrate) navigator.vibrate(20);
+  }
+}
+
+let toastTimer;
+function toast(msg) {
+  document.querySelectorAll('.toast').forEach((t) => t.remove());
+  clearTimeout(toastTimer);
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  toastTimer = setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 400); }, 2600);
+}
+
+// Mode test (pseudo terminé par #dev) : la bonne réponse, visible seulement sur ce téléphone
+function devBanner(s) {
+  const d = s.devAnswer;
+  if (!d) return '';
+  let txt = esc(d.text);
+  if (d.accepted?.length > 1) txt = d.accepted.map(esc).join(' · ');
+  if (d.value !== undefined) txt = `${fmt(d.value)}${d.unit ? ' ' + esc(d.unit) : ''}${d.tolerance ? ` (± ${fmt(d.tolerance)})` : ''}`;
+  return `<div class="devbanner">🛠 Réponse : <b>${txt}</b></div>`;
+}
+
+function renderAnswer(s) {
+  const q = s.question;
+  const m = $('#main');
+  const head = `<div class="qmeta"><span>Question ${q.index + 1}/${q.total}</span><span>${q.points} pts</span><span id="tleft">${q.time ? '' : '∞'}</span></div>
+    ${q.time ? '<div class="tbar"><div id="tbar"></div></div>' : ''}
+    <div class="qtext">${esc(q.text)}</div>${devBanner(s)}`;
+
+  if (q.type === 'choice' && q.multi) {
+    const picked = new Set();
+    m.innerHTML = `${head}
+      <div class="pick">☑️ Coche ${q.pick > 1 ? `les ${q.pick} bonnes réponses` : 'la bonne réponse'}</div>
+      <div class="choices multi ${q.choices.length <= 2 ? 'n2' : ''}">${q.choices.map((c, i) => `
+      <button class="choice${s.devAnswer?.correct?.includes(i) ? ' devgood' : ''}" data-i="${i}" style="background:${COLORS[i]}"><span class="tick"></span><span class="shape">${SHAPES[i]}</span><span>${esc(c)}</span></button>`).join('')}</div>
+      <button class="go" id="validate" disabled>Valider</button>
+      <div class="err" id="err"></div>`;
+    const go = $('#validate');
+    const refresh = () => {
+      go.disabled = !picked.size;
+      go.textContent = picked.size ? `Valider (${picked.size} cochée${picked.size > 1 ? 's' : ''})` : 'Valider';
+    };
+    m.querySelectorAll('.choice').forEach((b) => (b.onclick = () => {
+      const i = Number(b.dataset.i);
+      if (picked.has(i)) picked.delete(i); else picked.add(i);
+      b.classList.toggle('sel', picked.has(i));
+      b.querySelector('.tick').textContent = picked.has(i) ? '✓' : '';
+      if (navigator.vibrate) navigator.vibrate(10);
+      refresh();
+    }));
+    go.onclick = () => send([...picked]);
+    return;
+  }
+
+  if (q.type === 'map') {
+    m.innerHTML = `${head}
+      <div class="pick">📍 Touche la carte pour placer ton repère</div>
+      <div class="map-box" id="mapAnswer"></div>
+      <button class="go" id="validate" disabled>Valider</button>
+      <div class="err" id="err"></div>`;
+    const go = $('#validate');
+    let marker = null;
+    Q.leaflet().then((L) => {
+      const box = $('#mapAnswer');
+      if (!box) return;
+      const map = Q.makeMap(box, { view: q.view });
+      if (s.devAnswer?.target) L.marker([s.devAnswer.target.lat, s.devAnswer.target.lng], { icon: Q.pinIcon('#ffd34d', 0.8), interactive: false }).addTo(map);
+      const place = (ll) => {
+        if (!marker) {
+          marker = L.marker(ll, { icon: Q.pinIcon('#e5484d'), draggable: true }).addTo(map);
+          if (navigator.vibrate) navigator.vibrate(15);
+        } else marker.setLatLng(ll);
+        go.disabled = false;
+      };
+      map.on('click', (e) => place(e.latlng));
+      go.onclick = () => { const ll = marker.getLatLng(); send({ lat: ll.lat, lng: ll.lng }); };
+    }).catch((err) => { $('#err').textContent = err.message; });
+    return;
+  }
+
+  if (q.type === 'choice') {
+    m.innerHTML = `${head}<div class="choices ${q.choices.length <= 2 ? 'n2' : ''}">${q.choices.map((c, i) => `
+      <button class="choice${s.devAnswer?.correct?.includes(i) ? ' devgood' : ''}" data-i="${i}" style="background:${COLORS[i]}"><span class="shape">${SHAPES[i]}</span><span>${esc(c)}</span></button>`).join('')}</div>
+      <div class="err" id="err"></div>`;
+    m.querySelectorAll('.choice').forEach((b) => (b.onclick = () => send(Number(b.dataset.i))));
+    return;
+  }
+
+  const isNum = q.type === 'number';
+  m.innerHTML = `${head}
+    <form id="ansForm" style="display:grid;gap:12px">
+      <div class="unit"><input id="ans" ${isNum ? 'inputmode="decimal" placeholder="Ta valeur"' : 'placeholder="Ta réponse" autocapitalize="off" autocomplete="off"'} maxlength="100">
+      ${isNum && q.unit ? `<span>${esc(q.unit)}</span>` : ''}</div>
+      <button class="go">Valider</button>
+    </form>
+    <div class="err" id="err"></div>`;
+  const input = $('#ans');
+  input.focus();
+  $('#ansForm').onsubmit = (e) => {
+    e.preventDefault();
+    const v = input.value.trim();
+    if (!v) return;
+    if (isNum && !Number.isFinite(Number(v.replace(/\s/g, '').replace(',', '.')))) {
+      $('#err').textContent = 'Entre un nombre (ex : 12,5)';
+      return;
+    }
+    send(v);
+  };
+}
+
+function send(value) {
+  if (navigator.vibrate) navigator.vibrate(30);
+  document.querySelectorAll('#main button').forEach((b) => (b.disabled = true));
+  Q.api('/api/player/answer', { code: session.code, playerId: session.playerId, key: session.key, value }).catch((err) => {
+    const e = $('#err');
+    if (e) e.textContent = err.message;
+    document.querySelectorAll('#main button').forEach((b) => (b.disabled = false));
+  });
+}
+
+if (session) {
+  $('#main').innerHTML = '<div class="spinner"></div>';
+  connect();
+} else showJoin();
+</script>
+</body>
+</html>

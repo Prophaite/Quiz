@@ -1,0 +1,16 @@
+# Fins de ligne normalisées (LF dans le dépôt, converties selon le système à l'extraction)
+* text=auto
+
+# Scripts Windows : toujours en CRLF, sinon cmd.exe peut mal les lire
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Fichiers binaires : jamais de conversion ni de diff texte
+*.xlsx binary
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.mp3  binary
+*.ogg  binary
+*.m4a  binary
+*.wav  binary

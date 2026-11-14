@@ -1,0 +1,579 @@
+[
+  {
+    "id": "46192aa1526b",
+    "title": "Quiz de démonstration",
+    "questions": [
+      {
+        "id": "87d1a62a7a20",
+        "type": "choice",
+        "text": "Quelle est la capitale de l’Australie ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Sydney",
+            "correct": false
+          },
+          {
+            "text": "Canberra",
+            "correct": true
+          },
+          {
+            "text": "Melbourne",
+            "correct": false
+          },
+          {
+            "text": "Perth",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "85583ab6a6fc",
+        "type": "text",
+        "text": "Qui a peint « La Joconde » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Léonard de Vinci",
+          "Leonardo da Vinci",
+          "De Vinci",
+          "Vinci"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "93de4984d294",
+        "type": "number",
+        "text": "En quelle année l’homme a-t-il marché sur la Lune pour la première fois ?",
+        "image": "",
+        "points": 150,
+        "time": 25,
+        "trap": false,
+        "value": 1969,
+        "tolerance": 0,
+        "mode": "tolerance",
+        "unit": ""
+      },
+      {
+        "id": "93e8f103365d",
+        "type": "choice",
+        "text": "Le Soleil est une étoile.",
+        "image": "",
+        "points": 50,
+        "time": 10,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Vrai",
+            "correct": true
+          },
+          {
+            "text": "Faux",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "22e0f16521d4",
+        "type": "number",
+        "text": "Combien mesure la tour Eiffel (en mètres, antennes comprises) ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "value": 330,
+        "tolerance": 15,
+        "mode": "tolerance",
+        "unit": "m"
+      },
+      {
+        "id": "demo-carte-lyon",
+        "type": "map",
+        "text": "Où se trouve Lyon ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "lat": 45.764,
+        "lng": 4.8357,
+        "label": "Lyon",
+        "tolerance": 20,
+        "maxKm": 250,
+        "mode": "gradual",
+        "view": {
+          "lat": 46.6,
+          "lng": 2.4,
+          "zoom": 5
+        }
+      }
+    ],
+    "updatedAt": 1794579281173
+  },
+  {
+    "id": "gctfbh6tlzmlnbn7",
+    "title": "Quiz Test Excurio",
+    "questions": [
+      {
+        "id": "25c595807540",
+        "type": "choice",
+        "text": "Quelle est la capitale de l’Australie ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Sydney",
+            "correct": false
+          },
+          {
+            "text": "Canberra",
+            "correct": true
+          },
+          {
+            "text": "Melbourne",
+            "correct": false
+          },
+          {
+            "text": "Perth",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8a12c216a04d",
+        "type": "text",
+        "text": "Qui a peint « La Joconde » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Léonard de Vinci",
+          "Leonardo da Vinci",
+          "De Vinci",
+          "Vinci"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "7ae9a84898c2",
+        "type": "number",
+        "text": "En quelle année l’homme a-t-il marché sur la Lune pour la première fois ?",
+        "image": "",
+        "points": 150,
+        "time": 25,
+        "trap": false,
+        "value": 1969,
+        "tolerance": 0,
+        "mode": "tolerance",
+        "unit": ""
+      },
+      {
+        "id": "56938f85cb3f",
+        "type": "choice",
+        "text": "Le Soleil est une étoile.",
+        "image": "",
+        "points": 50,
+        "time": 10,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Vrai",
+            "correct": true
+          },
+          {
+            "text": "Faux",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0afac7bcae56",
+        "type": "number",
+        "text": "Combien mesure la tour Eiffel (antennes comprises) ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "value": 330,
+        "tolerance": 15,
+        "mode": "tolerance",
+        "unit": "m"
+      },
+      {
+        "id": "0ebf4f8c2e6d",
+        "type": "choice",
+        "text": "Qui a écrit « Les Fleurs du mal »",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Paul Verlaine",
+            "correct": false
+          },
+          {
+            "text": "Charles Baudelaire",
+            "correct": true
+          },
+          {
+            "text": "Arthur Rimbaud",
+            "correct": false
+          },
+          {
+            "text": "Victor Hugo",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a2939dede6c9",
+        "type": "text",
+        "text": "Quel est le nom du célèbre navire de Christophe Colomb en 1492 ?",
+        "image": "",
+        "points": 400,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "La Santa Maria",
+          "Santa Maria"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "0fc4187dfc2b",
+        "type": "choice",
+        "text": "Dans quel pays se trouve la région du Tyrol ?",
+        "image": "",
+        "points": 150,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Autriche",
+            "correct": true
+          },
+          {
+            "text": "Pologne",
+            "correct": false
+          },
+          {
+            "text": "Slovénie",
+            "correct": false
+          },
+          {
+            "text": "Italie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5a0d16267774",
+        "type": "text",
+        "text": "Quelle guerre a opposé la France et l'Angleterre et vu Jeanne d'Arc se révéler ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Guerre de Cent Ans",
+          "Cent ans",
+          "100 ans"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "d13c1f70c29f",
+        "type": "choice",
+        "text": "Quel est le nom du courant artistique auquel appartient Salvador Dalí ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Cubisme",
+            "correct": false
+          },
+          {
+            "text": "Le Surréalisme",
+            "correct": true
+          },
+          {
+            "text": "L'Impressionnisme",
+            "correct": false
+          },
+          {
+            "text": "Le Pop art",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "417df9f43e37",
+        "type": "text",
+        "text": "Quel écrivain est l’auteur de « 1984 » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "George Orwell",
+          "Orwell"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "ef47732546ec",
+        "type": "choice",
+        "text": "Quel peintre a rendu célèbres les boîtes de soupe Campbell’s ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Yoko Ono",
+            "correct": false
+          },
+          {
+            "text": "Salvador Dali",
+            "correct": false
+          },
+          {
+            "text": "Jean-Michel Basquiat",
+            "correct": false
+          },
+          {
+            "text": "Andy Warhol",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "90bde358e5f4",
+        "type": "choice",
+        "text": "Quelle ville est connue comme la capitale française de la bande dessinée ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Angoulême",
+            "correct": true
+          },
+          {
+            "text": "Annecy",
+            "correct": false
+          },
+          {
+            "text": "Amiens",
+            "correct": false
+          },
+          {
+            "text": "Aix",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b107e28278f6",
+        "type": "choice",
+        "text": "Quel organe du corps humain produit l’insuline ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Rate",
+            "correct": false
+          },
+          {
+            "text": "Le Pancréas",
+            "correct": true
+          },
+          {
+            "text": "Le Rein",
+            "correct": false
+          },
+          {
+            "text": "Le Cœur",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7e62d96ca3c3",
+        "type": "choice",
+        "text": "Quelle planète du système solaire possède la rotation la plus rapide sur elle-même ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Terre",
+            "correct": false
+          },
+          {
+            "text": "Mars",
+            "correct": false
+          },
+          {
+            "text": "Jupiter",
+            "correct": true
+          },
+          {
+            "text": "Saturne",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "585328030cc9",
+        "type": "text",
+        "text": "Quel métal a pour symbole chimique Fe ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Le Fer",
+          "Fer"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "175b52510adb",
+        "type": "number",
+        "text": "Combien de cœurs possède une pieuvre ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "value": 3,
+        "tolerance": 0,
+        "mode": "tolerance",
+        "unit": ""
+      },
+      {
+        "id": "67965072780b",
+        "type": "choice",
+        "text": "Quel est le plus grand organe du corps humain ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'intestin Grêle",
+            "correct": false
+          },
+          {
+            "text": "Les Poumons",
+            "correct": false
+          },
+          {
+            "text": "La Peau",
+            "correct": true
+          },
+          {
+            "text": "Le Cœur",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "97fc161b921e",
+        "type": "text",
+        "text": "Dans quel sport évolue l’équipe des All Blacks ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Le Rugby",
+          "Rugby"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "9cfc55abbd99",
+        "type": "text",
+        "text": "Quelle est la langue officielle du Brésil ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Le Portugais",
+          "Portugais"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "a76712dfbca0",
+        "type": "choice",
+        "text": "Quel scientifique est l’inventeur de la première pile électrique ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Voltaire",
+            "correct": false
+          },
+          {
+            "text": "Voltaren Actigo",
+            "correct": false
+          },
+          {
+            "text": "Vianney",
+            "correct": false
+          },
+          {
+            "text": "Alessandro Volta",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": 1794579281173
+  }
+]

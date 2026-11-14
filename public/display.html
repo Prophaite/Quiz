@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz Live — Écran</title>
+<style>
+  :root { --bg1: #24135f; --bg2: #4a1f8a; --card: rgba(255,255,255,.1); --line: rgba(255,255,255,.18); --ok: #2fd17a; --ko: #ff5a5f; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #fff; overflow: hidden;
+    background: radial-gradient(circle at 15% 10%, #5b2bb5 0%, transparent 45%), radial-gradient(circle at 90% 90%, #1d4fb8 0%, transparent 50%), linear-gradient(135deg, var(--bg1), var(--bg2)); }
+  #app { height: 100vh; display: flex; flex-direction: column; padding: 3vh 4vw; }
+  .top { display: flex; align-items: center; gap: 2vw; font-size: 2.2vh; opacity: .9; min-height: 5vh; }
+  .top .code { margin-left: auto; background: var(--card); padding: .6vh 1.2vw; border-radius: 99px; font-weight: 700; }
+  .top .code b { letter-spacing: .1em; }
+  .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+  .center { text-align: center; }
+  h1 { font-size: 6vh; margin: 0 0 2vh; letter-spacing: -.02em; }
+  .fade { animation: fade .5s ease both; }
+  @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes pop { 0% { transform: scale(.4); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+
+  /* Lobby */
+  .lobby { display: grid; grid-template-columns: auto 1fr; gap: 5vw; align-items: center; }
+  .qr { background: #fff; padding: 2vh; border-radius: 3vh; width: 48vh; height: 48vh; box-shadow: 0 2vh 6vh rgba(0,0,0,.3); }
+  .qr img { width: 100%; height: 100%; display: block; }
+  .join-info .label { font-size: 3vh; opacity: .8; }
+  .join-info .url { font-size: 3.4vh; font-weight: 700; margin: 1vh 0 3vh; word-break: break-all; }
+  .join-info .big-code { font-size: 16vh; font-weight: 900; letter-spacing: .12em; line-height: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 1vh; margin-top: 4vh; max-height: 30vh; overflow: hidden; }
+  .chip { background: var(--card); border: 1px solid var(--line); padding: 1vh 1.6vw; border-radius: 99px; font-size: 2.6vh; font-weight: 700; animation: pop .4s ease both; }
+  .count { font-size: 3vh; margin-top: 3vh; opacity: .85; }
+
+  /* Question */
+  .qhead { display: flex; align-items: center; gap: 3vw; }
+  .qnum { font-size: 2.6vh; opacity: .8; font-weight: 600; }
+  .qtext { font-size: 5.6vh; font-weight: 800; line-height: 1.2; text-align: center; margin: 2vh auto; max-width: 85vw; text-wrap: balance; }
+  .qimg { display: block; margin: 0 auto 2vh; max-height: 32vh; max-width: 70vw; border-radius: 2vh; box-shadow: 0 1vh 4vh rgba(0,0,0,.35); }
+  .timer { width: 13vh; height: 13vh; position: relative; flex: none; }
+  .timer svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .timer .n { position: absolute; inset: 0; display: grid; place-items: center; font-size: 5vh; font-weight: 900; font-variant-numeric: tabular-nums; }
+  .timer.low .n { color: #ffd34d; }
+  .side-stat { text-align: center; }
+  .side-stat b { display: block; font-size: 6vh; line-height: 1; }
+  .side-stat span { font-size: 2vh; opacity: .8; }
+  .qrow { display: flex; align-items: center; justify-content: space-between; gap: 3vw; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 2vh; margin-top: 2vh; }
+  .choice { display: flex; align-items: center; gap: 2vw; padding: 2.6vh 2vw; border-radius: 2vh; font-size: 3.8vh; font-weight: 800; box-shadow: 0 .8vh 0 rgba(0,0,0,.25); transition: opacity .4s, transform .4s; min-height: 11vh; }
+  .choice .shape { font-size: 4.5vh; width: 6vh; text-align: center; flex: none; }
+  .choice .txt { flex: 1; }
+  .choice .cnt { font-size: 4vh; background: rgba(0,0,0,.2); padding: .4vh 1.4vw; border-radius: 99px; }
+  .choice.dim { opacity: .28; transform: scale(.97); }
+  .choice.good { outline: .6vh solid #fff; }
+  .prompt { text-align: center; font-size: 4vh; opacity: .9; margin-top: 3vh; }
+  .prompt .icon { font-size: 10vh; display: block; margin-bottom: 1vh; }
+
+  /* Reveal */
+  .answer-big { text-align: center; margin: 2vh 0; }
+  .answer-big .lbl { font-size: 3vh; opacity: .8; }
+  .answer-big .val { font-size: 9vh; font-weight: 900; color: var(--ok); animation: pop .6s ease both; text-shadow: 0 .6vh 3vh rgba(0,0,0,.3); }
+  .stats { text-align: center; font-size: 3vh; opacity: .9; }
+  .cloud { display: flex; flex-wrap: wrap; gap: 1.4vh; justify-content: center; margin-top: 3vh; }
+  .cloud span { padding: 1vh 1.8vw; border-radius: 99px; font-weight: 700; background: var(--card); border: 2px solid transparent; animation: pop .4s ease both; }
+  .cloud span.ok { border-color: var(--ok); background: rgba(47,209,122,.18); }
+  .cloud span.ko { opacity: .7; text-decoration: line-through; text-decoration-color: rgba(255,255,255,.5); }
+  .closest { max-width: 70vw; margin: 3vh auto 0; display: grid; gap: 1.2vh; }
+  .closest div { display: flex; justify-content: space-between; padding: 1.4vh 2vw; background: var(--card); border-radius: 1.4vh; font-size: 3.2vh; font-weight: 700; animation: fade .4s ease both; }
+  .closest div.ok { background: rgba(47,209,122,.25); }
+
+  /* Classement */
+  .board { width: min(1100px, 80vw); margin: 0 auto; display: grid; gap: 1.2vh; }
+  .brow { display: flex; align-items: center; gap: 2vw; padding: 1.6vh 2vw; background: var(--card); border: 1px solid var(--line); border-radius: 1.6vh; font-size: 3.4vh; font-weight: 800; animation: fade .45s ease both; }
+  .brow .rk { width: 5vh; text-align: center; opacity: .8; }
+  .brow .nm { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .brow .gain { font-size: 2.4vh; color: var(--ok); font-weight: 700; }
+  .brow .mv { font-size: 2.2vh; width: 5vh; text-align: center; }
+  .brow .mv.up { color: var(--ok); } .brow .mv.down { color: var(--ko); }
+  .brow .sc { font-variant-numeric: tabular-nums; min-width: 12vh; text-align: right; }
+  .brow:nth-child(1) { background: linear-gradient(90deg, rgba(255,200,40,.35), var(--card)); }
+
+  /* Podium */
+  .podium { display: flex; align-items: flex-end; justify-content: center; gap: 2vw; height: 52vh; margin-top: 2vh; }
+  .step { width: 22vw; display: flex; flex-direction: column; align-items: center; animation: fade .8s ease both; }
+  .step .who { font-size: 4vh; font-weight: 900; text-align: center; margin-bottom: 1vh; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .step .pts { font-size: 2.8vh; opacity: .9; margin-bottom: 1.4vh; }
+  .step .block { width: 100%; border-radius: 2vh 2vh 0 0; display: grid; place-items: center; font-size: 10vh; font-weight: 900; }
+  .steal-banner { position: fixed; top: 12vh; left: 50%; transform: translateX(-50%); z-index: 1000; background: linear-gradient(135deg, #f5a524, #e5484d); color: #fff; font-size: 4.2vh; font-weight: 800; padding: 2vh 4vw; border-radius: 99px; box-shadow: 0 2vh 6vh rgba(0,0,0,.45); white-space: nowrap; animation: stealIn .7s cubic-bezier(.2,1.4,.4,1) both; }
+  .steal-banner.out { opacity: 0; transition: opacity .6s; }
+  @keyframes stealIn { from { opacity: 0; transform: translate(-50%, -6vh) scale(.6); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+  /* Cartes */
+  .map-wrap { height: 52vh; border-radius: 2vh; overflow: hidden; box-shadow: 0 1vh 4vh rgba(0,0,0,.35); z-index: 0; }
+  .map-reveal { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3vw; align-items: center; }
+  .map-reveal .map-wrap { height: 62vh; }
+  .qpin { background: none; border: 0; }
+  .leaflet-tooltip.pin-tip { font-weight: 800; font-size: 1.8vh; padding: .3vh .8vw; border-radius: 99px; }
+  .leaflet-tooltip.pin-tip.target { font-size: 2.4vh; background: #2b1670; color: #fff; border-color: #2b1670; }
+  /* Entrée des ninjas en fumée */
+  .smoke { position: relative; }
+  .smoke .nm, .smoke .who, span.smoke { animation: ninjaIn 1.6s ease both; }
+  .puff { position: absolute; left: 12vw; top: 50%; z-index: 2; font-size: 7vh; transform: translateY(-50%); animation: puff 1.6s ease-out both; pointer-events: none; }
+  @keyframes ninjaIn { 0%, 35% { opacity: 0; filter: blur(8px); letter-spacing: .4em; } 100% { opacity: 1; filter: none; letter-spacing: normal; } }
+  @keyframes puff { 0% { opacity: 0; transform: translateY(-50%) scale(.3); } 25% { opacity: 1; transform: translateY(-50%) scale(1.5); } 100% { opacity: 0; transform: translateY(-70%) scale(2.6); } }
+  .cheater { color: #fff; background: #e5484d; font-size: .55em; font-weight: 900; padding: .15em .6em; border-radius: 99px; vertical-align: middle; text-transform: uppercase; letter-spacing: .05em; }
+  .p1 .block { height: 32vh; background: linear-gradient(#ffd34d, #e6a700); color: #6b4a00; }
+  .p2 .block { height: 22vh; background: linear-gradient(#e6e9f2, #a9b0c4); color: #3c4256; }
+  .p3 .block { height: 15vh; background: linear-gradient(#f0a868, #c06a2a); color: #5c2c06; }
+  .p1 { animation-delay: .9s; } .p2 { animation-delay: .4s; } .p3 { animation-delay: 0s; }
+  .rest { display: flex; flex-wrap: wrap; justify-content: center; gap: 1vh 2vw; margin-top: 3vh; font-size: 2.6vh; opacity: .85; }
+
+  .ask { max-width: 420px; margin: auto; display: grid; gap: 12px; text-align: center; }
+  .ask input { font: inherit; font-size: 28px; text-align: center; padding: 12px; border-radius: 12px; border: 0; letter-spacing: .2em; }
+  .ask button { font: inherit; font-size: 20px; font-weight: 700; padding: 12px; border-radius: 12px; border: 0; background: #fff; color: var(--bg1); cursor: pointer; }
+  .fs { position: fixed; bottom: 1.5vh; right: 1.5vw; background: var(--card); color: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; opacity: .4; font: inherit; }
+  .fs:hover { opacity: 1; }
+  .fs.music { right: calc(1.5vw + 130px); }
+  .fs.music.off { text-decoration: line-through; }
+  .music-hint { position: fixed; bottom: 1.5vh; left: 50%; transform: translateX(-50%); background: #fff; color: #2b1670; font-weight: 800; padding: 8px 16px; border-radius: 99px; box-shadow: 0 6px 20px rgba(0,0,0,.3); cursor: pointer; animation: hintPulse 1.6s ease-in-out infinite; }
+  @keyframes hintPulse { 50% { transform: translateX(-50%) scale(1.05); } }
+  .hidden { display: none !important; }
+  .qr-wait { width: 100%; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh; color: #2b1670; font-weight: 800; font-size: 2.4vh; text-align: center; padding: 2vh; }
+  .qr-wait small { font-weight: 600; opacity: .7; font-size: 1.8vh; }
+  .qr-spin { width: 7vh; height: 7vh; border: .8vh solid #ddd6fe; border-top-color: #5b4bdb; border-radius: 50%; animation: qrspin 1s linear infinite; }
+  @keyframes qrspin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="top" id="top"></div>
+  <div class="stage" id="stage"></div>
+</div>
+<button class="fs" id="fs" title="Plein écran">⛶ Plein écran</button>
+<button class="fs music" id="musicBtn" title="Musique d'attente (salle d'attente)">🎵 Musique</button>
+<div class="music-hint hidden" id="musicHint">🔈 Cliquez n’importe où pour activer la musique</div>
+
+<script src="/common.js"></script>
+<script src="/music.js"></script>
+<script>
+const { esc, COLORS, SHAPES, fmt, params, ordinal } = Q;
+const $ = (s) => document.querySelector(s);
+const timer = Q.countdown();
+let code = params.get('room');
+let S = null;
+let lastKey = '';
+let live = null;
+
+$('#fs').onclick = () => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen());
+
+/* ---------- Musique d'attente : jouée dans la salle d'attente, coupée dès que le quiz démarre ---------- */
+const MUSIC_KEY = 'quiz-music';
+let musicOn = (() => { try { return localStorage.getItem(MUSIC_KEY) !== 'off'; } catch { return true; } })();
+async function updateMusic() {
+  const want = musicOn && S?.state === 'lobby';
+  $('#musicBtn').classList.toggle('off', !musicOn);
+  $('#musicBtn').textContent = musicOn ? '🎵 Musique' : '🔇 Musique';
+  if (!want) {
+    WaitMusic.stop();
+    $('#musicHint').classList.add('hidden');
+    return;
+  }
+  await WaitMusic.start();
+  // Le navigateur bloque le son tant que personne n'a cliqué sur la page
+  $('#musicHint').classList.toggle('hidden', !(musicOn && S?.state === 'lobby' && WaitMusic.blocked()));
+}
+$('#musicBtn').onclick = (e) => {
+  e.stopPropagation();
+  musicOn = !musicOn;
+  try { localStorage.setItem(MUSIC_KEY, musicOn ? 'on' : 'off'); } catch {}
+  WaitMusic.unlock().then(updateMusic);
+};
+for (const ev of ['pointerdown', 'keydown']) {
+  document.addEventListener(ev, () => { if (WaitMusic.playing) WaitMusic.unlock().then(updateMusic); });
+}
+
+function askCode(msg = '') {
+  $('#top').innerHTML = '';
+  $('#stage').innerHTML = `<form class="ask" id="askForm"><h1>Écran de projection</h1>
+    <input id="askCode" inputmode="numeric" maxlength="6" placeholder="Code" autofocus>
+    <button>Afficher le salon</button><div style="color:#ffb3b5">${esc(msg)}</div></form>`;
+  $('#askForm').onsubmit = (e) => {
+    e.preventDefault();
+    code = $('#askCode').value.trim();
+    history.replaceState(null, '', `?room=${encodeURIComponent(code)}`);
+    join();
+  };
+}
+
+function join() {
+  live?.stop();
+  lastKey = '';
+  if (!code) return askCode();
+  live = Q.stream(`/api/events?role=display&code=${encodeURIComponent(code)}`, {
+    onState: (s) => {
+      S = s;
+      timer.set(s.remaining, s.question?.time);
+      render();
+    },
+    onGone: () => askCode('Salon introuvable'),
+  });
+}
+join();
+
+timer.on((left, total) => {
+  const el = $('#timer');
+  if (!el) return;
+  const sec = Math.ceil(left / 1000);
+  el.querySelector('.n').textContent = S.state === 'question' ? sec : '0';
+  el.classList.toggle('low', S.state === 'question' && sec <= 5);
+  const circle = el.querySelector('.arc');
+  const frac = total && S.state === 'question' ? left / total : 0;
+  circle.style.strokeDashoffset = String(289 * (1 - frac));
+});
+
+function render() {
+  const s = S;
+  $('#top').innerHTML = `<span><b>${esc(s.title)}</b></span>
+    ${s.question && s.state !== 'lobby' && s.state !== 'end' ? `<span>Question ${s.question.index + 1} / ${s.question.total}</span>` : ''}
+    <span class="code">Rejoindre : <b>${esc(s.code)}</b></span>`;
+
+  // On évite de re-dessiner entièrement (animations) si seul un compteur change
+  let key = `${s.state}|${s.question?.index}`;
+  if (s.state === 'reveal') key += JSON.stringify(s.reveal);
+  if (s.state === 'leaderboard' || s.state === 'end') key += JSON.stringify(s.leaderboard);
+  const full = key !== lastKey;
+  lastKey = key;
+  updateMusic();
+  showSteal(s.steal);
+
+  if (s.state !== 'lobby') $('#lobby')?.remove();
+  if (s.state === 'lobby') return renderLobby(s);
+  if (s.state === 'question' || s.state === 'closed') return full ? renderQuestion(s) : updateQuestion(s);
+  if (s.state === 'reveal') return renderReveal(s, full);
+  if (s.state === 'leaderboard') return full && renderBoard(s);
+  if (s.state === 'end') return full && renderPodium(s);
+}
+
+// Bandeau « X a volé N pts à Y » (une seule fois par vol)
+let lastSteal = '';
+function showSteal(st) {
+  const id = st ? `${S.question?.index}|${st.thief}|${st.victim}|${st.amount}` : '';
+  if (!st || id === lastSteal) return;
+  lastSteal = id;
+  document.querySelector('.steal-banner')?.remove();
+  const el = document.createElement('div');
+  el.className = 'steal-banner';
+  el.innerHTML = `🦹 <b>${esc(st.thief)}</b> a volé <b>${st.amount} pts</b> à <b>${esc(st.victim)}</b> !`;
+  document.body.appendChild(el);
+  setTimeout(() => el.classList.add('out'), 6000);
+  setTimeout(() => el.remove(), 6600);
+}
+
+function renderLobby(s) {
+  const players = s.players;
+  // Pas de QR code tant que l'adresse Internet n'est pas vérifiée (elle ne marcherait pas encore)
+  const ready = s.netReady !== false;
+  const lobbyKey = ready ? s.joinUrl : 'preparing';
+  if (!$('#lobby') || $('#lobby').dataset.url !== lobbyKey) {
+    $('#stage').innerHTML = `<div class="lobby fade" id="lobby" data-url="${esc(lobbyKey)}">
+      <div class="qr">${ready
+        ? `<img src="/api/qr/${esc(s.code)}?u=${encodeURIComponent(s.joinUrl)}" alt="QR code">`
+        : '<div class="qr-wait"><div class="qr-spin"></div>Préparation de l’adresse Internet…<small>Le QR code apparaît dans quelques secondes</small></div>'}</div>
+      <div class="join-info">
+        <div class="label">Scannez le QR code ou allez sur</div>
+        <div class="url">${ready ? esc(s.joinUrl.replace(/\?room=.*/, '')) : '…'}</div>
+        <div class="label">Code du salon</div>
+        <div class="big-code">${esc(s.code)}</div>
+        <div class="count" id="pcount"></div>
+        <div class="chips" id="chips"></div>
+      </div></div>`;
+  }
+  $('#pcount').textContent = players.length ? `${players.length} joueur${players.length > 1 ? 's' : ''} connecté${players.length > 1 ? 's' : ''}` : 'En attente des joueurs…';
+  const chips = $('#chips');
+  const existing = new Set([...chips.children].map((c) => c.dataset.name));
+  const names = new Set(players.map((p) => p.name));
+  [...chips.children].forEach((c) => !names.has(c.dataset.name) && c.remove());
+  players.forEach((p) => {
+    if (existing.has(p.name)) return;
+    const el = document.createElement('span');
+    el.className = 'chip';
+    el.dataset.name = p.name;
+    el.textContent = p.name;
+    chips.appendChild(el);
+  });
+}
+
+function timerHtml(q) {
+  if (!q.time) return '<div style="width:13vh"></div>';
+  return `<div class="timer" id="timer"><svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="7"/>
+    <circle class="arc" cx="50" cy="50" r="46" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-dasharray="289" style="transition:stroke-dashoffset .1s linear"/>
+    </svg><div class="n"></div></div>`;
+}
+
+function choicesHtml(q, reveal) {
+  return `<div class="choices">${q.choices.map((c, i) => {
+    const good = reveal && reveal.correct.includes(i);
+    return `<div class="choice ${reveal ? (good ? 'good' : 'dim') : ''}" style="background:${COLORS[i]}">
+      <span class="shape">${SHAPES[i]}</span><span class="txt">${esc(c)}</span>
+      ${reveal ? `<span class="cnt">${reveal.counts[i]}</span>` : ''}</div>`;
+  }).join('')}</div>`;
+}
+
+function renderQuestion(s) {
+  const q = s.question;
+  let body = '';
+  if (q.type === 'choice') {
+    body = (q.multi ? `<div class="prompt"><span class="icon">☑️</span>Plusieurs réponses : cochez ${q.pick > 1 ? `les ${q.pick} bonnes réponses` : 'la bonne réponse'} puis validez</div>` : '')
+      + choicesHtml(q);
+  } else if (q.type === 'map') body = `<div class="map-wrap" id="qmap"></div><div class="prompt" style="margin-top:1.5vh;font-size:3vh">📍 Placez votre repère sur la carte de votre téléphone</div>`;
+  else if (q.type === 'text') body = `<div class="prompt"><span class="icon">⌨️</span>Écrivez votre réponse sur votre téléphone</div>`;
+  else body = `<div class="prompt"><span class="icon">🔢</span>Entrez une valeur${q.unit ? ` (en ${esc(q.unit)})` : ''} sur votre téléphone</div>`;
+  $('#stage').innerHTML = `<div class="fade">
+    <div class="qrow">${timerHtml(q)}
+      <div class="qnum">${q.points} points</div>
+      <div class="side-stat"><b id="acount">${s.answeredCount}</b><span>réponse${s.answeredCount > 1 ? 's' : ''}</span></div>
+    </div>
+    ${q.image ? `<img class="qimg" src="${esc(q.image)}" alt="">` : ''}
+    <div class="qtext">${esc(q.text)}</div>
+    ${body}
+    <div class="prompt" id="closedMsg" style="${s.state === 'closed' ? '' : 'display:none'}">⏱ Temps écoulé !</div>
+  </div>`;
+  if (q.type === 'map') Q.leaflet().then(() => { const el = $('#qmap'); if (el) Q.makeMap(el, { view: q.view }); }).catch((e) => { const el = $('#qmap'); if (el) el.innerHTML = `<p class="center">${esc(e.message)}</p>`; });
+}
+function updateQuestion(s) {
+  const a = $('#acount');
+  if (a) a.textContent = s.answeredCount;
+  const m = $('#closedMsg');
+  if (m) m.style.display = s.state === 'closed' ? '' : 'none';
+}
+
+function renderReveal(s, full) {
+  if (!full) return;
+  const q = s.question;
+  const r = s.reveal;
+  let body = '';
+  const pct = r.answerCount ? Math.round((100 * r.correctCount) / r.answerCount) : 0;
+  const stats = `<div class="stats">${r.correctCount} bonne${r.correctCount > 1 ? 's' : ''} réponse${r.correctCount > 1 ? 's' : ''} sur ${r.answerCount} (${pct} %)${r.partialCount ? ` · ${r.partialCount} en partie` : ''}</div>`;
+  if (r.trap) {
+    body = `<div class="answer-big"><div class="lbl">🪤 C’était un piège !</div><div class="val" style="color:#ffd34d">Il ne fallait pas répondre</div></div>
+      <div class="stats">${r.resisted} joueur${r.resisted > 1 ? 's' : ''} sur ${r.playerCount} ${r.resisted > 1 ? 'ont' : 'a'} résisté · ${r.answerCount} piégé${r.answerCount > 1 ? 's' : ''}</div>
+      ${q.type === 'choice' ? choicesHtml(q, { ...r, correct: [] }) : ''}`;
+  } else if (q.type === 'map') {
+    body = `<div class="map-reveal"><div class="map-wrap" id="rmap"></div>
+      <div><div class="answer-big" style="margin-top:0"><div class="lbl">Réponse</div><div class="val" style="font-size:6vh">${esc(r.answer)}</div></div>${stats}
+      <div class="closest" style="max-width:none">${r.pins.slice(0, 5).map((c, i) => `<div class="${c.correct ? 'ok' : ''}" style="animation-delay:${i * 120}ms"><span>${c.correct ? '✅ ' : c.partial ? '🟡 ' : ''}${esc(c.name)}</span><span>${Q.fmtKm(c.d)}</span></div>`).join('') || '<p class="center">Aucune réponse</p>'}</div></div></div>`;
+  } else if (q.type === 'choice') {
+    body = choicesHtml(q, r) + `<div style="margin-top:3vh">${stats}</div>`;
+  } else if (q.type === 'text') {
+    body = `<div class="answer-big"><div class="lbl">Réponse</div><div class="val">${esc(r.answer)}</div></div>${stats}
+      <div class="cloud">${r.groups.map((g, i) => `<span class="${g.correct ? 'ok' : 'ko'}" style="font-size:${Math.min(5, 2.4 + g.count * .5)}vh;animation-delay:${i * 60}ms">${esc(g.text)}${g.count > 1 ? ` ×${g.count}` : ''}</span>`).join('')}</div>`;
+  } else {
+    body = `<div class="answer-big"><div class="lbl">Réponse</div><div class="val">${fmt(r.value)}${r.unit ? ' ' + esc(r.unit) : ''}</div></div>
+      <div class="stats">${r.tolerance ? `Tolérance ± ${fmt(r.tolerance)} · ` : ''}${r.avg !== null ? `Moyenne des réponses : ${fmt(Math.round(r.avg * 100) / 100)}` : 'Aucune réponse'}</div>
+      <div class="closest">${r.closest.map((c, i) => `<div class="${c.correct ? 'ok' : ''}" style="animation-delay:${i * 120}ms"><span>${c.correct ? '✅ ' : ''}${esc(c.name)}</span><span>${fmt(c.value)}</span></div>`).join('')}</div>`;
+  }
+  $('#stage').innerHTML = `<div class="fade">
+    <div class="qtext" style="font-size:4.2vh">${esc(q.text)}</div>
+    ${body}</div>`;
+  if (q.type === 'map' && !r.trap) showRevealMap(r);
+}
+
+// Carte de la révélation : point à trouver, rayon « tous les points », repère de chaque joueur
+function showRevealMap(r) {
+  Q.leaflet().then((L) => {
+    const el = $('#rmap');
+    if (!el) return;
+    const map = Q.makeMap(el, { labels: true });
+    const target = [r.target.lat, r.target.lng];
+    if (r.tolerance) L.circle(target, { radius: r.tolerance * 1000, color: '#2fd17a', weight: 2, fillOpacity: 0.15 }).addTo(map);
+    const pts = [target];
+    // Les plus éloignés d'abord, pour que les meilleurs soient dessinés par-dessus
+    [...r.pins].reverse().forEach((p, i, all) => {
+      const ll = [p.lat, p.lng];
+      pts.push(ll);
+      const color = p.correct ? '#2fd17a' : p.partial ? '#f5a524' : '#e5484d';
+      const m = L.marker(ll, { icon: Q.pinIcon(color, 0.8) }).addTo(map);
+      const rank = all.length - i;
+      m.bindTooltip(`${esc(p.name)} · ${Q.fmtKm(p.d)}`, { permanent: rank <= 8, direction: 'top', className: 'pin-tip' });
+    });
+    L.marker(target, { icon: Q.pinIcon('#ffffff', 1.3), zIndexOffset: 1000 }).addTo(map)
+      .bindTooltip(`🎯 ${esc(r.target.label || 'Réponse')}`, { permanent: true, direction: 'top', className: 'pin-tip target' });
+    if (pts.length > 1) map.fitBounds(pts, { padding: [40, 40], maxZoom: 9 });
+    else map.setView(target, 6);
+  }).catch(() => {});
+}
+
+/* Ninjas (#ninja) : absents de la salle d'attente, ils surgissent en fumée la première fois
+   qu'ils apparaissent dans un classement. On retient ceux déjà apparus pour ce salon. */
+const ninjaKey = () => `quiz-ninja-${code}`;
+function ninjaEntrance(p) {
+  if (!p.ninja) return false;
+  let seen = [];
+  try { seen = JSON.parse(sessionStorage.getItem(ninjaKey()) || '[]'); } catch {}
+  if (seen.includes(p.name)) return false;
+  seen.push(p.name);
+  try { sessionStorage.setItem(ninjaKey(), JSON.stringify(seen)); } catch {}
+  return true;
+}
+const smoke = (on) => (on ? '<span class="puff" aria-hidden="true">💨</span>' : '');
+const cheaterTag = (p) => (p.cheater ? ' <span class="cheater">Tricheur</span>' : '');
+
+function renderBoard(s) {
+  const b = s.leaderboard;
+  $('#stage').innerHTML = `<h1 class="center fade">🏆 Classement</h1>
+    <div class="board">${b.map((p, i) => {
+      const ninja = ninjaEntrance(p);
+      return `<div class="brow${ninja ? ' smoke' : ''}" style="animation-delay:${i * 70}ms">${smoke(ninja)}
+      <span class="rk">${p.rank}</span>
+      <span class="mv ${p.move > 0 ? 'up' : p.move < 0 ? 'down' : ''}">${p.move > 0 ? '▲' + p.move : p.move < 0 ? '▼' + -p.move : ''}</span>
+      <span class="nm">${ninja ? '🥷 ' : ''}${esc(p.name)}</span>
+      ${p.last ? `<span class="gain">+${p.last}</span>` : ''}
+      <span class="sc">${p.score}</span></div>`;
+    }).join('') || '<p class="center">Aucun joueur</p>'}</div>`;
+}
+
+function renderPodium(s) {
+  const b = s.leaderboard;
+  const step = (p, cls, n) => {
+    if (!p) return `<div class="step ${cls}"></div>`;
+    const ninja = ninjaEntrance(p);
+    return `<div class="step ${cls}${ninja ? ' smoke' : ''}">${smoke(ninja)}<div class="who">${esc(p.name)}${cheaterTag(p)}</div><div class="pts">${p.score} pts</div><div class="block">${n}</div></div>`;
+  };
+  $('#stage').innerHTML = `<h1 class="center fade">🎉 Résultats finaux</h1>
+    <div class="podium">${step(b[1], 'p2', 2)}${step(b[0], 'p1', 1)}${step(b[2], 'p3', 3)}</div>
+    <div class="rest">${b.slice(3).map((p) => { const ninja = ninjaEntrance(p); return `<span class="${ninja ? 'smoke' : ''}">${smoke(ninja)}${ordinal(p.rank)} ${esc(p.name)}${cheaterTag(p)} — ${p.score}</span>`; }).join('')}</div>`;
+}
+</script>
+</body>
+</html>

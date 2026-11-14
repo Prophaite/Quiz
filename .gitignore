@@ -1,0 +1,33 @@
+# Dépendances et journaux Node (le projet n'en a pas, mais au cas où)
+node_modules/
+npm-debug.log*
+*.log
+
+# Fichiers créés automatiquement par la sauvegarde des quiz
+data/*.tmp
+data/quizzes.json.bak
+data/quizzes.abime-*.json
+
+# Outil de tunnel déposé dans le dossier (binaire téléchargé, ~50 Mo)
+cloudflared
+cloudflared.exe
+
+# Musique d'attente personnelle (droits de diffusion, fichiers lourds)
+public/musique-attente.*
+
+# Variables d'environnement / mots de passe
+.env
+.env.*
+
+# Fichiers temporaires d'Excel et du système
+~$*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Réglages locaux de Claude Code (launch.json reste suivi)
+.claude/settings.local.json

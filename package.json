@@ -1,0 +1,10 @@
+{
+  "name": "quiz-live",
+  "version": "1.0.0",
+  "description": "Quiz en direct : les joueurs rejoignent avec leur téléphone (QR code), gestion depuis un PC, écran de projection. Aucune dépendance.",
+  "main": "server.js",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
