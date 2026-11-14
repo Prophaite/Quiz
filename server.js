@@ -933,14 +933,14 @@ function shuffle(list) {
   return list;
 }
 function thSetQuestion(room) {
-  Object.assign(room.th, { phase: 'question', mode: null, shown: null, given: null, correct: null });
+  Object.assign(room.th, { phase: 'question', mode: null, shown: null, given: null, correct: null, cashText: null });
 }
 function thNextTeam(room) {
   const th = room.th;
   th.turn++;
   const gone = (id) => { const p = room.players.get(id); return !p || p.out; }; // équipe exclue entre-temps
   while (th.turn < th.order.length && gone(th.order[th.turn])) th.turn++;
-  Object.assign(th, { theme: -1, qNum: 0, mode: null, shown: null, given: null, correct: null });
+  Object.assign(th, { theme: -1, qNum: 0, mode: null, shown: null, given: null, correct: null, cashText: null });
   th.phase = th.turn < th.order.length ? 'pick' : 'done';
 }
 
@@ -977,9 +977,18 @@ function thAction(room, action, payload) {
       return true;
     }
     case 'thAnswer': {
-      // Réponse donnée à l'oral, saisie par l'animateur (modifiable tant qu'on n'est pas passé à la suite)
+      // Réponse de l'équipe : sur son téléphone, ou à l'oral et saisie par l'animateur
+      // (l'animateur peut corriger tant qu'on n'est pas passé à la suite)
       if (!['options', 'result'].includes(th.phase) || !q || !team) fail('Pas de réponse attendue');
-      if (payload.choice != null && th.mode !== 'cash') {
+      if (payload.text != null && th.mode === 'cash') {
+        // Cash tapé sur le téléphone : comparé à la bonne réponse, avec une petite tolérance de frappe
+        const text = String(payload.text).trim().slice(0, 100);
+        if (!text) fail('Réponse vide');
+        const accepted = q.type === 'choice' ? q.choices.filter((c) => c.correct).map((c) => c.text) : [];
+        th.cashText = text;
+        th.given = null;
+        th.correct = textMatches(normalize(text), { answers: [...accepted, ...(q.answers || [])], fuzzy: true });
+      } else if (payload.choice != null && th.mode !== 'cash') {
         const c = Number(payload.choice);
         if (!th.shown.includes(c)) fail('Réponse non proposée');
         th.given = c;
@@ -1114,6 +1123,29 @@ function playerGuess(body) {
   return { ok: true };
 }
 
+// Étape Thèmes : l'équipe dont c'est le tour choisit son thème, Duo / Carré / Cash et répond
+const PLAYER_TH_ACTIONS = { pick: 'thPick', mode: 'thMode', answer: 'thAnswer' };
+function playerTheme(body) {
+  const { room, p } = playerOf(body);
+  if (stageType(room) !== 'themes' || room.state !== 'themes' || !room.th) fail('Pas d’étape Thèmes en cours');
+  if (p.out) fail('Tu es éliminé');
+  if (thTeam(room)?.id !== p.id) fail('Ce n’est pas ton tour');
+  const action = PLAYER_TH_ACTIONS[body.action];
+  if (!action) fail('Action inconnue');
+  // Une fois la réponse donnée, seul l'animateur peut la corriger
+  if (action === 'thAnswer' && room.th.phase !== 'options') fail('Réponse déjà donnée');
+  // Seulement ce que l'équipe a le droit d'envoyer (jamais « correct » directement)
+  const payload = { theme: body.theme, mode: body.mode };
+  if (action === 'thAnswer') {
+    if (room.th.mode === 'cash') payload.text = String(body.text ?? '');
+    else if (body.choice == null) fail('Choisis une réponse');
+    else payload.choice = body.choice;
+  }
+  thAction(room, action, payload);
+  broadcast(room);
+  return { ok: true };
+}
+
 // Actions de l'animateur propres au tournoi ; renvoie true si l'action a été traitée
 function tourAction(room, action, payload) {
   const type = stageType(room);
@@ -1197,6 +1229,7 @@ function themesView(room, host) {
     mode: showQ ? th.mode : null,
     shown: showQ && th.shown ? th.shown.map((i) => ({ i, text: q.choices[i].text })) : null,
     given: th.given,
+    cashText: showQ ? th.cashText : null,
     correct: result ? th.correct : null,
     gained: result ? (th.correct ? st.points[th.mode] : 0) : null,
     answer: answer ? correctAnswerText(q) : null,
@@ -1385,8 +1418,8 @@ function playerView(room, p, board, names = lobbyNames(room), pub = publicBoard(
     tour: tourInfo(room),
     out: !!p.out, // éliminé du tournoi : il regarde seulement
     qualified: room.state === 'stageEnd' ? !!p.qualified : null,
-    // Thèmes : le téléphone indique seulement à qui c'est le tour
-    th: th ? { phase: th.phase, team: th.team, me: th.team === p.name, theme: th.theme, qNum: th.qNum, qCount: th.qCount, mode: th.mode } : null,
+    // Thèmes : tout le monde voit la question ; l'équipe dont c'est le tour joue sur son téléphone
+    th: th ? { ...th, scores: undefined, me: !p.out && thTeam(room)?.id === p.id } : null,
     im: stageType(room) === 'images' && room.im && !p.out ? imagesView(room, 'player', p) : null,
     code: room.code,
     title: room.quiz.title,
@@ -2025,6 +2058,8 @@ async function handle(req, res) {
         return json(res, 200, playerCheat(body));
       case '/api/player/steal':
         return json(res, 200, playerSteal(body));
+      case '/api/player/theme':
+        return json(res, 200, playerTheme(body));
       case '/api/player/guess':
         return json(res, 200, playerGuess(body));
     }

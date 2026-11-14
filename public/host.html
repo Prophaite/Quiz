@@ -1156,7 +1156,7 @@ function themesPanel(s) {
     <div class="qtext">${esc(q.text)}</div>
     <div>Bonne réponse : <b>${esc(th.answer)}</b></div>`;
   if (th.phase === 'question') {
-    h += `<p class="hint" style="margin-top:10px">L’équipe voit l’énoncé et annonce son choix :</p>
+    h += `<p class="hint" style="margin-top:10px">L’équipe choisit sur son téléphone, ou l’annonce à l’oral et vous cliquez :</p>
       <div class="mode-btns">
         ${btn(`Duo<small>2 réponses · ${pts.duo} pts</small>`, 'thMode', '', { mode: 'duo' }, q.choicesOk ? '' : 'disabled')}
         ${btn(`Carré<small>4 réponses · ${pts.carre} pts</small>`, 'thMode', '', { mode: 'carre' }, q.choicesOk ? '' : 'disabled')}
@@ -1164,7 +1164,8 @@ function themesPanel(s) {
       </div>`;
   } else {
     const label = { duo: 'Duo', carre: 'Carré', cash: 'Cash' }[th.mode];
-    h += `<p class="hint" style="margin-top:10px"><b>${label}</b> (${pts[th.mode]} pts) — cliquez la réponse donnée par l’équipe${th.phase === 'result' ? ' (vous pouvez encore corriger)' : ''} :</p>`;
+    h += `<p class="hint" style="margin-top:10px"><b>${label}</b> (${pts[th.mode]} pts) — l’équipe répond sur son téléphone, ou à l’oral et vous cliquez sa réponse${th.phase === 'result' ? ' (vous pouvez encore corriger)' : ''} :</p>`;
+    if (th.cashText) h += `<div class="steal-line">📱 Réponse tapée par l’équipe : <b>${esc(th.cashText)}</b></div>`;
     if (th.mode === 'cash') {
       h += `<div class="opt-btns">
         ${btn('✓ Bonne réponse', 'thAnswer', th.phase === 'result' && th.correct ? 'given' : '', { correct: true })}

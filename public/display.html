@@ -59,6 +59,7 @@
   .answer-big { text-align: center; margin: 2vh 0; }
   .answer-big .lbl { font-size: 3vh; opacity: .8; }
   .answer-big .val { font-size: 9vh; font-weight: 900; color: var(--ok); animation: pop .6s ease both; text-shadow: 0 .6vh 3vh rgba(0,0,0,.3); }
+  .cash-given { text-align: center; font-size: 4vh; margin-top: 2vh; }
   .stats { text-align: center; font-size: 3vh; opacity: .9; }
   .cloud { display: flex; flex-wrap: wrap; gap: 1.4vh; justify-content: center; margin-top: 3vh; }
   .cloud span { padding: 1vh 1.8vw; border-radius: 99px; font-weight: 700; background: var(--card); border: 2px solid transparent; animation: pop .4s ease both; }
@@ -321,7 +322,7 @@ function renderThemes(s) {
         <div>Cash<small>sans aide · ${pts.cash} pts</small></div></div>`;
     } else if (th.mode === 'cash') {
       main += th.phase === 'result'
-        ? `<div class="answer-big"><div class="lbl">Réponse</div><div class="val">${esc(th.answer)}</div></div>`
+        ? `${th.cashText ? `<div class="cash-given">Réponse de ${esc(th.team)} : <b>${esc(th.cashText)}</b></div>` : ''}<div class="answer-big"><div class="lbl">Bonne réponse</div><div class="val">${esc(th.answer)}</div></div>`
         : `<div class="cash-big">💰 Cash ! <span style="font-size:4vh">${pts.cash} pts</span></div>`;
     } else {
       main += `<div class="choices">${th.shown.map((o, k) => {

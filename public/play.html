@@ -111,6 +111,17 @@
   .level { text-align: center; font-weight: 800; font-size: 15px; opacity: .9; }
   .guess-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
   .guess-row .go { width: auto; padding: 14px 18px; }
+  .th-head { text-align: center; font-weight: 800; font-size: 15px; opacity: .9; }
+  .th-img { display: block; max-width: 100%; max-height: 30vh; margin: 0 auto; border-radius: 12px; }
+  .th-list, .th-modes { display: grid; gap: 10px; }
+  .th-pick, .th-mode { font: inherit; font-size: 20px; font-weight: 800; padding: 14px; border-radius: 14px; border: 0; background: #fff; color: #2b1670; cursor: pointer; box-shadow: 0 5px 0 #b9b2e0; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .th-pick small, .th-mode small { font-size: 13px; font-weight: 600; opacity: .7; }
+  .th-pick:disabled, .th-mode:disabled { opacity: .35; cursor: default; }
+  .th-mode.cash { background: #ffd34d; color: #3a2a00; box-shadow: 0 5px 0 #c99a00; }
+  .th-choices .choice:disabled { cursor: default; }
+  .th-choices .choice.dim { opacity: .35; }
+  .th-choices .choice.good { outline: 4px solid #fff; outline-offset: -4px; }
+  .th-choices .choice.given::after { content: 'Réponse donnée'; position: absolute; top: 6px; right: 8px; font-size: 11px; background: #fff; color: #2b1670; padding: 1px 6px; border-radius: 99px; }
   .link { background: none; border: 0; color: #fff; opacity: .7; font: inherit; text-decoration: underline; cursor: pointer; margin-top: 8px; }
 </style>
 </head>
@@ -319,7 +330,7 @@ function renderTour(s, m) {
   if (s.state === 'stageIntro') {
     m.innerHTML = `${tag}<div class="center"><div class="big-icon">${t.stage ? '🎉' : '🚀'}</div>
       <h1>${t.stage ? 'Qualifié !' : 'C’est parti !'}</h1></div>
-      <p class="center">${{ quiz: 'Prépare-toi à répondre sur ton téléphone.', themes: 'Pour cette étape, tout se passe à l’oral : pose ton téléphone et regarde l’écran.', images: 'Réponds aux questions pour rendre l’image plus nette, puis trouve ce qu’elle représente !' }[t.type]}</p>
+      <p class="center">${{ quiz: 'Prépare-toi à répondre sur ton téléphone.', themes: 'Chaque équipe à son tour choisit un thème, puis Duo, Carré ou Cash, et répond sur son téléphone (ou à l’oral).', images: 'Réponds aux questions pour rendre l’image plus nette, puis trouve ce qu’elle représente !' }[t.type]}</p>
       <div class="spinner"></div>`;
     return true;
   }
@@ -333,15 +344,7 @@ function renderTour(s, m) {
     return true;
   }
   if (s.state === 'themes') {
-    const th = s.th;
-    const mode = th.mode ? ` · ${{ duo: 'Duo', carre: 'Carré', cash: 'Cash' }[th.mode]}` : '';
-    m.innerHTML = th.phase === 'done'
-      ? `${tag}<div class="center"><div class="big-icon">🗂</div><h1>Toutes les équipes sont passées</h1></div><p class="center">Regarde l’écran pour la suite.</p>`
-      : th.me
-        ? `${tag}<div class="center"><div class="big-icon">🎤</div><h1>C’est à vous !</h1></div>
-          <p class="center">${th.phase === 'pick' ? 'Choisissez un thème et annoncez-le à l’animateur.' : `${esc(th.theme)} · question ${th.qNum + 1}/${th.qCount}${mode}<br>Répondez à l’oral, la question est à l’écran.`}</p>`
-        : `${tag}<div class="center"><div class="big-icon">🍿</div><h1>Au tour de ${esc(th.team)}</h1></div>
-          <p class="center">${th.theme ? `Thème : <b>${esc(th.theme)}</b>${mode}` : 'Choix du thème en cours…'}</p>`;
+    renderThemes(s, m, tag);
     return true;
   }
   if (!s.im) return false;
@@ -381,6 +384,75 @@ function renderTour(s, m) {
     return true;
   }
   return false; // questions : écrans habituels
+}
+/* ---------- Étape Thèmes : l'équipe dont c'est le tour joue ici, les autres suivent ---------- */
+const MODE_NAMES = { duo: 'Duo', carre: 'Carré', cash: 'Cash' };
+function renderThemes(s, m, tag) {
+  const th = s.th;
+  // On garde ce qui est en cours de saisie pour le Cash si l'écran est redessiné
+  const typing = $('#thCash') ? { v: $('#thCash').value, f: document.activeElement === $('#thCash') } : null;
+  if (th.phase === 'done') {
+    m.innerHTML = `${tag}<div class="center"><div class="big-icon">🗂</div><h1>Toutes les équipes sont passées</h1></div><p class="center">Regarde l’écran pour la suite.</p>`;
+    return;
+  }
+  if (th.phase === 'pick') {
+    m.innerHTML = th.me
+      ? `${tag}<div class="center"><div class="big-icon">🎤</div><h1>C’est à vous !</h1><p style="margin-top:6px">Choisissez votre thème :</p></div>
+        <div class="th-list">${th.themes.map((x, i) => `<button class="th-pick" data-theme="${i}" ${x.takenBy ? 'disabled' : ''}>${esc(x.title)}
+          <small>${x.takenBy ? `pris par ${esc(x.takenBy)}` : `${x.count} question${x.count > 1 ? 's' : ''}`}</small></button>`).join('')}</div>`
+      : `${tag}<div class="center"><div class="big-icon">🍿</div><h1>Au tour de ${esc(th.team)}</h1><p style="margin-top:6px">Choix du thème en cours…</p></div>`;
+    m.querySelectorAll('[data-theme]').forEach((b) => (b.onclick = () => sendTheme({ action: 'pick', theme: Number(b.dataset.theme) })));
+    return;
+  }
+  const q = th.question;
+  const pts = th.points;
+  let h = `${tag}<div class="th-head">${th.me ? '🎤 À vous' : `🍿 ${esc(th.team)}`} · ${esc(th.theme)} · ${th.qNum + 1}/${th.qCount}${th.mode ? ` · <b>${MODE_NAMES[th.mode]}</b>` : ''}</div>
+    ${q.image ? `<img class="th-img" src="${esc(q.image)}" alt="">` : ''}<div class="qtext">${esc(q.text)}</div>`;
+  if (th.phase === 'question') {
+    h += th.me
+      ? `<div class="th-modes">
+          <button class="th-mode" data-mode="duo" ${q.choicesOk ? '' : 'disabled'}>Duo<small>2 réponses · ${pts.duo} pts</small></button>
+          <button class="th-mode" data-mode="carre" ${q.choicesOk ? '' : 'disabled'}>Carré<small>4 réponses · ${pts.carre} pts</small></button>
+          <button class="th-mode cash" data-mode="cash">Cash<small>sans aide · ${pts.cash} pts</small></button></div>`
+      : `<p class="center">${esc(th.team)} choisit Duo, Carré ou Cash…</p>`;
+  } else if (th.mode === 'cash') {
+    if (th.phase === 'options') {
+      h += th.me
+        ? `<form id="thCashForm" class="guess-row"><input id="thCash" maxlength="100" placeholder="Votre réponse" autocomplete="off"><button class="go">OK</button></form>
+           <p class="center" style="font-size:14px">💰 Cash : ${pts.cash} pts. Vous pouvez aussi répondre à l’oral.</p>`
+        : `<p class="center">💰 ${esc(th.team)} tente le Cash…</p>`;
+    }
+  } else {
+    h += `<div class="choices th-choices">${th.shown.map((o, k) => {
+      const cls = th.phase === 'result' ? (o.i === th.goodIndex ? ' good' : ' dim') + (o.i === th.given ? ' given' : '') : '';
+      return `<button class="choice${cls}" data-choice="${o.i}" style="background:${COLORS[k]}" ${th.me && th.phase === 'options' ? '' : 'disabled'}><span class="shape">${SHAPES[k]}</span><span>${esc(o.text)}</span></button>`;
+    }).join('')}</div>`;
+    if (th.phase === 'options' && !th.me) h += `<p class="center">${esc(th.team)} réfléchit…</p>`;
+  }
+  if (th.phase === 'result') {
+    document.body.className = th.me ? (th.correct ? 'ok' : 'ko') : '';
+    if (th.cashText) h += `<div class="card"><div class="lbl">Réponse de ${th.me ? 'votre équipe' : esc(th.team)}</div><div class="val">${esc(th.cashText)}</div></div>`;
+    h += `<div class="center"><h1>${th.correct ? `✓ Bonne réponse ! +${th.gained} pts` : '✗ Mauvaise réponse'}</h1></div>`;
+    if (!th.correct || th.mode === 'cash') h += `<div class="card"><div class="lbl">La bonne réponse</div><div class="val">${esc(th.answer)}</div></div>`;
+  }
+  m.innerHTML = h;
+  m.querySelectorAll('[data-mode]:not([disabled])').forEach((b) => (b.onclick = () => sendTheme({ action: 'mode', mode: b.dataset.mode })));
+  m.querySelectorAll('[data-choice]:not([disabled])').forEach((b) => (b.onclick = () => sendTheme({ action: 'answer', choice: Number(b.dataset.choice) })));
+  const f = $('#thCashForm');
+  if (f) {
+    if (typing) { $('#thCash').value = typing.v; if (typing.f) $('#thCash').focus(); }
+    f.onsubmit = (e) => { e.preventDefault(); const v = $('#thCash').value.trim(); if (v) sendTheme({ action: 'answer', text: v }); };
+  }
+}
+async function sendTheme(data) {
+  const btns = [...document.querySelectorAll('.th-pick, .th-mode, .th-choices .choice, #thCashForm button')].filter((b) => !b.disabled);
+  btns.forEach((b) => (b.disabled = true));
+  try {
+    await Q.api('/api/player/theme', { code: session.code, playerId: session.playerId, key: session.key, ...data });
+  } catch (e) {
+    toast(e.message);
+    btns.forEach((b) => (b.disabled = false));
+  }
 }
 async function sendGuess(data) {
   document.querySelectorAll('#guessForm button, #guessPass').forEach((b) => (b.disabled = true));
