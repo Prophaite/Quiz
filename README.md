@@ -158,7 +158,7 @@ Case **🎲 Tentation de triche** dans les réglages de l'onglet Partie (désact
 
 ## Vol de points
 
-Quand **un seul joueur** a bien répondu à une question, son téléphone lui propose de **voler un peu de points** à un joueur de son choix : 30 % du score de la victime, sans dépasser la moitié des points de la question. Un seul vol par question, possible jusqu'au lancement de la question suivante. L'écran de projection annonce « 🦹 Mia a volé 30 pts à Bob ! », la victime est prévenue sur son téléphone, et la page de gestion l'affiche. (Pas de vol sur les questions piège.)
+Quand **un seul joueur** a bien répondu à une question, son téléphone lui propose de **voler un peu de points** à un joueur de son choix : 30 % du score de la victime, sans dépasser la moitié des points de la question. Un seul vol par question, possible jusqu'au lancement de la question suivante. L'écran de projection annonce « 🦹 Mia a volé 30 pts à Bob ! », la victime est prévenue sur son téléphone, et la page de gestion l'affiche. (Pas de vol sur les questions piège.) Le vol peut être désactivé à la création de la partie (case « 🦹 Vol de points ») ou en cours de partie dans la page de gestion : désactivé, un vol proposé mais pas encore fait est annulé.
 
 ## Pendant la partie
 

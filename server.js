@@ -535,7 +535,7 @@ function createRoom(quiz, settings = {}, tour = null) {
     order: [], // ordre de classement de l'étape précédente (ids), pour l'ordre de passage aux thèmes
     th: null, // état du module Thèmes
     im: null, // état du module Images
-    settings: { autoClose: settings.autoClose !== false, speed: settings.speed !== false, allowDev: true, luck: false },
+    settings: { autoClose: settings.autoClose !== false, speed: settings.speed !== false, steal: settings.steal !== false, allowDev: true, luck: false },
     players: new Map(),
     streams: new Set(),
     waiters: new Set(), // requêtes /api/poll en attente
@@ -761,7 +761,7 @@ function applyCheat(room, p, q) {
 /* la moitié des points de la question).                               */
 /* ------------------------------------------------------------------ */
 function makeSteal(room) {
-  if (room.stealFor === room.qIndex) return;
+  if (room.settings.steal === false || room.stealFor === room.qIndex) return;
   room.stealFor = room.qIndex;
   room.steal = null;
   const q = currentQ(room);
@@ -1711,6 +1711,11 @@ function quizAction(room, action, payload) {
       room.settings.autoClose = !!payload.autoClose;
       if ('speed' in payload) room.settings.speed = !!payload.speed;
       if ('allowDev' in payload) room.settings.allowDev = !!payload.allowDev;
+      if ('steal' in payload) {
+        room.settings.steal = !!payload.steal;
+        // Désactivé : on annule un vol proposé mais pas encore fait
+        if (!room.settings.steal && room.steal && !room.steal.victimId) room.steal = null;
+      }
       if ('luck' in payload) {
         room.settings.luck = !!payload.luck;
         // Désactivée : on retire les propositions en cours et les triches acceptées pas encore jouées

@@ -249,6 +249,7 @@
         <select id="setupTour"></select>
       </label>
       <label class="check"><input type="checkbox" id="setupSpeed" checked> ⏱ Points selon la rapidité (questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 %)</label>
+      <label class="check"><input type="checkbox" id="setupSteal" checked> 🦹 Vol de points (le seul joueur à avoir bien répondu peut voler des points à un autre)</label>
       <label class="check"><input type="checkbox" id="setupAuto" checked> Fermer automatiquement quand tout le monde a répondu</label>
       <button class="primary big" id="createRoom">Créer le salon</button>
       <p class="hint" id="netHint"></p>
@@ -290,6 +291,7 @@
         <div class="out-list" id="outList"></div>
         <h3>Réglages</h3>
         <label class="check" title="Questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 % à la fin du temps"><input type="checkbox" id="setSpeed"> ⏱ Points selon la rapidité</label>
+        <label class="check" title="Le seul joueur à avoir bien répondu peut voler des points à un autre joueur"><input type="checkbox" id="setSteal"> 🦹 Vol de points</label>
         <label class="check"><input type="checkbox" id="setAuto"> Fermeture auto.</label>
         <label class="check" title="Décoché : aucun joueur inscrit avec #dev ne voit plus les réponses"><input type="checkbox" id="setDev"> Mode test (#dev) autorisé</label>
         <label class="check" title="Entre deux questions, certains joueurs se voient proposer de tricher : la bonne réponse est remplie pour eux, mais ils risquent de tout perdre (révélé au classement final)"><input type="checkbox" id="setLuck"> 🎲 Tentation de triche</label>
@@ -936,7 +938,7 @@ $('#createRoom').onclick = async () => {
     room = await Q.api('/api/room/create', {
       quizId: isTour ? undefined : $('#setupQuiz').value,
       tournamentId: isTour ? $('#setupTour').value : undefined,
-      settings: { autoClose: $('#setupAuto').checked, speed: $('#setupSpeed').checked },
+      settings: { autoClose: $('#setupAuto').checked, speed: $('#setupSpeed').checked, steal: $('#setupSteal').checked },
     });
   } catch (e) { return toast(e.message); }
   localStorage.setItem('quiz-host-room', JSON.stringify(room));
@@ -976,8 +978,8 @@ function act(action, payload) {
   Q.api('/api/room/action', { code: room.code, token: room.token, action, payload }).catch((e) => toast(e.message));
 }
 
-$('#setSpeed').onchange = $('#setAuto').onchange = $('#setDev').onchange = $('#setLuck').onchange = () =>
-  act('settings', { speed: $('#setSpeed').checked, autoClose: $('#setAuto').checked, allowDev: $('#setDev').checked, luck: $('#setLuck').checked });
+$('#setSpeed').onchange = $('#setSteal').onchange = $('#setAuto').onchange = $('#setDev').onchange = $('#setLuck').onchange = () =>
+  act('settings', { speed: $('#setSpeed').checked, steal: $('#setSteal').checked, autoClose: $('#setAuto').checked, allowDev: $('#setDev').checked, luck: $('#setLuck').checked });
 $('#reloadQuiz').onclick = async () => { await flushSave(); act('reloadQuiz', { quizId: $('#reloadSelect').value }); };
 $('#copyLink').onclick = () => { navigator.clipboard?.writeText(S.joinUrl); toast('Lien copié'); };
 
@@ -1014,6 +1016,7 @@ function onState(s) {
   $('#roomPill').innerHTML = `Salon <b>${esc(s.code)}</b>`;
   $('#setAuto').checked = s.settings.autoClose;
   $('#setSpeed').checked = s.settings.speed !== false;
+  $('#setSteal').checked = s.settings.steal !== false;
   $('#setDev').checked = s.settings.allowDev !== false;
   $('#setLuck').checked = !!s.settings.luck;
   timer.set(s.remaining, s.question?.time);
