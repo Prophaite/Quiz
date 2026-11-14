@@ -285,72 +285,144 @@ function sampleQuiz() {
 }
 
 /*
- * Lecture prudente : un fichier illisible (arrêt brutal, conflit OneDrive…) n'est
- * JAMAIS écrasé. On essaie la sauvegarde .bak, et le fichier abîmé est mis de côté.
+ * Fichiers de données (quiz, tournois) lus et écrits prudemment :
+ * - lecture : un fichier illisible (arrêt brutal, conflit OneDrive…) n'est JAMAIS écrasé ;
+ *   il est mis de côté et on essaie la sauvegarde .bak ;
+ * - écriture atomique : fichier temporaire puis renommage, la version précédente
+ *   (valide) étant gardée dans <fichier>.bak.
  */
-const BACKUP_FILE = DATA_FILE + '.bak';
-let restoredFromBackup = false;
-function readQuizFile(file) {
+function readList(file, clean) {
   const data = JSON.parse(fs.readFileSync(file, 'utf8')); // lève une erreur si absent ou abîmé
-  if (!Array.isArray(data)) throw new Error('contenu inattendu (pas une liste de quiz)');
-  return data.map(cleanQuiz);
+  if (!Array.isArray(data)) throw new Error('contenu inattendu (pas une liste)');
+  return data.map(clean);
 }
-function loadQuizzes() {
-  if (!fs.existsSync(DATA_FILE) && !fs.existsSync(BACKUP_FILE)) return null; // premier lancement
+// Renvoie { list, restored } ou null (premier lancement, ou rien de récupérable)
+function loadList(file, clean, what) {
+  const bak = file + '.bak';
+  if (!fs.existsSync(file) && !fs.existsSync(bak)) return null;
   let mainError = null;
-  if (fs.existsSync(DATA_FILE)) {
+  if (fs.existsSync(file)) {
     try {
-      return readQuizFile(DATA_FILE);
+      return { list: readList(file, clean), restored: false };
     } catch (e) {
       mainError = e;
     }
   }
-  // Fichier principal absent ou abîmé : on le met de côté (jamais supprimé) et on tente la sauvegarde
   if (mainError) {
-    const aside = DATA_FILE.replace(/\.json$/, `.abime-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
-    try { fs.copyFileSync(DATA_FILE, aside); } catch {}
-    console.log(`  ⚠ ${path.basename(DATA_FILE)} est illisible (${mainError.message}).`);
+    const aside = file.replace(/.json$/, `.abime-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
+    try { fs.copyFileSync(file, aside); } catch {}
+    console.log(`  ⚠ ${path.basename(file)} est illisible (${mainError.message}).`);
     console.log(`    Copie conservée : ${path.basename(aside)}`);
   }
   try {
-    const list = readQuizFile(BACKUP_FILE);
-    console.log(`  ✔ Quiz récupérés depuis la sauvegarde ${path.basename(BACKUP_FILE)}.`);
-    restoredFromBackup = true;
-    return list;
+    const list = readList(bak, clean);
+    console.log(`  ✔ ${what} récupérés depuis la sauvegarde ${path.basename(bak)}.`);
+    return { list, restored: true };
   } catch {
-    if (mainError) {
-      console.log('    Aucune sauvegarde utilisable : démarrage avec le quiz de démonstration.');
-      console.log('    Vos anciens quiz sont toujours dans la copie ci-dessus.');
-    }
+    if (mainError) console.log(`    Aucune sauvegarde utilisable : vos anciens ${what.toLowerCase()} sont toujours dans la copie ci-dessus.`);
     return null;
   }
 }
-/*
- * Écriture atomique : on écrit un fichier temporaire puis on le renomme, pour ne
- * jamais laisser un quizzes.json à moitié écrit. La version précédente (valide)
- * est gardée dans quizzes.json.bak.
- */
-function persist() {
+function saveList(file, list, clean) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
-  const content = JSON.stringify(quizzes, null, 2);
-  const tmp = `${DATA_FILE}.${process.pid}.tmp`;
+  const content = JSON.stringify(list, null, 2);
+  const tmp = `${file}.${process.pid}.tmp`;
   fs.writeFileSync(tmp, content);
   try {
-    if (fs.existsSync(DATA_FILE)) {
-      try { readQuizFile(DATA_FILE); fs.copyFileSync(DATA_FILE, BACKUP_FILE); } catch {} // seulement si valide
+    if (fs.existsSync(file)) {
+      try { readList(file, clean); fs.copyFileSync(file, file + '.bak'); } catch {} // seulement si valide
     }
-    fs.renameSync(tmp, DATA_FILE);
+    fs.renameSync(tmp, file);
   } catch (e) {
     // Fichier verrouillé (ex. OneDrive en cours de synchro) : écriture directe en dernier recours
-    try { fs.writeFileSync(DATA_FILE, content); } finally { try { fs.unlinkSync(tmp); } catch {} }
+    try { fs.writeFileSync(file, content); } finally { try { fs.unlinkSync(tmp); } catch {} }
   }
 }
-let quizzes = loadQuizzes();
+const persist = () => saveList(DATA_FILE, quizzes, cleanQuiz);
+const loadedQuizzes = loadList(DATA_FILE, cleanQuiz, 'Quiz');
+let quizzes = loadedQuizzes?.list;
 if (!quizzes) {
   quizzes = [sampleQuiz()];
   persist();
-} else if (restoredFromBackup) {
+} else if (loadedQuizzes.restored) {
   persist(); // restauré depuis la sauvegarde : on réécrit un fichier principal propre
+}
+
+/* ------------------------------------------------------------------ */
+/* Tournois : une suite d'étapes (modules), les N premiers de chaque    */
+/* étape sont qualifiés pour la suivante.                               */
+/*   quiz   : un quiz classique, sur les téléphones                     */
+/*   themes : chaque équipe choisit un thème (un quiz) ; l'animateur    */
+/*            gère tout (duo / carré / cash)                           */
+/*   images : une image à reconnaître, de plus en plus nette à chaque   */
+/*            bonne réponse ; la 1re équipe à N images gagne            */
+/* Le contenu vient des quiz existants (référencés par leur id).        */
+/* ------------------------------------------------------------------ */
+const TOURN_FILE = path.join(DATA_DIR, 'tournaments.json');
+const STAGE_TYPES = ['quiz', 'themes', 'images'];
+const STAGE_LABELS = { quiz: 'Quiz', themes: 'Thèmes', images: 'Images' };
+const refId = (v) => (typeof v === 'string' ? v.slice(0, 40) : '');
+
+function cleanStage(s = {}) {
+  const type = STAGE_TYPES.includes(s.type) ? s.type : 'quiz';
+  const out = { type, qualify: Math.round(num(s.qualify, 1, 300, 4)) };
+  if (type === 'quiz') {
+    out.quizId = refId(s.quizId);
+  } else if (type === 'themes') {
+    out.themeIds = [...new Set((Array.isArray(s.themeIds) ? s.themeIds : []).map(refId).filter(Boolean))].slice(0, 40);
+    out.perTeam = Math.round(num(s.perTeam, 1, 50, 3));
+    const pts = s.points || {};
+    out.points = {
+      duo: Math.round(num(pts.duo, 0, 100000, 25)),
+      carre: Math.round(num(pts.carre, 0, 100000, 50)),
+      cash: Math.round(num(pts.cash, 0, 100000, 100)),
+    };
+  } else {
+    out.imageQuizId = refId(s.imageQuizId); // quiz dont les questions « Mot / nom » portent les images
+    out.questionQuizId = refId(s.questionQuizId); // questions posées pour rendre l'image plus nette
+    out.wins = Math.round(num(s.wins, 1, 20, 3));
+    out.levels = Math.round(num(s.levels, 1, 20, 5));
+    out.effect = s.effect === 'small' ? 'small' : 'blur';
+  }
+  return out;
+}
+function cleanTournament(t = {}) {
+  return {
+    id: typeof t.id === 'string' && t.id ? t.id.slice(0, 40) : uid(),
+    title: String(t.title ?? 'Tournoi sans titre').slice(0, 120) || 'Tournoi sans titre',
+    stages: (Array.isArray(t.stages) ? t.stages : []).slice(0, 10).map(cleanStage),
+    updatedAt: Date.now(),
+  };
+}
+const persistTournaments = () => saveList(TOURN_FILE, tournaments, cleanTournament);
+const loadedTournaments = loadList(TOURN_FILE, cleanTournament, 'Tournois');
+let tournaments = loadedTournaments?.list || [];
+if (loadedTournaments?.restored) persistTournaments();
+
+/* Copie figée du contenu d'un tournoi au lancement du salon (les quiz peuvent ensuite être modifiés sans effet) */
+function resolveTournament(t) {
+  const find = (id) => quizzes.find((q) => q.id === id);
+  const clone = (x) => JSON.parse(JSON.stringify(x));
+  if (!t.stages.length) fail('Ce tournoi ne contient aucune étape');
+  const stages = t.stages.map((s, i) => {
+    const label = `Étape ${i + 1} (${STAGE_LABELS[s.type]})`;
+    if (s.type === 'quiz') {
+      const q = find(s.quizId);
+      if (!q?.questions.length) fail(`${label} : quiz introuvable ou vide`);
+      return { ...s, quiz: clone(q) };
+    }
+    if (s.type === 'themes') {
+      const themes = s.themeIds.map(find).filter((q) => q?.questions.length);
+      if (!themes.length) fail(`${label} : aucun thème (quiz non vide) choisi`);
+      return { ...s, themes: themes.map((q) => ({ title: q.title, questions: clone(q.questions) })) };
+    }
+    const images = (find(s.imageQuizId)?.questions || []).filter((q) => q.type === 'text' && q.image && q.answers.length);
+    if (!images.length) fail(`${label} : le quiz d’images doit contenir des questions « Mot / nom » avec une image et une réponse`);
+    const qq = find(s.questionQuizId);
+    if (!qq?.questions.length) fail(`${label} : quiz de questions introuvable ou vide`);
+    return { ...s, images: clone(images), quiz: clone(qq) };
+  });
+  return { id: t.id, title: t.title, stages };
 }
 
 /* ------------------------------------------------------------------ */
@@ -448,14 +520,21 @@ function resetScores(room) {
     p.history = {};
     p.bonus = 0;
     Object.assign(p, { cheats: 0, busted: false, offer: false, cheatNext: false, tempted: false, wipes: {}, wipeAt: new Set() });
+    Object.assign(p, { imLevel: 0, imCorrect: 0, imWins: 0, qualified: false }); // tournoi
   }
 }
 
-function createRoom(quiz, settings = {}) {
+// tour : tournoi déjà résolu (resolveTournament) ; sinon partie de quiz simple
+function createRoom(quiz, settings = {}, tour = null) {
   const room = {
     code: newCode(),
     token: uid() + uid(),
-    quiz: JSON.parse(JSON.stringify(quiz)),
+    quiz: tour ? { id: '', title: tour.title, questions: [] } : JSON.parse(JSON.stringify(quiz)),
+    tour, // tournoi : étapes, contenu figé
+    stageIndex: -1,
+    order: [], // ordre de classement de l'étape précédente (ids), pour l'ordre de passage aux thèmes
+    th: null, // état du module Thèmes
+    im: null, // état du module Images
     settings: { autoClose: settings.autoClose !== false, speed: settings.speed !== false, allowDev: true, luck: false },
     players: new Map(),
     streams: new Set(),
@@ -500,18 +579,26 @@ function applyWipes(room) {
   }
 }
 
+// Tournoi : étape en cours, et joueurs encore en lice (les éliminés regardent seulement)
+const stage = (room) => (room.tour && room.stageIndex >= 0 ? room.tour.stages[room.stageIndex] : null);
+const stageType = (room) => stage(room)?.type || 'quiz';
+const activePlayers = (room) => [...room.players.values()].filter((p) => !p.out);
+
 function ranking(room, publicOnly = true) {
-  const list = [...room.players.values()].map((p) => ({
+  // Étape Images : on compte les images trouvées, puis les bonnes réponses pour départager
+  const img = stageType(room) === 'images';
+  const list = activePlayers(room).map((p) => ({
     id: p.id,
     name: p.name,
     connected: playerConnected(p),
-    score: totalScore(room, p, publicOnly),
-    last: room.qIndex >= 0 ? p.history[room.qIndex] ?? 0 : 0,
+    score: img ? p.imWins || 0 : totalScore(room, p, publicOnly),
+    tie: img ? p.imCorrect || 0 : 0,
+    last: !img && room.qIndex >= 0 ? p.history[room.qIndex] ?? 0 : 0,
   }));
-  list.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+  list.sort((a, b) => b.score - a.score || b.tie - a.tie || a.name.localeCompare(b.name));
   let rank = 0;
   list.forEach((e, i) => {
-    if (i === 0 || e.score !== list[i - 1].score) rank = i + 1;
+    if (i === 0 || e.score !== list[i - 1].score || e.tie !== list[i - 1].tie) rank = i + 1;
     e.rank = rank;
     const prev = room.prevRanks.get(e.id);
     e.move = prev ? prev - rank : 0;
@@ -637,9 +724,9 @@ const cheatRisk = (room, p) => (p.busted ? 1 : Math.min(0.95, 0.02 + p.cheats * 
 // Nouvelles propositions : environ 4 par partie, quelle que soit sa longueur, et jamais à tout le monde
 // (1 joueur à la fois, 2 à partir de 20 joueurs…). Ceux qui ont déjà triché sont redemandés à chaque manche.
 const offerRoundChance = (room) => Math.min(0.6, 4 / Math.max(1, room.quiz.questions.length - 1));
-const offersPerRound = (room) => Math.max(1, Math.floor(room.players.size / 10));
+const offersPerRound = (room) => Math.max(1, Math.floor(activePlayers(room).length / 10));
 // Sur toute la partie, au plus 1 joueur sur 6 (au moins 1) reçoit une proposition
-const maxTempted = (room) => Math.max(1, Math.floor(room.players.size / 6));
+const maxTempted = (room) => Math.max(1, Math.floor(activePlayers(room).length / 6));
 const RISK_LABELS = [[0.05, 'minuscule'], [0.35, 'réel'], [0.6, 'élevé'], [0.8, 'très élevé'], [1, 'énorme']];
 const riskLabel = (r) => RISK_LABELS.find(([max]) => r <= max)[1];
 
@@ -697,7 +784,7 @@ function playerSteal(body) {
   const { room, p } = playerOf(body);
   const st = room.steal;
   if (!st || st.thiefId !== p.id || st.victimId || !['reveal', 'leaderboard'].includes(room.state)) fail('Plus de vol possible');
-  const victim = [...room.players.values()].find((x) => x.name === body.target && x.id !== p.id);
+  const victim = activePlayers(room).find((x) => x.name === body.target && x.id !== p.id);
   if (!victim) fail('Joueur introuvable');
   const take = stealTake(st, totalScore(room, victim, true));
   if (take <= 0) fail('Ce joueur n’a pas de points');
@@ -719,7 +806,7 @@ function makeOffers(room) {
   if (!room.settings.luck || room.offersFor === room.qIndex) return;
   room.offersFor = room.qIndex;
   if (room.qIndex + 1 >= room.quiz.questions.length) return; // plus de question après
-  const players = [...room.players.values()];
+  const players = activePlayers(room);
   // Le ou les premiers du classement ne sont jamais tentés
   const leaders = new Set(ranking(room, false).filter((e) => e.rank === 1).map((e) => e.id));
   for (const p of players) {
@@ -750,7 +837,7 @@ function playerCheat(body) {
 // comme ayant répondu, même sur une question piège où sa « réponse » est de ne rien envoyer.
 function maybeAutoClose(room) {
   if (!room.settings.autoClose || room.state !== 'question') return false;
-  const active = [...room.players.values()].filter(playerConnected);
+  const active = activePlayers(room).filter(playerConnected);
   if (!active.length || !active.every((x) => room.answers.has(x.id) || room.cheated?.has(x.id))) return false;
   closeQuestion(room, true);
   return true;
@@ -762,6 +849,400 @@ function closeQuestion(room, notify) {
   room.state = 'closed';
   scoreQuestion(room);
   if (notify) broadcast(room);
+}
+
+/* ------------------------------------------------------------------ */
+/* Tournoi : enchaînement des étapes                                    */
+/* lobby → stageIntro → (module) → stageEnd (qualifiés) → stageIntro …  */
+/* → end (podium de la dernière étape)                                  */
+/* ------------------------------------------------------------------ */
+const emptyQuiz = (room) => ({ id: '', title: room.tour.title, questions: [] });
+
+function startStage(room, i) {
+  room.stageIndex = i;
+  resetScores(room); // les scores repartent de zéro à chaque étape
+  room.quiz = stage(room).quiz || emptyQuiz(room);
+  room.th = null;
+  room.im = null;
+  room.state = 'stageIntro';
+}
+
+function beginStage(room) {
+  const st = stage(room);
+  if (st.type === 'quiz') return startQuestion(room, 0);
+  if (st.type === 'themes') {
+    // Ordre de passage : classement de l'étape précédente (1er en premier), sinon ordre d'arrivée
+    const active = activePlayers(room);
+    const order = room.order.filter((id) => active.some((p) => p.id === id));
+    for (const p of active) if (!order.includes(p.id)) order.push(p.id);
+    room.th = { order, turn: 0, phase: 'pick', taken: {}, theme: -1, qNum: 0, mode: null, shown: null, given: null, correct: null };
+    room.state = 'themes';
+    return;
+  }
+  room.im = { img: 0, qCounter: 0, appliedFor: -1, guesses: new Map(), guessOpen: 0, found: [], winner: null, over: false };
+  startImQuestion(room);
+}
+
+// Fin d'étape : les N premiers sont pré-cochés « qualifiés » (l'animateur peut corriger)
+function endStage(room) {
+  closeQuestion(room);
+  clearTimeout(room.timer);
+  room.prevRanks = new Map();
+  if (room.stageIndex >= room.tour.stages.length - 1) {
+    room.state = 'end';
+    return;
+  }
+  const st = stage(room);
+  for (const e of ranking(room, false)) room.players.get(e.id).qualified = e.rank <= st.qualify;
+  room.state = 'stageEnd';
+}
+
+function nextStage(room) {
+  const board = ranking(room, false);
+  if (!board.some((e) => room.players.get(e.id)?.qualified)) fail('Aucune équipe qualifiée : cochez au moins une équipe');
+  room.order = board.filter((e) => room.players.get(e.id).qualified).map((e) => e.id);
+  for (const p of activePlayers(room)) if (!p.qualified) p.out = true;
+  startStage(room, room.stageIndex + 1);
+}
+
+function resetTournament(room) {
+  for (const p of room.players.values()) p.out = false;
+  room.order = [];
+  room.stageIndex = -1;
+  room.th = null;
+  room.im = null;
+  room.quiz = emptyQuiz(room);
+  resetScores(room);
+}
+
+/* ---------- Module Thèmes (géré par l'animateur) ---------- */
+// Phases : pick (l'équipe choisit un thème) → question (énoncé seul) → options (duo / carré / cash
+// choisi, réponses affichées) → result → question suivante… → équipe suivante … → done
+const thTeam = (room) => room.players.get(room.th?.order[room.th.turn]);
+function thQuestions(room) {
+  const st = stage(room);
+  return room.th.theme >= 0 ? st.themes[room.th.theme].questions.slice(0, st.perTeam) : [];
+}
+const canChoose = (q) => q?.type === 'choice' && q.choices.length >= 2 && q.choices.some((c) => c.correct);
+const goodChoice = (q) => q.choices.findIndex((c) => c.correct);
+function shuffle(list) {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
+}
+function thSetQuestion(room) {
+  Object.assign(room.th, { phase: 'question', mode: null, shown: null, given: null, correct: null });
+}
+function thNextTeam(room) {
+  const th = room.th;
+  th.turn++;
+  const gone = (id) => { const p = room.players.get(id); return !p || p.out; }; // équipe exclue entre-temps
+  while (th.turn < th.order.length && gone(th.order[th.turn])) th.turn++;
+  Object.assign(th, { theme: -1, qNum: 0, mode: null, shown: null, given: null, correct: null });
+  th.phase = th.turn < th.order.length ? 'pick' : 'done';
+}
+
+function thAction(room, action, payload) {
+  const th = room.th;
+  const st = stage(room);
+  const team = thTeam(room);
+  const q = thQuestions(room)[th.qNum];
+  switch (action) {
+    case 'thPick': {
+      if (th.phase !== 'pick' || !team) fail('Ce n’est pas le moment de choisir un thème');
+      const i = Number(payload.theme);
+      if (!st.themes[i]) fail('Thème introuvable');
+      if (th.taken[i] != null) fail('Ce thème a déjà été choisi');
+      th.taken[i] = team.id;
+      th.theme = i;
+      th.qNum = 0;
+      thSetQuestion(room);
+      return true;
+    }
+    case 'thMode': {
+      if (th.phase !== 'question' || !q) fail('Pas de question en cours');
+      const mode = payload.mode;
+      if (!['duo', 'carre', 'cash'].includes(mode)) fail('Choix inconnu');
+      if (mode !== 'cash' && !canChoose(q)) fail('Cette question n’a pas de choix de réponses : seulement Cash');
+      th.mode = mode;
+      if (mode === 'cash') th.shown = [];
+      else {
+        // La bonne réponse + 1 (duo) ou 3 (carré) mauvaises tirées au hasard, dans l'ordre d'origine
+        const wrong = shuffle(q.choices.map((_, i) => i).filter((i) => !q.choices[i].correct));
+        th.shown = [goodChoice(q), ...wrong.slice(0, mode === 'duo' ? 1 : 3)].sort((a, b) => a - b);
+      }
+      th.phase = 'options';
+      return true;
+    }
+    case 'thAnswer': {
+      // Réponse donnée à l'oral, saisie par l'animateur (modifiable tant qu'on n'est pas passé à la suite)
+      if (!['options', 'result'].includes(th.phase) || !q || !team) fail('Pas de réponse attendue');
+      if (payload.choice != null && th.mode !== 'cash') {
+        const c = Number(payload.choice);
+        if (!th.shown.includes(c)) fail('Réponse non proposée');
+        th.given = c;
+        th.correct = !!q.choices[c].correct;
+      } else {
+        th.given = null;
+        th.correct = !!payload.correct;
+      }
+      team.history[`th${th.theme}_${th.qNum}`] = th.correct ? st.points[th.mode] : 0;
+      th.phase = 'result';
+      return true;
+    }
+    case 'thNext':
+      if (th.phase === 'result') {
+        if (th.qNum + 1 < thQuestions(room).length) {
+          th.qNum++;
+          thSetQuestion(room);
+        } else thNextTeam(room);
+      } else if (th.phase === 'pick') thNextTeam(room); // passer le tour de cette équipe
+      return true;
+    case 'next':
+    case 'goto':
+    case 'leaderboard':
+    case 'reveal':
+    case 'close':
+      return true; // sans objet dans ce module
+  }
+  return false;
+}
+
+/* ---------- Module Images ---------- */
+// Une seule image pour tout le monde. Chaque bonne réponse à une question rend l'image plus
+// nette sur le téléphone de l'équipe. Entre deux questions (phase « guess »), les équipes
+// proposent un nom (téléphone ou oral) et l'animateur attribue l'image.
+const imImage = (room) => stage(room).images[room.im.img];
+
+function startImQuestion(room) {
+  const im = room.im;
+  im.guesses = new Map();
+  im.qCounter++;
+  // Quand toutes les questions ont été posées, on recommence au début
+  startQuestion(room, (im.qCounter - 1) % room.quiz.questions.length);
+}
+
+// Une bonne réponse = un cran de netteté (une seule fois par question)
+function applyImLevels(room) {
+  const im = room.im;
+  if (im.appliedFor === im.qCounter) return;
+  im.appliedFor = im.qCounter;
+  const st = stage(room);
+  for (const [pid, a] of room.answers) {
+    const p = room.players.get(pid);
+    if (!p || p.out || !(a.correct || a.points > 0)) continue;
+    p.imCorrect = (p.imCorrect || 0) + 1;
+    p.imLevel = Math.min(st.levels, (p.imLevel || 0) + 1);
+  }
+}
+
+function imAction(room, action, payload) {
+  const im = room.im;
+  const st = stage(room);
+  switch (action) {
+    case 'imGuess':
+      if (!['question', 'closed', 'reveal'].includes(room.state)) fail('Pas de question en cours');
+      closeQuestion(room);
+      applyImLevels(room);
+      im.guesses = new Map();
+      im.guessOpen = Date.now();
+      room.state = 'guess';
+      return true;
+    case 'next': // question suivante, même image
+      if (room.state === 'guess') startImQuestion(room);
+      return true;
+    case 'imAward': {
+      if (room.state !== 'guess') fail('Les propositions ne sont pas ouvertes');
+      const p = room.players.get(payload.playerId);
+      if (!p || p.out) fail('Équipe introuvable');
+      im.winner = p.id;
+      p.imWins = (p.imWins || 0) + 1;
+      im.found.push({ img: im.img, by: p.id });
+      im.over = p.imWins >= st.wins;
+      room.state = 'imFound';
+      return true;
+    }
+    case 'imSkip': // personne ne trouve : on dévoile et on passe à l'image suivante
+      if (room.state !== 'guess') fail('Les propositions ne sont pas ouvertes');
+      im.winner = null;
+      im.found.push({ img: im.img, by: null });
+      room.state = 'imFound';
+      return true;
+    case 'imUndo': {
+      // Erreur de l'animateur : on annule l'attribution et on revient aux propositions
+      if (room.state !== 'imFound') fail('Rien à annuler');
+      const p = im.winner && room.players.get(im.winner);
+      if (p) p.imWins = Math.max(0, (p.imWins || 0) - 1);
+      im.found.pop();
+      im.winner = null;
+      im.over = false;
+      room.state = 'guess';
+      return true;
+    }
+    case 'imNextImage':
+      if (room.state !== 'imFound') fail('Image pas encore trouvée');
+      if (im.over || im.img + 1 >= st.images.length) {
+        endStage(room);
+        return true;
+      }
+      im.img++;
+      im.winner = null;
+      for (const p of activePlayers(room)) p.imLevel = 0;
+      startImQuestion(room);
+      return true;
+    case 'goto':
+    case 'leaderboard':
+      return true; // sans objet dans ce module
+  }
+  return false;
+}
+
+function playerGuess(body) {
+  const { room, p } = playerOf(body);
+  if (stageType(room) !== 'images' || room.state !== 'guess') fail('Pas de proposition pour le moment');
+  if (p.out) fail('Tu es éliminé');
+  if (room.im.guesses.has(p.id)) fail('Tu as déjà proposé une réponse');
+  if (body.pass) room.im.guesses.set(p.id, { pass: true, at: Date.now() });
+  else {
+    const text = String(body.text ?? '').trim().slice(0, 100);
+    if (!text) fail('Réponse vide');
+    room.im.guesses.set(p.id, { text, at: Date.now(), ok: textMatches(normalize(text), imImage(room)) });
+  }
+  broadcast(room, p);
+  return { ok: true };
+}
+
+// Actions de l'animateur propres au tournoi ; renvoie true si l'action a été traitée
+function tourAction(room, action, payload) {
+  const type = stageType(room);
+  switch (action) {
+    case 'reset':
+      resetTournament(room);
+      return true;
+    case 'reloadQuiz':
+      fail('Impossible pendant un tournoi');
+      break;
+    case 'stageStart':
+      if (room.state !== 'stageIntro') fail('L’étape a déjà commencé');
+      beginStage(room);
+      return true;
+    case 'stageNext':
+      if (room.state !== 'stageEnd') fail('L’étape n’est pas terminée');
+      nextStage(room);
+      return true;
+    case 'qualify': {
+      if (room.state !== 'stageEnd') fail('Possible seulement en fin d’étape');
+      const p = room.players.get(payload.playerId);
+      if (p && !p.out) p.qualified = !!payload.on;
+      return true;
+    }
+    case 'end': // « Terminer l'étape »
+      if (!['lobby', 'end', 'stageEnd'].includes(room.state)) endStage(room);
+      return true;
+  }
+  if (room.state === 'lobby') {
+    if (action === 'next') startStage(room, 0);
+    return action === 'next';
+  }
+  if (type === 'themes' && room.th) return thAction(room, action, payload);
+  if (type === 'images' && room.im) return imAction(room, action, payload);
+  // Étape Quiz : après la dernière question, fin de l'étape (classement + qualifiés)
+  if (type === 'quiz' && action === 'next' && room.qIndex + 1 >= room.quiz.questions.length) {
+    endStage(room);
+    return true;
+  }
+  return false;
+}
+
+/* ---------- Vues du tournoi ---------- */
+function tourInfo(room) {
+  if (!room.tour) return null;
+  return {
+    title: room.tour.title,
+    stage: room.stageIndex,
+    type: stageType(room),
+    last: room.stageIndex >= room.tour.stages.length - 1,
+    stages: room.tour.stages.map((s) => ({ type: s.type, label: STAGE_LABELS[s.type], qualify: s.qualify })),
+  };
+}
+
+function themesView(room, host) {
+  const th = room.th;
+  if (!th) return null;
+  const st = stage(room);
+  const team = thTeam(room);
+  const qs = thQuestions(room);
+  const q = qs[th.qNum];
+  const showQ = !!q && ['question', 'options', 'result'].includes(th.phase);
+  const result = th.phase === 'result';
+  const answer = showQ && (result || host);
+  return {
+    phase: th.phase,
+    themes: st.themes.map((t, i) => ({
+      title: t.title,
+      count: Math.min(st.perTeam, t.questions.length),
+      takenBy: th.taken[i] != null ? room.players.get(th.taken[i])?.name ?? '—' : null,
+    })),
+    order: th.order.map((id, i) => ({ name: room.players.get(id)?.name ?? '—', done: i < th.turn, current: i === th.turn && th.phase !== 'done' })),
+    team: team && th.phase !== 'done' ? team.name : null,
+    teamId: host ? team?.id ?? null : undefined,
+    scores: ranking(room).map((e) => ({ name: e.name, score: e.score, rank: e.rank })),
+    theme: th.theme >= 0 ? st.themes[th.theme].title : null,
+    qNum: th.qNum,
+    qCount: qs.length,
+    points: st.points,
+    question: showQ ? { text: q.text, image: q.image, choicesOk: canChoose(q) } : null,
+    mode: showQ ? th.mode : null,
+    shown: showQ && th.shown ? th.shown.map((i) => ({ i, text: q.choices[i].text })) : null,
+    given: th.given,
+    correct: result ? th.correct : null,
+    gained: result ? (th.correct ? st.points[th.mode] : 0) : null,
+    answer: answer ? correctAnswerText(q) : null,
+    goodIndex: answer && q.type === 'choice' ? goodChoice(q) : null,
+  };
+}
+
+// role : host (image nette + propositions), display (netteté la plus basse), player (sa netteté)
+function imagesView(room, role, p) {
+  const im = room.im;
+  if (!im) return null;
+  const st = stage(room);
+  const img = imImage(room);
+  const active = activePlayers(room);
+  const found = room.state === 'imFound';
+  const minLevel = active.length ? Math.min(...active.map((x) => x.imLevel || 0)) : 0;
+  const v = {
+    index: im.img,
+    total: st.images.length,
+    levels: st.levels,
+    effect: st.effect,
+    wins: st.wins,
+    // L'image passe par le serveur : l'adresse d'origine (souvent parlante) reste cachée
+    src: `/api/stage-image?code=${room.code}&n=${im.img}`,
+    level: found || role === 'host' ? st.levels : role === 'player' ? p.imLevel || 0 : minLevel,
+    teams: ranking(room).map((e) => {
+      const x = room.players.get(e.id);
+      return { name: e.name, rank: e.rank, correct: x.imCorrect || 0, wins: x.imWins || 0, guessed: im.guesses.has(e.id), level: role === 'host' ? x.imLevel || 0 : undefined };
+    }),
+    guessCount: im.guesses.size,
+    found: found ? { answer: img.answers[0], by: im.winner ? room.players.get(im.winner)?.name ?? '?' : null, over: im.over } : null,
+  };
+  if (role === 'host') {
+    v.answers = img.answers;
+    v.guesses = [...im.guesses]
+      .map(([pid, g]) => ({ playerId: pid, name: room.players.get(pid)?.name ?? '?', text: g.text ?? '', pass: !!g.pass, ok: !!g.ok, ms: g.at - im.guessOpen }))
+      .sort((a, b) => a.ms - b.ms);
+  }
+  if (role === 'player') {
+    const g = im.guesses.get(p.id);
+    v.guessed = !!g;
+    v.myGuess = g && !g.pass ? g.text : null;
+    v.myWins = p.imWins || 0;
+    v.myCorrect = p.imCorrect || 0;
+  }
+  return v;
 }
 
 /* ------------------------------------------------------------------ */
@@ -811,8 +1292,8 @@ function revealData(room) {
   if (q.trap) {
     // Ceux qui ont résisté = joueurs sans réponse
     base.trap = true;
-    base.resisted = [...room.players.values()].filter((p) => !room.answers.has(p.id)).length;
-    base.playerCount = room.players.size;
+    base.resisted = activePlayers(room).filter((p) => !room.answers.has(p.id)).length;
+    base.playerCount = activePlayers(room).length;
   }
   if (q.type === 'choice') {
     const counts = q.choices.map(() => 0);
@@ -852,55 +1333,68 @@ function revealData(room) {
 }
 
 function displayView(room) {
-  const showBoard = ['reveal', 'leaderboard', 'end'].includes(room.state);
+  const showBoard = ['reveal', 'leaderboard', 'end', 'stageEnd'].includes(room.state);
   return {
+    tour: tourInfo(room),
+    th: room.state === 'themes' ? themesView(room, false) : null,
+    im: ['guess', 'imFound'].includes(room.state) ? imagesView(room, 'display') : null,
     code: room.code,
     joinUrl: `${publicUrl}/play?room=${room.code}`,
     // 'starting' : l'adresse Internet n'est pas encore prête, ne pas afficher le QR code
     netReady: tunnel.mode !== 'starting',
     title: room.quiz.title,
     state: room.state,
-    players: [...room.players.values()].map((p) => ({ name: p.name, connected: playerConnected(p) })),
+    players: activePlayers(room).map((p) => ({ name: p.name, connected: playerConnected(p) })),
     question: publicQuestion(room, true),
     remaining: remaining(room),
     answeredCount: room.answers.size,
     reveal: room.state === 'reveal' ? revealData(room) : null,
     steal: ['reveal', 'leaderboard'].includes(room.state) ? stealInfo(room) : null,
     leaderboard: showBoard
-      ? ranking(room).slice(0, room.state === 'end' ? 20 : 10).map((e) => {
+      ? ranking(room).slice(0, ['end', 'stageEnd'].includes(room.state) ? 30 : 10).map((e) => {
         const p = room.players.get(e.id);
-        // cheater : démasqué en fin de partie
-        return { ...e, cheater: room.state === 'end' && !!p?.busted };
+        // cheater : démasqué en fin de partie ; qualified : fin d'étape d'un tournoi
+        return { ...e, cheater: room.state === 'end' && !!p?.busted, qualified: room.state === 'stageEnd' ? !!p?.qualified : undefined };
       })
       : null,
   };
 }
 
 // Pseudos visibles par les joueurs dans le salon d'attente (ordre d'arrivée).
-const lobbyNames = (room) => (room.state === 'lobby' ? [...room.players.values()].map((p) => p.name) : null);
+const lobbyNames = (room) => (['lobby', 'stageIntro'].includes(room.state) ? activePlayers(room).map((p) => p.name) : null);
 
 // Classement complet envoyé aux téléphones à l'écran « Classement » entre les
 // questions et à la fin (pas à l'écran de la réponse).
 // (nom, rang, score, points de la dernière question). Pas d'identifiants internes.
-const BOARD_STATES = ['leaderboard', 'end'];
+const BOARD_STATES = ['leaderboard', 'end', 'stageEnd'];
 const publicBoard = (room, board) =>
   BOARD_STATES.includes(room.state)
-    ? board.map((e) => ({ rank: e.rank, name: e.name, score: e.score, last: e.last, move: e.move, cheater: room.state === 'end' && !!room.players.get(e.id)?.busted }))
+    ? board.map((e) => {
+      const p = room.players.get(e.id);
+      return { rank: e.rank, name: e.name, score: e.score, last: e.last, move: e.move, cheater: room.state === 'end' && !!p?.busted, qualified: room.state === 'stageEnd' ? !!p?.qualified : undefined };
+    })
     : null;
 
 function playerView(room, p, board, names = lobbyNames(room), pub = publicBoard(room, board)) {
   const a = room.answers.get(p.id);
   const me = board.find((e) => e.id === p.id);
-  const revealed = ['reveal', 'leaderboard', 'end'].includes(room.state);
+  const revealed = ['reveal', 'leaderboard', 'end', 'stageEnd'].includes(room.state);
   const q = currentQ(room);
+  const th = room.state === 'themes' ? themesView(room, false) : null;
   return {
+    tour: tourInfo(room),
+    out: !!p.out, // éliminé du tournoi : il regarde seulement
+    qualified: room.state === 'stageEnd' ? !!p.qualified : null,
+    // Thèmes : le téléphone indique seulement à qui c'est le tour
+    th: th ? { phase: th.phase, team: th.team, me: th.team === p.name, theme: th.theme, qNum: th.qNum, qCount: th.qCount, mode: th.mode } : null,
+    im: stageType(room) === 'images' && room.im && !p.out ? imagesView(room, 'player', p) : null,
     code: room.code,
     title: room.quiz.title,
     state: room.state,
     name: p.name,
     score: me?.score ?? 0,
     rank: revealed ? me?.rank : null,
-    playerCount: room.players.size,
+    playerCount: activePlayers(room).length,
     players: names,
     board: pub,
     question: publicQuestion(room, false),
@@ -961,6 +1455,10 @@ function hostView(room) {
     }))
     .sort((x, y) => x.ms - y.ms);
   return {
+    tour: tourInfo(room),
+    th: room.state === 'themes' ? themesView(room, true) : null,
+    im: stageType(room) === 'images' && room.im ? imagesView(room, 'host') : null,
+    eliminated: [...room.players.values()].filter((p) => p.out).map((p) => p.name),
     code: room.code,
     joinUrl: `${publicUrl}/play?room=${room.code}`,
     // 'starting' : l'adresse Internet n'est pas encore prête, ne pas afficher le QR code
@@ -983,6 +1481,7 @@ function hostView(room) {
       return {
         ...e, dev: !!p?.dev, cheats: p?.cheats || 0, busted: !!p?.busted,
         risk: p ? Math.round(cheatRisk(room, p) * 100) : 0, offer: !!p?.offer, cheatNext: !!p?.cheatNext,
+        qualified: !!p?.qualified,
       };
     }),
   };
@@ -1125,6 +1624,13 @@ function playerOf(body) {
 }
 
 function hostAction(room, action, payload = {}) {
+  if (!(room.tour && tourAction(room, action, payload))) quizAction(room, action, payload);
+  // Tentation de triche et vol de points : seulement dans un quiz (partie simple ou étape Quiz)
+  if (stageType(room) === 'quiz' && (room.state === 'reveal' || room.state === 'leaderboard')) { makeOffers(room); makeSteal(room); }
+  broadcast(room);
+}
+
+function quizAction(room, action, payload) {
   const total = room.quiz.questions.length;
   switch (action) {
     case 'next':
@@ -1228,8 +1734,6 @@ function hostAction(room, action, payload = {}) {
     default:
       fail('Action inconnue');
   }
-  if (room.state === 'reveal' || room.state === 'leaderboard') { makeOffers(room); makeSteal(room); }
-  broadcast(room);
 }
 
 const NAME_TAGS = ['dev'];
@@ -1258,6 +1762,9 @@ function playerJoin(body) {
     p = {
       id: uid(), key: uid() + uid(), name: clean, dev, history: {}, bonus: 0, streams: 0, polls: 0, lastPoll: 0,
       cheats: 0, busted: false, offer: false, cheatNext: false, wipes: {}, wipeAt: new Set(), // tentation de triche
+      imLevel: 0, imCorrect: 0, imWins: 0, qualified: false,
+      // Tournoi déjà commencé : l'équipe arrivée en retard regarde seulement
+      out: !!room.tour && room.stageIndex >= 0,
     };
     room.players.set(p.id, p);
     broadcast(room);
@@ -1268,6 +1775,7 @@ function playerJoin(body) {
 function playerAnswer(body) {
   const { room, p } = playerOf(body);
   if (room.state !== 'question') fail('Les réponses sont fermées');
+  if (p.out) fail('Tu es éliminé : regarde l’écran');
   if (room.answers.has(p.id)) fail('Tu as déjà répondu');
   const q = currentQ(room);
   let v;
@@ -1371,6 +1879,33 @@ function serveStatic(req, res, pathname) {
   });
 }
 
+/*
+ * Image d'une étape Images : téléchargée par le serveur (adresse Internet) ou lue dans
+ * le dossier public (adresse locale « /images/… »). Petit cache mémoire : tous les
+ * téléphones demandent la même image en même temps.
+ */
+const imageCache = new Map(); // adresse → { type, buf }
+async function serveStageImage(req, res, src) {
+  if (!/^https?:\/\//i.test(src)) {
+    const rel = src.split(/[?#]/)[0].replace(/^\/+/, '');
+    try { return serveStatic(req, res, '/' + decodeURIComponent(rel)); } catch { return json(res, 404, { error: 'Image introuvable' }); }
+  }
+  let img = imageCache.get(src);
+  if (!img) {
+    let r;
+    try { r = await fetch(src, { redirect: 'follow', signal: AbortSignal.timeout(10000) }); } catch { return json(res, 502, { error: 'Image injoignable' }); }
+    const type = r.headers.get('content-type') || '';
+    if (!r.ok || !type.startsWith('image/')) return json(res, 502, { error: 'Ce lien ne mène pas à une image' });
+    const buf = Buffer.from(await r.arrayBuffer());
+    if (buf.length > 15 * 1024 * 1024) return json(res, 502, { error: 'Image trop lourde' });
+    img = { type, buf };
+    imageCache.set(src, img);
+    if (imageCache.size > 40) imageCache.delete(imageCache.keys().next().value);
+  }
+  res.writeHead(200, { 'Content-Type': img.type, 'Content-Length': img.buf.length, 'Cache-Control': 'private, max-age=600' });
+  res.end(req.method === 'HEAD' ? undefined : img.buf);
+}
+
 async function handle(req, res) {
   const url = new URL(req.url, 'http://x');
   const p = url.pathname;
@@ -1383,7 +1918,14 @@ async function handle(req, res) {
   if (m === 'GET' && p === '/api/info') {
     return json(res, 200, { publicUrl, lanUrl: LAN_URL, tunnel: tunnel.mode, tunnelError: tunnel.error });
   }
-  const adminOnly = (m === 'GET' && p === '/api/quizzes') || (m === 'POST' && (p.startsWith('/api/quizzes') || p === '/api/room/create'));
+  if (m === 'GET' && p === '/api/stage-image') {
+    // Image de l'étape Images en cours (seulement l'image courante, adresse d'origine cachée)
+    const room = rooms.get(url.searchParams.get('code') || '');
+    if (!room?.im || stageType(room) !== 'images' || Number(url.searchParams.get('n')) !== room.im.img) return json(res, 404, { error: 'Image indisponible' });
+    return serveStageImage(req, res, imImage(room).image);
+  }
+  const adminOnly = (m === 'GET' && (p === '/api/quizzes' || p === '/api/tournaments'))
+    || (m === 'POST' && (p.startsWith('/api/quizzes') || p.startsWith('/api/tournaments') || p === '/api/room/create'));
   if (adminOnly && !isAdmin(req)) {
     return json(res, 401, {
       error: ADMIN_PASSWORD ? 'Mot de passe requis' : 'La gestion n’est accessible que depuis le PC qui fait tourner le quiz',
@@ -1391,6 +1933,7 @@ async function handle(req, res) {
     });
   }
   if (m === 'GET' && p === '/api/quizzes') return json(res, 200, quizzes);
+  if (m === 'GET' && p === '/api/tournaments') return json(res, 200, tournaments);
   if (m === 'GET' && p.startsWith('/api/qr/')) {
     const code = p.slice(8).replace(/\D/g, '').slice(0, 8);
     res.writeHead(200, { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'no-cache' });
@@ -1441,7 +1984,25 @@ async function handle(req, res) {
         quizzes = quizzes.filter((q) => q.id !== body.id);
         persist();
         return json(res, 200, { ok: true });
+      case '/api/tournaments': {
+        const t = cleanTournament(body);
+        const i = tournaments.findIndex((x) => x.id === t.id);
+        if (i >= 0) tournaments[i] = t;
+        else tournaments.push(t);
+        persistTournaments();
+        return json(res, 200, t);
+      }
+      case '/api/tournaments/delete':
+        tournaments = tournaments.filter((t) => t.id !== body.id);
+        persistTournaments();
+        return json(res, 200, { ok: true });
       case '/api/room/create': {
+        if (body.tournamentId) {
+          const t = tournaments.find((x) => x.id === body.tournamentId);
+          if (!t) fail('Tournoi introuvable', 404);
+          const room = createRoom(null, body.settings, resolveTournament(t));
+          return json(res, 200, { code: room.code, token: room.token });
+        }
         const quiz = quizzes.find((q) => q.id === body.quizId);
         if (!quiz) fail('Quiz introuvable', 404);
         if (!quiz.questions.length) fail('Ce quiz ne contient aucune question');
@@ -1459,6 +2020,8 @@ async function handle(req, res) {
         return json(res, 200, playerCheat(body));
       case '/api/player/steal':
         return json(res, 200, playerSteal(body));
+      case '/api/player/guess':
+        return json(res, 200, playerGuess(body));
     }
     return json(res, 404, { error: 'Introuvable' });
   }

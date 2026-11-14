@@ -170,6 +170,28 @@ Options : +10 s, aller à n'importe quelle question, corriger une réponse à la
 
 Les joueurs qui rechargent la page ou perdent le réseau sont reconnectés automatiquement avec leur score.
 
+## Tournoi
+
+Un tournoi enchaîne plusieurs **étapes** ; à la fin de chacune, les **N premières équipes** sont qualifiées pour la suivante. Une équipe = un téléphone (un seul membre de l'équipe se connecte).
+
+**Créer un tournoi** : onglet **🏆 Tournois** → « + Nouveau », puis ajoutez et ordonnez les étapes. Le contenu de chaque étape vient de vos quiz (onglet Questions) :
+
+| Étape | Contenu à préparer | Déroulement |
+|---|---|---|
+| 🎯 **Quiz** | un quiz | Un quiz classique sur les téléphones. |
+| 🗂 **Thèmes** | **un quiz par thème** (le titre du quiz = le nom du thème), questions à choix multiple avec au moins 4 réponses dont une bonne | Tout se passe à l'oral, l'animateur gère tout (voir ci-dessous). |
+| 🖼 **Images** | un **quiz d'images** (une question « Mot / nom » par image : l'adresse de l'image dans le champ Image, les noms acceptés comme réponses) + un quiz de **questions** | Voir ci-dessous. |
+
+Réglages par étape : nombre de qualifiés ; pour Thèmes, le nombre de questions par équipe et les points Duo / Carré / Cash (25 / 50 / 100 par défaut) ; pour Images, le nombre d'images pour gagner (3), le nombre de bonnes réponses pour une image complètement nette (5) et l'effet (image floutée ou toute petite).
+
+**Lancer** : onglet Partie → Type de partie « 🏆 Tournoi ». Chaque étape commence par un écran de présentation (« Lancer l'étape ») et se termine par le classement avec les qualifiés **pré-cochés** : cochez / décochez pour départager des ex æquo ou repêcher une équipe, puis « Étape suivante ». Les scores repartent de zéro à chaque étape. Les équipes éliminées voient « Tu as été éliminé » et suivent la suite à l'écran ; une équipe qui rejoint après le début du tournoi regarde seulement. La dernière étape donne le podium final.
+
+**Étape Thèmes** : les équipes passent dans l'ordre du classement de l'étape précédente (la 1re choisit en premier). L'écran de projection montre la grille des thèmes ; un thème choisi est grisé. Pour chaque question, l'écran montre d'abord l'énoncé seul ; l'équipe annonce **Duo** (2 réponses affichées : la bonne et une mauvaise tirée au hasard), **Carré** (4 réponses) ou **Cash** (aucune réponse) et vous cliquez son choix, puis la réponse qu'elle donne (en Cash : ✓ / ✗). Vous pouvez corriger tant que vous n'êtes pas passé à la suite. Une question qui n'est pas à choix multiple ne peut se jouer qu'en Cash.
+
+**Étape Images** : une seule image pour toutes les équipes. Des questions sont posées sur les téléphones (comme un quiz) ; **chaque bonne réponse rend l'image plus nette sur le téléphone de l'équipe**. L'écran de projection montre l'image avec la netteté **la plus basse** des équipes (elle ne devient plus nette que quand toutes les équipes ont progressé), ainsi que le nombre de bonnes réponses et d'images trouvées de chaque équipe. Après chaque question (« 🖼 Propositions d'image »), chaque équipe peut proposer un nom sur son téléphone (une proposition par question) ou à l'oral : la page de gestion liste les propositions de la plus rapide à la plus lente, signale la plus rapide juste, et vous attribuez l'image d'un clic (« Attribuer », ou le bouton de l'équipe pour une réponse à l'oral). Seule l'équipe la plus rapide gagne l'image ; on passe alors à l'image suivante (netteté remise à zéro). La première équipe à atteindre l'objectif gagne. « Personne ne trouve : dévoiler » passe l'image sans l'attribuer ; « Annuler l'attribution » corrige une erreur. Si toutes les questions ont été posées, elles recommencent au début.
+
+Les images passent par le serveur : les téléphones ne voient pas l'adresse d'origine (souvent parlante, comme `tour-eiffel.jpg`). Une image peut être une adresse Internet ou un fichier déposé dans `public` (ex. `/images/tour.jpg`).
+
 ## Données
 
-Les quiz sont enregistrés dans `data/quizzes.json` (sauvegarde automatique pendant l'édition). Export/import JSON depuis l'éditeur. Les parties en cours sont en mémoire : redémarrer le serveur les termine.
+Les quiz sont enregistrés dans `data/quizzes.json` et les tournois dans `data/tournaments.json` (sauvegarde automatique pendant l'édition, avec une copie de secours `.bak`). Export/import JSON depuis l'éditeur. Les parties en cours sont en mémoire : redémarrer le serveur les termine.

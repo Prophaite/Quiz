@@ -56,13 +56,13 @@
   .title-input:hover { border-color: var(--line); }
   .save-status { font-size: 12px; color: var(--muted); white-space: nowrap; }
   /* L'éditeur n'a pas de cadre blanc : chaque question est une carte posée sur le fond violet. */
-  #quizEditor { background: transparent; border: 0; padding: 0; box-shadow: none; }
-  #quizEditor .title-input { color: #fff; background: transparent; }
-  #quizEditor .title-input::placeholder { color: rgba(255, 255, 255, .6); }
-  #quizEditor .title-input:hover { border-color: rgba(255, 255, 255, .35); }
-  #quizEditor .title-input:focus { outline: 2px solid rgba(255, 255, 255, .5); border-color: transparent; background: rgba(255, 255, 255, .1); }
-  #quizEditor .save-status { color: rgba(255, 255, 255, .8); }
-  #quizEditor .empty { color: rgba(255, 255, 255, .85); background: rgba(255, 255, 255, .1); border: 2px dashed rgba(255, 255, 255, .35); border-radius: 12px; margin-top: 16px; }
+  #quizEditor, #tourEditor { background: transparent; border: 0; padding: 0; box-shadow: none; }
+  #quizEditor .title-input, #tourEditor .title-input { color: #fff; background: transparent; }
+  #quizEditor .title-input::placeholder, #tourEditor .title-input::placeholder { color: rgba(255, 255, 255, .6); }
+  #quizEditor .title-input:hover, #tourEditor .title-input:hover { border-color: rgba(255, 255, 255, .35); }
+  #quizEditor .title-input:focus, #tourEditor .title-input:focus { outline: 2px solid rgba(255, 255, 255, .5); border-color: transparent; background: rgba(255, 255, 255, .1); }
+  #quizEditor .save-status, #tourEditor .save-status { color: rgba(255, 255, 255, .8); }
+  #quizEditor .empty, #tourEditor .empty { color: rgba(255, 255, 255, .85); background: rgba(255, 255, 255, .1); border: 2px dashed rgba(255, 255, 255, .35); border-radius: 12px; margin-top: 16px; }
   .add-bar button { box-shadow: 0 4px 12px rgba(25, 10, 70, .2); }
   .qcard { border: 0; border-radius: 14px; padding: 16px; margin-top: 16px; background: #fff; box-shadow: 0 8px 24px rgba(25, 10, 70, .28); }
   .qcard.trap { box-shadow: 0 0 0 3px #f5a524, 0 8px 24px rgba(25, 10, 70, .28); }
@@ -128,6 +128,35 @@
   .bar { display: grid; grid-template-columns: 26px 1fr 40px; align-items: center; gap: 8px; }
   .bar .fill { height: 24px; border-radius: 6px; min-width: 4px; }
   .bar .label { font-size: 12px; color: var(--muted); grid-column: 2 / 4; margin-top: -4px; }
+  /* ---------- Tournoi ---------- */
+  .stage-icon { font-size: 18px; }
+  .theme-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px 12px; margin-top: 6px; }
+  .theme-checks label { font-weight: 500; }
+  .pts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
+  .chip { padding: 3px 10px; border-radius: 99px; background: var(--bg); color: var(--muted); font-weight: 600; font-size: 12px; }
+  .chip.cur { background: var(--accent); color: #fff; }
+  .chip.done { text-decoration: line-through; opacity: .6; }
+  .theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin-top: 8px; }
+  .theme-grid button { justify-content: center; flex-direction: column; padding: 14px 10px; font-size: 15px; }
+  .theme-grid button small { font-weight: 500; color: var(--muted); font-size: 11px; }
+  .mode-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .mode-btns button { justify-content: center; flex-direction: column; padding: 14px; font-size: 17px; }
+  .mode-btns button small { font-weight: 500; font-size: 12px; color: var(--muted); }
+  .opt-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .opt-btns button { justify-content: flex-start; padding: 12px; font-size: 15px; }
+  .opt-btns button.good { border-color: var(--ok); }
+  .opt-btns button.given { outline: 3px solid var(--accent); }
+  .verdict { margin-top: 12px; padding: 10px 14px; border-radius: 10px; font-weight: 700; font-size: 16px; }
+  .verdict.ok { background: var(--ok-soft); color: var(--ok); }
+  .verdict.ko { background: var(--ko-soft); color: var(--ko); }
+  .im-box { display: flex; gap: 14px; align-items: flex-start; margin-top: 10px; }
+  .im-box img { max-width: 220px; max-height: 180px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); }
+  table.teams { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  table.teams th, table.teams td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line); }
+  table.teams th { color: var(--muted); font-size: 11px; text-transform: uppercase; }
+  .answer-line.fastest { outline: 2px solid var(--ok); }
+  .out-list { font-size: 12px; color: var(--muted); margin-top: 8px; }
   .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1b1d29; color: #fff; padding: 10px 18px; border-radius: 10px; font-weight: 600; z-index: 100; }
   @media (max-width: 900px) {
     .editor, .live { grid-template-columns: 1fr; }
@@ -140,6 +169,7 @@
   <h1>Quiz <span>Live</span></h1>
   <nav>
     <button data-tab="editor" class="active">📝 Questions</button>
+    <button data-tab="tour">🏆 Tournois</button>
     <button data-tab="live">🎮 Partie</button>
   </nav>
   <div class="room-pill" id="roomPill"></div>
@@ -179,12 +209,44 @@
     </section>
   </section>
 
+  <!-- ================= TOURNOIS ================= -->
+  <section id="tab-tour" class="editor hidden">
+    <aside class="panel">
+      <h2>Mes tournois</h2>
+      <div class="quiz-list" id="tourList"></div>
+      <div class="side-actions">
+        <button id="newTour" class="primary">+ Nouveau</button>
+        <button id="dupTour">Dupliquer</button>
+        <button id="deleteTour" class="danger" style="grid-column: span 2">Supprimer ce tournoi</button>
+      </div>
+      <p class="hint">Un tournoi enchaîne des étapes ; les premières équipes de chaque étape sont qualifiées pour la suivante. Le contenu vient de vos quiz (onglet Questions) : un quiz par thème, un quiz d’images…</p>
+    </aside>
+    <section class="panel" id="tourEditor">
+      <div class="row">
+        <input class="title-input grow" id="tourTitle" placeholder="Nom du tournoi">
+        <span class="save-status" id="tourSave"></span>
+      </div>
+      <div id="stages"></div>
+      <div class="add-bar">
+        <button data-addstage="quiz">+ Étape Quiz</button>
+        <button data-addstage="themes">+ Étape Thèmes</button>
+        <button data-addstage="images">+ Étape Images</button>
+      </div>
+    </section>
+  </section>
+
   <!-- ================= PARTIE ================= -->
   <section id="tab-live" class="hidden">
     <div id="liveSetup" class="panel setup">
       <h2>Lancer une partie</h2>
-      <label class="field">Quiz
+      <label class="field">Type de partie
+        <select id="setupMode"><option value="quiz">Quiz simple</option><option value="tour">🏆 Tournoi</option></select>
+      </label>
+      <label class="field" id="setupQuizField">Quiz
         <select id="setupQuiz"></select>
+      </label>
+      <label class="field hidden" id="setupTourField">Tournoi
+        <select id="setupTour"></select>
       </label>
       <label class="check"><input type="checkbox" id="setupSpeed" checked> ⏱ Points selon la rapidité (questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 %)</label>
       <label class="check"><input type="checkbox" id="setupAuto" checked> Fermer automatiquement quand tout le monde a répondu</label>
@@ -225,6 +287,7 @@
         <div class="row"><h2 class="grow" style="margin:0">Joueurs <span class="muted" id="playerCount"></span></h2></div>
         <p class="hint">Survolez un joueur pour ajuster son score ou l’exclure.</p>
         <div class="players" id="players"></div>
+        <div class="out-list" id="outList"></div>
         <h3>Réglages</h3>
         <label class="check" title="Questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 % à la fin du temps"><input type="checkbox" id="setSpeed"> ⏱ Points selon la rapidité</label>
         <label class="check"><input type="checkbox" id="setAuto"> Fermeture auto.</label>
@@ -268,8 +331,10 @@ function toast(msg) {
 function showTab(name) {
   document.querySelectorAll('nav button').forEach((b) => b.classList.toggle('active', b.dataset.tab === name));
   $('#tab-editor').classList.toggle('hidden', name !== 'editor');
+  $('#tab-tour').classList.toggle('hidden', name !== 'tour');
   $('#tab-live').classList.toggle('hidden', name !== 'live');
   if (name === 'live') fillQuizSelects();
+  if (name === 'tour') loadTournaments();
 }
 document.querySelectorAll('nav button').forEach((b) => (b.onclick = () => showTab(b.dataset.tab)));
 
@@ -635,6 +700,180 @@ $('#xlsxTemplate').onclick = () => {
   a.click();
 };
 
+/* ===================== Éditeur de tournoi ===================== */
+const STAGE_INFO = {
+  quiz: { icon: '🎯', label: 'Quiz', hint: 'Un quiz classique : chaque équipe répond sur son téléphone.' },
+  themes: { icon: '🗂', label: 'Thèmes', hint: 'À tour de rôle (dans l’ordre du classement précédent), chaque équipe choisit un thème et répond à l’oral. Pour chaque question elle annonce Duo (2 réponses proposées), Carré (4) ou Cash (aucune). Vous gérez tout depuis cette page.' },
+  images: { icon: '🖼', label: 'Images', hint: 'Une image à reconnaître, de plus en plus nette sur le téléphone de l’équipe à chaque bonne réponse à une question. Entre deux questions, les équipes proposent un nom (téléphone ou oral) et vous attribuez l’image. La première équipe à atteindre l’objectif gagne.' },
+};
+let tournaments = [];
+let tour = null; // tournoi affiché
+let tourTimer = null;
+
+async function loadTournaments() {
+  try { tournaments = await Q.get('/api/tournaments'); } catch { return; }
+  tour = tournaments.find((t) => t.id === tour?.id) || tournaments[0] || null;
+  renderTourList();
+  renderTourEditor();
+}
+function renderTourList() {
+  $('#tourList').innerHTML = tournaments
+    .map((t) => `<button data-id="${esc(t.id)}" class="${tour && t.id === tour.id ? 'active' : ''}">
+      <span>${esc(t.title)}</span><small>${t.stages.length} étape${t.stages.length > 1 ? 's' : ''}</small></button>`)
+    .join('') || '<p class="muted">Aucun tournoi</p>';
+  $('#tourList').querySelectorAll('button').forEach((b) => (b.onclick = async () => {
+    await flushTourSave();
+    tour = tournaments.find((t) => t.id === b.dataset.id);
+    renderTourList();
+    renderTourEditor();
+  }));
+}
+function scheduleTourSave() {
+  $('#tourSave').textContent = 'Modifications…';
+  clearTimeout(tourTimer);
+  tourTimer = setTimeout(saveTour, 600);
+}
+async function flushTourSave() { if (tourTimer) { clearTimeout(tourTimer); await saveTour(); } }
+async function saveTour() {
+  tourTimer = null;
+  if (!tour) return;
+  try { await Q.api('/api/tournaments', tour); } catch (e) { $('#tourSave').textContent = '⚠ ' + e.message; return; }
+  if (!tournaments.includes(tour)) tournaments.push(tour);
+  $('#tourSave').textContent = '✓ Enregistré';
+  renderTourList();
+}
+function blankStage(type) {
+  if (type === 'themes') return { type, themeIds: [], perTeam: 3, points: { duo: 25, carre: 50, cash: 100 }, qualify: 2 };
+  if (type === 'images') return { type, imageQuizId: '', questionQuizId: '', wins: 3, levels: 5, effect: 'blur', qualify: 1 };
+  return { type: 'quiz', quizId: quizzes[0]?.id || '', qualify: 4 };
+}
+const quizOptions = (sel, filter = () => true) => `<option value="">— choisir un quiz —</option>` + quizzes.filter(filter)
+  .map((q) => `<option value="${esc(q.id)}" ${q.id === sel ? 'selected' : ''}>${esc(q.title)} (${q.questions.length} q.)</option>`).join('');
+const imageCount = (q) => (q?.questions || []).filter((x) => x.type === 'text' && x.image && x.answers?.length).length;
+
+function stageCard(st, i) {
+  const info = STAGE_INFO[st.type];
+  const last = i === tour.stages.length - 1;
+  let body = '';
+  if (st.type === 'quiz') {
+    body = `<label class="field">Quiz<select data-s="${i}" data-f="quizId">${quizOptions(st.quizId)}</select></label>`;
+  } else if (st.type === 'themes') {
+    body = `<div class="field">Thèmes proposés (un quiz = un thème, son titre est le nom du thème)
+      <div class="theme-checks">${quizzes.map((q) => `<label class="check"><input type="checkbox" data-s="${i}" data-theme="${esc(q.id)}" ${st.themeIds.includes(q.id) ? 'checked' : ''}> ${esc(q.title)} <span class="muted">(${q.questions.length} q.)</span></label>`).join('')}</div></div>
+      <div class="pts-grid">
+        <label class="field">Questions par équipe<input type="number" min="1" data-s="${i}" data-f="perTeam" value="${st.perTeam}"></label>
+        <label class="field">Points Duo (2 réponses)<input type="number" min="0" data-s="${i}" data-f="pts.duo" value="${st.points.duo}"></label>
+        <label class="field">Points Carré (4 réponses)<input type="number" min="0" data-s="${i}" data-f="pts.carre" value="${st.points.carre}"></label>
+        <label class="field">Points Cash (aucune)<input type="number" min="0" data-s="${i}" data-f="pts.cash" value="${st.points.cash}"></label>
+      </div>
+      <p class="hint">Questions à choix multiple avec au moins 4 réponses dont une bonne (le Carré en montre 4, le Duo 2). Une question d’un autre type ne peut se jouer qu’en Cash.</p>`;
+  } else {
+    const n = imageCount(quizzes.find((q) => q.id === st.imageQuizId));
+    body = `<div class="num-grid" style="grid-template-columns:1fr 1fr">
+        <label class="field">Quiz d’images<select data-s="${i}" data-f="imageQuizId">${quizOptions(st.imageQuizId)}</select></label>
+        <label class="field">Questions pour rendre l’image plus nette<select data-s="${i}" data-f="questionQuizId">${quizOptions(st.questionQuizId)}</select></label>
+      </div>
+      <p class="hint">${st.imageQuizId ? (n ? `✓ ${n} image${n > 1 ? 's' : ''} utilisable${n > 1 ? 's' : ''}.` : '⚠ Ce quiz ne contient aucune image utilisable.') : ''}
+        Quiz d’images : une question « Mot / nom » par image, avec l’adresse de l’image dans le champ Image et les noms acceptés comme réponses.</p>
+      <div class="pts-grid">
+        <label class="field">Images pour gagner<input type="number" min="1" data-s="${i}" data-f="wins" value="${st.wins}"></label>
+        <label class="field">Bonnes réponses pour une image nette<input type="number" min="1" data-s="${i}" data-f="levels" value="${st.levels}"></label>
+        <label class="field">Effet
+          <select data-s="${i}" data-f="effect">
+            <option value="blur" ${st.effect !== 'small' ? 'selected' : ''}>Image floutée</option>
+            <option value="small" ${st.effect === 'small' ? 'selected' : ''}>Image toute petite</option>
+          </select>
+        </label>
+      </div>`;
+  }
+  return `<div class="qcard">
+    <div class="qcard-head">
+      <span class="qnum">${i + 1}</span>
+      <span class="stage-icon">${info.icon}</span><b>Étape ${info.label}</b>
+      <span class="grow"></span>
+      <button class="small" data-s="${i}" data-act="up" ${i === 0 ? 'disabled' : ''} title="Monter">↑</button>
+      <button class="small" data-s="${i}" data-act="down" ${last ? 'disabled' : ''} title="Descendre">↓</button>
+      <button class="small danger" data-s="${i}" data-act="del" title="Supprimer">🗑</button>
+    </div>
+    <p class="hint" style="margin-top:0">${info.hint}</p>
+    ${body}
+    ${last
+      ? '<p class="hint" style="margin-top:10px">🏁 Dernière étape : son classement donne le podium final.</p>'
+      : `<label class="field" style="margin-top:10px;max-width:280px">Équipes qualifiées pour l’étape suivante<input type="number" min="1" data-s="${i}" data-f="qualify" value="${st.qualify}"></label>`}
+  </div>`;
+}
+function renderTourEditor() {
+  if (!tour) { $('#tourEditor').classList.add('hidden'); return; }
+  $('#tourEditor').classList.remove('hidden');
+  $('#tourTitle').value = tour.title;
+  $('#tourSave').textContent = '';
+  $('#stages').innerHTML = tour.stages.length
+    ? tour.stages.map(stageCard).join('')
+    : '<div class="empty">Aucune étape pour l’instant.<br>Ajoutez-en avec les boutons ci-dessous (ex. Quiz → Thèmes → Images).</div>';
+}
+$('#tourTitle').addEventListener('input', (e) => { tour.title = e.target.value; scheduleTourSave(); });
+const stBox = $('#stages');
+stBox.addEventListener('input', (e) => {
+  const el = e.target;
+  const st = tour?.stages[el.dataset.s];
+  if (!st || !el.dataset.f || el.tagName === 'SELECT') return;
+  const v = el.value === '' ? 0 : Number(el.value);
+  if (el.dataset.f.startsWith('pts.')) st.points[el.dataset.f.slice(4)] = v; else st[el.dataset.f] = v;
+  scheduleTourSave();
+});
+stBox.addEventListener('change', (e) => {
+  const el = e.target;
+  const st = tour?.stages[el.dataset.s];
+  if (!st) return;
+  if (el.dataset.theme) {
+    st.themeIds = el.checked ? [...st.themeIds, el.dataset.theme] : st.themeIds.filter((id) => id !== el.dataset.theme);
+  } else if (el.tagName === 'SELECT') {
+    st[el.dataset.f] = el.value;
+    if (st.type === 'images') renderTourEditor(); // met à jour le nombre d'images
+  } else return;
+  scheduleTourSave();
+});
+stBox.addEventListener('click', (e) => {
+  const el = e.target.closest('button[data-act]');
+  if (!el) return;
+  const i = Number(el.dataset.s);
+  const sts = tour.stages;
+  if (el.dataset.act === 'up' && i > 0) [sts[i - 1], sts[i]] = [sts[i], sts[i - 1]];
+  else if (el.dataset.act === 'down' && i < sts.length - 1) [sts[i + 1], sts[i]] = [sts[i], sts[i + 1]];
+  else if (el.dataset.act === 'del') { if (!confirm('Supprimer cette étape ?')) return; sts.splice(i, 1); }
+  else return;
+  renderTourEditor();
+  scheduleTourSave();
+});
+document.querySelectorAll('[data-addstage]').forEach((b) => (b.onclick = () => {
+  if (!tour) return;
+  tour.stages.push(blankStage(b.dataset.addstage));
+  renderTourEditor();
+  scheduleTourSave();
+  stBox.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}));
+$('#newTour').onclick = async () => {
+  await flushTourSave();
+  tour = { id: uid() + uid(), title: 'Nouveau tournoi', stages: [blankStage('quiz'), blankStage('themes'), blankStage('images')] };
+  tournaments.push(tour);
+  renderTourList(); renderTourEditor(); await saveTour();
+  $('#tourTitle').select();
+};
+$('#dupTour').onclick = async () => {
+  if (!tour) return;
+  await flushTourSave();
+  tour = { ...JSON.parse(JSON.stringify(tour)), id: uid() + uid(), title: tour.title + ' (copie)' };
+  tournaments.push(tour);
+  renderTourList(); renderTourEditor(); await saveTour();
+};
+$('#deleteTour').onclick = async () => {
+  if (!tour || !confirm(`Supprimer définitivement le tournoi « ${tour.title} » ? (les quiz ne sont pas supprimés)`)) return;
+  clearTimeout(tourTimer); tourTimer = null;
+  await Q.api('/api/tournaments/delete', { id: tour.id });
+  tour = null;
+  await loadTournaments();
+};
+
 /* ===================== Partie en direct ===================== */
 const timer = Q.countdown();
 let room = JSON.parse(localStorage.getItem('quiz-host-room') || 'null');
@@ -649,7 +888,21 @@ function fillQuizSelects() {
   if (prev && quizzes.find((q) => q.id === prev)) sel.value = prev; else if (current) sel.value = current.id;
   $('#reloadSelect').innerHTML = opts;
   if (S) $('#reloadSelect').value = S.quizId;
+  // Tournois (rechargés à chaque passage sur l'onglet, ils ont pu être modifiés)
+  Q.get('/api/tournaments').then((list) => {
+    tournaments = list;
+    const t = $('#setupTour');
+    const prevT = t.value;
+    t.innerHTML = list.map((x) => `<option value="${esc(x.id)}">${esc(x.title)} (${x.stages.map((s) => STAGE_INFO[s.type].label).join(' → ') || 'aucune étape'})</option>`).join('')
+      || '<option value="">Aucun tournoi : créez-en un dans l’onglet Tournois</option>';
+    if (prevT && list.find((x) => x.id === prevT)) t.value = prevT; else if (tour) t.value = tour.id;
+  }).catch(() => {});
 }
+$('#setupMode').onchange = () => {
+  const t = $('#setupMode').value === 'tour';
+  $('#setupQuizField').classList.toggle('hidden', t);
+  $('#setupTourField').classList.toggle('hidden', !t);
+};
 
 /* Indique comment les joueurs vont se connecter (Wi-Fi local ou Internet) */
 async function refreshNetHint() {
@@ -676,9 +929,13 @@ refreshNetHint();
 
 $('#createRoom').onclick = async () => {
   await flushSave();
+  await flushTourSave();
+  const isTour = $('#setupMode').value === 'tour';
+  if (isTour && !$('#setupTour').value) return toast('Créez d’abord un tournoi dans l’onglet Tournois');
   try {
     room = await Q.api('/api/room/create', {
-      quizId: $('#setupQuiz').value,
+      quizId: isTour ? undefined : $('#setupQuiz').value,
+      tournamentId: isTour ? $('#setupTour').value : undefined,
       settings: { autoClose: $('#setupAuto').checked, speed: $('#setupSpeed').checked },
     });
   } catch (e) { return toast(e.message); }
@@ -727,6 +984,8 @@ $('#copyLink').onclick = () => { navigator.clipboard?.writeText(S.joinUrl); toas
 const STATE_LABELS = {
   lobby: 'Salle d’attente', question: 'Question en cours', closed: 'Réponses fermées',
   reveal: 'Réponse affichée', leaderboard: 'Classement', end: 'Partie terminée',
+  stageIntro: 'Présentation de l’étape', stageEnd: 'Fin d’étape — qualifiés', themes: 'Thèmes',
+  guess: 'Propositions d’image', imFound: 'Image trouvée',
 };
 
 timer.on((left, total) => {
@@ -761,45 +1020,76 @@ function onState(s) {
   renderLive();
 }
 
+const btn = (label, action, cls = '', payload, extra = '') =>
+  `<button class="${cls}" data-action="${action}" ${payload ? `data-payload='${esc(JSON.stringify(payload))}'` : ''} ${extra}>${label}</button>`;
+const CONFIRMS = {
+  reset: () => (S.tour ? 'Recommencer tout le tournoi ? Toutes les équipes reviennent au salon d’attente, scores à zéro.' : 'Remettre tous les scores à zéro et revenir au salon d’attente ?'),
+  end: () => (S.tour ? 'Terminer cette étape maintenant ? (classement et qualifiés)' : 'Terminer la partie maintenant ?'),
+  imSkip: () => 'Personne n’a trouvé ? L’image sera dévoilée sans être attribuée.',
+};
+// Tous les boutons [data-action] de la zone : envoient l'action (avec confirmation si besoin)
+function bindActions(root) {
+  root.querySelectorAll('[data-action]').forEach((b) => {
+    b.onclick = () => {
+      const ask = CONFIRMS[b.dataset.action];
+      if (ask && !confirm(ask())) return;
+      act(b.dataset.action, b.dataset.payload ? JSON.parse(b.dataset.payload) : undefined);
+    };
+  });
+}
+
 function renderLive() {
   const s = S;
+  const t = s.tour;
+  const type = t?.type || 'quiz';
   const total = s.questions.length;
   const last = s.qIndex >= total - 1;
-  $('#liveTitle').textContent = s.title;
-  $('#stateBadge').textContent = STATE_LABELS[s.state] + (s.qIndex >= 0 && s.state !== 'lobby' && s.state !== 'end' ? ` · ${s.qIndex + 1}/${total}` : '');
+  const stageTag = t && t.stage >= 0 ? `Étape ${t.stage + 1}/${t.stages.length} · ${STAGE_INFO[type].label} · ` : '';
+  $('#liveTitle').textContent = t ? t.title : s.title;
+  $('#stateBadge').textContent = stageTag + STATE_LABELS[s.state]
+    + (type === 'quiz' && s.qIndex >= 0 && ['question', 'closed', 'reveal', 'leaderboard'].includes(s.state) ? ` · ${s.qIndex + 1}/${total}` : '');
 
   // Contrôles
-  const btn = (label, action, cls = '', payload) =>
-    `<button class="${cls}" data-action="${action}" ${payload ? `data-payload='${esc(JSON.stringify(payload))}'` : ''}>${label}</button>`;
   let c = '';
-  if (s.state === 'lobby') c += btn('▶ Démarrer le quiz', 'next', 'primary big');
+  const endLabel = !t ? '🏁 Résultats finaux' : t.last ? '🏁 Résultats finaux du tournoi' : '🏁 Fin de l’étape';
+  if (s.state === 'lobby') c += btn(t ? '▶ Démarrer le tournoi' : '▶ Démarrer le quiz', 'next', 'primary big');
+  if (s.state === 'stageIntro') c += btn(`▶ Lancer l’étape ${t.stage + 1} (${STAGE_INFO[type].label})`, 'stageStart', 'primary big');
   if (s.state === 'question') {
     c += btn('⏹ Fermer les réponses', 'close', 'primary big');
     if (s.question.time) c += btn('+10 s', 'addTime');
   }
-  if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big');
-  if (s.state === 'reveal') {
-    c += btn('🏆 Classement', 'leaderboard', 'primary big');
-    c += btn(last ? '🏁 Résultats finaux' : '⏭ Question suivante', 'next', 'big');
+  if (type === 'images') {
+    if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big') + btn('🖼 Propositions d’image', 'imGuess', 'big');
+    if (s.state === 'reveal') c += btn('🖼 Propositions d’image', 'imGuess', 'primary big');
+    if (s.state === 'guess') c += btn('⏭ Question suivante (même image)', 'next', 'primary big') + btn('🙈 Personne ne trouve : dévoiler', 'imSkip');
+    if (s.state === 'imFound') {
+      const over = s.im.found?.over || s.im.index + 1 >= s.im.total;
+      c += btn(over ? endLabel : '▶ Image suivante', 'imNextImage', 'primary big') + btn('↩ Annuler l’attribution', 'imUndo');
+    }
+  } else if (type === 'quiz') {
+    if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big');
+    if (s.state === 'reveal') {
+      c += btn('🏆 Classement', 'leaderboard', 'primary big');
+      c += btn(last ? endLabel : '⏭ Question suivante', 'next', 'big');
+    }
+    if (s.state === 'leaderboard') {
+      c += btn(last ? endLabel : '⏭ Question suivante', 'next', 'primary big');
+      c += btn('↩ Revoir la réponse', 'reveal');
+    }
+    if (['question', 'closed', 'reveal', 'leaderboard'].includes(s.state)) {
+      c += `<select id="gotoSel" style="width:auto"><option value="">Aller à la question…</option>${s.questions
+        .map((q, i) => `<option value="${i}">${i + 1}. ${esc(q.text.slice(0, 50) || '(sans texte)')}</option>`).join('')}</select>`;
+    }
   }
-  if (s.state === 'leaderboard') {
-    c += btn(last ? '🏁 Résultats finaux' : '⏭ Question suivante', 'next', 'primary big');
-    c += btn('↩ Revoir la réponse', 'reveal');
+  if (s.state === 'stageEnd') {
+    const n = s.ranking.filter((p) => p.qualified).length;
+    c += btn(`▶ Étape suivante avec ${n} équipe${n > 1 ? 's' : ''} qualifiée${n > 1 ? 's' : ''}`, 'stageNext', 'primary big', null, n ? '' : 'disabled');
   }
-  if (s.state === 'end') c += btn('🔄 Rejouer (remise à zéro des scores)', 'reset', 'primary big');
-  if (s.state !== 'lobby') {
-    c += `<select id="gotoSel" style="width:auto"><option value="">Aller à la question…</option>${s.questions
-      .map((q, i) => `<option value="${i}">${i + 1}. ${esc(q.text.slice(0, 50) || '(sans texte)')}</option>`).join('')}</select>`;
-  }
-  if (s.state !== 'end' && s.state !== 'lobby') c += btn('Terminer la partie', 'end', 'danger');
+  if (s.state === 'end') c += btn(t ? '🔄 Recommencer le tournoi' : '🔄 Rejouer (remise à zéro des scores)', 'reset', 'primary big');
+  if (!['end', 'lobby', 'stageEnd'].includes(s.state)) c += btn(t ? 'Terminer l’étape' : 'Terminer la partie', 'end', 'danger');
+  if (t && s.state === 'stageEnd') c += btn('🔄 Recommencer le tournoi', 'reset', 'danger');
   $('#controls').innerHTML = c;
-  $('#controls').querySelectorAll('[data-action]').forEach((b) => {
-    b.onclick = () => {
-      if (b.dataset.action === 'reset' && !confirm('Remettre tous les scores à zéro et revenir au salon d’attente ?')) return;
-      if (b.dataset.action === 'end' && !confirm('Terminer la partie maintenant ?')) return;
-      act(b.dataset.action, b.dataset.payload ? JSON.parse(b.dataset.payload) : undefined);
-    };
-  });
+  bindActions($('#controls'));
   const goto = $('#gotoSel');
   if (goto) goto.onchange = () => {
     if (goto.value !== '' && confirm(`Lancer la question ${Number(goto.value) + 1} ? Les points déjà gagnés sur cette question seront recalculés.`)) act('goto', { index: Number(goto.value) });
@@ -811,17 +1101,106 @@ function renderLive() {
   if (s.state === 'lobby') {
     b = `<p class="muted">Les joueurs scannent le QR code ou ouvrent le lien et saisissent le code <b>${esc(s.code)}</b>.
       Ouvrez l’écran de projection sur l’écran partagé, puis démarrez quand tout le monde est là.</p>
-      <p><b>${s.questions.length}</b> questions prêtes.</p>`;
+      ${t ? `<p>${t.stages.map((x, i) => `<b>${i + 1}.</b> ${STAGE_INFO[x.type].icon} ${STAGE_INFO[x.type].label}${i < t.stages.length - 1 ? ` <span class="muted">(${x.qualify} qualifiés)</span>` : ''}`).join(' → ')}</p>
+        <p class="hint">Une équipe = un téléphone. Une équipe qui rejoint après le début du tournoi regarde seulement.</p>`
+        : `<p><b>${s.questions.length}</b> questions prêtes.</p>`}`;
+  } else if (s.state === 'stageIntro') {
+    b = `<p>${STAGE_INFO[type].icon} <b>Étape ${t.stage + 1} : ${STAGE_INFO[type].label}</b> — ${s.ranking.length} équipe${s.ranking.length > 1 ? 's' : ''} en lice.</p>
+      <p class="hint">${STAGE_INFO[type].hint}</p>
+      ${t.last ? '' : `<p class="hint">Les ${t.stages[t.stage].qualify} premières seront qualifiées pour l’étape suivante.</p>`}
+      <p class="muted">L’écran de projection présente l’étape. Lancez-la quand tout le monde est prêt.</p>`;
+  } else if (s.state === 'stageEnd') {
+    b = `<p>Étape terminée. Les ${t.stages[t.stage].qualify} premières équipes sont <b>pré-cochées</b> : cochez ou décochez pour départager des ex æquo ou repêcher une équipe.</p>
+      <table class="teams"><tr><th>Rang</th><th>Équipe</th><th>Score</th><th>Qualifiée</th></tr>
+      ${s.ranking.map((p) => `<tr><td>${p.rank}</td><td><b>${esc(p.name)}</b></td><td>${p.score}${type === 'images' ? ` image(s) · ${p.tie} bonne(s) réponse(s)` : ''}</td>
+        <td><input type="checkbox" data-qualify="${esc(p.id)}" ${p.qualified ? 'checked' : ''} style="width:auto"></td></tr>`).join('')}</table>`;
   } else if (s.state === 'end') {
     b = '<p class="muted">Le podium est affiché sur l’écran de projection.</p>';
+  } else if (s.state === 'themes') {
+    b = themesPanel(s);
+  } else if (type === 'images' && ['guess', 'imFound'].includes(s.state)) {
+    b = imagesPanel(s);
   } else if (s.question) {
-    b = questionPanel(s);
+    b = questionPanel(s) + (type === 'images' ? imagesPanel(s) : '');
   }
   $('#liveBody').innerHTML = b;
+  bindActions($('#liveBody'));
   $('#liveBody').querySelectorAll('[data-group]').forEach((el) => (el.onclick = () => act('toggleGroup', { key: el.dataset.group })));
   $('#liveBody').querySelectorAll('[data-toggle]').forEach((el) => (el.onclick = () => act('togglePlayer', { playerId: el.dataset.toggle })));
+  $('#liveBody').querySelectorAll('[data-qualify]').forEach((el) => (el.onchange = () => act('qualify', { playerId: el.dataset.qualify, on: el.checked })));
 
   renderPlayers();
+}
+
+/* ---------- Étape Thèmes : tout se pilote d'ici ---------- */
+function themesPanel(s) {
+  const th = s.th;
+  const pts = th.points;
+  let h = `<div class="chips">${th.order.map((o) => `<span class="chip ${o.current ? 'cur' : o.done ? 'done' : ''}">${esc(o.name)}</span>`).join('')}</div>`;
+  if (th.phase === 'done') {
+    return h + `<p>✅ Toutes les équipes sont passées.</p>${btn(t_endLabel(s), 'end', 'primary big')}`;
+  }
+  if (th.phase === 'pick') {
+    const free = th.themes.filter((x) => !x.takenBy).length;
+    return h + `<p>Au tour de <b>${esc(th.team)}</b> de choisir un thème${free ? '' : ' — <b>il n’en reste plus</b>'} :</p>
+      <div class="theme-grid">${th.themes.map((x, i) => `<button data-action="thPick" data-payload='${esc(JSON.stringify({ theme: i }))}' ${x.takenBy ? 'disabled' : ''}>
+        ${esc(x.title)}<small>${x.takenBy ? `pris par ${esc(x.takenBy)}` : `${x.count} question${x.count > 1 ? 's' : ''}`}</small></button>`).join('')}</div>
+      <div style="margin-top:12px">${btn(`⏭ Passer le tour de ${esc(th.team)}`, 'thNext', 'small')}</div>`;
+  }
+  const q = th.question;
+  h += `<div class="qview">
+    <div class="muted"><b>${esc(th.team)}</b> · ${esc(th.theme)} · question ${th.qNum + 1}/${th.qCount}</div>
+    <div class="qtext">${esc(q.text)}</div>
+    <div>Bonne réponse : <b>${esc(th.answer)}</b></div>`;
+  if (th.phase === 'question') {
+    h += `<p class="hint" style="margin-top:10px">L’équipe voit l’énoncé et annonce son choix :</p>
+      <div class="mode-btns">
+        ${btn(`Duo<small>2 réponses · ${pts.duo} pts</small>`, 'thMode', '', { mode: 'duo' }, q.choicesOk ? '' : 'disabled')}
+        ${btn(`Carré<small>4 réponses · ${pts.carre} pts</small>`, 'thMode', '', { mode: 'carre' }, q.choicesOk ? '' : 'disabled')}
+        ${btn(`Cash<small>aucune réponse · ${pts.cash} pts</small>`, 'thMode', 'primary', { mode: 'cash' })}
+      </div>`;
+  } else {
+    const label = { duo: 'Duo', carre: 'Carré', cash: 'Cash' }[th.mode];
+    h += `<p class="hint" style="margin-top:10px"><b>${label}</b> (${pts[th.mode]} pts) — cliquez la réponse donnée par l’équipe${th.phase === 'result' ? ' (vous pouvez encore corriger)' : ''} :</p>`;
+    if (th.mode === 'cash') {
+      h += `<div class="opt-btns">
+        ${btn('✓ Bonne réponse', 'thAnswer', th.phase === 'result' && th.correct ? 'given' : '', { correct: true })}
+        ${btn('✗ Mauvaise réponse', 'thAnswer', th.phase === 'result' && !th.correct ? 'given' : '', { correct: false })}</div>`;
+    } else {
+      h += `<div class="opt-btns">${th.shown.map((o) => btn(`${o.i === th.goodIndex ? '✓ ' : ''}${esc(o.text)}`, 'thAnswer',
+        `${o.i === th.goodIndex ? 'good' : ''} ${th.phase === 'result' && th.given === o.i ? 'given' : ''}`, { choice: o.i })).join('')}</div>`;
+    }
+    if (th.phase === 'result') {
+      const lastQ = th.qNum + 1 >= th.qCount;
+      h += `<div class="verdict ${th.correct ? 'ok' : 'ko'}">${th.correct ? `✓ Bonne réponse : +${th.gained} pts` : '✗ Mauvaise réponse : 0 pt'}</div>
+        <div style="margin-top:12px">${btn(lastQ ? '⏭ Équipe suivante' : '⏭ Question suivante', 'thNext', 'primary big')}</div>`;
+    }
+  }
+  return h + '</div>';
+}
+const t_endLabel = (s) => (s.tour.last ? '🏁 Résultats finaux du tournoi' : '🏁 Fin de l’étape');
+
+/* ---------- Étape Images ---------- */
+function imagesPanel(s) {
+  const im = s.im;
+  let h = `<h3>Image ${im.index + 1}/${im.total} — objectif : ${im.wins} image${im.wins > 1 ? 's' : ''}</h3>
+    <div class="im-box"><img src="${esc(im.src)}" alt="">
+      <div>Réponse : <b>${esc(im.answers.join(' / '))}</b>
+        ${im.found ? `<div class="verdict ${im.found.by ? 'ok' : 'ko'}">${im.found.by ? `🏆 Trouvée par ${esc(im.found.by)}${im.found.over ? ' — <b>gagne l’étape !</b>' : ''}` : 'Personne n’a trouvé'}</div>` : ''}
+      </div></div>`;
+  if (s.state === 'guess') {
+    const firstOk = im.guesses.find((g) => g.ok);
+    h += `<h3>Propositions (${im.guesses.filter((g) => !g.pass).length}) — la plus rapide en premier</h3>
+      ${im.guesses.map((g) => `<div class="answer-line ${g.pass ? '' : g.ok ? 'ok' : 'ko'} ${g === firstOk ? 'fastest' : ''}">
+        <span class="val">${g.pass ? '<span class="muted">passe</span>' : esc(g.text)}</span>
+        <span class="who">${esc(g.name)} · ${(g.ms / 1000).toFixed(1)} s${g === firstOk ? ' · <b>la plus rapide juste</b>' : ''}</span>
+        ${g.pass ? '' : btn('🏆 Attribuer', 'imAward', g.ok ? 'small primary' : 'small', { playerId: g.playerId })}</div>`).join('') || '<p class="muted">Pas encore de proposition sur les téléphones.</p>'}
+      <h3>Réponse donnée à l’oral</h3>
+      <div class="row">${s.ranking.map((p) => btn(`🏆 ${esc(p.name)}`, 'imAward', 'small', { playerId: p.id })).join('')}</div>`;
+  }
+  h += `<table class="teams"><tr><th>Équipe</th><th>Bonnes réponses</th><th>Netteté</th><th>Images</th>${s.state === 'guess' ? '<th>Proposé</th>' : ''}</tr>
+    ${im.teams.map((x) => `<tr><td><b>${esc(x.name)}</b></td><td>${x.correct}</td><td>${x.level}/${im.levels}</td><td>${x.wins}</td>${s.state === 'guess' ? `<td>${x.guessed ? '✓' : ''}</td>` : ''}</tr>`).join('')}</table>`;
+  return h;
 }
 
 function questionPanel(s) {
@@ -890,8 +1269,10 @@ function renderPlayers() {
         <button data-adj="${esc(p.id)}" data-d="10">+10</button>
         <button data-kick="${esc(p.id)}" class="danger" title="Exclure">✕</button>
       </span>
-      <span class="score">${p.score}</span>
+      ${s.state === 'stageEnd' && p.qualified ? '<span class="tag ok">qualifiée</span>' : ''}
+      <span class="score">${p.score}${s.tour?.type === 'images' && s.tour.stage >= 0 ? ' 🖼' : ''}</span>
     </div>`).join('') || '<p class="muted">En attente de joueurs…</p>';
+  $('#outList').innerHTML = s.eliminated?.length ? `Éliminées : ${s.eliminated.map(esc).join(', ')}` : '';
   $('#players').querySelectorAll('[data-adj]').forEach((b) => (b.onclick = () => act('adjust', { playerId: b.dataset.adj, delta: Number(b.dataset.d) })));
   $('#players').querySelectorAll('[data-undev]').forEach((b) => (b.onclick = () => {
     const p = s.ranking.find((x) => x.id === b.dataset.undev);

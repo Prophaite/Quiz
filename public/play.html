@@ -104,6 +104,13 @@
   .steal-list button small { font-weight: 600; opacity: .6; margin-left: 4px; }
   .steal-list button b { color: #c62f35; }
   .steal-list button:disabled { opacity: .5; }
+  /* Tournoi */
+  .stage-tag { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; opacity: .8; text-align: center; }
+  .simg { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 14px; background: rgba(0,0,0,.25); height: 42vh; min-height: 220px; }
+  .simg img { max-width: 100%; max-height: 100%; object-fit: contain; transition: filter 1s ease, width 1s ease, height 1s ease; -webkit-user-select: none; user-select: none; }
+  .level { text-align: center; font-weight: 800; font-size: 15px; opacity: .9; }
+  .guess-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+  .guess-row .go { width: auto; padding: 14px 18px; }
   .link { background: none; border: 0; color: #fff; opacity: .7; font: inherit; text-decoration: underline; cursor: pointer; margin-top: 8px; }
 </style>
 </head>
@@ -199,8 +206,12 @@ timer.on((left, total) => {
 
 function render() {
   const s = S;
-  $('#bar').innerHTML = `<span class="name">👤 ${esc(s.name)}${s.dev ? ' <span class="devtag">🛠 test</span>' : ''}</span><span class="score">${s.score} pts</span>`;
-  const key = [s.state, s.question?.index, s.answered, s.rank, s.state === 'question' ? '' : s.score, s.result?.correct, s.result?.partial, s.result?.points, !!s.devAnswer, s.offer?.risk, s.cheatPending, s.cheated, s.busted, !!s.stealOffer, s.steal ? s.steal.victim + s.steal.amount : '', (s.board || []).map((e) => e.name + ':' + e.score).join(',')].join('|');
+  const imgStage = s.tour?.type === 'images' && s.tour.stage >= 0;
+  $('#bar').innerHTML = `<span class="name">👤 ${esc(s.name)}${s.dev ? ' <span class="devtag">🛠 test</span>' : ''}</span>
+    <span class="score">${s.out ? 'éliminé' : imgStage ? `🖼 ${s.score}` : `${s.score} pts`}</span>`;
+  const key = [s.state, s.question?.index, s.answered, s.rank, s.state === 'question' ? '' : s.score, s.result?.correct, s.result?.partial, s.result?.points, !!s.devAnswer, s.offer?.risk, s.cheatPending, s.cheated, s.busted, !!s.stealOffer, s.steal ? s.steal.victim + s.steal.amount : '', (s.board || []).map((e) => e.name + ':' + e.score).join(','),
+    // tournoi (sans la liste des autres équipes : on ne redessine pas pendant qu'on écrit une proposition)
+    s.tour?.stage, s.out, s.qualified, JSON.stringify(s.th), s.im ? [s.im.index, s.im.level, s.im.guessed, s.im.myGuess, JSON.stringify(s.im.found)].join('/') : ''].join('|');
   if (s.state !== 'lobby') known = null;
   if (key === lastKey) {
     if (s.state === 'lobby') updateLobby(s); // nouveaux joueurs : mise à jour sans tout redessiner
@@ -219,6 +230,8 @@ function render() {
     updateLobby(s);
     return;
   }
+
+  if (s.tour && (s.state !== 'end' || s.out) && renderTour(s, m)) return;
 
   if (s.state === 'question' && !s.answered && s.cheated) {
     m.innerHTML = `<div class="center"><div class="big-icon">😈</div><h1>Triche activée</h1></div>
@@ -288,6 +301,94 @@ function render() {
       ${boardHtml(s, { title: 'Classement final' })}
       <p class="center">Merci d’avoir joué !</p>`;
     scrollToMe();
+  }
+}
+
+/* ---------- Tournoi : écrans propres aux étapes (renvoie true si l'écran est géré ici) ---------- */
+const STAGE_NAMES = { quiz: '🎯 Quiz', themes: '🗂 Thèmes', images: '🖼 Images' };
+function renderTour(s, m) {
+  const t = s.tour;
+  const tag = t.stage >= 0 ? `<div class="stage-tag">Étape ${t.stage + 1}/${t.stages.length} · ${STAGE_NAMES[t.type]}</div>` : '';
+  if (s.out) {
+    m.innerHTML = s.state === 'end'
+      ? `<div class="center"><div class="big-icon">🏁</div><h1>Tournoi terminé !</h1></div>${boardHtml(s, { title: 'Classement final' })}<p class="center">Merci d’avoir joué !</p>`
+      : `${tag}<div class="center"><div class="big-icon">👀</div><h1>Tu as été éliminé</h1></div>
+        <p class="center">Merci d’avoir joué ! Suis la suite du tournoi sur l’écran.</p>`;
+    return true;
+  }
+  if (s.state === 'stageIntro') {
+    m.innerHTML = `${tag}<div class="center"><div class="big-icon">${t.stage ? '🎉' : '🚀'}</div>
+      <h1>${t.stage ? 'Qualifié !' : 'C’est parti !'}</h1></div>
+      <p class="center">${{ quiz: 'Prépare-toi à répondre sur ton téléphone.', themes: 'Pour cette étape, tout se passe à l’oral : pose ton téléphone et regarde l’écran.', images: 'Réponds aux questions pour rendre l’image plus nette, puis trouve ce qu’elle représente !' }[t.type]}</p>
+      <div class="spinner"></div>`;
+    return true;
+  }
+  if (s.state === 'stageEnd') {
+    document.body.className = s.qualified ? 'ok' : 'ko';
+    m.innerHTML = `${tag}<div class="center"><div class="big-icon">${s.qualified ? '🎉' : '😢'}</div>
+      <h1>${s.qualified ? 'Qualifié pour la suite !' : 'Pas qualifié…'}</h1>
+      <p style="margin-top:6px">Tu termines <b>${ordinal(s.rank)}</b> de l’étape. ${s.qualified ? '' : 'L’animateur peut encore repêcher une équipe.'}</p></div>
+      ${boardHtml(s, { title: 'Classement de l’étape' })}`;
+    scrollToMe();
+    return true;
+  }
+  if (s.state === 'themes') {
+    const th = s.th;
+    const mode = th.mode ? ` · ${{ duo: 'Duo', carre: 'Carré', cash: 'Cash' }[th.mode]}` : '';
+    m.innerHTML = th.phase === 'done'
+      ? `${tag}<div class="center"><div class="big-icon">🗂</div><h1>Toutes les équipes sont passées</h1></div><p class="center">Regarde l’écran pour la suite.</p>`
+      : th.me
+        ? `${tag}<div class="center"><div class="big-icon">🎤</div><h1>C’est à vous !</h1></div>
+          <p class="center">${th.phase === 'pick' ? 'Choisissez un thème et annoncez-le à l’animateur.' : `${esc(th.theme)} · question ${th.qNum + 1}/${th.qCount}${mode}<br>Répondez à l’oral, la question est à l’écran.`}</p>`
+        : `${tag}<div class="center"><div class="big-icon">🍿</div><h1>Au tour de ${esc(th.team)}</h1></div>
+          <p class="center">${th.theme ? `Thème : <b>${esc(th.theme)}</b>${mode}` : 'Choix du thème en cours…'}</p>`;
+    return true;
+  }
+  if (!s.im) return false;
+  const im = s.im;
+  const lvl = `<div class="level">Netteté ${im.level}/${im.levels} · ✓ ${im.myCorrect} bonne${im.myCorrect > 1 ? 's' : ''} réponse${im.myCorrect > 1 ? 's' : ''} · 🖼 ${im.myWins}/${im.wins}</div>`;
+  if (s.state === 'reveal' && s.result) {
+    const r = s.result;
+    document.body.className = r.correct ? 'ok' : 'ko';
+    m.innerHTML = `${tag}<div class="center"><div class="big-icon">${r.correct ? '🔍' : r.answered ? '😬' : '💤'}</div>
+      <h1>${r.correct ? 'Bonne réponse : l’image devient plus nette !' : r.answered ? 'Raté !' : 'Pas de réponse'}</h1></div>
+      ${!r.correct ? `<div class="card"><div class="lbl">La bonne réponse</div><div class="val">${esc(r.answer)}</div></div>` : ''}
+      <p class="center">Prépare-toi à proposer le nom de l’image…</p>`;
+    return true;
+  }
+  if (s.state === 'guess') {
+    m.innerHTML = `${tag}${Q.stageImage(im, 30)}${lvl}
+      ${im.guessed
+        ? `<div class="card"><div class="lbl">${im.myGuess ? 'Ta proposition' : 'Tu as passé ton tour'}</div><div class="val">${esc(im.myGuess || '—')}</div></div>
+           <p class="center">L’animateur valide les réponses…</p>`
+        : `<form id="guessForm" class="guess-row"><input id="guessText" maxlength="100" placeholder="Qu’est-ce que c’est ?" autocomplete="off"><button class="go">OK</button></form>
+           <button class="link" id="guessPass">Je ne sais pas, je passe</button>
+           <p class="center" style="font-size:14px">Une seule proposition par question (ou réponds à l’oral).</p>`}`;
+    const f = $('#guessForm');
+    if (f) {
+      f.onsubmit = (e) => { e.preventDefault(); const v = $('#guessText').value.trim(); if (v) sendGuess({ text: v }); };
+      $('#guessPass').onclick = () => sendGuess({ pass: true });
+    }
+    return true;
+  }
+  if (s.state === 'imFound') {
+    const fd = im.found;
+    const me = fd.by === s.name;
+    document.body.className = me ? 'ok' : '';
+    m.innerHTML = `${tag}${Q.stageImage(im)}
+      <div class="center"><h1>${me ? '🏆 Vous avez trouvé !' : fd.by ? `${esc(fd.by)} a trouvé` : 'Personne n’a trouvé'}</h1>
+      <p style="margin-top:6px">C’était : <b>${esc(fd.answer)}</b></p></div>${lvl}`;
+    return true;
+  }
+  return false; // questions : écrans habituels
+}
+async function sendGuess(data) {
+  document.querySelectorAll('#guessForm button, #guessPass').forEach((b) => (b.disabled = true));
+  try {
+    await Q.api('/api/player/guess', { code: session.code, playerId: session.playerId, key: session.key, ...data });
+  } catch (e) {
+    toast(e.message);
+    document.querySelectorAll('#guessForm button, #guessPass').forEach((b) => (b.disabled = false));
   }
 }
 

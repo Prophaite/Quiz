@@ -209,6 +209,20 @@ window.Q = (() => {
   }
   const fmtKm = (d) => (d < 1 ? 'moins d’1 km' : `${Math.round(d).toLocaleString('fr-FR')} km`);
 
-  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm };
+  /*
+   * Image de l'étape Images (tournoi), de plus en plus nette : level / levels.
+   * blur  : flou de maxBlur px au départ, net à la fin ;
+   * small : minuscule au départ, pleine taille à la fin.
+   * Le cadre (.simg) doit avoir une taille fixée par la page.
+   */
+  function stageImage(im, maxBlur = 40) {
+    const f = im.levels ? Math.max(0, Math.min(1, im.level / im.levels)) : 1;
+    const style = im.effect === 'small'
+      ? `width:${Math.round(5 + 95 * f)}%;height:${Math.round(5 + 95 * f)}%`
+      : `filter:blur(${Math.round((1 - f) * maxBlur)}px)`;
+    return `<div class="simg"><img src="${esc(im.src)}" style="${style}" alt="" draggable="false"></div>`;
+  }
+
+  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage };
 
 })();

@@ -5,8 +5,8 @@ npm-debug.log*
 
 # Fichiers créés automatiquement par la sauvegarde des quiz
 data/*.tmp
-data/quizzes.json.bak
-data/quizzes.abime-*.json
+data/*.json.bak
+data/*.abime-*.json
 
 # Outil de tunnel déposé dans le dossier (binaire téléchargé, ~50 Mo)
 cloudflared

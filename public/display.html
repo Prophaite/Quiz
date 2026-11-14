@@ -112,6 +112,37 @@
   .music-hint { position: fixed; bottom: 1.5vh; left: 50%; transform: translateX(-50%); background: #fff; color: #2b1670; font-weight: 800; padding: 8px 16px; border-radius: 99px; box-shadow: 0 6px 20px rgba(0,0,0,.3); cursor: pointer; animation: hintPulse 1.6s ease-in-out infinite; }
   @keyframes hintPulse { 50% { transform: translateX(-50%) scale(1.05); } }
   .hidden { display: none !important; }
+  /* ---------- Tournoi ---------- */
+  .intro-num { font-size: 3.4vh; opacity: .8; text-transform: uppercase; letter-spacing: .15em; font-weight: 800; }
+  .intro-title { font-size: 13vh; font-weight: 900; line-height: 1.05; margin: 1vh 0 2vh; animation: pop .7s ease both; }
+  .intro-hint { font-size: 3vh; opacity: .85; max-width: 70vw; margin: 0 auto; text-wrap: balance; }
+  .center .chips { justify-content: center; }
+  .brow.out { opacity: .38; }
+  .brow .qtag { font-size: 2.2vh; background: var(--ok); color: #0b3d22; padding: .3vh 1vw; border-radius: 99px; }
+  .with-side { display: grid; grid-template-columns: 1fr minmax(26vw, max-content); gap: 3vw; align-items: center; }
+  .side-board span { white-space: nowrap; }
+  .side-board { display: grid; gap: 1vh; align-content: start; }
+  .side-board div { display: flex; justify-content: space-between; gap: 1vw; padding: 1.2vh 1.4vw; background: var(--card); border-radius: 1.2vh; font-size: 2.6vh; font-weight: 700; }
+  .side-board div.cur { outline: .4vh solid #fff; }
+  .side-board small { opacity: .75; font-weight: 600; }
+  .themes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(22vw, 1fr)); gap: 2vh; margin-top: 3vh; }
+  .theme-tile { background: var(--card); border: 2px solid var(--line); border-radius: 2vh; padding: 3vh 1.5vw; text-align: center; font-size: 3.6vh; font-weight: 800; animation: pop .4s ease both; }
+  .theme-tile small { display: block; font-size: 2vh; font-weight: 600; opacity: .8; margin-top: .6vh; }
+  .theme-tile.taken { opacity: .3; filter: grayscale(1); text-decoration: line-through; }
+  .turn { text-align: center; font-size: 4vh; }
+  .turn b { color: #ffd34d; }
+  .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2vw; margin-top: 4vh; }
+  .modes div { background: var(--card); border: 2px solid var(--line); border-radius: 2vh; padding: 3vh 1vw; text-align: center; font-size: 5vh; font-weight: 900; }
+  .modes small { display: block; font-size: 2.4vh; font-weight: 600; opacity: .85; }
+  .cash-big { text-align: center; font-size: 10vh; font-weight: 900; color: #ffd34d; animation: pop .6s ease both; margin-top: 3vh; }
+  .verdict-big { text-align: center; font-size: 6vh; font-weight: 900; margin-top: 3vh; animation: pop .6s ease both; }
+  .verdict-big.ok { color: var(--ok); } .verdict-big.ko { color: var(--ko); }
+  .choice.given { outline: .6vh dashed #fff; }
+  .simg { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 2vh; background: rgba(0,0,0,.25); height: 62vh; }
+  .simg img { max-width: 100%; max-height: 100%; object-fit: contain; transition: filter 1s ease, width 1s ease, height 1s ease; }
+  .im-prompt { text-align: center; font-size: 3.6vh; font-weight: 800; margin-top: 2vh; }
+  .im-found { text-align: center; margin-top: 2vh; font-size: 4.4vh; font-weight: 900; animation: pop .6s ease both; }
+  .im-found .ans { color: var(--ok); font-size: 6vh; display: block; }
   .qr-wait { width: 100%; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh; color: #2b1670; font-weight: 800; font-size: 2.4vh; text-align: center; padding: 2vh; }
   .qr-wait small { font-weight: 600; opacity: .7; font-size: 1.8vh; }
   .qr-spin { width: 7vh; height: 7vh; border: .8vh solid #ddd6fe; border-top-color: #5b4bdb; border-radius: 50%; animation: qrspin 1s linear infinite; }
@@ -205,16 +236,24 @@ timer.on((left, total) => {
   circle.style.strokeDashoffset = String(289 * (1 - frac));
 });
 
+const STAGE_NAMES = { quiz: '🎯 Quiz', themes: '🗂 Thèmes', images: '🖼 Images' };
+
 function render() {
   const s = S;
-  $('#top').innerHTML = `<span><b>${esc(s.title)}</b></span>
-    ${s.question && s.state !== 'lobby' && s.state !== 'end' ? `<span>Question ${s.question.index + 1} / ${s.question.total}</span>` : ''}
+  const t = s.tour;
+  const imgStage = t?.type === 'images' && t.stage >= 0;
+  $('#top').innerHTML = `<span><b>${esc(t ? t.title : s.title)}</b></span>
+    ${t && t.stage >= 0 ? `<span>Étape ${t.stage + 1}/${t.stages.length} · ${STAGE_NAMES[t.type]}</span>` : ''}
+    ${s.question && ['question', 'closed', 'reveal', 'leaderboard'].includes(s.state) && !imgStage ? `<span>Question ${s.question.index + 1} / ${s.question.total}</span>` : ''}
     <span class="code">Rejoindre : <b>${esc(s.code)}</b></span>`;
 
   // On évite de re-dessiner entièrement (animations) si seul un compteur change
-  let key = `${s.state}|${s.question?.index}`;
+  let key = `${s.state}|${s.question?.index}|${t?.stage}`;
   if (s.state === 'reveal') key += JSON.stringify(s.reveal);
-  if (s.state === 'leaderboard' || s.state === 'end') key += JSON.stringify(s.leaderboard);
+  if (['leaderboard', 'end', 'stageEnd'].includes(s.state)) key += JSON.stringify(s.leaderboard);
+  if (s.state === 'themes') key += JSON.stringify(s.th);
+  if (s.state === 'imFound') key += JSON.stringify(s.im.found) + s.im.index;
+  if (s.state === 'stageIntro') key += s.players.map((p) => p.name).join();
   const full = key !== lastKey;
   lastKey = key;
   updateMusic();
@@ -226,6 +265,102 @@ function render() {
   if (s.state === 'reveal') return renderReveal(s, full);
   if (s.state === 'leaderboard') return full && renderBoard(s);
   if (s.state === 'end') return full && renderPodium(s);
+  if (s.state === 'stageIntro') return full && renderStageIntro(s);
+  if (s.state === 'stageEnd') return full && renderStageEnd(s);
+  if (s.state === 'themes') return full && renderThemes(s);
+  if (s.state === 'guess') return renderGuess(s);
+  if (s.state === 'imFound') return full && renderFound(s);
+}
+
+/* ---------- Tournoi ---------- */
+const STAGE_HINTS = {
+  quiz: 'Répondez aux questions sur votre téléphone',
+  themes: 'Chaque équipe choisit un thème et répond à l’oral : Duo, Carré ou Cash ?',
+  images: 'Trouvez l’image ! Chaque bonne réponse la rend plus nette sur votre téléphone',
+};
+function renderStageIntro(s) {
+  const t = s.tour;
+  const st = t.stages[t.stage];
+  $('#stage').innerHTML = `<div class="center fade">
+    <div class="intro-num">Étape ${t.stage + 1} sur ${t.stages.length}${t.last ? ' · Finale' : ''}</div>
+    <div class="intro-title">${STAGE_NAMES[st.type]}</div>
+    <div class="intro-hint">${STAGE_HINTS[st.type]}${t.last ? '' : `<br>Les ${st.qualify} premières équipes sont qualifiées pour la suite.`}</div>
+    <div class="chips">${s.players.map((p, i) => `<span class="chip" style="animation-delay:${i * 60}ms">${esc(p.name)}</span>`).join('')}</div>
+  </div>`;
+}
+function renderStageEnd(s) {
+  const t = s.tour;
+  const unit = t.type === 'images' ? ' 🖼' : '';
+  $('#stage').innerHTML = `<h1 class="center fade">🏁 Fin de l’étape ${t.stage + 1} — qualifiés</h1>
+    <div class="board">${s.leaderboard.map((p, i) => `<div class="brow ${p.qualified ? '' : 'out'}" style="animation-delay:${i * 70}ms">
+      <span class="rk">${p.rank}</span><span class="nm">${esc(p.name)}</span>
+      ${p.qualified ? '<span class="qtag">✓ qualifiée</span>' : ''}
+      <span class="sc">${p.score}${unit}</span></div>`).join('')}</div>`;
+}
+
+// Classement à côté de l'écran des thèmes
+const sideBoard = (th) => `<div class="side-board">${th.scores.map((x) => `<div class="${x.name === th.team ? 'cur' : ''}"><span>${x.rank}. ${esc(x.name)}</span><span>${x.score}</span></div>`).join('')}</div>`;
+
+function renderThemes(s) {
+  const th = s.th;
+  let main = '';
+  if (th.phase === 'pick' || th.phase === 'done') {
+    main = `<div class="turn">${th.phase === 'done' ? 'Toutes les équipes sont passées !' : `Au tour de <b>${esc(th.team)}</b> de choisir un thème`}</div>
+      <div class="themes-grid">${th.themes.map((x, i) => `<div class="theme-tile ${x.takenBy ? 'taken' : ''}" style="animation-delay:${i * 50}ms">${esc(x.title)}
+        <small>${x.takenBy ? `choisi par ${esc(x.takenBy)}` : `${x.count} question${x.count > 1 ? 's' : ''}`}</small></div>`).join('')}</div>`;
+  } else {
+    const q = th.question;
+    const pts = th.points;
+    main = `<div class="turn"><b>${esc(th.team)}</b> · ${esc(th.theme)} · question ${th.qNum + 1}/${th.qCount}</div>
+      ${q.image ? `<img class="qimg" src="${esc(q.image)}" alt="">` : ''}
+      <div class="qtext">${esc(q.text)}</div>`;
+    if (th.phase === 'question') {
+      main += `<div class="modes">
+        <div style="${q.choicesOk ? '' : 'opacity:.3'}">Duo<small>2 réponses · ${pts.duo} pts</small></div>
+        <div style="${q.choicesOk ? '' : 'opacity:.3'}">Carré<small>4 réponses · ${pts.carre} pts</small></div>
+        <div>Cash<small>sans aide · ${pts.cash} pts</small></div></div>`;
+    } else if (th.mode === 'cash') {
+      main += th.phase === 'result'
+        ? `<div class="answer-big"><div class="lbl">Réponse</div><div class="val">${esc(th.answer)}</div></div>`
+        : `<div class="cash-big">💰 Cash ! <span style="font-size:4vh">${pts.cash} pts</span></div>`;
+    } else {
+      main += `<div class="choices">${th.shown.map((o, k) => {
+        const cls = th.phase === 'result' ? (o.i === th.goodIndex ? 'good' : 'dim') + (o.i === th.given ? ' given' : '') : '';
+        return `<div class="choice ${cls}" style="background:${COLORS[k]}"><span class="shape">${SHAPES[k]}</span><span class="txt">${esc(o.text)}</span></div>`;
+      }).join('')}</div>`;
+    }
+    if (th.phase === 'result') {
+      main += `<div class="verdict-big ${th.correct ? 'ok' : 'ko'}">${th.correct ? `✓ Bonne réponse ! +${th.gained} pts` : '✗ Mauvaise réponse'}</div>`;
+    }
+  }
+  $('#stage').innerHTML = `<div class="with-side fade"><div>${main}</div>${sideBoard(th)}</div>`;
+}
+
+// Équipes de l'étape Images : bonnes réponses et images trouvées
+const imTeams = (im, showGuess) => `<div class="side-board">${im.teams.map((x) => `<div><span>${esc(x.name)}${showGuess && x.guessed ? ' 💬' : ''}</span>
+  <span><small>✓ ${x.correct}</small> · 🖼 ${x.wins}/${im.wins}</span></div>`).join('')}</div>`;
+
+let guessKey = '';
+function renderGuess(s) {
+  const im = s.im;
+  // L'image ne change pas pendant les propositions : on ne met à jour que la liste des équipes
+  const k = `${im.index}|${im.level}`;
+  if (k !== guessKey || !$('#guessView')) {
+    guessKey = k;
+    $('#stage').innerHTML = `<div class="with-side fade" id="guessView"><div>
+      ${Q.stageImage(im, 70)}
+      <div class="im-prompt">🖼 Image ${im.index + 1} — proposez son nom sur votre téléphone ou à l’oral !</div></div>
+      <div id="imTeams">${imTeams(im, true)}</div></div>`;
+  } else $('#imTeams').innerHTML = imTeams(im, true);
+}
+function renderFound(s) {
+  guessKey = '';
+  const im = s.im;
+  const f = im.found;
+  $('#stage').innerHTML = `<div class="with-side fade"><div>
+    ${Q.stageImage(im)}
+    <div class="im-found">${f.by ? `🏆 ${esc(f.by)} a trouvé !` : 'Personne n’a trouvé…'}<span class="ans">${esc(f.answer)}</span></div></div>
+    ${imTeams(im, false)}</div>`;
 }
 
 // Bandeau « X a volé N pts à Y » (une seule fois par vol)
@@ -393,11 +528,12 @@ function renderBoard(s) {
 
 function renderPodium(s) {
   const b = s.leaderboard;
+  const unit = s.tour?.type === 'images' ? ' 🖼' : ' pts';
   const step = (p, cls, n) => {
     if (!p) return `<div class="step ${cls}"></div>`;
-    return `<div class="step ${cls}"><div class="who">${esc(p.name)}${cheaterTag(p)}</div><div class="pts">${p.score} pts</div><div class="block">${n}</div></div>`;
+    return `<div class="step ${cls}"><div class="who">${esc(p.name)}${cheaterTag(p)}</div><div class="pts">${p.score}${unit}</div><div class="block">${n}</div></div>`;
   };
-  $('#stage').innerHTML = `<h1 class="center fade">🎉 Résultats finaux</h1>
+  $('#stage').innerHTML = `<h1 class="center fade">🎉 ${s.tour ? `Vainqueur du tournoi : ${esc(b[0]?.name ?? '—')}` : 'Résultats finaux'}</h1>
     <div class="podium">${step(b[1], 'p2', 2)}${step(b[0], 'p1', 1)}${step(b[2], 'p3', 3)}</div>
     <div class="rest">${b.slice(3).map((p) => `<span>${ordinal(p.rank)} ${esc(p.name)}${cheaterTag(p)} — ${p.score}</span>`).join('')}</div>`;
 }
