@@ -575,5 +575,1393 @@
       }
     ],
     "updatedAt": 1794579281173
+  },
+  {
+    "id": "deee6207043f",
+    "title": "Sport",
+    "questions": [
+      {
+        "id": "b7c428653925",
+        "type": "choice",
+        "text": "Combien de joueurs par équipe sur un terrain de football ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "7",
+            "correct": false
+          },
+          {
+            "text": "10",
+            "correct": false
+          },
+          {
+            "text": "11",
+            "correct": true
+          },
+          {
+            "text": "12",
+            "correct": false
+          },
+          {
+            "text": "9",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "47bb66f9007f",
+        "type": "choice",
+        "text": "Dans quel sport utilise-t-on un volant ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Badminton",
+            "correct": true
+          },
+          {
+            "text": "Padel",
+            "correct": false
+          },
+          {
+            "text": "Squash",
+            "correct": false
+          },
+          {
+            "text": "Ping-pong",
+            "correct": false
+          },
+          {
+            "text": "Tennis",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "22df1a8a56db",
+        "type": "choice",
+        "text": "Quelle ville a accueilli les Jeux olympiques d’été de 2024 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Rome",
+            "correct": false
+          },
+          {
+            "text": "Paris",
+            "correct": true
+          },
+          {
+            "text": "Tokyo",
+            "correct": false
+          },
+          {
+            "text": "Londres",
+            "correct": false
+          },
+          {
+            "text": "Los Angeles",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "b66df7bd4978",
+        "type": "choice",
+        "text": "Combien de points vaut un essai au rugby à XV ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "3",
+            "correct": false
+          },
+          {
+            "text": "7",
+            "correct": false
+          },
+          {
+            "text": "5",
+            "correct": true
+          },
+          {
+            "text": "6",
+            "correct": false
+          },
+          {
+            "text": "4",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "7a747af59474",
+    "title": "Cinéma",
+    "questions": [
+      {
+        "id": "f0dc4d01084f",
+        "type": "choice",
+        "text": "Qui a réalisé « Titanic » (1997) ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Ridley Scott",
+            "correct": false
+          },
+          {
+            "text": "James Cameron",
+            "correct": true
+          },
+          {
+            "text": "Martin Scorsese",
+            "correct": false
+          },
+          {
+            "text": "Christopher Nolan",
+            "correct": false
+          },
+          {
+            "text": "Steven Spielberg",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "4ccb08bc7b66",
+        "type": "choice",
+        "text": "Dans « Le Roi Lion », comment s’appelle le père de Simba ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Rafiki",
+            "correct": false
+          },
+          {
+            "text": "Scar",
+            "correct": false
+          },
+          {
+            "text": "Timon",
+            "correct": false
+          },
+          {
+            "text": "Zazu",
+            "correct": false
+          },
+          {
+            "text": "Mufasa",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "417ade599c82",
+        "type": "choice",
+        "text": "Quel acteur incarne Jack Sparrow dans « Pirates des Caraïbes » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Brad Pitt",
+            "correct": false
+          },
+          {
+            "text": "Johnny Depp",
+            "correct": true
+          },
+          {
+            "text": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "text": "Orlando Bloom",
+            "correct": false
+          },
+          {
+            "text": "Leonardo DiCaprio",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "a6cc5723e6bf",
+        "type": "choice",
+        "text": "Combien de films compte la saga « Harry Potter » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "10",
+            "correct": false
+          },
+          {
+            "text": "9",
+            "correct": false
+          },
+          {
+            "text": "8",
+            "correct": true
+          },
+          {
+            "text": "6",
+            "correct": false
+          },
+          {
+            "text": "7",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "c007afd05522",
+    "title": "Histoire",
+    "questions": [
+      {
+        "id": "630b1f6aa04d",
+        "type": "choice",
+        "text": "En quelle année a eu lieu la prise de la Bastille ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "1848",
+            "correct": false
+          },
+          {
+            "text": "1789",
+            "correct": true
+          },
+          {
+            "text": "1792",
+            "correct": false
+          },
+          {
+            "text": "1815",
+            "correct": false
+          },
+          {
+            "text": "1776",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "fb0af13b67d2",
+        "type": "choice",
+        "text": "Qui a été le premier empereur des Français ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Louis XVI",
+            "correct": false
+          },
+          {
+            "text": "Charlemagne",
+            "correct": false
+          },
+          {
+            "text": "Napoléon III",
+            "correct": false
+          },
+          {
+            "text": "Napoléon Ier",
+            "correct": true
+          },
+          {
+            "text": "Louis XIV",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "51e98aa08be5",
+        "type": "choice",
+        "text": "En quelle année l’homme a-t-il marché sur la Lune pour la première fois ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "1972",
+            "correct": false
+          },
+          {
+            "text": "1969",
+            "correct": true
+          },
+          {
+            "text": "1965",
+            "correct": false
+          },
+          {
+            "text": "1975",
+            "correct": false
+          },
+          {
+            "text": "1961",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "2ad9026d1278",
+        "type": "choice",
+        "text": "Quelle civilisation a construit le Machu Picchu ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Les Incas",
+            "correct": true
+          },
+          {
+            "text": "Les Toltèques",
+            "correct": false
+          },
+          {
+            "text": "Les Aztèques",
+            "correct": false
+          },
+          {
+            "text": "Les Olmèques",
+            "correct": false
+          },
+          {
+            "text": "Les Mayas",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "56176f17a359",
+    "title": "Géographie",
+    "questions": [
+      {
+        "id": "a827dade9f6a",
+        "type": "choice",
+        "text": "Quelle est la capitale de l’Australie ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Sydney",
+            "correct": false
+          },
+          {
+            "text": "Canberra",
+            "correct": true
+          },
+          {
+            "text": "Melbourne",
+            "correct": false
+          },
+          {
+            "text": "Brisbane",
+            "correct": false
+          },
+          {
+            "text": "Perth",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "e6039e3cfaf3",
+        "type": "choice",
+        "text": "Quel est le plus long fleuve de France ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "La Garonne",
+            "correct": false
+          },
+          {
+            "text": "La Loire",
+            "correct": true
+          },
+          {
+            "text": "Le Rhône",
+            "correct": false
+          },
+          {
+            "text": "La Seine",
+            "correct": false
+          },
+          {
+            "text": "Le Rhin",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "7a111428ed78",
+        "type": "choice",
+        "text": "Sur quel continent se trouve l’Égypte ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "L’Afrique",
+            "correct": true
+          },
+          {
+            "text": "L’Europe",
+            "correct": false
+          },
+          {
+            "text": "L’Amérique",
+            "correct": false
+          },
+          {
+            "text": "L’Océanie",
+            "correct": false
+          },
+          {
+            "text": "L’Asie",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "90d4fb569b42",
+        "type": "choice",
+        "text": "Quel est le plus haut sommet des Alpes ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "La barre des Écrins",
+            "correct": false
+          },
+          {
+            "text": "Le mont Rose",
+            "correct": false
+          },
+          {
+            "text": "Le Cervin",
+            "correct": false
+          },
+          {
+            "text": "Le mont Blanc",
+            "correct": true
+          },
+          {
+            "text": "L’Eiger",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "5e69af380593",
+    "title": "Musique",
+    "questions": [
+      {
+        "id": "e25909af92af",
+        "type": "choice",
+        "text": "De quel pays vient le groupe ABBA ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Danemark",
+            "correct": false
+          },
+          {
+            "text": "Pays-Bas",
+            "correct": false
+          },
+          {
+            "text": "Norvège",
+            "correct": false
+          },
+          {
+            "text": "Finlande",
+            "correct": false
+          },
+          {
+            "text": "Suède",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "e5e9b50d0766",
+        "type": "choice",
+        "text": "Combien de cordes a une guitare classique ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "12",
+            "correct": false
+          },
+          {
+            "text": "7",
+            "correct": false
+          },
+          {
+            "text": "4",
+            "correct": false
+          },
+          {
+            "text": "5",
+            "correct": false
+          },
+          {
+            "text": "6",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "bb4fdc8b88de",
+        "type": "choice",
+        "text": "Qui a composé « La Flûte enchantée » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Chopin",
+            "correct": false
+          },
+          {
+            "text": "Bach",
+            "correct": false
+          },
+          {
+            "text": "Beethoven",
+            "correct": false
+          },
+          {
+            "text": "Mozart",
+            "correct": true
+          },
+          {
+            "text": "Vivaldi",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "6f1d7a36ac6a",
+        "type": "choice",
+        "text": "Quel chanteur est surnommé « le King » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Michael Jackson",
+            "correct": false
+          },
+          {
+            "text": "Johnny Hallyday",
+            "correct": false
+          },
+          {
+            "text": "Elvis Presley",
+            "correct": true
+          },
+          {
+            "text": "Prince",
+            "correct": false
+          },
+          {
+            "text": "Frank Sinatra",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "d3c86d11ce62",
+    "title": "Sciences",
+    "questions": [
+      {
+        "id": "ae3e391eaaa1",
+        "type": "choice",
+        "text": "Quel est le symbole chimique de l’or ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Ag",
+            "correct": false
+          },
+          {
+            "text": "Or",
+            "correct": false
+          },
+          {
+            "text": "Fe",
+            "correct": false
+          },
+          {
+            "text": "Go",
+            "correct": false
+          },
+          {
+            "text": "Au",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "8b0fbb5dd552",
+        "type": "choice",
+        "text": "Combien de planètes compte le système solaire ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "8",
+            "correct": true
+          },
+          {
+            "text": "12",
+            "correct": false
+          },
+          {
+            "text": "10",
+            "correct": false
+          },
+          {
+            "text": "7",
+            "correct": false
+          },
+          {
+            "text": "9",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "5eaf4e9aa33a",
+        "type": "choice",
+        "text": "Quel gaz les plantes absorbent-elles pour la photosynthèse ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Le dioxyde de carbone",
+            "correct": true
+          },
+          {
+            "text": "L’oxygène",
+            "correct": false
+          },
+          {
+            "text": "L’hélium",
+            "correct": false
+          },
+          {
+            "text": "L’hydrogène",
+            "correct": false
+          },
+          {
+            "text": "L’azote",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "06d620243c9a",
+        "type": "choice",
+        "text": "Combien d’os compte le squelette d’un adulte ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "250",
+            "correct": false
+          },
+          {
+            "text": "212",
+            "correct": false
+          },
+          {
+            "text": "206",
+            "correct": true
+          },
+          {
+            "text": "300",
+            "correct": false
+          },
+          {
+            "text": "186",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "952edfc0ce76",
+    "title": "Questions de la finale (test)",
+    "questions": [
+      {
+        "id": "d4fb0ccb14c8",
+        "type": "choice",
+        "text": "Combien de pattes a une araignée ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "6",
+            "correct": false
+          },
+          {
+            "text": "4",
+            "correct": false
+          },
+          {
+            "text": "10",
+            "correct": false
+          },
+          {
+            "text": "8",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "3a86a465ca3c",
+        "type": "choice",
+        "text": "De quelle couleur est le cheval blanc d’Henri IV ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Blanc",
+            "correct": true
+          },
+          {
+            "text": "Gris",
+            "correct": false
+          },
+          {
+            "text": "Marron",
+            "correct": false
+          },
+          {
+            "text": "Noir",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "90c3a867e4b0",
+        "type": "choice",
+        "text": "Combien font 7 × 8 ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "56",
+            "correct": true
+          },
+          {
+            "text": "64",
+            "correct": false
+          },
+          {
+            "text": "54",
+            "correct": false
+          },
+          {
+            "text": "48",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "dd10cbbbf904",
+        "type": "choice",
+        "text": "Combien de jours compte une année bissextile ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "366",
+            "correct": true
+          },
+          {
+            "text": "360",
+            "correct": false
+          },
+          {
+            "text": "364",
+            "correct": false
+          },
+          {
+            "text": "365",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "7bd60ca7f16a",
+        "type": "choice",
+        "text": "Quelle planète est surnommée la planète rouge ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Jupiter",
+            "correct": false
+          },
+          {
+            "text": "Mars",
+            "correct": true
+          },
+          {
+            "text": "Mercure",
+            "correct": false
+          },
+          {
+            "text": "Vénus",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "fd27b054b4ea",
+        "type": "choice",
+        "text": "Quel est le plus grand océan du monde ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Le Pacifique",
+            "correct": true
+          },
+          {
+            "text": "L’Arctique",
+            "correct": false
+          },
+          {
+            "text": "L’océan Indien",
+            "correct": false
+          },
+          {
+            "text": "L’Atlantique",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "b0f84e058949",
+        "type": "choice",
+        "text": "Dans quel pays se trouve la tour de Pise ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Italie",
+            "correct": true
+          },
+          {
+            "text": "France",
+            "correct": false
+          },
+          {
+            "text": "Espagne",
+            "correct": false
+          },
+          {
+            "text": "Grèce",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "3ce97dd63884",
+        "type": "choice",
+        "text": "Combien de côtés a un hexagone ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "5",
+            "correct": false
+          },
+          {
+            "text": "8",
+            "correct": false
+          },
+          {
+            "text": "7",
+            "correct": false
+          },
+          {
+            "text": "6",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "83e21fbc18b2",
+        "type": "choice",
+        "text": "Quelle est la capitale de l’Espagne ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "Madrid",
+            "correct": true
+          },
+          {
+            "text": "Barcelone",
+            "correct": false
+          },
+          {
+            "text": "Séville",
+            "correct": false
+          },
+          {
+            "text": "Valence",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "7e62ed3b711c",
+        "type": "choice",
+        "text": "Quel fruit est jaune et courbé ?",
+        "image": "",
+        "points": 100,
+        "time": 15,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "La fraise",
+            "correct": false
+          },
+          {
+            "text": "La pomme",
+            "correct": false
+          },
+          {
+            "text": "La banane",
+            "correct": true
+          },
+          {
+            "text": "Le kiwi",
+            "correct": false
+          }
+        ]
+      }
+    ],
+    "updatedAt": 1794681960623
+  },
+  {
+    "id": "9ea6132b5f8a",
+    "title": "Images : drapeaux (test)",
+    "questions": [
+      {
+        "id": "5041caa9919e",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/france.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "France"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "4be00edd9f2f",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/italie.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Italie"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "78d1fe7a6a54",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/allemagne.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Allemagne"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "f759bb93b89e",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/belgique.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Belgique"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "83b737de16f3",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/japon.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Japon"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "bdb4ac15cc66",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/suisse.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Suisse"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "fbad578f516e",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/suede.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Suède"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "cade910c44f9",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/espagne.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Espagne"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "e1f0745cf0b8",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/grece.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Grèce"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "76c10bbde0f0",
+        "type": "text",
+        "text": "Quel est ce drapeau ?",
+        "image": "/images/test/bresil.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Brésil"
+        ],
+        "fuzzy": true
+      }
+    ],
+    "updatedAt": 1794681960630
+  },
+  {
+    "id": "189f92e04fbc",
+    "title": "Images : symboles (test)",
+    "questions": [
+      {
+        "id": "74ba341d73b0",
+        "type": "text",
+        "text": "Quel est ce panneau ?",
+        "image": "/images/test/stop.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Stop",
+          "Panneau stop"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "4b488b0858e7",
+        "type": "text",
+        "text": "Quel est ce panneau ?",
+        "image": "/images/test/sens-interdit.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Sens interdit"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "276bf615b8ce",
+        "type": "text",
+        "text": "Quel est ce panneau ?",
+        "image": "/images/test/cedez-le-passage.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Cédez le passage",
+          "Céder le passage"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "523de998f63c",
+        "type": "text",
+        "text": "Quel est ce symbole ?",
+        "image": "/images/test/wifi.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Wi-Fi",
+          "Wifi"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "e3fdecda937b",
+        "type": "text",
+        "text": "Quel est ce symbole ?",
+        "image": "/images/test/smiley.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Smiley",
+          "Émoticône",
+          "Sourire",
+          "Emoji"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "305366ac6cdd",
+        "type": "text",
+        "text": "Quel est ce symbole ?",
+        "image": "/images/test/note-de-musique.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Note de musique",
+          "Note",
+          "Croche"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "cc5d4723066c",
+        "type": "text",
+        "text": "Quel est cet objet ?",
+        "image": "/images/test/ampoule.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Ampoule"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "5f07554c4256",
+        "type": "text",
+        "text": "Quel est ce symbole ?",
+        "image": "/images/test/coeur.svg",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Cœur",
+          "Coeur"
+        ],
+        "fuzzy": true
+      }
+    ],
+    "updatedAt": 1794681960634
   }
 ]
