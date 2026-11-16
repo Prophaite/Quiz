@@ -51,6 +51,20 @@
   .spinner { width: 46px; height: 46px; border: 5px solid var(--line); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .unit { display: flex; gap: 8px; align-items: center; }
+  /* Curseur des questions « Valeur à trouver » */
+  .slider-box { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 14px 12px; display: grid; gap: 10px; }
+  .slider-val { text-align: center; font-size: 40px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .slider-val small { font-size: 20px; font-weight: 700; opacity: .8; }
+  .slider-box input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; padding: 0; border: 0; margin: 0; touch-action: none; }
+  .slider-box input[type=range]::-webkit-slider-runnable-track { height: 12px; border-radius: 99px; background: linear-gradient(90deg, #ffd34d var(--fill, 50%), rgba(255,255,255,.25) var(--fill, 50%)); }
+  .slider-box input[type=range]::-moz-range-track { height: 12px; border-radius: 99px; background: rgba(255,255,255,.25); }
+  .slider-box input[type=range]::-moz-range-progress { height: 12px; border-radius: 99px; background: #ffd34d; }
+  .slider-box input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 36px; height: 36px; margin-top: -12px; border-radius: 50%; background: #fff; border: 4px solid #ffd34d; box-shadow: 0 3px 8px rgba(0,0,0,.35); }
+  .slider-box input[type=range]::-moz-range-thumb { width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 4px solid #ffd34d; box-shadow: 0 3px 8px rgba(0,0,0,.35); }
+  .slider-scale { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; opacity: .75; margin-top: -6px; }
+  .slider-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .slider-btns button { font: inherit; font-size: 26px; font-weight: 900; padding: 6px; border-radius: 12px; border: 0; background: rgba(255,255,255,.18); color: #fff; cursor: pointer; touch-action: manipulation; user-select: none; }
+  .slider-btns button:active { background: rgba(255,255,255,.32); }
   .unit span { font-size: 20px; font-weight: 700; }
   .lobby-count { font-weight: 800; font-size: 18px; text-align: center; }
   .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-height: 34vh; overflow: auto; padding: 2px; }
@@ -666,6 +680,8 @@ function renderAnswer(s) {
     return;
   }
 
+  if (q.type === 'number' && q.slider) return renderSlider(s, head);
+
   const isNum = q.type === 'number';
   m.innerHTML = `${head}
     <form id="ansForm" style="display:grid;gap:12px">
@@ -686,6 +702,47 @@ function renderAnswer(s) {
     }
     send(v);
   };
+}
+
+/* Valeur à trouver : on bouge un curseur entre un min et un max (calculés par le serveur) */
+function renderSlider(s, head) {
+  const q = s.question;
+  const { min, max, step } = q.slider;
+  const dec = (String(step).split('.')[1] || '').length;
+  const snap = (x) => Math.min(max, Math.max(min, Number((min + Math.round((x - min) / step) * step).toFixed(dec))));
+  const show = (x) => fmt(Number(x.toFixed(dec)));
+  $('#main').innerHTML = `${head}
+    <div class="slider-box">
+      <div class="slider-val"><span id="sval"></span>${q.unit ? ` <small>${esc(q.unit)}</small>` : ''}</div>
+      <input type="range" id="slider" min="${min}" max="${max}" step="${step}" value="${snap((min + max) / 2)}" aria-label="Ta valeur">
+      <div class="slider-scale"><span>${show(min)}</span><span>${show(max)}</span></div>
+      <div class="slider-btns"><button type="button" data-d="-1" aria-label="Moins">−</button><button type="button" data-d="1" aria-label="Plus">+</button></div>
+    </div>
+    <button class="go" id="validate">Valider</button>
+    <div class="err" id="err"></div>`;
+  const slider = $('#slider');
+  const update = () => {
+    const v = Number(slider.value);
+    $('#sval').textContent = show(v);
+    slider.style.setProperty('--fill', `${(100 * (v - min)) / (max - min)}%`);
+  };
+  slider.oninput = update;
+  update();
+  // −/+ : un cran par appui, et défilement de plus en plus rapide si on garde le doigt dessus
+  document.querySelectorAll('[data-d]').forEach((b) => {
+    let timer = null;
+    const nudge = () => { slider.value = snap(Number(slider.value) + Number(b.dataset.d) * step); update(); };
+    const stop = () => { clearTimeout(timer); timer = null; };
+    b.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      nudge();
+      let delay = 350;
+      const repeat = () => { nudge(); delay = Math.max(30, delay * 0.8); timer = setTimeout(repeat, delay); };
+      timer = setTimeout(repeat, delay);
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => b.addEventListener(ev, stop));
+  });
+  $('#validate').onclick = () => send(Number(slider.value));
 }
 
 function send(value) {

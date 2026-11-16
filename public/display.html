@@ -438,7 +438,9 @@ function renderQuestion(s) {
       + choicesHtml(q);
   } else if (q.type === 'map') body = `<div class="map-wrap" id="qmap"></div><div class="prompt" style="margin-top:1.5vh;font-size:3vh">📍 Placez votre repère sur la carte de votre téléphone</div>`;
   else if (q.type === 'text') body = `<div class="prompt"><span class="icon">⌨️</span>Écrivez votre réponse sur votre téléphone</div>`;
-  else body = `<div class="prompt"><span class="icon">🔢</span>Entrez une valeur${q.unit ? ` (en ${esc(q.unit)})` : ''} sur votre téléphone</div>`;
+  else body = q.slider
+    ? `<div class="prompt"><span class="icon">🎚</span>Bougez le curseur sur votre téléphone<br><small style="opacity:.8">entre ${fmt(q.slider.min)} et ${fmt(q.slider.max)}${q.unit ? ' ' + esc(q.unit) : ''}</small></div>`
+    : `<div class="prompt"><span class="icon">🔢</span>Entrez une valeur${q.unit ? ` (en ${esc(q.unit)})` : ''} sur votre téléphone</div>`;
   $('#stage').innerHTML = `<div class="fade">
     <div class="qrow">${timerHtml(q)}
       <div class="qnum">${q.points} points</div>

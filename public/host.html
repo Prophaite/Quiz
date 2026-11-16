@@ -309,6 +309,7 @@
 
 <script src="/common.js"></script>
 <script src="/xlsx-import.js"></script>
+<script src="/slider-range.js"></script>
 <script>
 const { esc, COLORS, SHAPES, TYPE_LABELS, fmt } = Q;
 // Mode dev de la page de gestion (/host?dev=1, ouvert par Lancer-Quiz-Dev.bat) :
@@ -457,6 +458,17 @@ async function initEditorMaps() {
   }
 }
 
+// Plage du curseur que verront les joueurs (automatique ou fixée), avec les éventuels problèmes
+function sliderHint(q) {
+  const r = QSlider.forQuestion(q);
+  const u = q.unit ? ' ' + esc(q.unit) : '';
+  let h = `🎚 Les joueurs répondent avec un curseur de <b>${fmt(r.min)}${u}</b> à <b>${fmt(r.max)}${u}</b> (pas de ${fmt(r.step)})`;
+  h += r.auto ? ', calculé automatiquement d’après la valeur. Laissez min et max vides, ou fixez-les vous-même.' : '.';
+  if (!r.contains) h += ' <b style="color:var(--ko)">⚠ La valeur exacte est en dehors de cette plage !</b>';
+  else if (!r.exact) h += ' <span style="color:var(--warn)">⚠ Le curseur ne permet pas de tomber pile sur la valeur : prévoyez une tolérance ou le mode « le plus proche ».</span>';
+  return h;
+}
+
 function questionCard(q, i) {
   let specific = '';
   if (q.type === 'choice') {
@@ -519,7 +531,10 @@ function questionCard(q, i) {
           <option value="tolerance" ${q.mode === 'tolerance' ? 'selected' : ''}>Uniquement dans la tolérance</option>
         </select>
       </label>
-    </div></div>`;
+      <label class="field">Curseur : min<input type="number" step="any" data-q="${i}" data-f="sliderMin" value="${q.sliderMin ?? ''}" placeholder="auto"></label>
+      <label class="field">Curseur : max<input type="number" step="any" data-q="${i}" data-f="sliderMax" value="${q.sliderMax ?? ''}" placeholder="auto"></label>
+    </div>
+    <p class="hint" data-sliderhint="${i}">${sliderHint(q)}</p></div>`;
   }
   return `<div class="qcard${q.trap ? ' trap' : ''}">
     <div class="qcard-head">
@@ -560,12 +575,18 @@ qbox.addEventListener('input', (e) => {
     else if (f === 'fuzzy') q.fuzzy = el.checked;
     else if (f === 'trap') { q.trap = el.checked; el.closest('.qcard').classList.toggle('trap', el.checked); }
     else if (f === 'multimode') return; // géré par l'événement « change »
+    else if (f === 'sliderMin' || f === 'sliderMax') q[f] = el.value === '' ? null : Number(el.value); // vide = automatique
     else if (['points', 'time', 'value', 'tolerance', 'maxKm'].includes(f)) {
       q[f] = el.value === '' ? 0 : Number(el.value);
       if (q.type === 'map') editorMaps.get(q.id)?.refresh();
     }
     else q[f] = el.value;
   } else return;
+  // Valeur à trouver : la plage du curseur affichée suit la valeur, la tolérance, l'unité et les bornes
+  if (q.type === 'number') {
+    const hint = qbox.querySelector(`[data-sliderhint="${el.dataset.q}"]`);
+    if (hint) hint.innerHTML = sliderHint(q);
+  }
   scheduleSave();
 });
 qbox.addEventListener('change', (e) => {

@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const QR = require('./qr');
+const QSlider = require('./public/slider-range.js'); // plage du curseur des questions « Valeur à trouver »
 
 const PORT = Number(process.env.PORT) || 3000;
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -251,6 +252,10 @@ function cleanQuestion(q = {}) {
     out.tolerance = Math.abs(num(q.tolerance, -1e15, 1e15, 0));
     out.mode = q.mode === 'closest' ? 'closest' : 'tolerance';
     out.unit = String(q.unit ?? '').slice(0, 30);
+    // Bornes du curseur fixées à la main (vide = calcul automatique selon la valeur)
+    const bound = (x) => (x === null || x === undefined || x === '' || !Number.isFinite(Number(x)) ? null : num(x, -1e15, 1e15, 0));
+    out.sliderMin = bound(q.sliderMin);
+    out.sliderMax = bound(q.sliderMax);
   }
   return out;
 }
@@ -1297,6 +1302,8 @@ function publicQuestion(room, withImage) {
     multi: q.type === 'choice' && !!q.multi,
     pick: q.type === 'choice' && q.multi ? q.choices.filter((c) => c.correct).length : undefined,
     view: q.type === 'map' ? q.view : undefined,
+    // Curseur : seulement les bornes et le pas (jamais la réponse)
+    slider: q.type === 'number' ? (({ min, max, step }) => ({ min, max, step }))(QSlider.forQuestion(q)) : undefined,
   };
 }
 
