@@ -229,6 +229,16 @@ window.Q = (() => {
     return `<div class="simg"><img src="${esc(im.src)}" style="${style}" alt="" draggable="false"></div>`;
   }
 
-  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage, smallSize };
+  /*
+   * Images du podium à la fin d'un tournoi, sur le téléphone de l'équipe (pas sur la projection).
+   * Une ligne par place : déposez l'image dans public/images/podium/ et ajoutez-la ici.
+   */
+  const PODIUM_IMAGES = {
+    3: '/images/podium/3.webp',
+  };
+  const podiumImage = (rank, cls = '') =>
+    PODIUM_IMAGES[rank] ? `<img class="${cls}" src="${esc(PODIUM_IMAGES[rank])}" alt="" draggable="false">` : '';
+
+  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage, smallSize, podiumImage };
 
 })();

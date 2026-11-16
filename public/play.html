@@ -136,6 +136,7 @@
   .th-choices .choice.dim { opacity: .35; }
   .th-choices .choice.good { outline: 4px solid #fff; outline-offset: -4px; }
   .th-choices .choice.given::after { content: 'Réponse donnée'; position: absolute; top: 6px; right: 8px; font-size: 11px; background: #fff; color: #2b1670; padding: 1px 6px; border-radius: 99px; }
+  .podium-img { display: block; max-width: 100%; max-height: 60vh; margin: 0 auto; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
   .link { background: none; border: 0; color: #fff; opacity: .7; font: inherit; text-decoration: underline; cursor: pointer; margin-top: 8px; }
 </style>
 </head>
@@ -323,6 +324,7 @@ function render() {
     if (s.busted) document.body.className = 'ko';
     m.innerHTML = `${s.busted ? '<div class="busted">🚨 Tricheur démasqué !<small>Ta triche a été découverte : chaque triche prise a remis tes points à 0.</small></div>' : ''}<div class="center"><div class="big-icon">${s.busted ? '🙈' : medal}</div><h1>Partie terminée !</h1>
       <div class="rank" style="margin-top:10px">${ordinal(s.rank)}</div><p>sur ${s.playerCount}</p></div>
+      ${s.tour && !s.busted ? Q.podiumImage(s.rank, 'podium-img') : ''}
       ${boardHtml(s, { title: 'Classement final' })}
       <p class="center">Merci d’avoir joué !</p>`;
     scrollToMe();
