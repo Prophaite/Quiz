@@ -215,14 +215,20 @@ window.Q = (() => {
    * small : minuscule au départ, pleine taille à la fin.
    * Le cadre (.simg) doit avoir une taille fixée par la page.
    */
+  // Taille (en %) de l'effet « toute petite » : elle est multipliée par le même facteur à chaque
+  // bonne réponse (5 % → 100 %). Elle reste donc petite au début, quand une image deviendrait
+  // vite reconnaissable, et grandit surtout à la fin.
+  const SMALL_MIN = 5;
+  const smallSize = (f) => Math.round(SMALL_MIN * (100 / SMALL_MIN) ** f * 10) / 10;
   function stageImage(im, maxBlur = 40) {
     const f = im.levels ? Math.max(0, Math.min(1, im.level / im.levels)) : 1;
+    const size = smallSize(f);
     const style = im.effect === 'small'
-      ? `width:${Math.round(5 + 95 * f)}%;height:${Math.round(5 + 95 * f)}%`
+      ? `width:${size}%;height:${size}%`
       : `filter:blur(${Math.round((1 - f) * maxBlur)}px)`;
     return `<div class="simg"><img src="${esc(im.src)}" style="${style}" alt="" draggable="false"></div>`;
   }
 
-  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage };
+  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage, smallSize };
 
 })();

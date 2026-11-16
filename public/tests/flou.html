@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz Live — Test de l’effet d’image</title>
+<style>
+  :root { --bg1: #24135f; --bg2: #4a1f8a; --card: rgba(255,255,255,.1); --line: rgba(255,255,255,.18); --muted: rgba(255,255,255,.7); }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #fff; min-height: 100vh;
+    background: radial-gradient(circle at 15% 10%, #5b2bb5 0%, transparent 45%), radial-gradient(circle at 90% 90%, #1d4fb8 0%, transparent 50%), linear-gradient(135deg, var(--bg1), var(--bg2)); background-attachment: fixed; }
+  main { max-width: 1200px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { margin: 0 0 4px; font-size: 26px; }
+  h2 { margin: 0 0 10px; font-size: 16px; }
+  .sub { color: var(--muted); margin: 0 0 18px; font-size: 14px; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; align-items: end; }
+  label.f { display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 700; color: var(--muted); }
+  select, input[type=number], input[type=text] { font: inherit; font-size: 15px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0,0,0,.25); color: #fff; width: 100%; }
+  select option { color: #000; }
+  .seg { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .seg button { flex: 1; font: inherit; font-size: 14px; font-weight: 700; padding: 8px; border: 0; background: transparent; color: #fff; cursor: pointer; }
+  .seg button.on { background: #fff; color: #2b1670; }
+  .level-row { display: flex; align-items: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .level-row input[type=range] { flex: 1; min-width: 160px; accent-color: #ffd34d; }
+  .btn { font: inherit; font-size: 14px; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 0; background: #fff; color: #2b1670; cursor: pointer; }
+  .btn.y { background: #ffd34d; color: #3a2a00; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  /* Largeur fixe : sinon le texte change de taille avec le niveau et la barre bouge */
+  .lvl { font-weight: 800; font-size: 18px; flex: 0 0 270px; font-variant-numeric: tabular-nums; }
+  .lvl small { display: block; font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  .file { font-size: 13px; color: var(--muted); }
+  .views { display: grid; grid-template-columns: 1fr 300px; gap: 16px; margin-top: 16px; }
+  @media (max-width: 760px) { .views { grid-template-columns: 1fr; } }
+  .view h2 small { font-weight: 600; color: var(--muted); }
+  /* Cadre « à l'échelle » : on dessine à la vraie taille puis on réduit, pour que le flou soit fidèle */
+  .frame { position: relative; overflow: hidden; border-radius: 12px; width: 100%; }
+  .views > *, .strip > * { min-width: 0; }
+  .frame > .inner { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+  /* Mêmes règles que la projection et le téléphone */
+  .simg { display: flex; align-items: center; justify-content: center; overflow: hidden; background: rgba(0,0,0,.25); width: 100%; height: 100%; }
+  .simg img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .anim .simg img { transition: filter 1s ease, width 1s ease, height 1s ease; }
+  .strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 10px; }
+  .strip figure { margin: 0; cursor: pointer; }
+  .strip figure.cur .frame { outline: 3px solid #ffd34d; }
+  .strip figcaption { font-size: 12px; text-align: center; margin-top: 4px; color: var(--muted); }
+  .msg { margin-top: 14px; padding: 10px 14px; border-radius: 10px; background: #fff4e5; color: #5a3a00; font-size: 14px; line-height: 1.45; }
+  .msg code { word-break: break-all; font-size: 13px; }
+  .note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🔍 Test de l’effet d’image</h1>
+  <p class="sub">Voyez comment l’image de l’étape Images devient plus nette à chaque bonne réponse, sur la projection et sur le téléphone. Le rendu utilise exactement le même calcul que le jeu.</p>
+
+  <div class="panel">
+    <div class="controls">
+      <label class="f">Image
+        <select id="pick"></select>
+      </label>
+      <label class="f">Ou adresse d’une image
+        <input type="text" id="url" placeholder="https://…" autocomplete="off" spellcheck="false">
+      </label>
+      <label class="f">Ou une image de votre ordinateur
+        <input type="file" id="file" accept="image/*" class="file">
+      </label>
+      <div class="f"><span>Effet</span>
+        <div class="seg" id="effect"><button data-v="blur">Floutée</button><button data-v="small">Toute petite</button></div>
+      </div>
+      <label class="f">Bonnes réponses pour une image nette
+        <input type="number" id="levels" min="1" max="20" value="5">
+      </label>
+    </div>
+    <div class="msg" id="msg" hidden></div>
+    <div class="level-row">
+      <button class="btn" id="minus">−</button>
+      <input type="range" id="level" min="0" max="5" value="0">
+      <button class="btn" id="plus">+1 bonne réponse</button>
+      <div class="lvl" id="lvlText"></div>
+      <button class="btn y" id="play">▶ Animation</button>
+    </div>
+  </div>
+
+  <div class="views">
+    <section class="panel view">
+      <h2>📺 Écran de projection <small>(propositions d’image : flou max 70 px, écran 1920×1080 réduit ici)</small></h2>
+      <div class="frame anim" id="tv"></div>
+    </section>
+    <section class="panel view">
+      <h2>📱 Téléphone <small>(flou max 30 px)</small></h2>
+      <div class="frame anim" id="phone"></div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:16px">
+    <h2>Tous les niveaux sur la projection <small style="font-weight:600;color:var(--muted)">(cliquez pour choisir)</small></h2>
+    <div class="strip" id="strip"></div>
+    <p class="note">Sur la projection, c’est le niveau de l’équipe la <b>moins avancée</b> qui s’affiche ; chaque téléphone montre le niveau de son équipe. Une fois l’image trouvée, elle s’affiche nette partout.</p>
+  </section>
+</main>
+<script src="../common.js"></script>
+<script>
+const $ = (s) => document.querySelector(s);
+const TEST = ['france', 'italie', 'allemagne', 'belgique', 'japon', 'suisse', 'suede', 'espagne', 'grece', 'bresil',
+  'stop', 'sens-interdit', 'cedez-le-passage', 'wifi', 'smiley', 'note-de-musique', 'ampoule', 'coeur'];
+// Taille réelle de la zone d'image : projection 1920×1080 (62vh de haut), téléphone ~375×812 (42vh)
+const TV = { w: 1240, h: 670, blur: 70 };
+const PHONE = { w: 343, h: 341, blur: 30 };
+
+// Réglages facultatifs dans l'adresse de la page : ?levels=5&effect=small#imgs=["https://…", …]
+const qs = new URLSearchParams(location.search);
+let fromHost = [];
+try { fromHost = JSON.parse(decodeURIComponent((location.hash.match(/imgs=(.*)$/) || [])[1] || '[]')); } catch { fromHost = []; }
+if (!Array.isArray(fromHost)) fromHost = [];
+fromHost = fromHost.filter((u) => typeof u === 'string' && u.trim());
+const state = {
+  src: '',
+  effect: qs.get('effect') === 'small' ? 'small' : 'blur',
+  levels: Math.max(1, Math.min(20, Number(qs.get('levels')) || 5)),
+  level: 0,
+};
+
+const opts = [
+  ...fromHost.map((u, i) => ({ v: u, t: `Image ${i + 1} (adresse de la page)` })),
+  ...TEST.map((n) => ({ v: `../images/test/${n}.svg`, t: `Test : ${n.replace(/-/g, ' ')}` })),
+];
+$('#pick').innerHTML = opts.map((o) => `<option value="${Q.esc(o.v)}">${Q.esc(o.t)}</option>`).join('');
+state.src = opts[0].v;
+
+// Dessine la zone d'image à sa vraie taille, puis la réduit pour tenir dans le cadre
+// maxW : largeur maximale (le téléphone n'est jamais affiché plus grand que nature)
+function frame(box, spec, level, maxW) {
+  box.style.aspectRatio = `${spec.w} / ${spec.h}`;
+  box.style.maxWidth = maxW ? `${maxW}px` : '';
+  const scale = box.clientWidth / spec.w;
+  const html = Q.stageImage({ src: state.src, level, levels: state.levels, effect: state.effect }, spec.blur);
+  let inner = box.firstElementChild;
+  if (!inner) { inner = document.createElement('div'); inner.className = 'inner'; box.append(inner); }
+  inner.style.cssText = `width:${spec.w}px;height:${spec.h}px;transform:scale(${scale})`;
+  const img = inner.querySelector('img');
+  // On garde la même balise <img> pour que la transition (1 s) se voie, comme dans le jeu
+  if (img && img.getAttribute('src') === state.src) {
+    img.setAttribute('style', html.match(/style="([^"]*)"/)[1]);
+  } else inner.innerHTML = html;
+}
+
+function render() {
+  const L = state.levels;
+  checkImage(state.src);
+  state.level = Math.max(0, Math.min(L, state.level));
+  $('#level').max = L;
+  $('#level').value = state.level;
+  $('#levels').value = L;
+  $('#minus').disabled = state.level <= 0;
+  $('#plus').disabled = state.level >= L;
+  const f = state.level / L;
+  const detail = state.effect === 'small'
+    ? `taille ${String(Q.smallSize(f)).replace('.', ',')} %`
+    : `flou ${Math.round((1 - f) * TV.blur)} px projection · ${Math.round((1 - f) * PHONE.blur)} px téléphone`;
+  $('#lvlText').innerHTML = `Netteté ${state.level}/${L}<small>${state.level === L ? 'image nette' : detail}</small>`;
+  document.querySelectorAll('#effect button').forEach((b) => b.classList.toggle('on', b.dataset.v === state.effect));
+  const tvBox = $('#tv'), phoneBox = $('#phone');
+  frame(tvBox, TV, state.level);
+  frame(phoneBox, PHONE, state.level, PHONE.w);
+  // Bande de tous les niveaux (sans animation)
+  const strip = $('#strip');
+  if (strip.childElementCount !== L + 1 || strip.dataset.key !== `${state.src}|${state.effect}|${L}`) {
+    strip.dataset.key = `${state.src}|${state.effect}|${L}`;
+    strip.innerHTML = Array.from({ length: L + 1 }, (_, i) => `<figure data-l="${i}"><div class="frame"></div><figcaption>${i === 0 ? 'Départ' : i === L ? `${i} — nette` : `${i} bonne${i > 1 ? 's' : ''} réponse${i > 1 ? 's' : ''}`}</figcaption></figure>`).join('');
+    strip.querySelectorAll('figure').forEach((fig) => {
+      fig.onclick = () => { stop(); state.level = Number(fig.dataset.l); render(); };
+    });
+  }
+  strip.querySelectorAll('figure').forEach((fig) => {
+    const box = fig.firstElementChild;
+    frame(box, TV, Number(fig.dataset.l));
+    fig.classList.toggle('cur', Number(fig.dataset.l) === state.level);
+  });
+}
+
+let timer = null;
+function stop() { clearInterval(timer); timer = null; $('#play').textContent = '▶ Animation'; }
+$('#play').onclick = () => {
+  if (timer) return stop();
+  state.level = 0;
+  render();
+  $('#play').textContent = '⏸ Arrêter';
+  timer = setInterval(() => {
+    if (state.level >= state.levels) return stop();
+    state.level++;
+    render();
+  }, 1600);
+};
+$('#minus').onclick = () => { stop(); state.level--; render(); };
+$('#plus').onclick = () => { stop(); state.level++; render(); };
+$('#level').oninput = (e) => { stop(); state.level = Number(e.target.value); render(); };
+$('#levels').onchange = (e) => { state.levels = Math.max(1, Math.min(20, Number(e.target.value) || 1)); render(); };
+document.querySelectorAll('#effect button').forEach((b) => (b.onclick = () => { state.effect = b.dataset.v; render(); }));
+// Une seule source à la fois : choisir l'une efface les deux autres
+$('#pick').onchange = (e) => { state.src = e.target.value; $('#url').value = ''; $('#file').value = ''; render(); };
+// L'image suit ce qui est tapé ou collé (sans attendre Entrée)
+let urlTimer = null;
+$('#url').oninput = (e) => {
+  clearTimeout(urlTimer);
+  urlTimer = setTimeout(() => {
+    const v = e.target.value.trim();
+    if (v) $('#file').value = '';
+    state.src = v || $('#pick').value;
+    render();
+  }, 300);
+};
+// Image impossible à charger : on le dit, au lieu d'un cadre vide
+const msg = $('#msg');
+let checking = '';
+function checkImage(src) {
+  if (src === checking) return;
+  checking = src;
+  msg.hidden = true;
+  const probe = new Image();
+  probe.onload = () => { if (checking === src) msg.hidden = true; };
+  probe.onerror = () => {
+    if (checking !== src) return;
+    msg.hidden = false;
+    msg.innerHTML = `⚠ Impossible d’afficher cette image : <code>${Q.esc(src)}</code><br>
+      Vérifiez que l’adresse mène <b>directement à l’image</b> (clic droit sur l’image → « Copier l’adresse de l’image » ; elle finit souvent par .jpg, .png, .webp ou .svg), et pas à la page web qui la contient.
+      Certains sites interdisent aussi d’afficher leurs images ailleurs : enregistrez-la alors sur votre ordinateur et choisissez-la avec « Ou une image de votre ordinateur ».`;
+  };
+  probe.src = src;
+}
+$('#file').onchange = (e) => {
+  const f = e.target.files[0];
+  if (f) { $('#url').value = ''; state.src = URL.createObjectURL(f); render(); }
+};
+addEventListener('resize', render);
+render();
+</script>
+</body>
+</html>

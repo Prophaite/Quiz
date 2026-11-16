@@ -183,7 +183,7 @@ Un tournoi enchaîne plusieurs **étapes** ; à la fin de chacune, les **N premi
 | 🗂 **Thèmes** | **un quiz par thème** (le titre du quiz = le nom du thème), questions à choix multiple avec au moins 4 réponses dont une bonne | L'équipe dont c'est le tour joue sur son téléphone (ou à l'oral, l'animateur clique pour elle). Voir ci-dessous. |
 | 🖼 **Images** | un **quiz d'images** (une question « Mot / nom » par image : l'adresse de l'image dans le champ Image, les noms acceptés comme réponses) + un quiz de **questions** | Voir ci-dessous. |
 
-Réglages par étape : nombre de qualifiés ; pour Thèmes, le nombre de questions par équipe et les points Duo / Carré / Cash (25 / 50 / 100 par défaut) ; pour Images, le nombre d'images pour gagner (3), le nombre de bonnes réponses pour une image complètement nette (5) et l'effet (image floutée ou toute petite).
+Réglages par étape : nombre de qualifiés ; pour Thèmes, le nombre de questions par équipe et les points Duo / Carré / Cash (25 / 50 / 100 par défaut) ; pour Images, le nombre d'images pour gagner (3), le nombre de bonnes réponses pour une image complètement nette (5) et l'effet : image floutée, ou toute petite (sa taille est multipliée par le même facteur à chaque bonne réponse, de 5 % à 100 % : elle reste petite au début et grandit surtout à la fin).
 
 **Lancer** : onglet Partie → Type de partie « 🏆 Tournoi ». Chaque étape commence par un écran de présentation (« Lancer l'étape ») et se termine par le classement avec les qualifiés **pré-cochés** : cochez / décochez pour départager des ex æquo ou repêcher une équipe, puis « Étape suivante ». Les scores repartent de zéro à chaque étape. Les équipes éliminées voient « Tu as été éliminé » et suivent la suite à l'écran ; une équipe qui rejoint après le début du tournoi regarde seulement. La dernière étape donne le podium final.
 
@@ -192,6 +192,14 @@ Réglages par étape : nombre de qualifiés ; pour Thèmes, le nombre de questio
 **Étape Images** : une seule image pour toutes les équipes. Des questions sont posées sur les téléphones (comme un quiz) ; **chaque bonne réponse rend l'image plus nette sur le téléphone de l'équipe**. L'écran de projection montre l'image avec la netteté **la plus basse** des équipes (elle ne devient plus nette que quand toutes les équipes ont progressé), ainsi que le nombre de bonnes réponses et d'images trouvées de chaque équipe. Après chaque question (« 🖼 Propositions d'image »), chaque équipe peut proposer un nom sur son téléphone (une proposition par question) ou à l'oral : la page de gestion liste les propositions de la plus rapide à la plus lente, signale la plus rapide juste, et vous attribuez l'image d'un clic (« Attribuer », ou le bouton de l'équipe pour une réponse à l'oral). Seule l'équipe la plus rapide gagne l'image ; on passe alors à l'image suivante (netteté remise à zéro). La première équipe à atteindre l'objectif gagne. « Personne ne trouve : dévoiler » passe l'image sans l'attribuer ; « Annuler l'attribution » corrige une erreur. Si toutes les questions ont été posées, elles recommencent au début.
 
 Les images passent par le serveur : les téléphones ne voient pas l'adresse d'origine (souvent parlante, comme `tour-eiffel.jpg`). Une image peut être une adresse Internet ou un fichier déposé dans `public` (ex. `/images/tour.jpg`).
+
+## Pages de test
+
+Le dossier `public/tests/` regroupe des pages pour vérifier une fonctionnalité sans lancer de partie. Elles ne sont reliées à aucune page de l'appli et n'ont pas besoin du serveur : ouvrez simplement le fichier dans votre navigateur (double-clic). Elles marchent aussi avec le serveur lancé, à l'adresse /tests/….
+
+| Page | Ce qu'elle montre |
+|---|---|
+| `public/tests/flou.html` | Étape Images : l'image floutée ou toute petite à chaque niveau de netteté, sur la projection et sur le téléphone, avec le même calcul que le jeu. Une image peut venir d'une adresse internet ou d'un fichier de l'ordinateur. |
 
 ## Données
 
