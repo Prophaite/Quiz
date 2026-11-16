@@ -163,7 +163,7 @@ Quand **un seul joueur** a bien répondu à une question, son téléphone lui pr
 
 ## Pendant la partie
 
-Démarrer → la question s'affiche (fermeture automatique à la fin du temps ou quand tout le monde a répondu) → Révéler → Classement → Question suivante → … → podium final.
+Démarrer → la question s'affiche (fermeture automatique à la fin du temps ou quand tout le monde a répondu ; un joueur exclu, ou dont le téléphone est déconnecté depuis plus de 6 secondes, n'est plus attendu, alors qu'une courte mise en veille ne fait pas passer à la réponse) → Révéler → Classement → Question suivante → … → podium final.
 
 **⏱ Points selon la rapidité** (case cochée par défaut, à la création du salon et dans les réglages de la partie) : sur les questions avec un temps limité, le **premier** qui répond correctement (ou en partie) a tous les points, puis c'est dégressif selon son retard sur lui, jusqu'à 50 % à la fin du temps. Case décochée, ou question sans temps limité : toutes les bonnes réponses valent la même chose.
 

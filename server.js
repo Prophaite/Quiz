@@ -848,6 +848,16 @@ function maybeAutoClose(room) {
   return true;
 }
 
+// Un téléphone vient de se déconnecter : s'il n'est pas revenu après le délai de grâce, on le
+// considère parti et, si tous ceux qui restent ont répondu, on passe à la réponse.
+const GRACE = 6500; // un téléphone qui se met en veille un instant n'est pas considéré parti
+function recheckAfterLeave(room, p) {
+  setTimeout(() => {
+    if (!rooms.has(room.code) || (p && room.players.has(p.id) && playerConnected(p))) return;
+    if (!maybeAutoClose(room)) broadcast(room); // l'animateur voit le joueur déconnecté
+  }, GRACE).unref();
+}
+
 function closeQuestion(room, notify) {
   if (room.state !== 'question') return;
   clearTimeout(room.timer);
@@ -1579,7 +1589,8 @@ function openPoll(req, res, room, role, pid, since) {
       p.polls = Math.max(0, p.polls - 1);
       p.lastPoll = Date.now();
       // Si la page ne revient pas (téléphone verrouillé, onglet fermé), l'animateur le voit déconnecté
-      setTimeout(() => { if (room.players.has(p.id) && !playerConnected(p)) broadcast(room); }, 6500).unref();
+      // et, si tous les autres ont répondu, on passe à la réponse
+      recheckAfterLeave(room, p);
     }
     if (!w.done) { w.done = true; clearTimeout(w.timer); room.waiters.delete(w); }
   });
@@ -1634,7 +1645,10 @@ function openStream(req, res, room, role, pid) {
     const pl = pid && room.players.get(pid);
     if (pl) {
       pl.streams = Math.max(0, pl.streams - 1);
-      if (pl.streams === 0) broadcast(room);
+      if (pl.streams === 0) {
+        pl.lastPoll = Date.now(); // délai de grâce avant de le considérer parti
+        recheckAfterLeave(room, pl);
+      }
     }
   });
 }
@@ -1737,6 +1751,7 @@ function quizAction(room, action, payload) {
       room.players.delete(p.id);
       room.answers.delete(p.id);
       room.kicked.add(p.id);
+      maybeAutoClose(room); // c'était peut-être le dernier à ne pas avoir répondu
       for (const w of [...room.waiters]) if (w.pid === p.id) answerPoll(room, w);
       for (const s of room.streams) {
         if (s.pid === p.id) {
@@ -1761,6 +1776,7 @@ function quizAction(room, action, payload) {
         // Désactivée : on retire les propositions en cours et les triches acceptées pas encore jouées
         if (!room.settings.luck) for (const p of room.players.values()) { p.offer = false; p.cheatNext = false; }
       }
+      maybeAutoClose(room); // fermeture auto activée alors que tout le monde a déjà répondu
       break;
     case 'undev': {
       // Retire définitivement le mode test (#dev) à un joueur
