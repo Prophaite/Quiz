@@ -1062,6 +1062,20 @@ function applyImLevels(room) {
   }
 }
 
+// Moments de l'étape Images où l'image est en jeu (elle peut être attribuée)
+const IM_PLAY_STATES = ['question', 'closed', 'reveal', 'guess'];
+function imAwardTo(room, p) {
+  const im = room.im;
+  // Attribuée pendant une question : on ferme les réponses ; « Annuler » y ramène, réponses fermées
+  if (room.state === 'question') closeQuestion(room);
+  im.backTo = room.state;
+  im.winner = p.id;
+  p.imWins = (p.imWins || 0) + 1;
+  im.found.push({ img: im.img, by: p.id });
+  im.over = p.imWins >= stage(room).wins;
+  room.state = 'imFound';
+}
+
 function imAction(room, action, payload) {
   const im = room.im;
   const st = stage(room);
@@ -1078,14 +1092,12 @@ function imAction(room, action, payload) {
       if (room.state === 'guess') startImQuestion(room);
       return true;
     case 'imAward': {
-      if (room.state !== 'guess') fail('Les propositions ne sont pas ouvertes');
+      // À tout moment de l'étape (pendant une question, après, ou pendant les propositions) :
+      // une équipe a trouvé à l'oral, ou l'animateur valide une proposition jugée fausse
+      if (!IM_PLAY_STATES.includes(room.state)) fail('Pas d’image en jeu');
       const p = room.players.get(payload.playerId);
       if (!p || p.out) fail('Équipe introuvable');
-      im.winner = p.id;
-      p.imWins = (p.imWins || 0) + 1;
-      im.found.push({ img: im.img, by: p.id });
-      im.over = p.imWins >= st.wins;
-      room.state = 'imFound';
+      imAwardTo(room, p);
       return true;
     }
     case 'imSkip': // personne ne trouve : on dévoile et on passe à l'image suivante
@@ -1102,7 +1114,7 @@ function imAction(room, action, payload) {
       im.found.pop();
       im.winner = null;
       im.over = false;
-      room.state = 'guess';
+      room.state = im.backTo || 'guess';
       return true;
     }
     case 'imNextImage':
@@ -1132,7 +1144,14 @@ function playerGuess(body) {
   else {
     const text = String(body.text ?? '').trim().slice(0, 100);
     if (!text) fail('Réponse vide');
-    room.im.guesses.set(p.id, { text, at: Date.now(), ok: textMatches(normalize(text), imImage(room)) });
+    const ok = textMatches(normalize(text), imImage(room));
+    room.im.guesses.set(p.id, { text, at: Date.now(), ok });
+    // Proposition juste : la plus rapide gagne l'image tout de suite (l'animateur peut annuler)
+    if (ok) {
+      imAwardTo(room, p);
+      broadcast(room);
+      return { ok: true, won: true };
+    }
   }
   broadcast(room, p);
   return { ok: true };

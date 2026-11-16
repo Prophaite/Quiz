@@ -1219,8 +1219,11 @@ function imagesPanel(s) {
       ${im.guesses.map((g) => `<div class="answer-line ${g.pass ? '' : g.ok ? 'ok' : 'ko'} ${g === firstOk ? 'fastest' : ''}">
         <span class="val">${g.pass ? '<span class="muted">passe</span>' : esc(g.text)}</span>
         <span class="who">${esc(g.name)} · ${(g.ms / 1000).toFixed(1)} s${g === firstOk ? ' · <b>la plus rapide juste</b>' : ''}</span>
-        ${g.pass ? '' : btn('🏆 Attribuer', 'imAward', g.ok ? 'small primary' : 'small', { playerId: g.playerId })}</div>`).join('') || '<p class="muted">Pas encore de proposition sur les téléphones.</p>'}
-      <h3>Réponse donnée à l’oral</h3>
+        ${g.pass ? '' : btn('🏆 Attribuer', 'imAward', g.ok ? 'small primary' : 'small', { playerId: g.playerId })}</div>`).join('') || '<p class="muted">Pas encore de proposition sur les téléphones. Une proposition juste fait gagner l’image tout de suite.</p>'}`;
+  }
+  // Une équipe trouve à l'oral : attribution possible à tout moment de l'étape
+  if (s.state !== 'imFound') {
+    h += `<h3>Image trouvée à l’oral</h3>
       <div class="row">${s.ranking.map((p) => btn(`🏆 ${esc(p.name)}`, 'imAward', 'small', { playerId: p.id })).join('')}</div>`;
   }
   h += `<table class="teams"><tr><th>Équipe</th><th>Bonnes réponses</th><th>Netteté</th><th>Images</th>${s.state === 'guess' ? '<th>Proposé</th>' : ''}</tr>
