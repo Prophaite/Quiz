@@ -59,7 +59,9 @@
         "value": 1969,
         "tolerance": 0,
         "mode": "tolerance",
-        "unit": ""
+        "unit": "",
+        "sliderMin": null,
+        "sliderMax": null
       },
       {
         "id": "93e8f103365d",
@@ -93,7 +95,9 @@
         "value": 330,
         "tolerance": 15,
         "mode": "tolerance",
-        "unit": "m"
+        "unit": "m",
+        "sliderMin": null,
+        "sliderMax": null
       },
       {
         "id": "demo-carte-lyon",
@@ -116,7 +120,7 @@
         }
       }
     ],
-    "updatedAt": 1794579281173
+    "updatedAt": 1794820625481
   },
   {
     "id": "gctfbh6tlzmlnbn7",
@@ -178,7 +182,9 @@
         "value": 1969,
         "tolerance": 0,
         "mode": "tolerance",
-        "unit": ""
+        "unit": "",
+        "sliderMin": null,
+        "sliderMax": null
       },
       {
         "id": "56938f85cb3f",
@@ -212,7 +218,9 @@
         "value": 330,
         "tolerance": 15,
         "mode": "tolerance",
-        "unit": "m"
+        "unit": "m",
+        "sliderMin": null,
+        "sliderMax": null
       },
       {
         "id": "0ebf4f8c2e6d",
@@ -485,7 +493,9 @@
         "value": 3,
         "tolerance": 0,
         "mode": "tolerance",
-        "unit": ""
+        "unit": "",
+        "sliderMin": null,
+        "sliderMax": null
       },
       {
         "id": "67965072780b",
@@ -574,7 +584,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1794579281173
+    "updatedAt": 1794820625481
   },
   {
     "id": "deee6207043f",
@@ -588,8 +598,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "7",
@@ -611,7 +619,9 @@
             "text": "9",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "47bb66f9007f",
@@ -621,8 +631,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Badminton",
@@ -644,7 +652,9 @@
             "text": "Tennis",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "22df1a8a56db",
@@ -654,8 +664,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Rome",
@@ -677,7 +685,9 @@
             "text": "Los Angeles",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "b66df7bd4978",
@@ -687,8 +697,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "3",
@@ -710,10 +718,12 @@
             "text": "4",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "7a747af59474",
@@ -727,8 +737,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Ridley Scott",
@@ -750,7 +758,9 @@
             "text": "Steven Spielberg",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "4ccb08bc7b66",
@@ -760,8 +770,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Rafiki",
@@ -783,7 +791,9 @@
             "text": "Mufasa",
             "correct": true
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "417ade599c82",
@@ -793,8 +803,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Brad Pitt",
@@ -816,7 +824,9 @@
             "text": "Leonardo DiCaprio",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "a6cc5723e6bf",
@@ -826,8 +836,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "10",
@@ -849,10 +857,12 @@
             "text": "7",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "c007afd05522",
@@ -866,8 +876,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "1848",
@@ -889,7 +897,9 @@
             "text": "1776",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "fb0af13b67d2",
@@ -899,8 +909,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Louis XVI",
@@ -922,7 +930,9 @@
             "text": "Louis XIV",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "51e98aa08be5",
@@ -932,8 +942,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "1972",
@@ -955,7 +963,9 @@
             "text": "1961",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "2ad9026d1278",
@@ -965,8 +975,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Les Incas",
@@ -988,10 +996,12 @@
             "text": "Les Mayas",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "56176f17a359",
@@ -1005,8 +1015,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Sydney",
@@ -1028,7 +1036,9 @@
             "text": "Perth",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "e6039e3cfaf3",
@@ -1038,8 +1048,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "La Garonne",
@@ -1061,7 +1069,9 @@
             "text": "Le Rhin",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "7a111428ed78",
@@ -1071,8 +1081,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "L’Afrique",
@@ -1094,7 +1102,9 @@
             "text": "L’Asie",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "90d4fb569b42",
@@ -1104,8 +1114,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "La barre des Écrins",
@@ -1127,10 +1135,12 @@
             "text": "L’Eiger",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "5e69af380593",
@@ -1144,8 +1154,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Danemark",
@@ -1167,7 +1175,9 @@
             "text": "Suède",
             "correct": true
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "e5e9b50d0766",
@@ -1177,8 +1187,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "12",
@@ -1200,7 +1208,9 @@
             "text": "6",
             "correct": true
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "bb4fdc8b88de",
@@ -1210,8 +1220,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Chopin",
@@ -1233,7 +1241,9 @@
             "text": "Vivaldi",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "6f1d7a36ac6a",
@@ -1243,8 +1253,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Michael Jackson",
@@ -1266,10 +1274,12 @@
             "text": "Frank Sinatra",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "d3c86d11ce62",
@@ -1283,8 +1293,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Ag",
@@ -1306,7 +1314,9 @@
             "text": "Au",
             "correct": true
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "8b0fbb5dd552",
@@ -1316,8 +1326,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "8",
@@ -1339,7 +1347,9 @@
             "text": "9",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "5eaf4e9aa33a",
@@ -1349,8 +1359,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Le dioxyde de carbone",
@@ -1372,7 +1380,9 @@
             "text": "L’azote",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "06d620243c9a",
@@ -1382,8 +1392,6 @@
         "points": 100,
         "time": 30,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "250",
@@ -1405,10 +1413,12 @@
             "text": "186",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "952edfc0ce76",
@@ -1422,8 +1432,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "6",
@@ -1441,7 +1449,9 @@
             "text": "8",
             "correct": true
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "3a86a465ca3c",
@@ -1451,8 +1461,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Blanc",
@@ -1470,7 +1478,9 @@
             "text": "Noir",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "90c3a867e4b0",
@@ -1480,8 +1490,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "56",
@@ -1499,7 +1507,9 @@
             "text": "48",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "dd10cbbbf904",
@@ -1509,8 +1519,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "366",
@@ -1528,7 +1536,9 @@
             "text": "365",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "7bd60ca7f16a",
@@ -1538,8 +1548,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Jupiter",
@@ -1557,7 +1565,9 @@
             "text": "Vénus",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "fd27b054b4ea",
@@ -1567,8 +1577,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Le Pacifique",
@@ -1586,7 +1594,9 @@
             "text": "L’Atlantique",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "b0f84e058949",
@@ -1596,8 +1606,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Italie",
@@ -1615,7 +1623,9 @@
             "text": "Grèce",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "3ce97dd63884",
@@ -1625,8 +1635,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "5",
@@ -1644,7 +1652,9 @@
             "text": "6",
             "correct": true
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "83e21fbc18b2",
@@ -1654,8 +1664,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "Madrid",
@@ -1673,7 +1681,9 @@
             "text": "Valence",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       },
       {
         "id": "7e62ed3b711c",
@@ -1683,8 +1693,6 @@
         "points": 100,
         "time": 15,
         "trap": false,
-        "multi": false,
-        "partial": false,
         "choices": [
           {
             "text": "La fraise",
@@ -1702,10 +1710,12 @@
             "text": "Le kiwi",
             "correct": false
           }
-        ]
+        ],
+        "multi": false,
+        "partial": false
       }
     ],
-    "updatedAt": 1794681960623
+    "updatedAt": 1794820625481
   },
   {
     "id": "9ea6132b5f8a",
@@ -1842,7 +1852,7 @@
         "fuzzy": true
       }
     ],
-    "updatedAt": 1794681960630
+    "updatedAt": 1794820625481
   },
   {
     "id": "189f92e04fbc",
@@ -1962,6 +1972,6 @@
         "fuzzy": true
       }
     ],
-    "updatedAt": 1794681960634
+    "updatedAt": 1794820625481
   }
 ]
