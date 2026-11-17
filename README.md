@@ -193,6 +193,14 @@ Réglages par étape : nombre de qualifiés ; pour Thèmes, le nombre de questio
 
 **Images du podium** : à la fin du tournoi, le téléphone des équipes du podium affiche une image sous leur classement (pas la projection). Pour l'instant, seule la 3e place en a une (`public/images/podium/3.webp`). Pour en ajouter, déposez l'image dans `public/images/podium/` et ajoutez une ligne à `PODIUM_IMAGES` dans `public/common.js`.
 
+**Trophée du vainqueur** : l'équipe 1re du tournoi (sauf tricheur démasqué) voit sur son téléphone un trophée doré en 3D qui tourne sur lui-même ; on peut aussi le faire tourner du doigt. Le modèle est `public/models/trophy.bin`, affiché par `public/model3d.js` (WebGL, sans bibliothèque ; un 🏆 s'affiche à la place si le téléphone ne gère pas la 3D). Pour changer de trophée, convertissez un modèle `.obj` (même très lourd) avec :
+
+```
+node tools/obj-to-model.js chemin/vers/modele.obj public/models/trophy.bin
+```
+
+Le script simplifie le modèle (60 000 triangles au plus, ~600 Ko) et le centre ; le trophée d'origine (40 Mo, 500 000 triangles) n'est pas dans le dépôt.
+
 Les images passent par le serveur : les téléphones ne voient pas l'adresse d'origine (souvent parlante, comme `tour-eiffel.jpg`). Une image peut être une adresse Internet ou un fichier déposé dans `public` (ex. `/images/tour.jpg`).
 
 ## Pages de test

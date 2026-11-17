@@ -17,3 +17,5 @@
 *.ogg  binary
 *.m4a  binary
 *.wav  binary
+*.bin  binary
+*.obj  binary
