@@ -234,6 +234,7 @@ window.Q = (() => {
    * Une ligne par place : déposez l'image dans public/images/podium/ et ajoutez-la ici.
    */
   const PODIUM_IMAGES = {
+    2: '/images/podium/2.png',
     3: '/images/podium/3.webp',
   };
   const podiumImage = (rank, cls = '') =>
