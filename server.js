@@ -540,7 +540,7 @@ function createRoom(quiz, settings = {}, tour = null) {
     order: [], // ordre de classement de l'étape précédente (ids), pour l'ordre de passage aux thèmes
     th: null, // état du module Thèmes
     im: null, // état du module Images
-    settings: { autoClose: settings.autoClose !== false, speed: settings.speed !== false, steal: settings.steal !== false, allowDev: true, luck: false },
+    settings: { speed: settings.speed !== false, steal: settings.steal !== false, allowDev: true, luck: false },
     players: new Map(),
     streams: new Set(),
     waiters: new Set(), // requêtes /api/poll en attente
@@ -838,11 +838,11 @@ function playerCheat(body) {
   return { ok: true, accepted: p.cheatNext };
 }
 
-// Quand tous les joueurs connectés ont répondu, on passe directement à la révélation de la
-// réponse (réglage « Fermeture auto. »). Un tricheur compte comme ayant répondu, même sur une
-// question piège où sa « réponse » est de ne rien envoyer.
+// Quand tous les joueurs connectés ont répondu, on passe toujours directement à la révélation
+// de la réponse. Un tricheur compte comme ayant répondu, même sur une question piège où sa
+// « réponse » est de ne rien envoyer.
 function maybeAutoClose(room) {
-  if (!room.settings.autoClose || room.state !== 'question') return false;
+  if (room.state !== 'question') return false;
   const active = activePlayers(room).filter(playerConnected);
   if (!active.length || !active.every((x) => room.answers.has(x.id) || room.cheated?.has(x.id))) return false;
   closeQuestion(room);
@@ -1787,7 +1787,6 @@ function quizAction(room, action, payload) {
       break;
     }
     case 'settings':
-      room.settings.autoClose = !!payload.autoClose;
       if ('speed' in payload) room.settings.speed = !!payload.speed;
       if ('allowDev' in payload) room.settings.allowDev = !!payload.allowDev;
       if ('steal' in payload) {
@@ -1800,7 +1799,6 @@ function quizAction(room, action, payload) {
         // Désactivée : on retire les propositions en cours et les triches acceptées pas encore jouées
         if (!room.settings.luck) for (const p of room.players.values()) { p.offer = false; p.cheatNext = false; }
       }
-      maybeAutoClose(room); // fermeture auto activée alors que tout le monde a déjà répondu
       break;
     case 'undev': {
       // Retire définitivement le mode test (#dev) à un joueur
