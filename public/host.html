@@ -250,7 +250,7 @@
       </label>
       <label class="check"><input type="checkbox" id="setupSpeed" checked> ⏱ Points selon la rapidité (questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 %)</label>
       <label class="check"><input type="checkbox" id="setupSteal" checked> 🦹 Vol de points (le seul joueur à avoir bien répondu peut voler des points à un autre)</label>
-      <label class="check"><input type="checkbox" id="setupAuto" checked> Fermer automatiquement quand tout le monde a répondu</label>
+      <label class="check"><input type="checkbox" id="setupAuto" checked> Révéler la réponse dès que tout le monde a répondu</label>
       <button class="primary big" id="createRoom">Créer le salon</button>
       <p class="hint" id="netHint"></p>
     </div>
@@ -292,7 +292,7 @@
         <h3>Réglages</h3>
         <label class="check" title="Questions avec un temps limité : le premier qui répond correctement a tous les points, puis c’est dégressif jusqu’à 50 % à la fin du temps"><input type="checkbox" id="setSpeed"> ⏱ Points selon la rapidité</label>
         <label class="check" title="Le seul joueur à avoir bien répondu peut voler des points à un autre joueur"><input type="checkbox" id="setSteal"> 🦹 Vol de points</label>
-        <label class="check"><input type="checkbox" id="setAuto"> Fermeture auto.</label>
+        <label class="check" title="Dès que tous les joueurs présents ont répondu, la réponse est révélée sans attendre la fin du temps"><input type="checkbox" id="setAuto"> Révélation auto.</label>
         <label class="check" title="Décoché : aucun joueur inscrit avec #dev ne voit plus les réponses"><input type="checkbox" id="setDev"> Mode test (#dev) autorisé</label>
         <label class="check" title="Entre deux questions, certains joueurs se voient proposer de tricher : la bonne réponse est remplie pour eux, mais ils risquent de tout perdre (révélé au classement final)"><input type="checkbox" id="setLuck"> 🎲 Tentation de triche</label>
         <h3>Salon</h3>

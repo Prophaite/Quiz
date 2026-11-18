@@ -149,7 +149,7 @@ Case **🎲 Tentation de triche** dans les réglages de l'onglet Partie (désact
 
 - Ça n'arrive qu'à **peu de joueurs** : sur toute la partie, au plus 1 joueur sur 6 (au moins 1) reçoit une proposition, tiré au sort, un à la fois et seulement certaines manches. Un joueur qui refuse n'est plus sollicité ; un joueur qui a triché est redemandé **à chaque manche**.
 - **Le premier du classement** (ou les premiers ex æquo) ne reçoit **jamais** de proposition.
-- Pour la **fermeture automatique**, un tricheur compte comme ayant répondu (y compris sur une question piège).
+- Pour la **révélation automatique**, un tricheur compte comme ayant répondu (y compris sur une question piège).
 - Risque de tout perdre, **pondéré par le nombre de questions** N : 2 % la 1re fois, puis +3/N à chaque triche (95 % au plus). Exemples : 10 questions → 2 %, 32 %, 62 %, 92 % ; 20 questions → 2 %, 17 %, 32 %, 47 %… Le téléphone affiche un niveau (minuscule, réel, élevé…).
 - **L'animateur voit le risque** dans la liste des joueurs : badge `🎲2 · 47 %` = 2 triches, 47 % de risque à la prochaine ; `?` = proposition en cours, 😈 = va tricher à la prochaine question, 💀 = s'est déjà fait prendre ; la page de gestion affiche aussi l'étiquette rouge **Tricheur** à côté de son nom.
 - **Pris la main dans le sac** : à la question où le tirage le démasque, le tricheur **perd tous ses points juste après cette question** (ceux de la question compris). Il continue ensuite à jouer et **regagne des points normalement** s'il ne triche plus, mais **chaque nouvelle triche le fait retomber à 0** (à coup sûr, il est déjà démasqué).
@@ -163,7 +163,9 @@ Quand **un seul joueur** a bien répondu à une question, son téléphone lui pr
 
 ## Pendant la partie
 
-Démarrer → la question s'affiche (fermeture automatique à la fin du temps ou quand tout le monde a répondu ; un joueur exclu, ou dont le téléphone est déconnecté depuis plus de 6 secondes, n'est plus attendu, alors qu'une courte mise en veille ne fait pas passer à la réponse) → Révéler → Classement → Question suivante → … → podium final.
+Démarrer → la question s'affiche (fermeture automatique à la fin du temps) → Révéler → Classement → Question suivante → … → podium final.
+
+**Révélation auto.** (réglage coché par défaut) : dès que tous les joueurs présents ont répondu, la réponse est **révélée directement**, sans attendre la fin du temps ni le bouton « Révéler ». Un joueur exclu, ou dont le téléphone est déconnecté depuis plus de 6 secondes, n'est plus attendu, alors qu'une courte mise en veille ne fait pas passer à la réponse.
 
 **⏱ Points selon la rapidité** (case cochée par défaut, à la création du salon et dans les réglages de la partie) : sur les questions avec un temps limité, le **premier** qui répond correctement (ou en partie) a tous les points, puis c'est dégressif selon son retard sur lui, jusqu'à 50 % à la fin du temps. Case décochée, ou question sans temps limité : toutes les bonnes réponses valent la même chose.
 

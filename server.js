@@ -838,13 +838,18 @@ function playerCheat(body) {
   return { ok: true, accepted: p.cheatNext };
 }
 
-// Fermeture automatique quand tous les joueurs connectés ont répondu. Un tricheur compte
-// comme ayant répondu, même sur une question piège où sa « réponse » est de ne rien envoyer.
+// Quand tous les joueurs connectés ont répondu, on passe directement à la révélation de la
+// réponse (réglage « Fermeture auto. »). Un tricheur compte comme ayant répondu, même sur une
+// question piège où sa « réponse » est de ne rien envoyer.
 function maybeAutoClose(room) {
   if (!room.settings.autoClose || room.state !== 'question') return false;
   const active = activePlayers(room).filter(playerConnected);
   if (!active.length || !active.every((x) => room.answers.has(x.id) || room.cheated?.has(x.id))) return false;
-  closeQuestion(room, true);
+  closeQuestion(room);
+  room.state = 'reveal';
+  // Comme le bouton « Révéler » : propositions de triche et vol de points (étape Quiz seulement)
+  if (stageType(room) === 'quiz') { makeOffers(room); makeSteal(room); }
+  broadcast(room);
   return true;
 }
 
