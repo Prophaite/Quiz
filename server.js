@@ -900,7 +900,7 @@ function beginStage(room) {
     return;
   }
   room.im = { img: 0, qCounter: 0, appliedFor: -1, guesses: new Map(), guessOpen: 0, found: [], winner: null, over: false };
-  startImQuestion(room);
+  room.state = 'imIntro'; // l'image est d'abord montrée toute floue (netteté 0), avant la 1re question
 }
 
 // Fin d'étape : les N premiers sont pré-cochés « qualifiés » (l'animateur peut corriger)
@@ -1068,7 +1068,7 @@ function applyImLevels(room) {
 }
 
 // Moments de l'étape Images où l'image est en jeu (elle peut être attribuée)
-const IM_PLAY_STATES = ['question', 'closed', 'reveal', 'guess'];
+const IM_PLAY_STATES = ['imIntro', 'question', 'closed', 'reveal', 'guess'];
 function imAwardTo(room, p) {
   const im = room.im;
   // Attribuée pendant une question : on ferme les réponses ; « Annuler » y ramène, réponses fermées
@@ -1093,8 +1093,8 @@ function imAction(room, action, payload) {
       im.guessOpen = Date.now();
       room.state = 'guess';
       return true;
-    case 'next': // question suivante, même image
-      if (room.state === 'guess') startImQuestion(room);
+    case 'next': // 1re question de l'image, ou question suivante sur la même image
+      if (room.state === 'guess' || room.state === 'imIntro') startImQuestion(room);
       return true;
     case 'imAward': {
       // À tout moment de l'étape (pendant une question, après, ou pendant les propositions) :
@@ -1131,7 +1131,8 @@ function imAction(room, action, payload) {
       im.img++;
       im.winner = null;
       for (const p of activePlayers(room)) p.imLevel = 0;
-      startImQuestion(room);
+      im.guesses = new Map();
+      room.state = 'imIntro'; // la nouvelle image est montrée toute floue avant sa 1re question
       return true;
     case 'goto':
     case 'leaderboard':
@@ -1411,7 +1412,7 @@ function displayView(room) {
   return {
     tour: tourInfo(room),
     th: room.state === 'themes' ? themesView(room, false) : null,
-    im: ['guess', 'imFound'].includes(room.state) ? imagesView(room, 'display') : null,
+    im: ['imIntro', 'guess', 'imFound'].includes(room.state) ? imagesView(room, 'display') : null,
     code: room.code,
     joinUrl: `${publicUrl}/play?room=${room.code}`,
     // 'starting' : l'adresse Internet n'est pas encore prête, ne pas afficher le QR code
@@ -1513,6 +1514,36 @@ function devAnswer(q) {
   return out;
 }
 
+// Prochaines questions (énoncé et réponse) : l'animateur peut les lire à l'avance
+const UPCOMING_STATES = ['lobby', 'stageIntro', 'imIntro', 'question', 'closed', 'reveal', 'leaderboard', 'guess', 'imFound'];
+function upcomingQuestions(room, count = 3) {
+  if (!UPCOMING_STATES.includes(room.state)) return [];
+  let type = stageType(room);
+  let quiz = room.quiz;
+  let first = room.qIndex + 1;
+  if (room.state === 'lobby' && room.tour) {
+    // Tournoi pas encore commencé : questions de la 1re étape
+    const st = room.tour.stages[0];
+    type = st.type;
+    quiz = st.quiz;
+    first = 0;
+  } else if (room.state === 'lobby' || room.state === 'stageIntro') first = 0;
+  if (type === 'themes') return []; // l'animateur voit déjà chaque question de l'étape Thèmes
+  // Étape Images : les questions tournent en boucle
+  const loop = !!room.tour && type === 'images';
+  if (loop && room.im) first = room.im.qCounter;
+  const qs = quiz?.questions || [];
+  const out = [];
+  for (let i = first; out.length < Math.min(count, qs.length) && (loop || i < qs.length); i++) {
+    const q = qs[i % qs.length];
+    out.push({
+      index: i % qs.length, text: q.text, type: q.type, points: q.points, time: q.time, trap: !!q.trap,
+      answerText: correctAnswerText(q), choices: q.type === 'choice' ? q.choices.map((c) => c.text) : undefined,
+    });
+  }
+  return out;
+}
+
 function hostView(room) {
   const q = currentQ(room);
   const scored = room.state !== 'question';
@@ -1540,6 +1571,7 @@ function hostView(room) {
     title: room.quiz.title,
     quizId: room.quiz.id,
     questions: room.quiz.questions.map((x) => ({ text: x.text, type: x.type, points: x.points })),
+    upcoming: upcomingQuestions(room),
     settings: room.settings,
     state: room.state,
     qIndex: room.qIndex,

@@ -387,6 +387,12 @@ function renderTour(s, m) {
       <p class="center">Prépare-toi à proposer le nom de l’image…</p>`;
     return true;
   }
+  if (s.state === 'imIntro') {
+    document.body.className = '';
+    m.innerHTML = `${tag}${Q.stageImage(im, 30)}${lvl}
+      <p class="center">🖼 Image ${im.index + 1} : réponds juste aux questions pour la rendre plus nette, puis trouve ce que c’est !</p>`;
+    return true;
+  }
   if (s.state === 'guess') {
     m.innerHTML = `${tag}${Q.stageImage(im, 30)}${lvl}
       ${im.guessed

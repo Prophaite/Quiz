@@ -269,6 +269,7 @@ function render() {
   if (s.state === 'stageIntro') return full && renderStageIntro(s);
   if (s.state === 'stageEnd') return full && renderStageEnd(s);
   if (s.state === 'themes') return full && renderThemes(s);
+  if (s.state === 'imIntro') return renderImIntro(s);
   if (s.state === 'guess') return renderGuess(s);
   if (s.state === 'imFound') return full && renderFound(s);
 }
@@ -353,6 +354,20 @@ function renderGuess(s) {
       <div class="im-prompt">🖼 Image ${im.index + 1} — proposez son nom sur votre téléphone ou à l’oral !</div></div>
       <div id="imTeams">${imTeams(im, true)}</div></div>`;
   } else $('#imTeams').innerHTML = imTeams(im, true);
+}
+// Nouvelle image, montrée toute floue avant sa première question
+let introKey = '';
+function renderImIntro(s) {
+  guessKey = '';
+  const im = s.im;
+  const k = `${im.index}|${im.level}`;
+  if (k !== introKey || !$('#imIntroView')) {
+    introKey = k;
+    $('#stage').innerHTML = `<div class="with-side fade" id="imIntroView"><div>
+      ${Q.stageImage(im, 70)}
+      <div class="im-prompt">🖼 Image ${im.index + 1} — répondez aux questions pour la rendre plus nette !</div></div>
+      <div id="imTeams">${imTeams(im, false)}</div></div>`;
+  } else $('#imTeams').innerHTML = imTeams(im, false);
 }
 function renderFound(s) {
   guessKey = '';

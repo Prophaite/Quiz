@@ -36,7 +36,7 @@
         "effect": "blur"
       }
     ],
-    "updatedAt": 1794689042067
+    "updatedAt": 1795178657915
   },
   {
     "id": "1deadd57189e",
@@ -45,7 +45,7 @@
       {
         "type": "quiz",
         "qualify": 4,
-        "quizId": "46192aa1526b"
+        "quizId": "gctfbh6tlzmlnbn7"
       },
       {
         "type": "themes",
@@ -68,13 +68,13 @@
       {
         "type": "images",
         "qualify": 1,
-        "imageQuizId": "9ea6132b5f8a",
+        "imageQuizId": "189f92e04fbc",
         "questionQuizId": "952edfc0ce76",
         "wins": 3,
         "levels": 5,
         "effect": "blur"
       }
     ],
-    "updatedAt": 1794688989943
+    "updatedAt": 1795178836505
   }
 ]

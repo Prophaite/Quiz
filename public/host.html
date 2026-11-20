@@ -150,6 +150,14 @@
   .verdict { margin-top: 12px; padding: 10px 14px; border-radius: 10px; font-weight: 700; font-size: 16px; }
   .verdict.ok { background: var(--ok-soft); color: var(--ok); }
   .verdict.ko { background: var(--ko-soft); color: var(--ko); }
+  .upcoming { margin-top: 18px; border: 1px dashed var(--line); border-radius: 10px; padding: 8px 12px; }
+  .upcoming summary { cursor: pointer; font-weight: 700; }
+  .up-q { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 13px; }
+  .up-q.first { font-size: 15px; }
+  .up-text { font-weight: 700; margin: 3px 0; }
+  .up-q.first .up-text { font-size: 18px; }
+  .up-choices { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
+  .up-choices span { border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; }
   .im-box { display: flex; gap: 14px; align-items: flex-start; margin-top: 10px; }
   .im-box img { max-width: 220px; max-height: 180px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); }
   table.teams { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
@@ -1006,7 +1014,7 @@ const STATE_LABELS = {
   lobby: 'Salle d’attente', question: 'Question en cours', closed: 'Réponses fermées',
   reveal: 'Réponse affichée', leaderboard: 'Classement', end: 'Partie terminée',
   stageIntro: 'Présentation de l’étape', stageEnd: 'Fin d’étape — qualifiés', themes: 'Thèmes',
-  guess: 'Propositions d’image', imFound: 'Image trouvée',
+  imIntro: 'Image à deviner (toute floue)', guess: 'Propositions d’image', imFound: 'Image trouvée',
 };
 
 timer.on((left, total) => {
@@ -1080,6 +1088,7 @@ function renderLive() {
     if (s.question.time) c += btn('+10 s', 'addTime');
   }
   if (type === 'images') {
+    if (s.state === 'imIntro') c += btn('▶ Première question', 'next', 'primary big');
     if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big') + btn('🖼 Propositions d’image', 'imGuess', 'big');
     if (s.state === 'reveal') c += btn('🖼 Propositions d’image', 'imGuess', 'primary big');
     if (s.state === 'guess') c += btn('⏭ Question suivante (même image)', 'next', 'primary big') + btn('🙈 Personne ne trouve : dévoiler', 'imSkip');
@@ -1139,11 +1148,13 @@ function renderLive() {
     b = '<p class="muted">Le podium est affiché sur l’écran de projection.</p>';
   } else if (s.state === 'themes') {
     b = themesPanel(s);
-  } else if (type === 'images' && ['guess', 'imFound'].includes(s.state)) {
-    b = imagesPanel(s);
+  } else if (type === 'images' && ['imIntro', 'guess', 'imFound'].includes(s.state)) {
+    b = (s.state === 'imIntro' ? '<p class="hint">L’image est affichée toute floue sur l’écran et les téléphones. Lancez la première question quand vous êtes prêt.</p>' : '')
+      + imagesPanel(s);
   } else if (s.question) {
     b = questionPanel(s) + (type === 'images' ? imagesPanel(s) : '');
   }
+  b += upcomingPanel(s);
   $('#liveBody').innerHTML = b;
   bindActions($('#liveBody'));
   $('#liveBody').querySelectorAll('[data-group]').forEach((el) => (el.onclick = () => act('toggleGroup', { key: el.dataset.group })));
@@ -1201,6 +1212,21 @@ function themesPanel(s) {
   return h + '</div>';
 }
 const t_endLabel = (s) => (s.tour.last ? '🏁 Résultats finaux du tournoi' : '🏁 Fin de l’étape');
+
+/* ---------- Prochaines questions : à lire avant de les lancer ---------- */
+function upcomingPanel(s) {
+  const list = s.upcoming || [];
+  if (!list.length) return '';
+  const item = (q, i) => `<div class="up-q ${i ? '' : 'first'}">
+    <div class="muted">${i ? 'Ensuite' : 'Prochaine question'} · n° ${q.index + 1} · ${TYPE_LABELS[q.type]}${q.trap ? ' · 🪤 piège' : ''} · ${q.points} pts${q.time ? ` · ${q.time} s` : ''}</div>
+    <div class="up-text">${esc(q.text || '(sans texte)')}</div>
+    ${q.choices ? `<div class="up-choices">${q.choices.map((c) => `<span>${esc(c)}</span>`).join('')}</div>` : ''}
+    <div class="up-ans">Réponse : <b>${esc(q.answerText)}</b></div></div>`;
+  return `<details class="upcoming" ${upcomingOpen ? 'open' : ''}><summary>📖 À suivre — ${list.length} prochaine${list.length > 1 ? 's' : ''} question${list.length > 1 ? 's' : ''}</summary>
+    ${list.map(item).join('')}</details>`;
+}
+let upcomingOpen = true;
+document.addEventListener('toggle', (e) => { if (e.target.classList?.contains('upcoming')) upcomingOpen = e.target.open; }, true);
 
 /* ---------- Étape Images ---------- */
 function imagesPanel(s) {
