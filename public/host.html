@@ -1149,7 +1149,7 @@ function renderLive() {
   } else if (s.state === 'themes') {
     b = themesPanel(s);
   } else if (type === 'images' && ['imIntro', 'guess', 'imFound'].includes(s.state)) {
-    b = (s.state === 'imIntro' ? '<p class="hint">L’image est affichée toute floue sur l’écran et les téléphones. Lancez la première question quand vous êtes prêt.</p>' : '')
+    b = (s.state === 'imIntro' ? '<p class="hint">L’image est affichée toute floue sur l’écran et les téléphones ; les équipes peuvent déjà proposer un nom. Lancez la première question quand vous êtes prêt.</p>' : '')
       + imagesPanel(s);
   } else if (s.question) {
     b = questionPanel(s) + (type === 'images' ? imagesPanel(s) : '');
@@ -1236,7 +1236,7 @@ function imagesPanel(s) {
       <div>Réponse : <b>${esc(im.answers.join(' / '))}</b>
         ${im.found ? `<div class="verdict ${im.found.by ? 'ok' : 'ko'}">${im.found.by ? `🏆 Trouvée par ${esc(im.found.by)}${im.found.over ? ' — <b>gagne l’étape !</b>' : ''}` : 'Personne n’a trouvé'}</div>` : ''}
       </div></div>`;
-  if (s.state === 'guess') {
+  if (s.state === 'guess' || s.state === 'imIntro') {
     const firstOk = im.guesses.find((g) => g.ok);
     h += `<h3>Propositions (${im.guesses.filter((g) => !g.pass).length}) — la plus rapide en premier</h3>
       ${im.guesses.map((g) => `<div class="answer-line ${g.pass ? '' : g.ok ? 'ok' : 'ko'} ${g === firstOk ? 'fastest' : ''}">
@@ -1249,8 +1249,8 @@ function imagesPanel(s) {
     h += `<h3>Image trouvée à l’oral</h3>
       <div class="row">${s.ranking.map((p) => btn(`🏆 ${esc(p.name)}`, 'imAward', 'small', { playerId: p.id })).join('')}</div>`;
   }
-  h += `<table class="teams"><tr><th>Équipe</th><th>Bonnes réponses</th><th>Netteté</th><th>Images</th>${s.state === 'guess' ? '<th>Proposé</th>' : ''}</tr>
-    ${im.teams.map((x) => `<tr><td><b>${esc(x.name)}</b></td><td>${x.correct}</td><td>${x.level}/${im.levels}</td><td>${x.wins}</td>${s.state === 'guess' ? `<td>${x.guessed ? '✓' : ''}</td>` : ''}</tr>`).join('')}</table>`;
+  h += `<table class="teams"><tr><th>Équipe</th><th>Bonnes réponses</th><th>Netteté</th><th>Images</th>${['guess', 'imIntro'].includes(s.state) ? '<th>Proposé</th>' : ''}</tr>
+    ${im.teams.map((x) => `<tr><td><b>${esc(x.name)}</b></td><td>${x.correct}</td><td>${x.level}/${im.levels}</td><td>${x.wins}</td>${['guess', 'imIntro'].includes(s.state) ? `<td>${x.guessed ? '✓' : ''}</td>` : ''}</tr>`).join('')}</table>`;
   return h;
 }
 

@@ -350,7 +350,7 @@ function renderGuess(s) {
   if (k !== guessKey || !$('#guessView')) {
     guessKey = k;
     $('#stage').innerHTML = `<div class="with-side fade" id="guessView"><div>
-      ${Q.stageImage(im, 70)}
+      ${Q.stageImage(im, Q.BLUR.display)}
       <div class="im-prompt">🖼 Image ${im.index + 1} — proposez son nom sur votre téléphone ou à l’oral !</div></div>
       <div id="imTeams">${imTeams(im, true)}</div></div>`;
   } else $('#imTeams').innerHTML = imTeams(im, true);
@@ -364,10 +364,10 @@ function renderImIntro(s) {
   if (k !== introKey || !$('#imIntroView')) {
     introKey = k;
     $('#stage').innerHTML = `<div class="with-side fade" id="imIntroView"><div>
-      ${Q.stageImage(im, 70)}
-      <div class="im-prompt">🖼 Image ${im.index + 1} — répondez aux questions pour la rendre plus nette !</div></div>
-      <div id="imTeams">${imTeams(im, false)}</div></div>`;
-  } else $('#imTeams').innerHTML = imTeams(im, false);
+      ${Q.stageImage(im, Q.BLUR.display)}
+      <div class="im-prompt">🖼 Image ${im.index + 1} — trouvez-la dès maintenant sur votre téléphone, ou répondez aux questions pour la rendre plus nette !</div></div>
+      <div id="imTeams">${imTeams(im, true)}</div></div>`;
+  } else $('#imTeams').innerHTML = imTeams(im, true);
 }
 function renderFound(s) {
   guessKey = '';

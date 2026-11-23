@@ -220,6 +220,9 @@ window.Q = (() => {
   // vite reconnaissable, et grandit surtout à la fin.
   const SMALL_MIN = 5;
   const smallSize = (f) => Math.round(SMALL_MIN * (100 / SMALL_MIN) ** f * 10) / 10;
+  // Flou de départ (netteté 0) de l'étape Images, en px. Le téléphone a un cadre bien plus petit
+  // que la projection : 60 px y suffisent pour qu'une image simple (un drapeau) ne se devine pas.
+  const BLUR = { display: 70, phone: 60 };
   function stageImage(im, maxBlur = 40) {
     const f = im.levels ? Math.max(0, Math.min(1, im.level / im.levels)) : 1;
     const size = smallSize(f);
@@ -240,6 +243,6 @@ window.Q = (() => {
   const podiumImage = (rank, cls = '') =>
     PODIUM_IMAGES[rank] ? `<img class="${cls}" src="${esc(PODIUM_IMAGES[rank])}" alt="" draggable="false">` : '';
 
-  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage, smallSize, podiumImage };
+  return { esc, COLORS, SHAPES, TYPE_LABELS, fmt, params, countdown, ordinal, api, get, stream, leaflet, makeMap, pinIcon, fmtKm, stageImage, smallSize, podiumImage, BLUR };
 
 })();

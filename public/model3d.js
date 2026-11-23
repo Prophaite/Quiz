@@ -5,11 +5,12 @@
  *
  *   const stop = Model3D.show(canvas, '/models/trophy.bin');
  *
- * L'animation s'arrête d'elle-même quand le canvas quitte la page.
+ * L'animation s'arrête d'elle-même quand le canvas quitte la page, et le contexte WebGL est libéré.
  * Sans WebGL (ou si le fichier ne se charge pas), un 🏆 remplace le canvas.
  */
 window.Model3D = (() => {
   const cache = new Map(); // url → Promise<{ pos, nor, idx }>
+  const live = new Set(); // affichages en cours : { canvas, release }
 
   function load(url) {
     if (!cache.has(url)) {
@@ -90,11 +91,26 @@ window.Model3D = (() => {
 
   function show(canvas, url, { speed = 1 } = {}) {
     let stopped = false;
+    // Les trophées qui ont quitté la page rendent leur contexte, même si l'animation est en pause
+    // (téléphone verrouillé, onglet caché : requestAnimationFrame ne tourne plus).
+    for (const v of live) if (!v.canvas.isConnected) v.release();
     const gl = canvas.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: false });
     if (!gl) { fallback(canvas); return () => {}; }
+    // Fin de l'affichage : on rend tout de suite le contexte WebGL au navigateur, qui n'en garde
+    // qu'un nombre limité (~16) ; sinon chaque nouvel affichage du trophée en consommerait un.
+    let released = false;
+    const release = () => {
+      stopped = true;
+      if (released) return;
+      released = true;
+      live.delete(self);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
+    };
+    const self = { canvas, release };
+    live.add(self);
 
     load(url).then(({ pos, nor, idx }) => {
-      if (stopped || !canvas.isConnected) return;
+      if (stopped || !canvas.isConnected) return release();
       const prog = gl.createProgram();
       gl.attachShader(prog, compile(gl, gl.VERTEX_SHADER, VS));
       gl.attachShader(prog, compile(gl, gl.FRAGMENT_SHADER, FS));
@@ -127,12 +143,12 @@ window.Model3D = (() => {
         angle += dx * 0.012;
         spin = dx * 0.6;
       });
-      const release = () => { dragX = null; };
-      canvas.addEventListener('pointerup', release);
-      canvas.addEventListener('pointercancel', release);
+      const drop = () => { dragX = null; };
+      canvas.addEventListener('pointerup', drop);
+      canvas.addEventListener('pointercancel', drop);
 
       const frame = (now) => {
-        if (stopped || !canvas.isConnected) return; // la page a changé : on arrête
+        if (stopped || !canvas.isConnected) return release(); // la page a changé : on arrête
         const dt = Math.min(0.05, (now - last) / 1000);
         last = now;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -150,9 +166,13 @@ window.Model3D = (() => {
         requestAnimationFrame(frame);
       };
       requestAnimationFrame(frame);
-    }).catch(() => { if (!stopped && canvas.isConnected) fallback(canvas); });
+    }).catch(() => {
+      const keep = !stopped && canvas.isConnected;
+      release();
+      if (keep) fallback(canvas);
+    });
 
-    return () => { stopped = true; };
+    return release;
   }
 
   return { show, load };

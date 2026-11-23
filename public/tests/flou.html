@@ -85,11 +85,11 @@
 
   <div class="views">
     <section class="panel view">
-      <h2>📺 Écran de projection <small>(propositions d’image : flou max 70 px, écran 1920×1080 réduit ici)</small></h2>
+      <h2>📺 Écran de projection <small>(propositions d’image : flou max <span id="tvBlur"></span> px, écran 1920×1080 réduit ici)</small></h2>
       <div class="frame anim" id="tv"></div>
     </section>
     <section class="panel view">
-      <h2>📱 Téléphone <small>(flou max 30 px)</small></h2>
+      <h2>📱 Téléphone <small>(flou max <span id="phoneBlur"></span> px)</small></h2>
       <div class="frame anim" id="phone"></div>
     </section>
   </div>
@@ -106,8 +106,8 @@ const $ = (s) => document.querySelector(s);
 const TEST = ['france', 'italie', 'allemagne', 'belgique', 'japon', 'suisse', 'suede', 'espagne', 'grece', 'bresil',
   'stop', 'sens-interdit', 'cedez-le-passage', 'wifi', 'smiley', 'note-de-musique', 'ampoule', 'coeur'];
 // Taille réelle de la zone d'image : projection 1920×1080 (62vh de haut), téléphone ~375×812 (42vh)
-const TV = { w: 1240, h: 670, blur: 70 };
-const PHONE = { w: 343, h: 341, blur: 30 };
+const TV = { w: 1240, h: 670, blur: Q.BLUR.display };
+const PHONE = { w: 343, h: 341, blur: Q.BLUR.phone };
 
 // Réglages facultatifs dans l'adresse de la page : ?levels=5&effect=small#imgs=["https://…", …]
 const qs = new URLSearchParams(location.search);
@@ -233,6 +233,8 @@ $('#file').onchange = (e) => {
   const f = e.target.files[0];
   if (f) { $('#url').value = ''; state.src = URL.createObjectURL(f); render(); }
 };
+$('#tvBlur').textContent = TV.blur;
+$('#phoneBlur').textContent = PHONE.blur;
 addEventListener('resize', render);
 render();
 </script>

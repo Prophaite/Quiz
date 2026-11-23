@@ -899,7 +899,7 @@ function beginStage(room) {
     room.state = 'themes';
     return;
   }
-  room.im = { img: 0, qCounter: 0, appliedFor: -1, guesses: new Map(), guessOpen: 0, found: [], winner: null, over: false };
+  room.im = { img: 0, qCounter: 0, appliedFor: -1, guesses: new Map(), guessOpen: Date.now(), found: [], winner: null, over: false };
   room.state = 'imIntro'; // l'image est d'abord montrée toute floue (netteté 0), avant la 1re question
 }
 
@@ -1069,6 +1069,8 @@ function applyImLevels(room) {
 
 // Moments de l'étape Images où l'image est en jeu (elle peut être attribuée)
 const IM_PLAY_STATES = ['imIntro', 'question', 'closed', 'reveal', 'guess'];
+// Moments où les équipes peuvent proposer le nom de l'image sur leur téléphone
+const IM_GUESS_STATES = ['imIntro', 'guess'];
 function imAwardTo(room, p) {
   const im = room.im;
   // Attribuée pendant une question : on ferme les réponses ; « Annuler » y ramène, réponses fermées
@@ -1132,6 +1134,7 @@ function imAction(room, action, payload) {
       im.winner = null;
       for (const p of activePlayers(room)) p.imLevel = 0;
       im.guesses = new Map();
+      im.guessOpen = Date.now(); // on peut proposer un nom dès que l'image apparaît
       room.state = 'imIntro'; // la nouvelle image est montrée toute floue avant sa 1re question
       return true;
     case 'goto':
@@ -1143,7 +1146,8 @@ function imAction(room, action, payload) {
 
 function playerGuess(body) {
   const { room, p } = playerOf(body);
-  if (stageType(room) !== 'images' || room.state !== 'guess') fail('Pas de proposition pour le moment');
+  // Dès que l'image apparaît (toute floue), puis après chaque question : une proposition par équipe
+  if (stageType(room) !== 'images' || !IM_GUESS_STATES.includes(room.state)) fail('Pas de proposition pour le moment');
   if (p.out) fail('Tu es éliminé');
   if (room.im.guesses.has(p.id)) fail('Tu as déjà proposé une réponse');
   if (body.pass) room.im.guesses.set(p.id, { pass: true, at: Date.now() });
