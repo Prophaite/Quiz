@@ -899,6 +899,8 @@ function beginStage(room) {
     room.state = 'themes';
     return;
   }
+  // Les images sont tirées au hasard à chaque début d'étape (copie propre au salon)
+  st.images = shuffle([...st.images]);
   room.im = { img: 0, qCounter: 0, appliedFor: -1, guesses: new Map(), guessOpen: Date.now(), found: [], winner: null, over: false };
   room.state = 'imIntro'; // l'image est d'abord montrée toute floue (netteté 0), avant la 1re question
 }
@@ -1107,8 +1109,10 @@ function imAction(room, action, payload) {
       imAwardTo(room, p);
       return true;
     }
-    case 'imSkip': // personne ne trouve : on dévoile et on passe à l'image suivante
-      if (room.state !== 'guess') fail('Les propositions ne sont pas ouvertes');
+    case 'imSkip': // personne ne trouve : à tout moment, on dévoile l'image puis on passe à la suivante
+      if (!IM_PLAY_STATES.includes(room.state)) fail('Pas d’image en jeu');
+      if (room.state === 'question') closeQuestion(room);
+      im.backTo = room.state; // « Annuler » ramène là où on en était
       im.winner = null;
       im.found.push({ img: im.img, by: null });
       room.state = 'imFound';

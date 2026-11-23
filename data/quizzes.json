@@ -1973,5 +1973,113 @@
       }
     ],
     "updatedAt": 1794820625481
+  },
+  {
+    "id": "e74d6b7fbd92",
+    "title": "Tournoi Excurio - Images",
+    "questions": [
+      {
+        "id": "9a645e4127e8",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "https://imgs.search.brave.com/jXA-pqUZU00j6W0_uG9OLLz5xqc6p723jfzBwqeHvQA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cGxhbnNhbWVyaWNh/aW5zLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvVGVybWluYXRv/ci0yLWxlLWp1Z2Vt/ZW50LWRlcm5pZXIt/YWZmaWNoZS0xLmpw/Zw",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Terminator 2",
+          "Terminator",
+          "Terminator 2 : Le Jugement dernier",
+          "Le Jugement dernier",
+          "Terminator 2 Judgment Day"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "8df6ff77da4c",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "https://imgs.search.brave.com/Q7LSslsGGETb3mnSTDvMEQubaQ_kEjANPyTKZzH-Iwo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/Z3JpZ25vdXguYmUv/dXBsb2FkL2dyaWdu/b3V4L2ZpbG1zLzIx/MzEvcHVscF9maWN0/aW9uX2FmZmljaGUu/d2VicA",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Pulp Fiction"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "62505f213763",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "https://imgs.search.brave.com/0uIcPH5wL8W8kEq7yrkS1Q1x8BK6XpdKFflUh8wlskA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/aWNvbi1pY29uLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAx/OC8wNy9tYXJpbHlu/X21vbnJvZV9waG90/b19wb3NlX3NldmVu/X3llYXJfaXRjaC04/NjB4MTA2MS5qcGc",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Marilyn Monroe",
+          "Marilyn",
+          "Sept ans de réflexion",
+          "The Seven Year Itch"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "f40e27a52b55",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "https://imgs.search.brave.com/2S7KS_PiWxNfcaVzX1lNfrMeARoSENMv8ivuBIxAARc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/MjBtbi5mci9SODdU/UFh2cVFKaUIxZGpl/eW9sa1JTay8xNDQ0/eDkyMF9hLXBob3Rv/LXRha2VuLTA5LWp1/bHktMjAwNi1vZi1m/cmVuY2gtbWlkZmll/bGRlci16aW5lZGlu/ZS16aWRhbmUtbC1n/ZXN0dXJpbmctYWZ0/ZXItaGVhZC1idXR0/aW5nLWl0YWxpYW4t/ZGVmZW5kZXItbWFy/Y28tbWF0ZXJhenpp/LWR1cmluZy10aGUt/d29ybGQtY3VwLTIw/MDYtZmluYWwtZm9v/dGJhbGwtbWF0Y2gt/YmV0d2Vlbi1pdGFs/eS1hbmQtZnJhbmNl/LWF0LWJlcmxpbi1z/LW9seW1waWMtc3Rh/ZGl1bS1hZnAtcGhv/dG8tam9obi1tYWNk/b3VnYWxsLXBob3Rv/LWJ5LWpvaG4tbWFj/ZG91Z2FsbC1hZnA",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Coup de boule de Zidane",
+          "Coup de boule",
+          "Zidane",
+          "Zinédine Zidane",
+          "Zidane Materazzi",
+          "Finale 2006",
+          "Coupe du monde 2006"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "a6e8979b0b68",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "https://imgs.search.brave.com/TIvcECELpDq5HVd-Heud2JjaUC8YGWyxZ-5Q6G4PD-k/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/cGF1bG9ldXZyZWFy/dC5vcmcvY291Y2gv/dXBsb2Fkcy9pbWFn/ZS9ibG9nLzIwMjQv/dmluY2VudC12YW4t/Z29naC1sYS1udWl0/LWV0b2lsZWUuanBn",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "La Nuit étoilée",
+          "Nuit étoilée",
+          "Van Gogh",
+          "Vincent van Gogh",
+          "The Starry Night"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "f106d67f721d",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "https://imgs.search.brave.com/dBNtYiVGrpOzCM-k57kg627bYY3p1AM_ZcChGnTtfZM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucHJpc21pYy5p/by9leGN1cmlvL2FG/SzBCTE5KRUZhUFlF/T2tfQmVmb3JldGhl/cmFtcGFydHMzRC1U/aGVMYXN0U3Ryb25n/aG9sZC0lQzIlQTlF/eGN1cmlvQ01OLnBu/Zz9hdXRvPWZvcm1h/dCxjb21wcmVzcyZ3/PTEwODA",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Carcassonne",
+          "Cité de Carcassonne",
+          "La Cité de Carcassonne",
+          "Before the Ramparts",
+          "The Last Stronghold",
+          "Before the Ramparts : The Last Stronghold",
+          "Before the Ramparts 3D"
+        ],
+        "fuzzy": true
+      }
+    ],
+    "updatedAt": 1795476699986
   }
 ]

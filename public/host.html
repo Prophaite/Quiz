@@ -1054,7 +1054,7 @@ const btn = (label, action, cls = '', payload, extra = '') =>
 const CONFIRMS = {
   reset: () => (S.tour ? 'Recommencer tout le tournoi ? Toutes les équipes reviennent au salon d’attente, scores à zéro.' : 'Remettre tous les scores à zéro et revenir au salon d’attente ?'),
   end: () => (S.tour ? 'Terminer cette étape maintenant ? (classement et qualifiés)' : 'Terminer la partie maintenant ?'),
-  imSkip: () => 'Personne n’a trouvé ? L’image sera dévoilée sans être attribuée.',
+  imSkip: () => 'Passer cette image ? Elle sera dévoilée sans être attribuée, puis vous passerez à la suivante.',
 };
 // Tous les boutons [data-action] de la zone : envoient l'action (avec confirmation si besoin)
 function bindActions(root) {
@@ -1091,10 +1091,12 @@ function renderLive() {
     if (s.state === 'imIntro') c += btn('▶ Première question', 'next', 'primary big');
     if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big') + btn('🖼 Propositions d’image', 'imGuess', 'big');
     if (s.state === 'reveal') c += btn('🖼 Propositions d’image', 'imGuess', 'primary big');
-    if (s.state === 'guess') c += btn('⏭ Question suivante (même image)', 'next', 'primary big') + btn('🙈 Personne ne trouve : dévoiler', 'imSkip');
+    if (s.state === 'guess') c += btn('⏭ Question suivante (même image)', 'next', 'primary big');
+    // Personne ne trouve : on peut passer l'image à tout moment (elle est dévoilée, puis image suivante)
+    if (['imIntro', 'question', 'closed', 'reveal', 'guess'].includes(s.state)) c += btn('🙈 Passer l’image (personne ne trouve)', 'imSkip');
     if (s.state === 'imFound') {
       const over = s.im.found?.over || s.im.index + 1 >= s.im.total;
-      c += btn(over ? endLabel : '▶ Image suivante', 'imNextImage', 'primary big') + btn('↩ Annuler l’attribution', 'imUndo');
+      c += btn(over ? endLabel : '▶ Image suivante', 'imNextImage', 'primary big') + btn(s.im.found?.by ? '↩ Annuler l’attribution' : '↩ Annuler : revenir à l’image', 'imUndo');
     }
   } else if (type === 'quiz') {
     if (s.state === 'closed') c += btn('👁 Révéler la réponse', 'reveal', 'primary big');
