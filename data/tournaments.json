@@ -36,7 +36,7 @@
         "effect": "blur"
       }
     ],
-    "updatedAt": 1795178657915
+    "updatedAt": 1795543306972
   },
   {
     "id": "1deadd57189e",
@@ -75,7 +75,7 @@
         "effect": "blur"
       }
     ],
-    "updatedAt": 1795178836505
+    "updatedAt": 1795543306972
   },
   {
     "id": "701780589945",
@@ -83,12 +83,12 @@
     "stages": [
       {
         "type": "quiz",
-        "qualify": 4,
+        "qualify": 8,
         "quizId": "gctfbh6tlzmlnbn7"
       },
       {
         "type": "themes",
-        "qualify": 2,
+        "qualify": 5,
         "themeIds": [
           "deee6207043f",
           "7a747af59474",
@@ -97,10 +97,10 @@
           "5e69af380593",
           "d3c86d11ce62"
         ],
-        "perTeam": 3,
+        "perTeam": 4,
         "points": {
-          "duo": 25,
-          "carre": 50,
+          "duo": 35,
+          "carre": 60,
           "cash": 100
         }
       },
@@ -109,11 +109,11 @@
         "qualify": 1,
         "imageQuizId": "e74d6b7fbd92",
         "questionQuizId": "fe17e916e960",
-        "wins": 3,
+        "wins": 5,
         "levels": 5,
         "effect": "blur"
       }
     ],
-    "updatedAt": 1795540207693
+    "updatedAt": 1795543778217
   }
 ]

@@ -2250,1082 +2250,9 @@
     "title": "Tournoi Excurio - Questions de la finale",
     "questions": [
       {
-        "id": "4bca7327666b",
+        "id": "5573ac2d30f9",
         "type": "choice",
-        "text": "Quelle mer borde la ville d’Odessa ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La mer Caspienne",
-            "correct": false
-          },
-          {
-            "text": "La mer Baltique",
-            "correct": false
-          },
-          {
-            "text": "La mer Noire",
-            "correct": true
-          },
-          {
-            "text": "La mer Égée",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "de61ead92d4e",
-        "type": "choice",
-        "text": "Combien de cases compte un échiquier ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "64",
-            "correct": true
-          },
-          {
-            "text": "100",
-            "correct": false
-          },
-          {
-            "text": "81",
-            "correct": false
-          },
-          {
-            "text": "49",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "adc8b2377824",
-        "type": "choice",
-        "text": "Quel navigateur a atteint l’Amérique en 1492 ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Amerigo Vespucci",
-            "correct": false
-          },
-          {
-            "text": "Vasco de Gama",
-            "correct": false
-          },
-          {
-            "text": "Fernand de Magellan",
-            "correct": false
-          },
-          {
-            "text": "Christophe Colomb",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "d23d9404aa0b",
-        "type": "choice",
-        "text": "Quel est l’ingrédient principal du guacamole ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le concombre",
-            "correct": false
-          },
-          {
-            "text": "La tomate",
-            "correct": false
-          },
-          {
-            "text": "L’avocat",
-            "correct": true
-          },
-          {
-            "text": "Le poivron",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "e382634ba636",
-        "type": "choice",
-        "text": "Dans quelle ville Jeanne d’Arc a-t-elle été brûlée ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Rouen",
-            "correct": true
-          },
-          {
-            "text": "Paris",
-            "correct": false
-          },
-          {
-            "text": "Reims",
-            "correct": false
-          },
-          {
-            "text": "Orléans",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "ee56bd79146a",
-        "type": "choice",
-        "text": "Dans quel sport utilise-t-on un volant ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le squash",
-            "correct": false
-          },
-          {
-            "text": "Le tennis",
-            "correct": false
-          },
-          {
-            "text": "Le badminton",
-            "correct": true
-          },
-          {
-            "text": "Le tennis de table",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "7a46a3287375",
-        "type": "choice",
-        "text": "Quel chanteur est surnommé « le King » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Frank Sinatra",
-            "correct": false
-          },
-          {
-            "text": "Johnny Hallyday",
-            "correct": false
-          },
-          {
-            "text": "Elvis Presley",
-            "correct": true
-          },
-          {
-            "text": "Michael Jackson",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "abdce347bc73",
-        "type": "choice",
-        "text": "Dans « Le Seigneur des anneaux », quel hobbit part détruire l’Anneau ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Sam",
-            "correct": false
-          },
-          {
-            "text": "Pippin",
-            "correct": false
-          },
-          {
-            "text": "Frodon",
-            "correct": true
-          },
-          {
-            "text": "Bilbon",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "cdaa45cf59f5",
-        "type": "choice",
-        "text": "Dans quel pays se trouve le Machu Picchu ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le Mexique",
-            "correct": false
-          },
-          {
-            "text": "La Bolivie",
-            "correct": false
-          },
-          {
-            "text": "Le Pérou",
-            "correct": true
-          },
-          {
-            "text": "Le Chili",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "0f3b509e9d2b",
-        "type": "choice",
-        "text": "Quelle série met en scène les familles Stark et Lannister ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Vikings",
-            "correct": false
-          },
-          {
-            "text": "The Crown",
-            "correct": false
-          },
-          {
-            "text": "The Witcher",
-            "correct": false
-          },
-          {
-            "text": "Game of Thrones",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "bb7529e4f9c9",
-        "type": "choice",
-        "text": "De quelle couleur est le maillot du leader du Tour de France ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Blanc",
-            "correct": false
-          },
-          {
-            "text": "Jaune",
-            "correct": true
-          },
-          {
-            "text": "Vert",
-            "correct": false
-          },
-          {
-            "text": "Blanc à pois rouges",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "111ccad2d240",
-        "type": "choice",
-        "text": "Quel film Pixar raconte l’histoire d’un poisson-clown qui cherche son fils ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Cars",
-            "correct": false
-          },
-          {
-            "text": "Toy Story",
-            "correct": false
-          },
-          {
-            "text": "Le Monde de Nemo",
-            "correct": true
-          },
-          {
-            "text": "Ratatouille",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "da9296d70131",
-        "type": "choice",
-        "text": "Que signifie l’expression « poser un lapin » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Partir sans payer",
-            "correct": false
-          },
-          {
-            "text": "Faire une blague",
-            "correct": false
-          },
-          {
-            "text": "Raconter un mensonge",
-            "correct": false
-          },
-          {
-            "text": "Ne pas venir à un rendez-vous",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "677d3222f885",
-        "type": "choice",
-        "text": "En quelle année le mur de Berlin est-il tombé ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "1987",
-            "correct": false
-          },
-          {
-            "text": "1989",
-            "correct": true
-          },
-          {
-            "text": "1985",
-            "correct": false
-          },
-          {
-            "text": "1991",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "2fad2f12f3a2",
-        "type": "choice",
-        "text": "Qui a écrit « Le Petit Prince » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Marcel Pagnol",
-            "correct": false
-          },
-          {
-            "text": "Jules Verne",
-            "correct": false
-          },
-          {
-            "text": "Antoine de Saint-Exupéry",
-            "correct": true
-          },
-          {
-            "text": "Albert Camus",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "403de344a139",
-        "type": "choice",
-        "text": "Quel groupe a chanté « Bohemian Rhapsody » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Queen",
-            "correct": true
-          },
-          {
-            "text": "The Rolling Stones",
-            "correct": false
-          },
-          {
-            "text": "Led Zeppelin",
-            "correct": false
-          },
-          {
-            "text": "The Beatles",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "9dce7a59926d",
-        "type": "choice",
-        "text": "Qui a été le premier homme à marcher sur la Lune ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Michael Collins",
-            "correct": false
-          },
-          {
-            "text": "Neil Armstrong",
-            "correct": true
-          },
-          {
-            "text": "Buzz Aldrin",
-            "correct": false
-          },
-          {
-            "text": "Youri Gagarine",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "bb07a99f4ce3",
-        "type": "choice",
-        "text": "Quel animal est l’emblème du WWF ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le tigre",
-            "correct": false
-          },
-          {
-            "text": "L’ours polaire",
-            "correct": false
-          },
-          {
-            "text": "Le panda géant",
-            "correct": true
-          },
-          {
-            "text": "L’éléphant",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "d3c49f6f99fd",
-        "type": "choice",
-        "text": "En quelle année a eu lieu le débarquement en Normandie ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "1942",
-            "correct": false
-          },
-          {
-            "text": "1944",
-            "correct": true
-          },
-          {
-            "text": "1943",
-            "correct": false
-          },
-          {
-            "text": "1945",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "158bc5f5e03b",
-        "type": "choice",
-        "text": "Qui a fondé Microsoft avec Paul Allen ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Steve Wozniak",
-            "correct": false
-          },
-          {
-            "text": "Mark Zuckerberg",
-            "correct": false
-          },
-          {
-            "text": "Bill Gates",
-            "correct": true
-          },
-          {
-            "text": "Steve Jobs",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "bd55212776f1",
-        "type": "choice",
-        "text": "Quel tournoi de tennis se joue sur terre battue à Paris ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "L’US Open",
-            "correct": false
-          },
-          {
-            "text": "Wimbledon",
-            "correct": false
-          },
-          {
-            "text": "L’Open d’Australie",
-            "correct": false
-          },
-          {
-            "text": "Roland-Garros",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "185e00d995a3",
-        "type": "choice",
-        "text": "Dans quel sport Teddy Riner s’est-il illustré ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La lutte",
-            "correct": false
-          },
-          {
-            "text": "Le karaté",
-            "correct": false
-          },
-          {
-            "text": "Le judo",
-            "correct": true
-          },
-          {
-            "text": "La boxe",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "6915e3bca982",
-        "type": "choice",
-        "text": "En quelle année Apple a-t-il présenté le premier iPhone ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "2005",
-            "correct": false
-          },
-          {
-            "text": "2010",
-            "correct": false
-          },
-          {
-            "text": "2009",
-            "correct": false
-          },
-          {
-            "text": "2007",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "c00792eed722",
-        "type": "choice",
-        "text": "Quel personnage de Molière est un avare ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Alceste",
-            "correct": false
-          },
-          {
-            "text": "Sganarelle",
-            "correct": false
-          },
-          {
-            "text": "Harpagon",
-            "correct": true
-          },
-          {
-            "text": "Tartuffe",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "f96e6707fb6a",
-        "type": "choice",
-        "text": "Avec combien de pays la France métropolitaine a-t-elle une frontière terrestre ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "9",
-            "correct": false
-          },
-          {
-            "text": "6",
-            "correct": false
-          },
-          {
-            "text": "7",
-            "correct": false
-          },
-          {
-            "text": "8",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "50f5053dbd61",
-        "type": "choice",
-        "text": "Quel acteur incarne Jack Sparrow dans « Pirates des Caraïbes » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Brad Pitt",
-            "correct": false
-          },
-          {
-            "text": "Johnny Depp",
-            "correct": true
-          },
-          {
-            "text": "Orlando Bloom",
-            "correct": false
-          },
-          {
-            "text": "Keanu Reeves",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "7b65f4ffdc12",
-        "type": "choice",
-        "text": "Quel est le pays le plus peuplé d’Afrique ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "L’Afrique du Sud",
-            "correct": false
-          },
-          {
-            "text": "L’Égypte",
-            "correct": false
-          },
-          {
-            "text": "L’Éthiopie",
-            "correct": false
-          },
-          {
-            "text": "Le Nigeria",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "f9b49d6a63ba",
-        "type": "choice",
-        "text": "Combien d’os compte le squelette d’un adulte ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "226",
-            "correct": false
-          },
-          {
-            "text": "256",
-            "correct": false
-          },
-          {
-            "text": "206",
-            "correct": true
-          },
-          {
-            "text": "186",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "557f2e305dbc",
-        "type": "choice",
-        "text": "Quelle civilisation a bâti la cité de Chichén Itzá ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Les Incas",
-            "correct": false
-          },
-          {
-            "text": "Les Olmèques",
-            "correct": false
-          },
-          {
-            "text": "Les Mayas",
-            "correct": true
-          },
-          {
-            "text": "Les Aztèques",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "8eb748089732",
-        "type": "choice",
-        "text": "Quelle est la planète la plus proche du Soleil ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Mercure",
-            "correct": true
-          },
-          {
-            "text": "La Terre",
-            "correct": false
-          },
-          {
-            "text": "Vénus",
-            "correct": false
-          },
-          {
-            "text": "Mars",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "b24d2f589dce",
-        "type": "choice",
-        "text": "Dans « Star Wars », qui est le père de Luke Skywalker ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Obi-Wan Kenobi",
-            "correct": false
-          },
-          {
-            "text": "Yoda",
-            "correct": false
-          },
-          {
-            "text": "L’Empereur Palpatine",
-            "correct": false
-          },
-          {
-            "text": "Dark Vador",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "16b93413ab67",
-        "type": "choice",
-        "text": "Qui a sculpté « Le Penseur » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Auguste Rodin",
-            "correct": true
-          },
-          {
-            "text": "Camille Claudel",
-            "correct": false
-          },
-          {
-            "text": "Auguste Bartholdi",
-            "correct": false
-          },
-          {
-            "text": "Michel-Ange",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "1c8c4f16b3f4",
-        "type": "choice",
-        "text": "Quelle est la monnaie du Japon ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le won",
-            "correct": false
-          },
-          {
-            "text": "Le baht",
-            "correct": false
-          },
-          {
-            "text": "Le yuan",
-            "correct": false
-          },
-          {
-            "text": "Le yen",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "de0743ed7ac0",
-        "type": "choice",
-        "text": "Combien de joueurs une équipe de volley-ball aligne-t-elle sur le terrain ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "7",
-            "correct": false
-          },
-          {
-            "text": "6",
-            "correct": true
-          },
-          {
-            "text": "5",
-            "correct": false
-          },
-          {
-            "text": "9",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "44750f1cef4f",
-        "type": "choice",
-        "text": "Combien de cœurs possède une pieuvre ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "1",
-            "correct": false
-          },
-          {
-            "text": "3",
-            "correct": true
-          },
-          {
-            "text": "8",
-            "correct": false
-          },
-          {
-            "text": "2",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "390a2ef3e898",
-        "type": "choice",
-        "text": "Quel film français de 2011 raconte l’amitié entre un riche tétraplégique et son aide à domicile ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le Dîner de cons",
-            "correct": false
-          },
-          {
-            "text": "Bienvenue chez les Ch’tis",
-            "correct": false
-          },
-          {
-            "text": "Les Visiteurs",
-            "correct": false
-          },
-          {
-            "text": "Intouchables",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "5d7b3a091672",
-        "type": "choice",
-        "text": "Quel gaz les plantes absorbent-elles pour la photosynthèse ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "L’azote",
-            "correct": false
-          },
-          {
-            "text": "L’hydrogène",
-            "correct": false
-          },
-          {
-            "text": "L’oxygène",
-            "correct": false
-          },
-          {
-            "text": "Le dioxyde de carbone",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "3dab9ba6d200",
-        "type": "choice",
-        "text": "Quel est l’animal terrestre le plus rapide ?",
+        "text": "Quel est le plus grand félin du monde ?",
         "image": "",
         "points": 100,
         "time": 20,
@@ -3336,15 +2263,15 @@
             "correct": false
           },
           {
-            "text": "Le guépard",
+            "text": "Le tigre",
             "correct": true
           },
           {
-            "text": "L’antilope",
+            "text": "Le léopard",
             "correct": false
           },
           {
-            "text": "Le lévrier",
+            "text": "Le jaguar",
             "correct": false
           }
         ],
@@ -3352,86 +2279,492 @@
         "partial": false
       },
       {
-        "id": "9fb63f6a96d4",
+        "id": "10eb8e978f0a",
         "type": "choice",
-        "text": "Qui a découvert la pénicilline ?",
+        "text": "Quel roi de France a été fait prisonnier à la bataille de Pavie ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Robert Koch",
+            "text": "Charles VIII",
             "correct": false
           },
           {
-            "text": "Louis Pasteur",
+            "text": "François Ier",
+            "correct": true
+          },
+          {
+            "text": "Louis XII",
+            "correct": false
+          },
+          {
+            "text": "Henri II",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "db91e430eded",
+        "type": "choice",
+        "text": "Quel président américain a signé la proclamation d’émancipation des esclaves ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Abraham Lincoln",
+            "correct": true
+          },
+          {
+            "text": "George Washington",
+            "correct": false
+          },
+          {
+            "text": "Thomas Jefferson",
+            "correct": false
+          },
+          {
+            "text": "Ulysses S. Grant",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "ba10be8ab1d4",
+        "type": "choice",
+        "text": "Combien de temps la lumière du Soleil met-elle, environ, pour atteindre la Terre ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "8 minutes",
+            "correct": true
+          },
+          {
+            "text": "1 heure",
+            "correct": false
+          },
+          {
+            "text": "8 secondes",
+            "correct": false
+          },
+          {
+            "text": "8 heures",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0587781fffa4",
+        "type": "choice",
+        "text": "Quel est le symbole chimique du tungstène ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Tu",
+            "correct": false
+          },
+          {
+            "text": "Tn",
+            "correct": false
+          },
+          {
+            "text": "W",
+            "correct": true
+          },
+          {
+            "text": "Tg",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2bf9ca02552b",
+        "type": "choice",
+        "text": "Quel est le plus long fleuve d’Europe ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Volga",
+            "correct": true
+          },
+          {
+            "text": "Le Dniepr",
+            "correct": false
+          },
+          {
+            "text": "Le Danube",
+            "correct": false
+          },
+          {
+            "text": "Le Rhin",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "bbbc41705528",
+        "type": "choice",
+        "text": "De quel pharaon le tombeau a-t-il été découvert presque intact en 1922 ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Akhenaton",
+            "correct": false
+          },
+          {
+            "text": "Khéops",
+            "correct": false
+          },
+          {
+            "text": "Toutânkhamon",
+            "correct": true
+          },
+          {
+            "text": "Ramsès II",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3f21b4111edc",
+        "type": "choice",
+        "text": "Quelle dynastie a régné sur les Francs entre les Mérovingiens et les Capétiens ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les Carolingiens",
+            "correct": true
+          },
+          {
+            "text": "Les Bourbons",
+            "correct": false
+          },
+          {
+            "text": "Les Valois",
+            "correct": false
+          },
+          {
+            "text": "Les Plantagenêts",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "175b85594fe4",
+        "type": "choice",
+        "text": "Quelle langue est la plus parlée au Brésil ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le portugais",
+            "correct": true
+          },
+          {
+            "text": "L’espagnol",
+            "correct": false
+          },
+          {
+            "text": "L’anglais",
+            "correct": false
+          },
+          {
+            "text": "Le français",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "227daebc3517",
+        "type": "choice",
+        "text": "Quel est l’élément chimique le plus abondant dans l’Univers ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L’hydrogène",
+            "correct": true
+          },
+          {
+            "text": "L’hélium",
+            "correct": false
+          },
+          {
+            "text": "L’oxygène",
+            "correct": false
+          },
+          {
+            "text": "Le carbone",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "116f9bc2f3b4",
+        "type": "choice",
+        "text": "Quel est le point culminant de l’Afrique ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le mont Kenya",
+            "correct": false
+          },
+          {
+            "text": "Le Toubkal",
+            "correct": false
+          },
+          {
+            "text": "Le Ruwenzori",
+            "correct": false
+          },
+          {
+            "text": "Le Kilimandjaro",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "50f7c6e5292f",
+        "type": "choice",
+        "text": "Quel château de la Loire enjambe le Cher ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Azay-le-Rideau",
+            "correct": false
+          },
+          {
+            "text": "Chambord",
+            "correct": false
+          },
+          {
+            "text": "Amboise",
+            "correct": false
+          },
+          {
+            "text": "Chenonceau",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "da54d02b767e",
+        "type": "choice",
+        "text": "Quel opéra de Bizet se déroule à Séville ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Carmen",
+            "correct": true
+          },
+          {
+            "text": "Tosca",
+            "correct": false
+          },
+          {
+            "text": "La Traviata",
+            "correct": false
+          },
+          {
+            "text": "Aïda",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "e0e211c13692",
+        "type": "choice",
+        "text": "En quelle année Napoléon Bonaparte a-t-il été sacré empereur ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "1806",
+            "correct": false
+          },
+          {
+            "text": "1815",
+            "correct": false
+          },
+          {
+            "text": "1804",
+            "correct": true
+          },
+          {
+            "text": "1799",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "fe8200800f20",
+        "type": "choice",
+        "text": "Quel acteur joue Jacques Mayol dans « Le Grand Bleu » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Tchéky Karyo",
+            "correct": false
+          },
+          {
+            "text": "Jean-Marc Barr",
+            "correct": true
+          },
+          {
+            "text": "Jean Reno",
+            "correct": false
+          },
+          {
+            "text": "Christophe Lambert",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "80525328837c",
+        "type": "choice",
+        "text": "Qui a écrit « À la recherche du temps perdu » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Marcel Proust",
+            "correct": true
+          },
+          {
+            "text": "André Gide",
+            "correct": false
+          },
+          {
+            "text": "Stendhal",
+            "correct": false
+          },
+          {
+            "text": "Gustave Flaubert",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2f5f9c6965f4",
+        "type": "choice",
+        "text": "Qui a découvert la radioactivité naturelle en 1896 ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Henri Becquerel",
+            "correct": true
+          },
+          {
+            "text": "Pierre Curie",
+            "correct": false
+          },
+          {
+            "text": "Ernest Rutherford",
             "correct": false
           },
           {
             "text": "Marie Curie",
             "correct": false
-          },
-          {
-            "text": "Alexander Fleming",
-            "correct": true
           }
         ],
         "multi": false,
         "partial": false
       },
       {
-        "id": "e3ba280321cd",
+        "id": "7b671319d62e",
         "type": "choice",
-        "text": "Quel est le plus grand organe du corps humain ?",
+        "text": "Quel film a remporté 11 Oscars, à égalité avec « Titanic » et « Ben-Hur » ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Le foie",
-            "correct": false
-          },
-          {
-            "text": "L’intestin grêle",
-            "correct": false
-          },
-          {
-            "text": "La peau",
+            "text": "Le Seigneur des anneaux : Le Retour du roi",
             "correct": true
           },
           {
-            "text": "Les poumons",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "94bd78f81b16",
-        "type": "choice",
-        "text": "Quel est le plus haut sommet d’Europe occidentale ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le mont Blanc",
-            "correct": true
-          },
-          {
-            "text": "Le mont Rose",
+            "text": "Avatar",
             "correct": false
           },
           {
-            "text": "L’Aneto",
+            "text": "La La Land",
             "correct": false
           },
           {
-            "text": "Le Cervin",
+            "text": "Forrest Gump",
             "correct": false
           }
         ],
@@ -3439,28 +2772,28 @@
         "partial": false
       },
       {
-        "id": "212bdfed10cc",
+        "id": "8b1c081182c4",
         "type": "choice",
-        "text": "Combien de points rapporte un essai au rugby à XV ?",
+        "text": "Quelle est la distance officielle d’un marathon ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "5",
+            "text": "40 km",
+            "correct": false
+          },
+          {
+            "text": "42 km",
+            "correct": false
+          },
+          {
+            "text": "42,195 km",
             "correct": true
           },
           {
-            "text": "7",
-            "correct": false
-          },
-          {
-            "text": "3",
-            "correct": false
-          },
-          {
-            "text": "4",
+            "text": "45 km",
             "correct": false
           }
         ],
@@ -3468,28 +2801,28 @@
         "partial": false
       },
       {
-        "id": "fe0673cb209d",
+        "id": "68c818018804",
         "type": "choice",
-        "text": "Quel acteur joue Forrest Gump ?",
+        "text": "Qui a écrit « Les Fleurs du mal » ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Robin Williams",
+            "text": "Stéphane Mallarmé",
             "correct": false
           },
           {
-            "text": "Tom Cruise",
-            "correct": false
-          },
-          {
-            "text": "Tom Hanks",
+            "text": "Charles Baudelaire",
             "correct": true
           },
           {
-            "text": "Kevin Costner",
+            "text": "Arthur Rimbaud",
+            "correct": false
+          },
+          {
+            "text": "Paul Verlaine",
             "correct": false
           }
         ],
@@ -3497,173 +2830,28 @@
         "partial": false
       },
       {
-        "id": "f5be7a269d6d",
+        "id": "3bbf99c9feea",
         "type": "choice",
-        "text": "Combien de temps dure un match de football, hors prolongations ?",
+        "text": "Qui a peint « Guernica » ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "120 minutes",
+            "text": "Francisco de Goya",
             "correct": false
           },
           {
-            "text": "80 minutes",
+            "text": "Joan Miró",
             "correct": false
           },
           {
-            "text": "90 minutes",
-            "correct": true
-          },
-          {
-            "text": "100 minutes",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "748b629e5ba8",
-        "type": "choice",
-        "text": "Qui a formulé la théorie de la relativité ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Isaac Newton",
+            "text": "Salvador Dalí",
             "correct": false
           },
           {
-            "text": "Niels Bohr",
-            "correct": false
-          },
-          {
-            "text": "Albert Einstein",
-            "correct": true
-          },
-          {
-            "text": "Max Planck",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "c9d54debc5d4",
-        "type": "choice",
-        "text": "Combien de lettres compte l’alphabet français ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "28",
-            "correct": false
-          },
-          {
-            "text": "26",
-            "correct": true
-          },
-          {
-            "text": "25",
-            "correct": false
-          },
-          {
-            "text": "24",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "c08f9842239a",
-        "type": "choice",
-        "text": "En quelle année a eu lieu la prise de la Bastille ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "1804",
-            "correct": false
-          },
-          {
-            "text": "1792",
-            "correct": false
-          },
-          {
-            "text": "1789",
-            "correct": true
-          },
-          {
-            "text": "1776",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "3c8d46245fe2",
-        "type": "choice",
-        "text": "À quel mouvement artistique Claude Monet est-il associé ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "L’impressionnisme",
-            "correct": true
-          },
-          {
-            "text": "Le surréalisme",
-            "correct": false
-          },
-          {
-            "text": "Le fauvisme",
-            "correct": false
-          },
-          {
-            "text": "Le cubisme",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "ee4bc49748bc",
-        "type": "choice",
-        "text": "Quelle est la plus grosse planète du système solaire ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Saturne",
-            "correct": false
-          },
-          {
-            "text": "Uranus",
-            "correct": false
-          },
-          {
-            "text": "Neptune",
-            "correct": false
-          },
-          {
-            "text": "Jupiter",
+            "text": "Pablo Picasso",
             "correct": true
           }
         ],
@@ -3671,78 +2859,49 @@
         "partial": false
       },
       {
-        "id": "6b45ea4d8d0e",
+        "id": "aecbc2b4a3ac",
         "type": "choice",
-        "text": "Qui a peint « La Jeune Fille à la perle » ?",
+        "text": "Quel ministre d’Henri IV a dit « Labourage et pâturage sont les deux mamelles de la France » ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Jan van Eyck",
+            "text": "Richelieu",
             "correct": false
           },
           {
-            "text": "Pierre Paul Rubens",
+            "text": "Turgot",
             "correct": false
           },
           {
-            "text": "Johannes Vermeer",
+            "text": "Colbert",
+            "correct": false
+          },
+          {
+            "text": "Sully",
             "correct": true
-          },
-          {
-            "text": "Rembrandt",
-            "correct": false
           }
         ],
         "multi": false,
         "partial": false
       },
       {
-        "id": "858d41ed2bae",
+        "id": "979ae045c57e",
         "type": "choice",
-        "text": "Quel est le plus long fleuve de France ?",
+        "text": "Quel est le numéro atomique du carbone ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "La Garonne",
-            "correct": false
-          },
-          {
-            "text": "Le Rhône",
-            "correct": false
-          },
-          {
-            "text": "La Loire",
+            "text": "6",
             "correct": true
           },
           {
-            "text": "La Seine",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "e50cba66bd49",
-        "type": "choice",
-        "text": "Combien de romans compte la saga Harry Potter ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "7",
-            "correct": true
-          },
-          {
-            "text": "5",
+            "text": "12",
             "correct": false
           },
           {
@@ -3750,314 +2909,57 @@
             "correct": false
           },
           {
+            "text": "14",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "28f66595a888",
+        "type": "choice",
+        "text": "Combien de touches compte un piano standard ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "100",
+            "correct": false
+          },
+          {
+            "text": "76",
+            "correct": false
+          },
+          {
+            "text": "88",
+            "correct": true
+          },
+          {
+            "text": "92",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "08a4dc883e50",
+        "type": "choice",
+        "text": "Combien de joueurs une équipe de hockey sur glace aligne-t-elle sur la glace, gardien compris ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
             "text": "6",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "7af16d65ef61",
-        "type": "choice",
-        "text": "Qui a réalisé « Titanic » (1997) ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "James Cameron",
             "correct": true
           },
           {
-            "text": "Ridley Scott",
-            "correct": false
-          },
-          {
-            "text": "Steven Spielberg",
-            "correct": false
-          },
-          {
-            "text": "Christopher Nolan",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "6b0f5ac4cfd7",
-        "type": "choice",
-        "text": "De quel pays vient le groupe ABBA ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La Suède",
-            "correct": true
-          },
-          {
-            "text": "Le Danemark",
-            "correct": false
-          },
-          {
-            "text": "La Finlande",
-            "correct": false
-          },
-          {
-            "text": "La Norvège",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "10ad5f342b12",
-        "type": "choice",
-        "text": "Dans quel musée est exposée « La Joconde » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le musée d’Orsay",
-            "correct": false
-          },
-          {
-            "text": "Les Offices",
-            "correct": false
-          },
-          {
-            "text": "Le Louvre",
-            "correct": true
-          },
-          {
-            "text": "Le Prado",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "330b4c55cd50",
-        "type": "choice",
-        "text": "Quel est le plus grand animal du monde ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le cachalot",
-            "correct": false
-          },
-          {
-            "text": "Le requin-baleine",
-            "correct": false
-          },
-          {
-            "text": "La baleine bleue",
-            "correct": true
-          },
-          {
-            "text": "L’éléphant d’Afrique",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "3a5953c17e63",
-        "type": "choice",
-        "text": "Qui a été le premier président de la Ve République ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Charles de Gaulle",
-            "correct": true
-          },
-          {
-            "text": "René Coty",
-            "correct": false
-          },
-          {
-            "text": "Georges Pompidou",
-            "correct": false
-          },
-          {
-            "text": "Vincent Auriol",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "5bd727861969",
-        "type": "choice",
-        "text": "Selon la légende, quel empereur romain aurait fait incendier Rome ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Néron",
-            "correct": true
-          },
-          {
-            "text": "Caligula",
-            "correct": false
-          },
-          {
-            "text": "Auguste",
-            "correct": false
-          },
-          {
-            "text": "Jules César",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "b39b8a8da4f2",
-        "type": "choice",
-        "text": "Quelle est, environ, la vitesse de la lumière dans le vide ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "300 000 km/s",
-            "correct": true
-          },
-          {
-            "text": "30 000 km/s",
-            "correct": false
-          },
-          {
-            "text": "3 000 km/s",
-            "correct": false
-          },
-          {
-            "text": "3 millions de km/s",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "d312a851ca6b",
-        "type": "choice",
-        "text": "Quelle est la capitale de la Nouvelle-Zélande ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Christchurch",
-            "correct": false
-          },
-          {
-            "text": "Queenstown",
-            "correct": false
-          },
-          {
-            "text": "Wellington",
-            "correct": true
-          },
-          {
-            "text": "Auckland",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "c9c5c4734159",
-        "type": "choice",
-        "text": "Quelle est la capitale du Canada ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Ottawa",
-            "correct": true
-          },
-          {
-            "text": "Montréal",
-            "correct": false
-          },
-          {
-            "text": "Toronto",
-            "correct": false
-          },
-          {
-            "text": "Vancouver",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "35f18e56ce5e",
-        "type": "choice",
-        "text": "Qui a chanté « La Vie en rose » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Édith Piaf",
-            "correct": true
-          },
-          {
-            "text": "Barbara",
-            "correct": false
-          },
-          {
-            "text": "Juliette Gréco",
-            "correct": false
-          },
-          {
-            "text": "Dalida",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "ab3bee1468d7",
-        "type": "choice",
-        "text": "Combien de cordes a une guitare classique ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "12",
+            "text": "11",
             "correct": false
           },
           {
@@ -4065,11 +2967,7 @@
             "correct": false
           },
           {
-            "text": "6",
-            "correct": true
-          },
-          {
-            "text": "4",
+            "text": "5",
             "correct": false
           }
         ],
@@ -4077,9 +2975,1227 @@
         "partial": false
       },
       {
-        "id": "94062ef1c3ac",
+        "id": "c99a5403dec6",
         "type": "choice",
-        "text": "Qui a écrit « Roméo et Juliette » ?",
+        "text": "Combien la France compte-t-elle de départements, outre-mer compris ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "103",
+            "correct": false
+          },
+          {
+            "text": "101",
+            "correct": true
+          },
+          {
+            "text": "95",
+            "correct": false
+          },
+          {
+            "text": "96",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2c82f5b2077c",
+        "type": "choice",
+        "text": "Qui a réalisé « 2001 : l’Odyssée de l’espace » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "George Lucas",
+            "correct": false
+          },
+          {
+            "text": "Steven Spielberg",
+            "correct": false
+          },
+          {
+            "text": "Stanley Kubrick",
+            "correct": true
+          },
+          {
+            "text": "Ridley Scott",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "4f26128a5349",
+        "type": "choice",
+        "text": "Quelle feuille figure sur le drapeau du Canada ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le chêne",
+            "correct": false
+          },
+          {
+            "text": "Le bouleau",
+            "correct": false
+          },
+          {
+            "text": "Le sapin",
+            "correct": false
+          },
+          {
+            "text": "L’érable",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3b7fd62712ea",
+        "type": "choice",
+        "text": "Quel pays a mis en orbite le premier satellite artificiel ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Chine",
+            "correct": false
+          },
+          {
+            "text": "L’URSS",
+            "correct": true
+          },
+          {
+            "text": "Les États-Unis",
+            "correct": false
+          },
+          {
+            "text": "La France",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2bd3c9954027",
+        "type": "choice",
+        "text": "Quelle est la capitale du Kazakhstan ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Almaty",
+            "correct": false
+          },
+          {
+            "text": "Astana",
+            "correct": true
+          },
+          {
+            "text": "Tachkent",
+            "correct": false
+          },
+          {
+            "text": "Bichkek",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "feed9965ce03",
+        "type": "choice",
+        "text": "En quelle année a eu lieu la bataille de Marignan ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "1515",
+            "correct": true
+          },
+          {
+            "text": "1415",
+            "correct": false
+          },
+          {
+            "text": "1498",
+            "correct": false
+          },
+          {
+            "text": "1525",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "ee05c9599268",
+        "type": "choice",
+        "text": "Quel métal est liquide à température ambiante ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le plomb",
+            "correct": false
+          },
+          {
+            "text": "Le sodium",
+            "correct": false
+          },
+          {
+            "text": "Le gallium",
+            "correct": false
+          },
+          {
+            "text": "Le mercure",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "89d2978d1e7d",
+        "type": "choice",
+        "text": "Qui a réalisé « Le Fabuleux Destin d’Amélie Poulain » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Leos Carax",
+            "correct": false
+          },
+          {
+            "text": "Luc Besson",
+            "correct": false
+          },
+          {
+            "text": "Jean-Pierre Jeunet",
+            "correct": true
+          },
+          {
+            "text": "Jacques Audiard",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8d5fd1fd87bd",
+        "type": "choice",
+        "text": "Quelle reine d’Angleterre a régné de 1558 à 1603 ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Victoria",
+            "correct": false
+          },
+          {
+            "text": "Marie Tudor",
+            "correct": false
+          },
+          {
+            "text": "Élisabeth Ire",
+            "correct": true
+          },
+          {
+            "text": "Anne",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "10a1f99e6cf7",
+        "type": "choice",
+        "text": "Quel est le lac le plus profond du monde ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le lac Baïkal",
+            "correct": true
+          },
+          {
+            "text": "Le lac Victoria",
+            "correct": false
+          },
+          {
+            "text": "Le lac Tanganyika",
+            "correct": false
+          },
+          {
+            "text": "Le lac Supérieur",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "61d88cfc793d",
+        "type": "choice",
+        "text": "Quel roi a signé l’édit de Nantes en 1598 ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Louis XIII",
+            "correct": false
+          },
+          {
+            "text": "Henri IV",
+            "correct": true
+          },
+          {
+            "text": "François Ier",
+            "correct": false
+          },
+          {
+            "text": "Henri III",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "776c4f1d41f1",
+        "type": "choice",
+        "text": "Combien d’années dure le mandat d’un sénateur en France ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "9",
+            "correct": false
+          },
+          {
+            "text": "5",
+            "correct": false
+          },
+          {
+            "text": "6",
+            "correct": true
+          },
+          {
+            "text": "7",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "ce77a4e54017",
+        "type": "choice",
+        "text": "Sur quelle île Napoléon est-il mort ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Corse",
+            "correct": false
+          },
+          {
+            "text": "Malte",
+            "correct": false
+          },
+          {
+            "text": "Sainte-Hélène",
+            "correct": true
+          },
+          {
+            "text": "L’île d’Elbe",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "32959185ca84",
+        "type": "choice",
+        "text": "Quel groupe a sorti l’album « Abbey Road » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "The Rolling Stones",
+            "correct": false
+          },
+          {
+            "text": "The Beatles",
+            "correct": true
+          },
+          {
+            "text": "The Kinks",
+            "correct": false
+          },
+          {
+            "text": "The Who",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7bb139ce26f0",
+        "type": "choice",
+        "text": "Quel compositeur français a écrit le « Boléro » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Claude Debussy",
+            "correct": false
+          },
+          {
+            "text": "Erik Satie",
+            "correct": false
+          },
+          {
+            "text": "Maurice Ravel",
+            "correct": true
+          },
+          {
+            "text": "Georges Bizet",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "cd1ae8ddd0be",
+        "type": "choice",
+        "text": "Quel vin effervescent est produit autour de Reims et d’Épernay ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le champagne",
+            "correct": true
+          },
+          {
+            "text": "La clairette",
+            "correct": false
+          },
+          {
+            "text": "Le crémant",
+            "correct": false
+          },
+          {
+            "text": "La blanquette",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0c812e81a695",
+        "type": "choice",
+        "text": "Quel pays compte le plus de fuseaux horaires, outre-mer compris ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Royaume-Uni",
+            "correct": false
+          },
+          {
+            "text": "La France",
+            "correct": true
+          },
+          {
+            "text": "La Russie",
+            "correct": false
+          },
+          {
+            "text": "Les États-Unis",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3df515959bf9",
+        "type": "choice",
+        "text": "Dans quel roman de Jules Verne apparaît le capitaine Nemo ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Vingt Mille Lieues sous les mers",
+            "correct": true
+          },
+          {
+            "text": "Voyage au centre de la Terre",
+            "correct": false
+          },
+          {
+            "text": "Le Tour du monde en quatre-vingts jours",
+            "correct": false
+          },
+          {
+            "text": "De la Terre à la Lune",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0c829e95f26d",
+        "type": "choice",
+        "text": "Quel festival de cinéma décerne le Lion d’or ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Berlinale",
+            "correct": false
+          },
+          {
+            "text": "Le Festival de Locarno",
+            "correct": false
+          },
+          {
+            "text": "La Mostra de Venise",
+            "correct": true
+          },
+          {
+            "text": "Le Festival de Cannes",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "11c7290e7915",
+        "type": "choice",
+        "text": "Quel chanteur belge a écrit « Ne me quitte pas » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Georges Brassens",
+            "correct": false
+          },
+          {
+            "text": "Charles Aznavour",
+            "correct": false
+          },
+          {
+            "text": "Jacques Brel",
+            "correct": true
+          },
+          {
+            "text": "Léo Ferré",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7dc8363568de",
+        "type": "choice",
+        "text": "Qui a peint « La Naissance de Vénus » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Caravage",
+            "correct": false
+          },
+          {
+            "text": "Sandro Botticelli",
+            "correct": true
+          },
+          {
+            "text": "Titien",
+            "correct": false
+          },
+          {
+            "text": "Raphaël",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7a3d05775289",
+        "type": "choice",
+        "text": "Qui a peint le plafond de la chapelle Sixtine ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Michel-Ange",
+            "correct": true
+          },
+          {
+            "text": "Léonard de Vinci",
+            "correct": false
+          },
+          {
+            "text": "Sandro Botticelli",
+            "correct": false
+          },
+          {
+            "text": "Raphaël",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5d6e07948eb3",
+        "type": "choice",
+        "text": "Quel est l’os le plus long du corps humain ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le tibia",
+            "correct": false
+          },
+          {
+            "text": "Le péroné",
+            "correct": false
+          },
+          {
+            "text": "L’humérus",
+            "correct": false
+          },
+          {
+            "text": "Le fémur",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "e350f71b5895",
+        "type": "choice",
+        "text": "En quelle année a été votée la loi de séparation des Églises et de l’État ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "1882",
+            "correct": false
+          },
+          {
+            "text": "1789",
+            "correct": false
+          },
+          {
+            "text": "1905",
+            "correct": true
+          },
+          {
+            "text": "1946",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8f7484221d82",
+        "type": "choice",
+        "text": "Dans quel sport dispute-t-on la Ryder Cup ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La voile",
+            "correct": false
+          },
+          {
+            "text": "Le tennis",
+            "correct": false
+          },
+          {
+            "text": "Le polo",
+            "correct": false
+          },
+          {
+            "text": "Le golf",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f8d238d0a759",
+        "type": "choice",
+        "text": "Quel roi a fait construire le château de Chambord ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Louis XII",
+            "correct": false
+          },
+          {
+            "text": "Charles VIII",
+            "correct": false
+          },
+          {
+            "text": "François Ier",
+            "correct": true
+          },
+          {
+            "text": "Henri II",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "04b78ac4a71a",
+        "type": "choice",
+        "text": "Quel ministre de Louis XIV a fait des Gobelins une manufacture royale ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Mazarin",
+            "correct": false
+          },
+          {
+            "text": "Jean-Baptiste Colbert",
+            "correct": true
+          },
+          {
+            "text": "Nicolas Fouquet",
+            "correct": false
+          },
+          {
+            "text": "Louvois",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1da52427f52c",
+        "type": "choice",
+        "text": "Quel écrivain français a reçu le prix Nobel de littérature en 1957 ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "André Gide",
+            "correct": false
+          },
+          {
+            "text": "François Mauriac",
+            "correct": false
+          },
+          {
+            "text": "Jean-Paul Sartre",
+            "correct": false
+          },
+          {
+            "text": "Albert Camus",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5126288b51dc",
+        "type": "choice",
+        "text": "Quel auteur a créé le personnage d’Arsène Lupin ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Arthur Conan Doyle",
+            "correct": false
+          },
+          {
+            "text": "Maurice Leblanc",
+            "correct": true
+          },
+          {
+            "text": "Georges Simenon",
+            "correct": false
+          },
+          {
+            "text": "Gaston Leroux",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "fffe26ff8ab6",
+        "type": "choice",
+        "text": "Quel est l’animal national de l’Écosse ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La licorne",
+            "correct": true
+          },
+          {
+            "text": "Le cerf",
+            "correct": false
+          },
+          {
+            "text": "Le lion",
+            "correct": false
+          },
+          {
+            "text": "L’aigle",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "83f7e375444d",
+        "type": "choice",
+        "text": "Quel fromage bleu est affiné dans des caves de l’Aveyron ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le roquefort",
+            "correct": true
+          },
+          {
+            "text": "Le bleu de Gex",
+            "correct": false
+          },
+          {
+            "text": "La fourme d’Ambert",
+            "correct": false
+          },
+          {
+            "text": "Le bleu d’Auvergne",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "27530236a470",
+        "type": "choice",
+        "text": "Qui a réalisé « Les Dents de la mer » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Francis Ford Coppola",
+            "correct": false
+          },
+          {
+            "text": "John Carpenter",
+            "correct": false
+          },
+          {
+            "text": "Steven Spielberg",
+            "correct": true
+          },
+          {
+            "text": "Brian De Palma",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "533d10ae1a44",
+        "type": "choice",
+        "text": "Quel est le plus petit pays du monde ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Nauru",
+            "correct": false
+          },
+          {
+            "text": "Saint-Marin",
+            "correct": false
+          },
+          {
+            "text": "Monaco",
+            "correct": false
+          },
+          {
+            "text": "Le Vatican",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "56b6268fb16f",
+        "type": "choice",
+        "text": "Quel dramaturge du XVIIe siècle a écrit « Phèdre » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Molière",
+            "correct": false
+          },
+          {
+            "text": "Pierre Corneille",
+            "correct": false
+          },
+          {
+            "text": "Marivaux",
+            "correct": false
+          },
+          {
+            "text": "Jean Racine",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a19899e2336f",
+        "type": "choice",
+        "text": "Quel massacre de protestants a eu lieu à Paris en août 1572 ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Saint-Barthélemy",
+            "correct": true
+          },
+          {
+            "text": "Les Vêpres siciliennes",
+            "correct": false
+          },
+          {
+            "text": "La journée des Dupes",
+            "correct": false
+          },
+          {
+            "text": "La Fronde",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d8901979b01b",
+        "type": "choice",
+        "text": "Qui a écrit « De l’origine des espèces » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Jean-Baptiste de Lamarck",
+            "correct": false
+          },
+          {
+            "text": "Buffon",
+            "correct": false
+          },
+          {
+            "text": "Charles Darwin",
+            "correct": true
+          },
+          {
+            "text": "Gregor Mendel",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "e500d58650aa",
+        "type": "choice",
+        "text": "Sur quelle planète une journée dure-t-elle plus longtemps qu’une année ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Mercure",
+            "correct": false
+          },
+          {
+            "text": "Vénus",
+            "correct": true
+          },
+          {
+            "text": "Jupiter",
+            "correct": false
+          },
+          {
+            "text": "Neptune",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2fa0a811bab3",
+        "type": "choice",
+        "text": "Quelle unité mesure une fréquence ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le joule",
+            "correct": false
+          },
+          {
+            "text": "Le pascal",
+            "correct": false
+          },
+          {
+            "text": "Le hertz",
+            "correct": true
+          },
+          {
+            "text": "Le tesla",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3c64603c059d",
+        "type": "choice",
+        "text": "Combien de sets faut-il gagner pour remporter un match masculin de Grand Chelem ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "4",
+            "correct": false
+          },
+          {
+            "text": "2",
+            "correct": false
+          },
+          {
+            "text": "5",
+            "correct": false
+          },
+          {
+            "text": "3",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b415d5c39a03",
+        "type": "choice",
+        "text": "Quel fleuve traverse Budapest ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Dniepr",
+            "correct": false
+          },
+          {
+            "text": "L’Elbe",
+            "correct": false
+          },
+          {
+            "text": "Le Danube",
+            "correct": true
+          },
+          {
+            "text": "La Vistule",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "20f78460a673",
+        "type": "choice",
+        "text": "Qui a composé « Les Quatre Saisons » ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Georg Friedrich Haendel",
+            "correct": false
+          },
+          {
+            "text": "Antonio Vivaldi",
+            "correct": true
+          },
+          {
+            "text": "Jean-Sébastien Bach",
+            "correct": false
+          },
+          {
+            "text": "Joseph Haydn",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7a09943a583c",
+        "type": "choice",
+        "text": "Quel détroit sépare l’Europe de l’Afrique ?",
+        "image": "",
+        "points": 100,
+        "time": 20,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les Dardanelles",
+            "correct": false
+          },
+          {
+            "text": "Le détroit de Gibraltar",
+            "correct": true
+          },
+          {
+            "text": "Le détroit de Messine",
+            "correct": false
+          },
+          {
+            "text": "Le Bosphore",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3e752f74cd0c",
+        "type": "choice",
+        "text": "Qui a écrit « Le Cid » ?",
         "image": "",
         "points": 100,
         "time": 20,
@@ -4094,11 +4210,11 @@
             "correct": false
           },
           {
-            "text": "William Shakespeare",
+            "text": "Pierre Corneille",
             "correct": true
           },
           {
-            "text": "Goethe",
+            "text": "Nicolas Boileau",
             "correct": false
           }
         ],
@@ -4106,57 +4222,28 @@
         "partial": false
       },
       {
-        "id": "b1cdd32846e9",
+        "id": "6b6705eeecae",
         "type": "choice",
-        "text": "Quel film est le premier film non anglophone à avoir reçu l’Oscar du meilleur film (2020) ?",
+        "text": "Dans quelle ville Léonard de Vinci est-il mort ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Roma",
+            "text": "Milan",
             "correct": false
           },
           {
-            "text": "Le Fabuleux Destin d’Amélie Poulain",
+            "text": "Blois",
             "correct": false
           },
           {
-            "text": "Tigre et Dragon",
-            "correct": false
-          },
-          {
-            "text": "Parasite",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "857e14df4efd",
-        "type": "choice",
-        "text": "Quel compositeur a continué à composer après être devenu sourd ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Ludwig van Beethoven",
+            "text": "Amboise",
             "correct": true
           },
           {
-            "text": "Wolfgang Amadeus Mozart",
-            "correct": false
-          },
-          {
-            "text": "Frédéric Chopin",
-            "correct": false
-          },
-          {
-            "text": "Jean-Sébastien Bach",
+            "text": "Florence",
             "correct": false
           }
         ],
@@ -4164,86 +4251,28 @@
         "partial": false
       },
       {
-        "id": "6344dab58033",
+        "id": "c5c03fe78678",
         "type": "choice",
-        "text": "Quel est le plus grand désert chaud du monde ?",
+        "text": "Quel cardinal fut le principal ministre de Louis XIII ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Le Gobi",
-            "correct": false
-          },
-          {
-            "text": "Le Kalahari",
-            "correct": false
-          },
-          {
-            "text": "L’Atacama",
-            "correct": false
-          },
-          {
-            "text": "Le Sahara",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "7655c1517f39",
-        "type": "choice",
-        "text": "Quel fromage utilise-t-on traditionnellement dans la tartiflette ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La raclette",
-            "correct": false
-          },
-          {
-            "text": "Le beaufort",
-            "correct": false
-          },
-          {
-            "text": "Le comté",
-            "correct": false
-          },
-          {
-            "text": "Le reblochon",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "5340c0a9a3df",
-        "type": "choice",
-        "text": "Quel duo français a composé « One More Time » ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Cassius",
-            "correct": false
-          },
-          {
-            "text": "Air",
-            "correct": false
-          },
-          {
-            "text": "Daft Punk",
+            "text": "Richelieu",
             "correct": true
           },
           {
-            "text": "Justice",
+            "text": "Fleury",
+            "correct": false
+          },
+          {
+            "text": "Dubois",
+            "correct": false
+          },
+          {
+            "text": "Mazarin",
             "correct": false
           }
         ],
@@ -4251,28 +4280,28 @@
         "partial": false
       },
       {
-        "id": "9a4bdce78424",
+        "id": "911f53aa8234",
         "type": "choice",
-        "text": "Combien de chromosomes possède une cellule humaine (hors cellules reproductrices) ?",
+        "text": "En quelle année Constantinople est-elle tombée aux mains des Ottomans ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "46",
+            "text": "1204",
+            "correct": false
+          },
+          {
+            "text": "1492",
+            "correct": false
+          },
+          {
+            "text": "1453",
             "correct": true
           },
           {
-            "text": "23",
-            "correct": false
-          },
-          {
-            "text": "44",
-            "correct": false
-          },
-          {
-            "text": "48",
+            "text": "1517",
             "correct": false
           }
         ],
@@ -4280,28 +4309,28 @@
         "partial": false
       },
       {
-        "id": "ab8ea3b5d223",
+        "id": "c8cafc45669c",
         "type": "choice",
-        "text": "Quel est le symbole chimique de l’or ?",
+        "text": "Dans quelle ville se trouve le stade de Wembley ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Ag",
+            "text": "Birmingham",
             "correct": false
           },
           {
-            "text": "Au",
+            "text": "Liverpool",
+            "correct": false
+          },
+          {
+            "text": "Londres",
             "correct": true
           },
           {
-            "text": "Go",
-            "correct": false
-          },
-          {
-            "text": "Or",
+            "text": "Manchester",
             "correct": false
           }
         ],
@@ -4309,57 +4338,28 @@
         "partial": false
       },
       {
-        "id": "0304cb663ef9",
+        "id": "a948668ea0de",
         "type": "choice",
-        "text": "Dans quelle ville se trouve la Sagrada Família ?",
+        "text": "Quelle est la capitale de la Birmanie (Myanmar) ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Barcelone",
-            "correct": true
-          },
-          {
-            "text": "Séville",
+            "text": "Rangoun",
             "correct": false
           },
           {
-            "text": "Valence",
+            "text": "Mandalay",
             "correct": false
           },
           {
-            "text": "Madrid",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "9ce2cc328d47",
-        "type": "choice",
-        "text": "De quelle région la choucroute est-elle la spécialité ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La Savoie",
+            "text": "Bagan",
             "correct": false
           },
           {
-            "text": "La Normandie",
-            "correct": false
-          },
-          {
-            "text": "La Bretagne",
-            "correct": false
-          },
-          {
-            "text": "L’Alsace",
+            "text": "Naypyidaw",
             "correct": true
           }
         ],
@@ -4367,28 +4367,28 @@
         "partial": false
       },
       {
-        "id": "b7254f331d86",
+        "id": "851684e56283",
         "type": "choice",
-        "text": "Qui a écrit « Les Misérables » ?",
+        "text": "En quelle année les Françaises ont-elles voté pour la première fois ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Alexandre Dumas",
+            "text": "1919",
             "correct": false
           },
           {
-            "text": "Honoré de Balzac",
-            "correct": false
-          },
-          {
-            "text": "Victor Hugo",
+            "text": "1945",
             "correct": true
           },
           {
-            "text": "Émile Zola",
+            "text": "1958",
+            "correct": false
+          },
+          {
+            "text": "1936",
             "correct": false
           }
         ],
@@ -4396,28 +4396,28 @@
         "partial": false
       },
       {
-        "id": "5dcec0eda26a",
+        "id": "719eab4b281b",
         "type": "choice",
-        "text": "Quel roi de France était surnommé le Roi-Soleil ?",
+        "text": "Combien de trous compte un parcours de golf standard ?",
         "image": "",
         "points": 100,
         "time": 20,
         "trap": false,
         "choices": [
           {
-            "text": "Louis XIV",
+            "text": "18",
             "correct": true
           },
           {
-            "text": "François Ier",
+            "text": "12",
             "correct": false
           },
           {
-            "text": "Louis XIII",
+            "text": "9",
             "correct": false
           },
           {
-            "text": "Louis XV",
+            "text": "21",
             "correct": false
           }
         ],
@@ -4425,6 +4425,6 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795540151037
+    "updatedAt": 1795543216897
   }
 ]
