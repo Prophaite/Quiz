@@ -76,5 +76,44 @@
       }
     ],
     "updatedAt": 1795178836505
+  },
+  {
+    "id": "701780589945",
+    "title": "Tournoi Excurio",
+    "stages": [
+      {
+        "type": "quiz",
+        "qualify": 4,
+        "quizId": "gctfbh6tlzmlnbn7"
+      },
+      {
+        "type": "themes",
+        "qualify": 2,
+        "themeIds": [
+          "deee6207043f",
+          "7a747af59474",
+          "c007afd05522",
+          "56176f17a359",
+          "5e69af380593",
+          "d3c86d11ce62"
+        ],
+        "perTeam": 3,
+        "points": {
+          "duo": 25,
+          "carre": 50,
+          "cash": 100
+        }
+      },
+      {
+        "type": "images",
+        "qualify": 1,
+        "imageQuizId": "e74d6b7fbd92",
+        "questionQuizId": "fe17e916e960",
+        "wins": 3,
+        "levels": 5,
+        "effect": "blur"
+      }
+    ],
+    "updatedAt": 1795540207693
   }
 ]
