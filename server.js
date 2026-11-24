@@ -1426,6 +1426,7 @@ function displayView(room) {
     // 'starting' : l'adresse Internet n'est pas encore prête, ne pas afficher le QR code
     netReady: tunnel.mode !== 'starting',
     title: room.quiz.title,
+    sfx: room.sfx || null, // dernier son de la boîte à sons (id 'stop' = tout couper)
     state: room.state,
     players: activePlayers(room).map((p) => ({ name: p.name, connected: playerConnected(p) })),
     question: publicQuestion(room, true),
@@ -1741,7 +1742,18 @@ function playerOf(body) {
   return { room, p };
 }
 
+// Boîte à sons : l'animateur déclenche un son, joué par l'écran de projection
+const SFX_ID = /^[a-z0-9-]{1,40}$/;
+const SOUNDS_DIR = path.join(PUBLIC_DIR, 'sons');
+const SOUND_EXT = ['.mp3', '.ogg', '.m4a', '.wav'];
+
 function hostAction(room, action, payload = {}) {
+  if (action === 'sfx') {
+    const id = String(payload.id ?? '');
+    if (!SFX_ID.test(id)) fail('Son inconnu');
+    room.sfx = { id, n: (room.sfx?.n || 0) + 1, at: Date.now() };
+    return broadcast(room);
+  }
   if (!(room.tour && tourAction(room, action, payload))) quizAction(room, action, payload);
   // Tentation de triche et vol de points : seulement dans un quiz (partie simple ou étape Quiz)
   if (stageType(room) === 'quiz' && (room.state === 'reveal' || room.state === 'leaderboard')) { makeOffers(room); makeSteal(room); }
@@ -2060,6 +2072,12 @@ async function handle(req, res) {
   }
   if (m === 'GET' && p === '/api/quizzes') return json(res, 200, quizzes);
   if (m === 'GET' && p === '/api/tournaments') return json(res, 200, tournaments);
+  if (m === 'GET' && p === '/api/sounds') {
+    // Fichiers de la boîte à sons (public/sons/) : ils remplacent les sons générés du même nom
+    let names = [];
+    try { names = fs.readdirSync(SOUNDS_DIR).filter((n) => SOUND_EXT.includes(path.extname(n).toLowerCase())); } catch {}
+    return json(res, 200, names);
+  }
   if (m === 'GET' && p.startsWith('/api/qr/')) {
     const code = p.slice(8).replace(/\D/g, '').slice(0, 8);
     res.writeHead(200, { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'no-cache' });

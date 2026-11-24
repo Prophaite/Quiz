@@ -150,6 +150,12 @@
   .verdict { margin-top: 12px; padding: 10px 14px; border-radius: 10px; font-weight: 700; font-size: 16px; }
   .verdict.ok { background: var(--ok-soft); color: var(--ok); }
   .verdict.ko { background: var(--ko-soft); color: var(--ko); }
+  .sfx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-top: 12px; }
+  .sfx-grid button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px; font-size: 13px; line-height: 1.2; text-align: center; }
+  .sfx-grid button .ico { font-size: 26px; }
+  .sfx-grid button.champion { grid-column: span 2; background: linear-gradient(135deg, #f6c445, #e8892b); color: #3a1d00; border-color: transparent; font-weight: 800; }
+  .sfx-grid button.played { animation: sfxFlash .5s ease; }
+  @keyframes sfxFlash { from { box-shadow: 0 0 0 4px var(--accent, #5b4bdb); } to { box-shadow: 0 0 0 0 transparent; } }
   .upcoming { margin-top: 18px; border: 1px dashed var(--line); border-radius: 10px; padding: 8px 12px; }
   .upcoming summary { cursor: pointer; font-weight: 700; }
   .up-q { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 13px; }
@@ -289,6 +295,19 @@
           <div class="controls" id="controls"></div>
           <div id="liveBody"></div>
         </div>
+
+        <div class="panel hidden" id="sfxPanel" style="margin-top:16px">
+          <div class="row">
+            <h2 class="grow" style="margin:0">🔊 Boîte à sons</h2>
+            <select id="sfxWhere" style="width:auto" title="Où les sons sont joués">
+              <option value="display">📺 Sur l’écran de projection</option>
+              <option value="here">💻 Sur ce PC</option>
+            </select>
+            <button id="sfxStop" class="small">⏹ Couper</button>
+          </div>
+          <div class="sfx-grid" id="sfxGrid"></div>
+          <p class="hint" id="sfxHelp"></p>
+        </div>
       </div>
 
       <aside class="panel">
@@ -316,6 +335,7 @@
 <script src="/common.js"></script>
 <script src="/xlsx-import.js"></script>
 <script src="/slider-range.js"></script>
+<script src="/sounds.js"></script>
 <script>
 const { esc, COLORS, SHAPES, TYPE_LABELS, fmt } = Q;
 // Mode dev de la page de gestion (/host?dev=1, ouvert par Lancer-Quiz-Dev.bat) :
@@ -1157,6 +1177,7 @@ function renderLive() {
     b = questionPanel(s) + (type === 'images' ? imagesPanel(s) : '');
   }
   b += upcomingPanel(s);
+  $('#sfxPanel').classList.toggle('hidden', s.state === 'lobby');
   $('#liveBody').innerHTML = b;
   bindActions($('#liveBody'));
   $('#liveBody').querySelectorAll('[data-group]').forEach((el) => (el.onclick = () => act('toggleGroup', { key: el.dataset.group })));
@@ -1214,6 +1235,31 @@ function themesPanel(s) {
   return h + '</div>';
 }
 const t_endLabel = (s) => (s.tour.last ? '🏁 Résultats finaux du tournoi' : '🏁 Fin de l’étape');
+
+/* ---------- Boîte à sons : visible une fois la partie commencée ---------- */
+const SFX_WHERE_KEY = 'quiz-sfx-where';
+async function setupSfx() {
+  const files = await Sfx.loadFiles();
+  const where = $('#sfxWhere');
+  try { where.value = localStorage.getItem(SFX_WHERE_KEY) || 'display'; } catch {}
+  where.onchange = () => { try { localStorage.setItem(SFX_WHERE_KEY, where.value); } catch {} };
+  $('#sfxGrid').innerHTML = Sfx.LIST.map((x) => {
+    const missing = x.file && !files[x.id];
+    return `<button data-sfx="${x.id}" class="${x.id === 'champion' ? 'champion' : ''}" ${missing ? 'disabled' : ''}
+      title="${missing ? `Déposez le fichier public/sons/${x.id}.mp3 puis rechargez la page` : files[x.id] ? 'Fichier de public/sons/' : 'Son généré'}">
+      <span class="ico">${x.icon}</span>${esc(x.label)}${missing ? '<small>fichier à ajouter</small>' : ''}</button>`;
+  }).join('');
+  $('#sfxHelp').innerHTML = files.champion
+    ? 'Les sons sont joués là où vous l’avez choisi. Un fichier déposé dans <code>public/sons/</code> remplace le son du même nom (ex. <code>applaudissements.mp3</code>).'
+    : 'Pour le générique, déposez le fichier <code>public/sons/champion.mp3</code> (ou .ogg, .m4a, .wav) puis rechargez la page. Un fichier déposé dans <code>public/sons/</code> remplace aussi le son du même nom (ex. <code>applaudissements.mp3</code>).';
+  $('#sfxGrid').querySelectorAll('[data-sfx]').forEach((b) => (b.onclick = () => {
+    b.classList.remove('played'); void b.offsetWidth; b.classList.add('played');
+    if (where.value === 'here') Sfx.play(b.dataset.sfx);
+    else act('sfx', { id: b.dataset.sfx });
+  }));
+  $('#sfxStop').onclick = () => (where.value === 'here' ? Sfx.stop() : act('sfx', { id: 'stop' }));
+}
+setupSfx();
 
 /* ---------- Prochaines questions : à lire avant de les lancer ---------- */
 function upcomingPanel(s) {

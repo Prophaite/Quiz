@@ -158,9 +158,11 @@
 <button class="fs" id="fs" title="Plein écran">⛶ Plein écran</button>
 <button class="fs music" id="musicBtn" title="Musique d'attente (salle d'attente)">🎵 Musique</button>
 <div class="music-hint hidden" id="musicHint">🔈 Cliquez n’importe où pour activer la musique</div>
+<div class="music-hint hidden" id="sfxHint">🔈 Cliquez n’importe où pour activer les sons de l’animateur</div>
 
 <script src="/common.js"></script>
 <script src="/music.js"></script>
+<script src="/sounds.js"></script>
 <script>
 const { esc, COLORS, SHAPES, fmt, params, ordinal } = Q;
 const $ = (s) => document.querySelector(s);
@@ -195,8 +197,24 @@ $('#musicBtn').onclick = (e) => {
   WaitMusic.unlock().then(updateMusic);
 };
 for (const ev of ['pointerdown', 'keydown']) {
-  document.addEventListener(ev, () => { if (WaitMusic.playing) WaitMusic.unlock().then(updateMusic); });
+  document.addEventListener(ev, () => {
+    if (WaitMusic.playing) WaitMusic.unlock().then(updateMusic);
+    Sfx.unlock().then((ok) => ok && $('#sfxHint').classList.add('hidden'));
+  });
 }
+
+/* ---------- Boîte à sons : l'animateur déclenche un son depuis sa page ---------- */
+let lastSfx = null;
+function playSfx(sfx) {
+  const n = sfx?.n ?? 0;
+  if (lastSfx === null) { lastSfx = n; return; } // à l'ouverture de la page : on ne rejoue pas l'ancien son
+  if (n === lastSfx) return;
+  lastSfx = n;
+  if (sfx.id === 'stop') return Sfx.stop();
+  if (Date.now() - sfx.at > 15000) return; // reçu trop tard (page en veille) : sans objet
+  Sfx.play(sfx.id).then((ok) => { if (!ok) $('#sfxHint').classList.remove('hidden'); });
+}
+Sfx.loadFiles();
 
 function askCode(msg = '') {
   $('#top').innerHTML = '';
@@ -258,6 +276,7 @@ function render() {
   const full = key !== lastKey;
   lastKey = key;
   updateMusic();
+  playSfx(s.sfx);
   showSteal(s.steal);
 
   if (s.state !== 'lobby') $('#lobby')?.remove();

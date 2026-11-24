@@ -133,6 +133,15 @@ L'écran de projection joue une petite musique d'attente pendant la salle d'atte
 - Les navigateurs n'autorisent le son qu'après un clic : si un bandeau « Cliquez n'importe où pour activer la musique » apparaît, cliquez une fois sur l'écran (le bouton Plein écran suffit).
 - **Votre propre musique** : déposez un fichier `musique-attente.mp3` (ou `.ogg`, `.m4a`, `.wav`) dans le dossier `public` ; il sera joué en boucle à la place. Utilisez une musique dont vous avez les droits de diffusion.
 
+## Boîte à sons
+
+Une fois la partie lancée, la page de gestion affiche une **boîte à sons** sous la question en cours : jingle de question, bonne / mauvaise réponse, applaudissements, roulement de tambour, suspense, tic-tac, fanfare, trombone triste, gong et coup de sifflet. Ces sons sont générés par le navigateur, sans aucun fichier.
+
+- **Où le son est joué** : sur l'écran de projection (par défaut : ce sont ses haut-parleurs qui comptent) ou sur le PC de l'animateur. Le choix est mémorisé. **⏹ Couper** arrête tous les sons en cours.
+- Comme pour la musique, l'écran de projection doit avoir reçu un clic pour jouer du son : sinon un bandeau « Cliquez n'importe où pour activer les sons de l'animateur » apparaît.
+- **Générique « Questions pour un champion »** (bouton doré) : il n'est pas fourni. Déposez votre propre fichier `public/sons/champion.mp3` (ou `.ogg`, `.m4a`, `.wav`), puis rechargez la page de gestion.
+- **Vos propres sons** : un fichier de `public/sons/` qui porte le nom d'un son le remplace (`jingle`, `bonne`, `mauvaise`, `applaudissements`, `roulement`, `suspense`, `tictac`, `fanfare`, `triste`, `gong`, `sifflet`). Exemple : `public/sons/applaudissements.mp3`.
+
 ## Mode test (#dev)
 
 Un joueur qui s'inscrit avec un pseudo terminé par `#dev` (ex. `Lucas#dev`) voit la bonne réponse sur son téléphone pendant chaque question. Partout ailleurs (projection, classements, autres joueurs), son nom s'affiche sans `#dev` et rien ne le distingue.

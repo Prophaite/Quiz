@@ -1,0 +1,9 @@
+Boîte à sons de l'animateur
+
+Déposez ici des fichiers audio (.mp3, .ogg, .m4a ou .wav), puis rechargez la page de gestion.
+
+- champion.mp3 : générique « Questions pour un champion » (bouton doré). Ce fichier n'est pas fourni :
+  ajoutez votre propre copie.
+- Un fichier qui porte le nom d'un son remplace le son généré : jingle, bonne, mauvaise,
+  applaudissements, roulement, suspense, tictac, fanfare, triste, gong, sifflet.
+  Exemple : applaudissements.mp3
