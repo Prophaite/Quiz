@@ -389,9 +389,93 @@
           "Manu"
         ],
         "fuzzy": true
+      },
+      {
+        "id": "cd4c2c36fabb",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "/images/excurio/han-solo-carbonite.webp",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Han Solo",
+          "Han Solo dans la carbonite",
+          "Han Solo congelé",
+          "Carbonite",
+          "Star Wars",
+          "La Guerre des étoiles",
+          "Le Retour du Jedi",
+          "Star Wars : Le Retour du Jedi",
+          "Return of the Jedi",
+          "L’Empire contre-attaque",
+          "Jabba",
+          "Palais de Jabba"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "0dbe2e49e758",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "/images/excurio/mark-hamill-anniversaire.webp",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Mark Hamill",
+          "Luke Skywalker",
+          "Luke",
+          "Happy Birthday",
+          "Joyeux anniversaire",
+          "Anniversaire",
+          "Happy Birthday Mark Hamill"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "1dec5606c08c",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "/images/excurio/horizon-de-kheops.webp",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "L’Horizon de Khéops",
+          "Horizon de Khéops",
+          "L'Horizon de Khéops",
+          "Khéops",
+          "Kheops",
+          "Pyramide de Khéops",
+          "Pyramides",
+          "Égypte",
+          "Gizeh",
+          "Giza"
+        ],
+        "fuzzy": true
+      },
+      {
+        "id": "7883ac98af7c",
+        "type": "text",
+        "text": "Qu’est-ce que c’est ?",
+        "image": "/images/excurio/soiree-halloween.webp",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "answers": [
+          "Halloween",
+          "Soirée Halloween",
+          "Fête d’Halloween",
+          "Fête d'Halloween",
+          "Soirée déguisée",
+          "Soirée costumée",
+          "Déguisements"
+        ],
+        "fuzzy": true
       }
     ],
-    "updatedAt": 1795600760719
+    "updatedAt": 1795622558398
   },
   {
     "id": "fe17e916e960",
