@@ -138,6 +138,7 @@ L'écran de projection joue une petite musique d'attente pendant la salle d'atte
 Une fois la partie lancée, la page de gestion affiche une **boîte à sons** sous la question en cours : jingle de question, bonne / mauvaise réponse, applaudissements, roulement de tambour, suspense, tic-tac, fanfare, trombone triste, gong et coup de sifflet. Ces sons sont générés par le navigateur, sans aucun fichier.
 
 - **Où le son est joué** : sur l'écran de projection (par défaut : ce sont ses haut-parleurs qui comptent) ou sur le PC de l'animateur. Le choix est mémorisé. **⏹ Couper** arrête tous les sons en cours.
+- **🔊 Son / 🔇 Son coupé** (en haut de la page de gestion, dès qu'un salon est ouvert) : coupe tout le son de la partie, sur la projection (musique d'attente et boîte à sons) et sur le PC de l'animateur. Les sons demandés pendant ce temps ne sont pas joués ; un nouveau clic remet le son.
 - Comme pour la musique, l'écran de projection doit avoir reçu un clic pour jouer du son : sinon un bandeau « Cliquez n'importe où pour activer les sons de l'animateur » apparaît.
 - **Générique « Questions pour un champion »** (bouton doré) : il n'est pas fourni. Déposez votre propre fichier `public/sons/champion.mp3` (ou `.ogg`, `.m4a`, `.wav`), puis rechargez la page de gestion.
 - **Vos propres sons** : un fichier de `public/sons/` qui porte le nom d'un son le remplace (`jingle`, `bonne`, `mauvaise`, `applaudissements`, `roulement`, `suspense`, `tictac`, `fanfare`, `triste`, `gong`, `sifflet`). Exemple : `public/sons/applaudissements.mp3`.

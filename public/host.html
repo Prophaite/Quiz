@@ -21,6 +21,8 @@
   nav button.active { background: var(--accent-soft); color: var(--accent); }
   .room-pill { margin-left: auto; font-weight: 600; color: var(--muted); }
   .room-pill b { color: var(--accent); font-size: 16px; letter-spacing: .08em; }
+  #muteBtn { white-space: nowrap; }
+  #muteBtn.on { background: #c0392b; border-color: #c0392b; color: #fff; }
   main { padding: 24px; max-width: 1400px; margin: 0 auto; }
   .hidden { display: none !important; }
 
@@ -187,6 +189,7 @@
     <button data-tab="live">🎮 Partie</button>
   </nav>
   <div class="room-pill" id="roomPill"></div>
+  <button id="muteBtn" class="small hidden" title="Couper tout le son de la partie : musique d'attente et boîte à sons, sur la projection et sur ce PC">🔊 Son</button>
 </header>
 
 <main>
@@ -1016,6 +1019,7 @@ function showSetup() {
   $('#liveSetup').classList.remove('hidden');
   $('#liveRoom').classList.add('hidden');
   $('#roomPill').innerHTML = '';
+  $('#muteBtn').classList.add('hidden');
 }
 
 $('#leaveRoom').onclick = () => {
@@ -1025,6 +1029,7 @@ $('#leaveRoom').onclick = () => {
   showSetup();
 };
 
+$('#muteBtn').onclick = () => S && act('mute', { on: !S.muted });
 function act(action, payload) {
   Q.api('/api/room/action', { code: room.code, token: room.token, action, payload }).catch((e) => toast(e.message));
 }
@@ -1065,6 +1070,10 @@ function onState(s) {
     $('#joinUrl').textContent = urlLabel;
   }
   $('#roomPill').innerHTML = `Salon <b>${esc(s.code)}</b>`;
+  $('#muteBtn').classList.remove('hidden');
+  $('#muteBtn').classList.toggle('on', !!s.muted);
+  $('#muteBtn').textContent = s.muted ? '🔇 Son coupé' : '🔊 Son';
+  if (s.muted) Sfx.stop();
   $('#setSpeed').checked = s.settings.speed !== false;
   $('#setSteal').checked = s.settings.steal !== false;
   $('#setDev').checked = s.settings.allowDev !== false;
@@ -1259,6 +1268,7 @@ async function setupSfx() {
     : 'Pour le générique, déposez le fichier <code>public/sons/champion.mp3</code> (ou .ogg, .m4a, .wav) puis rechargez la page. Un fichier déposé dans <code>public/sons/</code> remplace aussi le son du même nom (ex. <code>applaudissements.mp3</code>).';
   $('#sfxGrid').querySelectorAll('[data-sfx]').forEach((b) => (b.onclick = () => {
     b.classList.remove('played'); void b.offsetWidth; b.classList.add('played');
+    if (S?.muted) return toast('Le son est coupé : cliquez sur « 🔇 Son coupé » en haut pour le remettre');
     if (where.value === 'here') Sfx.play(b.dataset.sfx);
     else act('sfx', { id: b.dataset.sfx });
   }));

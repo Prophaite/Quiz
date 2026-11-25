@@ -178,7 +178,7 @@ $('#fs').onclick = () => (document.fullscreenElement ? document.exitFullscreen()
 const MUSIC_KEY = 'quiz-music';
 let musicOn = (() => { try { return localStorage.getItem(MUSIC_KEY) !== 'off'; } catch { return true; } })();
 async function updateMusic() {
-  const want = musicOn && S?.state === 'lobby';
+  const want = musicOn && !S?.muted && S?.state === 'lobby';
   $('#musicBtn').classList.toggle('off', !musicOn);
   $('#musicBtn').textContent = musicOn ? '🎵 Musique' : '🔇 Musique';
   if (!want) {
@@ -188,7 +188,7 @@ async function updateMusic() {
   }
   await WaitMusic.start();
   // Le navigateur bloque le son tant que personne n'a cliqué sur la page
-  $('#musicHint').classList.toggle('hidden', !(musicOn && S?.state === 'lobby' && WaitMusic.blocked()));
+  $('#musicHint').classList.toggle('hidden', !(want && WaitMusic.blocked()));
 }
 $('#musicBtn').onclick = (e) => {
   e.stopPropagation();
@@ -205,11 +205,16 @@ for (const ev of ['pointerdown', 'keydown']) {
 
 /* ---------- Boîte à sons : l'animateur déclenche un son depuis sa page ---------- */
 let lastSfx = null;
-function playSfx(sfx) {
+let wasMuted = false;
+function playSfx(sfx, muted) {
+  // Son coupé par l'animateur : on arrête tout et on ignore les sons demandés pendant ce temps
+  if (muted && !wasMuted) Sfx.stop();
+  wasMuted = !!muted;
   const n = sfx?.n ?? 0;
   if (lastSfx === null) { lastSfx = n; return; } // à l'ouverture de la page : on ne rejoue pas l'ancien son
   if (n === lastSfx) return;
   lastSfx = n;
+  if (muted) return;
   if (sfx.id === 'stop') return Sfx.stop();
   if (Date.now() - sfx.at > 15000) return; // reçu trop tard (page en veille) : sans objet
   Sfx.play(sfx.id).then((ok) => { if (!ok) $('#sfxHint').classList.remove('hidden'); });
@@ -276,7 +281,7 @@ function render() {
   const full = key !== lastKey;
   lastKey = key;
   updateMusic();
-  playSfx(s.sfx);
+  playSfx(s.sfx, s.muted);
   showSteal(s.steal);
 
   if (s.state !== 'lobby') $('#lobby')?.remove();

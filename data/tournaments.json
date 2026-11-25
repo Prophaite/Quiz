@@ -36,7 +36,7 @@
         "effect": "blur"
       }
     ],
-    "updatedAt": 1795599212345
+    "updatedAt": 1795629704012
   },
   {
     "id": "1deadd57189e",
@@ -75,7 +75,7 @@
         "effect": "blur"
       }
     ],
-    "updatedAt": 1795599212345
+    "updatedAt": 1795629704013
   },
   {
     "id": "701780589945",
@@ -115,11 +115,11 @@
         "qualify": 1,
         "imageQuizId": "e74d6b7fbd92",
         "questionQuizId": "fe17e916e960",
-        "wins": 5,
+        "wins": 4,
         "levels": 5,
         "effect": "blur"
       }
     ],
-    "updatedAt": 1795599488915
+    "updatedAt": 1795629769245
   }
 ]

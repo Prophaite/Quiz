@@ -1448,6 +1448,7 @@ function displayView(room) {
     netReady: tunnel.mode !== 'starting',
     title: room.quiz.title,
     sfx: room.sfx || null, // dernier son de la boîte à sons (id 'stop' = tout couper)
+    muted: !!room.muted,
     state: room.state,
     players: activePlayers(room).map((p) => ({ name: p.name, connected: playerConnected(p) })),
     question: publicQuestion(room, true),
@@ -1595,6 +1596,7 @@ function hostView(room) {
     th: room.state === 'themes' ? themesView(room, true) : null,
     im: stageType(room) === 'images' && room.im ? imagesView(room, 'host') : null,
     eliminated: [...room.players.values()].filter((p) => p.out).map((p) => p.name),
+    muted: !!room.muted,
     code: room.code,
     joinUrl: `${publicUrl}/play?room=${room.code}`,
     // 'starting' : l'adresse Internet n'est pas encore prête, ne pas afficher le QR code
@@ -1774,6 +1776,11 @@ function hostAction(room, action, payload = {}) {
     const id = String(payload.id ?? '');
     if (!SFX_ID.test(id)) fail('Son inconnu');
     room.sfx = { id, n: (room.sfx?.n || 0) + 1, at: Date.now() };
+    return broadcast(room);
+  }
+  if (action === 'mute') {
+    // Son coupé : la projection n'émet plus rien (musique d'attente, boîte à sons)
+    room.muted = !!payload.on;
     return broadcast(room);
   }
   if (!(room.tour && tourAction(room, action, payload))) quizAction(room, action, payload);
