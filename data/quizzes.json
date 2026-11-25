@@ -120,471 +120,7 @@
         }
       }
     ],
-    "updatedAt": 1795453835737
-  },
-  {
-    "id": "gctfbh6tlzmlnbn7",
-    "title": "Quiz Test Excurio",
-    "questions": [
-      {
-        "id": "25c595807540",
-        "type": "choice",
-        "text": "Quelle est la capitale de l’Australie ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Sydney",
-            "correct": false
-          },
-          {
-            "text": "Canberra",
-            "correct": true
-          },
-          {
-            "text": "Melbourne",
-            "correct": false
-          },
-          {
-            "text": "Perth",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "8a12c216a04d",
-        "type": "text",
-        "text": "Qui a peint « La Joconde » ?",
-        "image": "",
-        "points": 200,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "Léonard de Vinci",
-          "Leonardo da Vinci",
-          "De Vinci",
-          "Vinci"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "7ae9a84898c2",
-        "type": "number",
-        "text": "En quelle année l’homme a-t-il marché sur la Lune pour la première fois ?",
-        "image": "",
-        "points": 150,
-        "time": 25,
-        "trap": false,
-        "value": 1969,
-        "tolerance": 0,
-        "mode": "tolerance",
-        "unit": "",
-        "sliderMin": null,
-        "sliderMax": null
-      },
-      {
-        "id": "56938f85cb3f",
-        "type": "choice",
-        "text": "Le Soleil est une étoile.",
-        "image": "",
-        "points": 50,
-        "time": 10,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Vrai",
-            "correct": true
-          },
-          {
-            "text": "Faux",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "0afac7bcae56",
-        "type": "number",
-        "text": "Combien mesure la tour Eiffel (antennes comprises) ?",
-        "image": "",
-        "points": 200,
-        "time": 30,
-        "trap": false,
-        "value": 330,
-        "tolerance": 15,
-        "mode": "tolerance",
-        "unit": "m",
-        "sliderMin": null,
-        "sliderMax": null
-      },
-      {
-        "id": "0ebf4f8c2e6d",
-        "type": "choice",
-        "text": "Qui a écrit « Les Fleurs du mal »",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Paul Verlaine",
-            "correct": false
-          },
-          {
-            "text": "Charles Baudelaire",
-            "correct": true
-          },
-          {
-            "text": "Arthur Rimbaud",
-            "correct": false
-          },
-          {
-            "text": "Victor Hugo",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "a2939dede6c9",
-        "type": "text",
-        "text": "Quel est le nom du célèbre navire de Christophe Colomb en 1492 ?",
-        "image": "",
-        "points": 400,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "La Santa Maria",
-          "Santa Maria"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "0fc4187dfc2b",
-        "type": "choice",
-        "text": "Dans quel pays se trouve la région du Tyrol ?",
-        "image": "",
-        "points": 150,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Autriche",
-            "correct": true
-          },
-          {
-            "text": "Pologne",
-            "correct": false
-          },
-          {
-            "text": "Slovénie",
-            "correct": false
-          },
-          {
-            "text": "Italie",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "5a0d16267774",
-        "type": "text",
-        "text": "Quelle guerre a opposé la France et l'Angleterre et vu Jeanne d'Arc se révéler ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "Guerre de Cent Ans",
-          "Cent ans",
-          "100 ans"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "d13c1f70c29f",
-        "type": "choice",
-        "text": "Quel est le nom du courant artistique auquel appartient Salvador Dalí ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Le Cubisme",
-            "correct": false
-          },
-          {
-            "text": "Le Surréalisme",
-            "correct": true
-          },
-          {
-            "text": "L'Impressionnisme",
-            "correct": false
-          },
-          {
-            "text": "Le Pop art",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "417df9f43e37",
-        "type": "text",
-        "text": "Quel écrivain est l’auteur de « 1984 » ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "George Orwell",
-          "Orwell"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "ef47732546ec",
-        "type": "choice",
-        "text": "Quel peintre a rendu célèbres les boîtes de soupe Campbell’s ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Yoko Ono",
-            "correct": false
-          },
-          {
-            "text": "Salvador Dali",
-            "correct": false
-          },
-          {
-            "text": "Jean-Michel Basquiat",
-            "correct": false
-          },
-          {
-            "text": "Andy Warhol",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "90bde358e5f4",
-        "type": "choice",
-        "text": "Quelle ville est connue comme la capitale française de la bande dessinée ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Angoulême",
-            "correct": true
-          },
-          {
-            "text": "Annecy",
-            "correct": false
-          },
-          {
-            "text": "Amiens",
-            "correct": false
-          },
-          {
-            "text": "Aix",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "b107e28278f6",
-        "type": "choice",
-        "text": "Quel organe du corps humain produit l’insuline ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La Rate",
-            "correct": false
-          },
-          {
-            "text": "Le Pancréas",
-            "correct": true
-          },
-          {
-            "text": "Le Rein",
-            "correct": false
-          },
-          {
-            "text": "Le Cœur",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "7e62d96ca3c3",
-        "type": "choice",
-        "text": "Quelle planète du système solaire possède la rotation la plus rapide sur elle-même ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "choices": [
-          {
-            "text": "La Terre",
-            "correct": false
-          },
-          {
-            "text": "Mars",
-            "correct": false
-          },
-          {
-            "text": "Jupiter",
-            "correct": true
-          },
-          {
-            "text": "Saturne",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "585328030cc9",
-        "type": "text",
-        "text": "Quel métal a pour symbole chimique Fe ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "Le Fer",
-          "Fer"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "175b52510adb",
-        "type": "number",
-        "text": "Combien de cœurs possède une pieuvre ?",
-        "image": "",
-        "points": 100,
-        "time": 20,
-        "trap": false,
-        "value": 3,
-        "tolerance": 0,
-        "mode": "tolerance",
-        "unit": "",
-        "sliderMin": null,
-        "sliderMax": null
-      },
-      {
-        "id": "67965072780b",
-        "type": "choice",
-        "text": "Quel est le plus grand organe du corps humain ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "choices": [
-          {
-            "text": "L'intestin Grêle",
-            "correct": false
-          },
-          {
-            "text": "Les Poumons",
-            "correct": false
-          },
-          {
-            "text": "La Peau",
-            "correct": true
-          },
-          {
-            "text": "Le Cœur",
-            "correct": false
-          }
-        ],
-        "multi": false,
-        "partial": false
-      },
-      {
-        "id": "97fc161b921e",
-        "type": "text",
-        "text": "Dans quel sport évolue l’équipe des All Blacks ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "Le Rugby",
-          "Rugby"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "9cfc55abbd99",
-        "type": "text",
-        "text": "Quelle est la langue officielle du Brésil ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "answers": [
-          "Le Portugais",
-          "Portugais"
-        ],
-        "fuzzy": true
-      },
-      {
-        "id": "a76712dfbca0",
-        "type": "choice",
-        "text": "Quel scientifique est l’inventeur de la première pile électrique ?",
-        "image": "",
-        "points": 100,
-        "time": 30,
-        "trap": false,
-        "choices": [
-          {
-            "text": "Voltaire",
-            "correct": false
-          },
-          {
-            "text": "Voltaren Actigo",
-            "correct": false
-          },
-          {
-            "text": "Vianney",
-            "correct": false
-          },
-          {
-            "text": "Alessandro Volta",
-            "correct": true
-          }
-        ],
-        "multi": false,
-        "partial": false
-      }
-    ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "deee6207043f",
@@ -723,7 +259,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "7a747af59474",
@@ -862,7 +398,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "c007afd05522",
@@ -1001,7 +537,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "56176f17a359",
@@ -1140,7 +676,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "5e69af380593",
@@ -1279,7 +815,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "d3c86d11ce62",
@@ -1418,7 +954,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "952edfc0ce76",
@@ -1715,7 +1251,7 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "9ea6132b5f8a",
@@ -1852,7 +1388,7 @@
         "fuzzy": true
       }
     ],
-    "updatedAt": 1795452753794
+    "updatedAt": 1795599212344
   },
   {
     "id": "189f92e04fbc",
@@ -1972,7 +1508,7 @@
         "fuzzy": true
       }
     ],
-    "updatedAt": 1794820625481
+    "updatedAt": 1795599212344
   },
   {
     "id": "e74d6b7fbd92",
@@ -2243,7 +1779,7 @@
         "fuzzy": true
       }
     ],
-    "updatedAt": 1795539806237
+    "updatedAt": 1795599212344
   },
   {
     "id": "fe17e916e960",
@@ -4425,6 +3961,1086 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795543216897
+    "updatedAt": 1795599212344
+  },
+  {
+    "id": "29d7ca9cab39",
+    "title": "Tournoi Excurio - étape 1",
+    "questions": [
+      {
+        "id": "90572076510a",
+        "type": "choice",
+        "text": "Raymond Poulidor est monté 8 fois sur le podium du Tour de France. Combien de jours a-t-il porté le maillot jaune ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "1 jour",
+            "correct": false
+          },
+          {
+            "text": "Aucun",
+            "correct": true
+          },
+          {
+            "text": "12 jours",
+            "correct": false
+          },
+          {
+            "text": "3 jours",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6ac7891f7d11",
+        "type": "choice",
+        "text": "L'équipe de France masculine de basket a disputé 4 finales olympiques (1948, 2000, 2021 et 2024). Combien en a-t-elle gagné ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Aucune",
+            "correct": true
+          },
+          {
+            "text": "2",
+            "correct": false
+          },
+          {
+            "text": "1",
+            "correct": false
+          },
+          {
+            "text": "3",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "51036d4068b3",
+        "type": "choice",
+        "text": "Après l'élimination des Bleus à l'Euro 2008, quelle journaliste Raymond Domenech demande-t-il en mariage en direct à la télévision ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Laurence Ferrari",
+            "correct": false
+          },
+          {
+            "text": "Karine Ferri",
+            "correct": false
+          },
+          {
+            "text": "Estelle Denis",
+            "correct": true
+          },
+          {
+            "text": "Claire Chazal",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6ac16fcf9fa0",
+        "type": "choice",
+        "text": "Coupe du monde 2010 : dans quelle ville d'Afrique du Sud les Bleus refusent-ils de descendre du bus pour s'entraîner ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Durban",
+            "correct": false
+          },
+          {
+            "text": "Johannesburg",
+            "correct": false
+          },
+          {
+            "text": "Le Cap",
+            "correct": false
+          },
+          {
+            "text": "Knysna",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "78b30276fb8d",
+        "type": "choice",
+        "text": "Coupe du monde de rugby 2023, organisée en France : par quel score les Bleus sont-ils éliminés par l'Afrique du Sud en quart de finale ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "32-30",
+            "correct": false
+          },
+          {
+            "text": "19-16",
+            "correct": false
+          },
+          {
+            "text": "29-28",
+            "correct": true
+          },
+          {
+            "text": "24-13",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f7e892fc8baf",
+        "type": "choice",
+        "text": "« Les cons, ça ose tout. C'est même à ça qu'on les reconnaît. » De quel film vient cette réplique ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les Tontons flingueurs",
+            "correct": true
+          },
+          {
+            "text": "Un singe en hiver",
+            "correct": false
+          },
+          {
+            "text": "La Grande Vadrouille",
+            "correct": false
+          },
+          {
+            "text": "Le Cave se rebiffe",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0af7be886e68",
+        "type": "choice",
+        "text": "« Barrez-vous, cons de mimes ! » De quel film vient cette réplique ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Didier",
+            "correct": false
+          },
+          {
+            "text": "Le Père Noël est une ordure",
+            "correct": false
+          },
+          {
+            "text": "La Cité de la peur",
+            "correct": true
+          },
+          {
+            "text": "RRRrrrr!!!",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "fd11c228ee08",
+        "type": "choice",
+        "text": "« Comment est votre blanquette ? » Quel personnage pose cette question ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "OSS 117",
+            "correct": true
+          },
+          {
+            "text": "François Pignon",
+            "correct": false
+          },
+          {
+            "text": "Brice de Nice",
+            "correct": false
+          },
+          {
+            "text": "Jacquouille la Fripouille",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8892a4df0d0a",
+        "type": "choice",
+        "text": "« Jusqu'ici tout va bien… » Quel film s'ouvre sur cette phrase devenue culte ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les Misérables",
+            "correct": false
+          },
+          {
+            "text": "La Haine",
+            "correct": true
+          },
+          {
+            "text": "Banlieue 13",
+            "correct": false
+          },
+          {
+            "text": "Taxi",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9d8750b822a2",
+        "type": "choice",
+        "text": "Dans Astérix et Obélix : Mission Cléopâtre, Amonbofis lance à Numérobis : « Le lion ne s'associe pas avec le… »",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Cafard",
+            "correct": true
+          },
+          {
+            "text": "Rat",
+            "correct": false
+          },
+          {
+            "text": "Scorpion",
+            "correct": false
+          },
+          {
+            "text": "Chacal",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "4371b5410a02",
+        "type": "choice",
+        "text": "Dans Kim Possible, comment s'appelle la principale méchante, acolyte du docteur Drakken ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Shego",
+            "correct": true
+          },
+          {
+            "text": "Monique",
+            "correct": false
+          },
+          {
+            "text": "Bonnie",
+            "correct": false
+          },
+          {
+            "text": "Camille",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2fa4bdaf38b8",
+        "type": "choice",
+        "text": "Dans le dessin animé Pokémon, quel est le tout premier Pokémon que Sacha capture lui-même ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Bulbizarre",
+            "correct": false
+          },
+          {
+            "text": "Chenipan",
+            "correct": true
+          },
+          {
+            "text": "Roucool",
+            "correct": false
+          },
+          {
+            "text": "Pikachu",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b602c6ff3455",
+        "type": "choice",
+        "text": "Dans Courage, le chien froussard, comment s'appelle le lieu où vivent Courage, Muriel et Eustache ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Nulle Part",
+            "correct": true
+          },
+          {
+            "text": "Bouseville",
+            "correct": false
+          },
+          {
+            "text": "Petit-Bourg",
+            "correct": false
+          },
+          {
+            "text": "Trou-Perdu",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "36e4b04d9758",
+        "type": "choice",
+        "text": "Dans Code Lyoko, comment s'appelle la jeune fille qui vit dans le monde virtuel de Lyoko ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Sissi",
+            "correct": false
+          },
+          {
+            "text": "Aelita",
+            "correct": true
+          },
+          {
+            "text": "Yumi",
+            "correct": false
+          },
+          {
+            "text": "Odette",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0515feb36e1e",
+        "type": "choice",
+        "text": "Dans Totally Spies, laquelle de ces filles n'est PAS l'une des trois espionnes ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Alex",
+            "correct": false
+          },
+          {
+            "text": "Mandy",
+            "correct": true
+          },
+          {
+            "text": "Sam",
+            "correct": false
+          },
+          {
+            "text": "Clover",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f652d2c262b1",
+        "type": "choice",
+        "text": "Quel mathématicien est mort en 1832, à seulement 20 ans, des suites d'un duel ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Évariste Galois",
+            "correct": true
+          },
+          {
+            "text": "Pierre de Fermat",
+            "correct": false
+          },
+          {
+            "text": "Augustin Cauchy",
+            "correct": false
+          },
+          {
+            "text": "Blaise Pascal",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c6504e5d6220",
+        "type": "choice",
+        "text": "Quelle scientifique est la seule personne à avoir reçu deux prix Nobel dans deux sciences différentes ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Marie Curie",
+            "correct": true
+          },
+          {
+            "text": "Louis Pasteur",
+            "correct": false
+          },
+          {
+            "text": "Pierre Curie",
+            "correct": false
+          },
+          {
+            "text": "Irène Joliot-Curie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "22e08cce4cfd",
+        "type": "choice",
+        "text": "En 1791, quel texte Olympe de Gouges a-t-elle écrit ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les Lettres persanes",
+            "correct": false
+          },
+          {
+            "text": "Le Contrat social",
+            "correct": false
+          },
+          {
+            "text": "Le Deuxième Sexe",
+            "correct": false
+          },
+          {
+            "text": "La Déclaration des droits de la femme et de la citoyenne",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "4b26b7601255",
+        "type": "choice",
+        "text": "Quelle artiste de music-hall, aussi résistante et espionne pendant la Seconde Guerre mondiale, est entrée au Panthéon en 2021 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Dalida",
+            "correct": false
+          },
+          {
+            "text": "Mistinguett",
+            "correct": false
+          },
+          {
+            "text": "Joséphine Baker",
+            "correct": true
+          },
+          {
+            "text": "Édith Piaf",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7745bff30abf",
+        "type": "choice",
+        "text": "Comment Louis Braille, l'inventeur de l'écriture pour les aveugles, a-t-il perdu la vue ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "En se blessant avec un outil dans l'atelier de son père",
+            "correct": true
+          },
+          {
+            "text": "En regardant une éclipse",
+            "correct": false
+          },
+          {
+            "text": "Lors d'une bataille",
+            "correct": false
+          },
+          {
+            "text": "À cause d'une maladie à la naissance",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0cc3bac3cd8e",
+        "type": "choice",
+        "text": "Avec quel pays la France partage-t-elle sa plus longue frontière terrestre ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Belgique",
+            "correct": false
+          },
+          {
+            "text": "Le Brésil",
+            "correct": true
+          },
+          {
+            "text": "L'Espagne",
+            "correct": false
+          },
+          {
+            "text": "La Suisse",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f45ccfb8e023",
+        "type": "choice",
+        "text": "Quel pays possède le plus de fuseaux horaires au monde ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Russie",
+            "correct": false
+          },
+          {
+            "text": "La Chine",
+            "correct": false
+          },
+          {
+            "text": "Les États-Unis",
+            "correct": false
+          },
+          {
+            "text": "La France",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c374c5e9a1e5",
+        "type": "choice",
+        "text": "Quel pays possède le plus de pyramides au monde ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Égypte",
+            "correct": false
+          },
+          {
+            "text": "Le Soudan",
+            "correct": true
+          },
+          {
+            "text": "Le Mexique",
+            "correct": false
+          },
+          {
+            "text": "Le Pérou",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "af1d23fbabf4",
+        "type": "choice",
+        "text": "Quel est le seul pays au monde dont le drapeau n'est ni rectangulaire ni carré ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Vatican",
+            "correct": false
+          },
+          {
+            "text": "La Suisse",
+            "correct": false
+          },
+          {
+            "text": "Le Bhoutan",
+            "correct": false
+          },
+          {
+            "text": "Le Népal",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "58a80c12ec93",
+        "type": "choice",
+        "text": "Au point le plus proche, quelle distance sépare la Russie des États-Unis ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Environ 400 km",
+            "correct": false
+          },
+          {
+            "text": "Environ 4 km",
+            "correct": true
+          },
+          {
+            "text": "Environ 1 500 km",
+            "correct": false
+          },
+          {
+            "text": "Environ 80 km",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "54f7ea7fbf52",
+        "type": "choice",
+        "text": "Que joue-t-on pendant 4'33'', le célèbre morceau de John Cage ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Rien du tout : le morceau n'est que du silence",
+            "correct": true
+          },
+          {
+            "text": "Le même accord en boucle",
+            "correct": false
+          },
+          {
+            "text": "Une seule note répétée",
+            "correct": false
+          },
+          {
+            "text": "Un solo de batterie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "58aabc062694",
+        "type": "choice",
+        "text": "Pour quel pays Céline Dion a-t-elle remporté l'Eurovision en 1988 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Canada",
+            "correct": false
+          },
+          {
+            "text": "La Suisse",
+            "correct": true
+          },
+          {
+            "text": "La Belgique",
+            "correct": false
+          },
+          {
+            "text": "La France",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "51804e9ed2d0",
+        "type": "choice",
+        "text": "D'où vient le nom du groupe Daft Punk ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "D'un jeu vidéo",
+            "correct": false
+          },
+          {
+            "text": "D'une critique qui descendait leur premier groupe",
+            "correct": true
+          },
+          {
+            "text": "Du nom d'un club parisien",
+            "correct": false
+          },
+          {
+            "text": "D'un film culte des années 80",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d1b2b7e8a513",
+        "type": "choice",
+        "text": "Quel tube mondial en anglais est l'adaptation d'une chanson de Claude François ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "« New York, New York »",
+            "correct": false
+          },
+          {
+            "text": "« Fly Me to the Moon »",
+            "correct": false
+          },
+          {
+            "text": "« Strangers in the Night »",
+            "correct": false
+          },
+          {
+            "text": "« My Way »",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d48f89eefd3d",
+        "type": "choice",
+        "text": "Quelle est la vidéo la plus vue de l'histoire de YouTube ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Shape of You",
+            "correct": false
+          },
+          {
+            "text": "Baby Shark",
+            "correct": true
+          },
+          {
+            "text": "Despacito",
+            "correct": false
+          },
+          {
+            "text": "Gangnam Style",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f46a521fef6a",
+        "type": "choice",
+        "text": "En notation anglaise, quelle lettre désigne la note « si » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "A",
+            "correct": false
+          },
+          {
+            "text": "C",
+            "correct": false
+          },
+          {
+            "text": "B",
+            "correct": true
+          },
+          {
+            "text": "D",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9e6e5c2f04d4",
+        "type": "choice",
+        "text": "Quel animal a des empreintes digitales si proches des nôtres qu'elles pourraient tromper la police ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le raton laveur",
+            "correct": false
+          },
+          {
+            "text": "Le gorille",
+            "correct": false
+          },
+          {
+            "text": "Le koala",
+            "correct": true
+          },
+          {
+            "text": "Le chimpanzé",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2fab64cb2f82",
+        "type": "choice",
+        "text": "Le paresseux bouge si lentement que quelque chose pousse sur sa fourrure. De quoi s'agit-il ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Des algues",
+            "correct": true
+          },
+          {
+            "text": "Des champignons",
+            "correct": false
+          },
+          {
+            "text": "De la mousse",
+            "correct": false
+          },
+          {
+            "text": "Du lichen",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f9af432c2a8e",
+        "type": "choice",
+        "text": "Comment une abeille indique-t-elle aux autres où trouver des fleurs ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Elle danse",
+            "correct": true
+          },
+          {
+            "text": "Elle bourdonne plus ou moins fort",
+            "correct": false
+          },
+          {
+            "text": "Elle laisse une trace d'odeur",
+            "correct": false
+          },
+          {
+            "text": "Elle les guide en volant devant",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3b50ec81a04d",
+        "type": "choice",
+        "text": "Que font les loutres de mer pendant leur sommeil pour ne pas dériver ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Elles s'accrochent avec les dents à un rocher",
+            "correct": false
+          },
+          {
+            "text": "Elles dorment debout sur le rivage",
+            "correct": false
+          },
+          {
+            "text": "Elles se tiennent par la main",
+            "correct": true
+          },
+          {
+            "text": "Elles dorment sous l'eau",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "4a5b2d2cc163",
+        "type": "choice",
+        "text": "Quel minuscule animal est capable de survivre dans l'espace ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La fourmi",
+            "correct": false
+          },
+          {
+            "text": "Le tardigrade",
+            "correct": true
+          },
+          {
+            "text": "Le cafard",
+            "correct": false
+          },
+          {
+            "text": "La puce",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1b616b1ff224",
+        "type": "choice",
+        "text": "Sur 100 émiscuriens, combien pensent que la dernière voyelle de l'alphabet est le Z ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "3",
+            "correct": false
+          },
+          {
+            "text": "4",
+            "correct": false
+          },
+          {
+            "text": "2",
+            "correct": false
+          },
+          {
+            "text": "1",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": 1795599488904
   }
 ]

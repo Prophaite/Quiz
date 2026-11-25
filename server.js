@@ -530,17 +530,33 @@ function resetScores(room) {
 }
 
 // tour : tournoi déjà résolu (resolveTournament) ; sinon partie de quiz simple
+// Ordre des questions : celui du quiz, ou tiré au hasard (réglage « ordre aléatoire »).
+// Appliqué au début de chaque étape d'un tournoi (Quiz et Images) et au lancement d'un quiz simple.
+function applyOrder(room) {
+  const src = room.tour ? stage(room)?.quiz : room.source;
+  if (!src) return;
+  const questions = [...src.questions];
+  if (room.settings.random) {
+    for (let i = questions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+  }
+  room.quiz = { ...src, questions };
+}
+
 function createRoom(quiz, settings = {}, tour = null) {
   const room = {
     code: newCode(),
     token: uid() + uid(),
     quiz: tour ? { id: '', title: tour.title, questions: [] } : JSON.parse(JSON.stringify(quiz)),
+    source: tour ? null : JSON.parse(JSON.stringify(quiz)), // quiz simple : questions dans l'ordre d'origine
     tour, // tournoi : étapes, contenu figé
     stageIndex: -1,
     order: [], // ordre de classement de l'étape précédente (ids), pour l'ordre de passage aux thèmes
     th: null, // état du module Thèmes
     im: null, // état du module Images
-    settings: { speed: settings.speed !== false, steal: settings.steal !== false, allowDev: true, luck: false },
+    settings: { speed: settings.speed !== false, steal: settings.steal !== false, allowDev: true, luck: false, random: !!settings.random },
     players: new Map(),
     streams: new Set(),
     waiters: new Set(), // requêtes /api/poll en attente
@@ -557,6 +573,7 @@ function createRoom(quiz, settings = {}, tour = null) {
     prevRanks: new Map(),
     lastActive: Date.now(),
   };
+  applyOrder(room); // quiz simple : ordre aléatoire dès la salle d'attente si demandé
   rooms.set(room.code, room);
   return room;
 }
@@ -882,6 +899,7 @@ function startStage(room, i) {
   room.stageIndex = i;
   resetScores(room); // les scores repartent de zéro à chaque étape
   room.quiz = stage(room).quiz || emptyQuiz(room);
+  applyOrder(room);
   room.th = null;
   room.im = null;
   room.state = 'stageIntro';
@@ -1533,6 +1551,7 @@ function upcomingQuestions(room, count = 3) {
   if (room.state === 'lobby' && room.tour) {
     // Tournoi pas encore commencé : questions de la 1re étape
     const st = room.tour.stages[0];
+    if (room.settings.random) return [];
     type = st.type;
     quiz = st.quiz;
     first = 0;
@@ -1792,6 +1811,7 @@ function quizAction(room, action, payload) {
       break;
     case 'reset':
       resetScores(room);
+      applyOrder(room); // nouvel ordre si l'ordre aléatoire est activé
       break;
     case 'addTime':
       if (room.state !== 'question' || !room.deadline) break;
@@ -1846,6 +1866,11 @@ function quizAction(room, action, payload) {
         // Désactivé : on annule un vol proposé mais pas encore fait
         if (!room.settings.steal && room.steal && !room.steal.victimId) room.steal = null;
       }
+      if ('random' in payload) {
+        room.settings.random = !!payload.random;
+        // Pris en compte tout de suite si les questions n'ont pas commencé, sinon au prochain début d'étape
+        if (room.tour ? room.state === 'stageIntro' : room.state === 'lobby') applyOrder(room);
+      }
       if ('luck' in payload) {
         room.settings.luck = !!payload.luck;
         // Désactivée : on retire les propositions en cours et les triches acceptées pas encore jouées
@@ -1862,7 +1887,8 @@ function quizAction(room, action, payload) {
       if (room.state !== 'lobby' && room.state !== 'end') fail('Possible uniquement dans la salle d’attente ou en fin de partie');
       const quiz = quizzes.find((q) => q.id === payload.quizId);
       if (!quiz || !quiz.questions.length) fail('Quiz introuvable ou vide');
-      room.quiz = JSON.parse(JSON.stringify(quiz));
+      room.source = JSON.parse(JSON.stringify(quiz));
+      applyOrder(room);
       resetScores(room);
       break;
     }

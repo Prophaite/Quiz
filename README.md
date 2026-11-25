@@ -178,6 +178,8 @@ Démarrer → la question s'affiche (fermeture automatique à la fin du temps) �
 
 **⏱ Points selon la rapidité** (case cochée par défaut, à la création du salon et dans les réglages de la partie) : sur les questions avec un temps limité, le **premier** qui répond correctement (ou en partie) a tous les points, puis c'est dégressif selon son retard sur lui, jusqu'à 50 % à la fin du temps. Case décochée, ou question sans temps limité : toutes les bonnes réponses valent la même chose.
 
+**🔀 Ordre aléatoire des questions** (case décochée par défaut, à la création du salon et dans les réglages de la partie) : les questions sont tirées dans un ordre aléatoire, sans modifier le quiz enregistré. Quiz simple : nouveau tirage à chaque partie (« Rejouer » compris). Tournoi : nouveau tirage au début de chaque étape Quiz et Images. Le réglage est pris en compte tout de suite en salle d’attente ou pendant la présentation d’une étape ; une fois les questions commencées, l’ordre ne change plus jusqu’à l’étape suivante.
+
 Options : +10 s, aller à n'importe quelle question, corriger une réponse à la main, ajuster un score de ±10, exclure un joueur, changer de quiz en gardant les joueurs, rejouer.
 
 Les joueurs qui rechargent la page ou perdent le réseau sont reconnectés automatiquement avec leur score.
