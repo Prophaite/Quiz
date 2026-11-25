@@ -90,14 +90,20 @@
         "type": "themes",
         "qualify": 5,
         "themeIds": [
-          "deee6207043f",
-          "7a747af59474",
-          "c007afd05522",
-          "56176f17a359",
-          "5e69af380593",
-          "d3c86d11ce62"
+          "1d431c050206",
+          "2ae82ccc703b",
+          "0a673e8ac489",
+          "911dd1204cdd",
+          "dfd7c1ffda77",
+          "9ca78c464524",
+          "264abecf59c3",
+          "01c5399a6560",
+          "cb2ff04a7cbc",
+          "54b6ecb9b49f",
+          "cb9769a2d155",
+          "82adf1bd2405"
         ],
-        "perTeam": 4,
+        "perTeam": 8,
         "points": {
           "duo": 35,
           "carre": 60,

@@ -914,6 +914,8 @@ function beginStage(room) {
     const active = activePlayers(room);
     const order = room.order.filter((id) => active.some((p) => p.id === id));
     for (const p of active) if (!order.includes(p.id)) order.push(p.id);
+    // Les questions de chaque thème sont tirées au hasard à chaque début d'étape (copie propre au salon)
+    for (const t of st.themes) t.questions = shuffle([...t.questions]);
     room.th = { order, turn: 0, phase: 'pick', taken: {}, theme: -1, qNum: 0, mode: null, shown: null, given: null, correct: null };
     room.state = 'themes';
     return;

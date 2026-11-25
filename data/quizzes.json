@@ -3799,5 +3799,5355 @@
       }
     ],
     "updatedAt": 1795620051396
+  },
+  {
+    "id": "1d431c050206",
+    "title": "Alcool",
+    "questions": [
+      {
+        "id": "3d0be9432a06",
+        "type": "choice",
+        "text": "Quel alcool est à la base d'un mojito ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La vodka",
+            "correct": false
+          },
+          {
+            "text": "Le rhum",
+            "correct": true
+          },
+          {
+            "text": "Le gin",
+            "correct": false
+          },
+          {
+            "text": "La tequila",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5aae50eea890",
+        "type": "choice",
+        "text": "Avec quel fruit fabrique-t-on le cidre ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La poire",
+            "correct": false
+          },
+          {
+            "text": "Le raisin",
+            "correct": false
+          },
+          {
+            "text": "La prune",
+            "correct": false
+          },
+          {
+            "text": "La pomme",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "99cf4e722653",
+        "type": "choice",
+        "text": "Quelle boisson anisée est emblématique de Marseille ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le pastis",
+            "correct": true
+          },
+          {
+            "text": "Le calvados",
+            "correct": false
+          },
+          {
+            "text": "Le cognac",
+            "correct": false
+          },
+          {
+            "text": "La chartreuse",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "208fd0d8da04",
+        "type": "choice",
+        "text": "Comment appelle-t-on le professionnel chargé du service des vins au restaurant ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le caviste",
+            "correct": false
+          },
+          {
+            "text": "L'œnologue",
+            "correct": false
+          },
+          {
+            "text": "Le sommelier",
+            "correct": true
+          },
+          {
+            "text": "Le barman",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7ba3d856b6bc",
+        "type": "choice",
+        "text": "Quelle céréale est principalement utilisée pour brasser la bière ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'orge",
+            "correct": true
+          },
+          {
+            "text": "Le riz",
+            "correct": false
+          },
+          {
+            "text": "Le maïs",
+            "correct": false
+          },
+          {
+            "text": "L'avoine",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6c9ebf561b59",
+        "type": "choice",
+        "text": "Quel alcool mexicain est obtenu à partir de l'agave bleu ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le pisco",
+            "correct": false
+          },
+          {
+            "text": "La cachaça",
+            "correct": false
+          },
+          {
+            "text": "Le rhum",
+            "correct": false
+          },
+          {
+            "text": "La tequila",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "ecfd0f911508",
+        "type": "choice",
+        "text": "Quel cocktail associe vodka, liqueur de café et crème ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Black Russian",
+            "correct": false
+          },
+          {
+            "text": "Le White Russian",
+            "correct": true
+          },
+          {
+            "text": "L'Espresso Martini",
+            "correct": false
+          },
+          {
+            "text": "L'Irish coffee",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "818715367528",
+        "type": "number",
+        "text": "En quelle année la Prohibition prend-elle fin aux États-Unis ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "value": 1933,
+        "tolerance": 5,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "adf99bc2a05f",
+        "type": "choice",
+        "text": "À partir de quelle céréale fabrique-t-on le saké japonais ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'orge",
+            "correct": false
+          },
+          {
+            "text": "Le millet",
+            "correct": false
+          },
+          {
+            "text": "Le riz",
+            "correct": true
+          },
+          {
+            "text": "Le sarrasin",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a90164bbe210",
+        "type": "choice",
+        "text": "Quel vin pétillant italien entre dans la recette du Spritz ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le lambrusco",
+            "correct": false
+          },
+          {
+            "text": "Le chianti",
+            "correct": false
+          },
+          {
+            "text": "Le barolo",
+            "correct": false
+          },
+          {
+            "text": "Le prosecco",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "60a5f81c2dbf",
+        "type": "choice",
+        "text": "Comment les Irlandais écrivent-ils généralement « whisky » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Whiskey",
+            "correct": true
+          },
+          {
+            "text": "Whisky",
+            "correct": false
+          },
+          {
+            "text": "Wiskey",
+            "correct": false
+          },
+          {
+            "text": "Whiskee",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8cb51ad32776",
+        "type": "choice",
+        "text": "Quelle plante donne son nom et son amertume à l'absinthe ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'anis vert",
+            "correct": false
+          },
+          {
+            "text": "La grande absinthe (armoise)",
+            "correct": true
+          },
+          {
+            "text": "Le fenouil",
+            "correct": false
+          },
+          {
+            "text": "La badiane",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c1c17d7e3a96",
+        "type": "choice",
+        "text": "Que signifie la mention VSOP sur une bouteille de cognac ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Very Special Old Product",
+            "correct": false
+          },
+          {
+            "text": "Vieux Sélectionné d'Origine Protégée",
+            "correct": false
+          },
+          {
+            "text": "Very Superior Old Pale",
+            "correct": true
+          },
+          {
+            "text": "Very Smooth Original Proof",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "faf02b04706b",
+        "type": "choice",
+        "text": "Quelle région viticole française est réputée pour son « vin jaune » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Alsace",
+            "correct": false
+          },
+          {
+            "text": "Le Jura",
+            "correct": true
+          },
+          {
+            "text": "La Savoie",
+            "correct": false
+          },
+          {
+            "text": "La Loire",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5a08ebf09ec5",
+        "type": "choice",
+        "text": "Quel est le seul cépage autorisé pour produire du chablis ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le sauvignon blanc",
+            "correct": false
+          },
+          {
+            "text": "Le chenin",
+            "correct": false
+          },
+          {
+            "text": "Le riesling",
+            "correct": false
+          },
+          {
+            "text": "Le chardonnay",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "2ae82ccc703b",
+    "title": "Astrologie",
+    "questions": [
+      {
+        "id": "a21d960d0e1c",
+        "type": "choice",
+        "text": "Combien y a-t-il de signes dans le zodiaque occidental ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "10",
+            "correct": false
+          },
+          {
+            "text": "12",
+            "correct": true
+          },
+          {
+            "text": "13",
+            "correct": false
+          },
+          {
+            "text": "14",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6a43d3e60f09",
+        "type": "choice",
+        "text": "Quel signe ouvre le zodiaque, au début du printemps ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Capricorne",
+            "correct": false
+          },
+          {
+            "text": "Le Bélier",
+            "correct": true
+          },
+          {
+            "text": "Le Verseau",
+            "correct": false
+          },
+          {
+            "text": "Les Poissons",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8f08437dc89d",
+        "type": "choice",
+        "text": "De quel signe est une personne née le 25 décembre ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Sagittaire",
+            "correct": false
+          },
+          {
+            "text": "Verseau",
+            "correct": false
+          },
+          {
+            "text": "Scorpion",
+            "correct": false
+          },
+          {
+            "text": "Capricorne",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c0581ea20181",
+        "type": "choice",
+        "text": "Quel signe est représenté par un archer ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Sagittaire",
+            "correct": true
+          },
+          {
+            "text": "Les Gémeaux",
+            "correct": false
+          },
+          {
+            "text": "Le Verseau",
+            "correct": false
+          },
+          {
+            "text": "Le Bélier",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c4a28c9e9d41",
+        "type": "choice",
+        "text": "Quel signe est représenté par un crabe ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Scorpion",
+            "correct": false
+          },
+          {
+            "text": "Les Poissons",
+            "correct": false
+          },
+          {
+            "text": "Le Cancer",
+            "correct": true
+          },
+          {
+            "text": "Le Taureau",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "63ca1fe4bbe4",
+        "type": "choice",
+        "text": "Quels sont les quatre éléments de l'astrologie occidentale ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Feu, Terre, Air et Eau",
+            "correct": true
+          },
+          {
+            "text": "Feu, Bois, Métal et Eau",
+            "correct": false
+          },
+          {
+            "text": "Soleil, Lune, Étoiles et Terre",
+            "correct": false
+          },
+          {
+            "text": "Lumière, Ombre, Vent et Pluie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6efe883619fd",
+        "type": "choice",
+        "text": "À quel élément sont associés les Gémeaux ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Eau",
+            "correct": false
+          },
+          {
+            "text": "Le Feu",
+            "correct": false
+          },
+          {
+            "text": "La Terre",
+            "correct": false
+          },
+          {
+            "text": "L'Air",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f46abff1932a",
+        "type": "choice",
+        "text": "Qu'appelle-t-on l'« ascendant » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le signe de la mère",
+            "correct": false
+          },
+          {
+            "text": "Le signe qui se levait à l'horizon est à la naissance",
+            "correct": true
+          },
+          {
+            "text": "Le signe de l'année chinoise",
+            "correct": false
+          },
+          {
+            "text": "Le signe opposé au signe solaire",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f06d57684b4e",
+        "type": "choice",
+        "text": "Quel animal ouvre le cycle de l'horoscope chinois ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Dragon",
+            "correct": false
+          },
+          {
+            "text": "Le Tigre",
+            "correct": false
+          },
+          {
+            "text": "Le Rat",
+            "correct": true
+          },
+          {
+            "text": "Le Bœuf",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a5723356e3bf",
+        "type": "choice",
+        "text": "Quel signe est représenté par un porteur d'eau ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les Poissons",
+            "correct": false
+          },
+          {
+            "text": "Le Cancer",
+            "correct": false
+          },
+          {
+            "text": "La Balance",
+            "correct": false
+          },
+          {
+            "text": "Le Verseau",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6ea4449f38ef",
+        "type": "choice",
+        "text": "Quelle planète gouverne traditionnellement le Bélier ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Mars",
+            "correct": true
+          },
+          {
+            "text": "Vénus",
+            "correct": false
+          },
+          {
+            "text": "Jupiter",
+            "correct": false
+          },
+          {
+            "text": "Saturne",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "71cb07cdc78f",
+        "type": "choice",
+        "text": "Quelle constellation traversée par le Soleil est parfois présentée comme le « 13e signe » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Orion",
+            "correct": false
+          },
+          {
+            "text": "Ophiuchus (le Serpentaire)",
+            "correct": true
+          },
+          {
+            "text": "Pégase",
+            "correct": false
+          },
+          {
+            "text": "Andromède",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "32f89258d079",
+        "type": "choice",
+        "text": "Quels sont les deux signes gouvernés par Vénus ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Bélier et le Scorpion",
+            "correct": false
+          },
+          {
+            "text": "Les Gémeaux et la Vierge",
+            "correct": false
+          },
+          {
+            "text": "Le Taureau et la Balance",
+            "correct": true
+          },
+          {
+            "text": "Le Sagittaire et les Poissons",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "e5b70af6ad6e",
+        "type": "choice",
+        "text": "Comment appelle-t-on le mouvement apparent d'une planète qui semble reculer dans le ciel ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'éclipse",
+            "correct": false
+          },
+          {
+            "text": "La rétrogradation",
+            "correct": true
+          },
+          {
+            "text": "La conjonction",
+            "correct": false
+          },
+          {
+            "text": "La précession",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "ac32291e1e0a",
+        "type": "choice",
+        "text": "Quel astrologue et médecin français du XVIe siècle est célèbre pour ses « Prophéties » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Paracelse",
+            "correct": false
+          },
+          {
+            "text": "Copernic",
+            "correct": false
+          },
+          {
+            "text": "Johannes Kepler",
+            "correct": false
+          },
+          {
+            "text": "Nostradamus",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "0a673e8ac489",
+    "title": "Culture Excurio",
+    "questions": [
+      {
+        "id": "8eb9f0925184",
+        "type": "choice",
+        "text": "Dans les tickets et les configs, à quelle expérience correspond le code « HDK » (ou « HOK ») ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Trésor des Bâtisseurs",
+            "correct": false
+          },
+          {
+            "text": "L'Horizon de Khéops",
+            "correct": true
+          },
+          {
+            "text": "Les Mondes Disparus",
+            "correct": false
+          },
+          {
+            "text": "Napoléon",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "621a7e561c6e",
+        "type": "choice",
+        "text": "Dans Pyrates, quel célèbre pirate affronte-t-on lors d'une partie de roulette russe ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Barbe Noire",
+            "correct": true
+          },
+          {
+            "text": "Barberousse",
+            "correct": false
+          },
+          {
+            "text": "Long John Silver",
+            "correct": false
+          },
+          {
+            "text": "William Kidd",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5df1430a8f65",
+        "type": "choice",
+        "text": "Dans quel musée parisien l'expérience Les Impressionnistes a-t-elle été lancée ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Louvre",
+            "correct": false
+          },
+          {
+            "text": "Le musée de l'Orangerie",
+            "correct": false
+          },
+          {
+            "text": "Le musée Marmottan Monet",
+            "correct": false
+          },
+          {
+            "text": "Le musée d'Orsay",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d31c667ee1ec",
+        "type": "choice",
+        "text": "Qui est Emy ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le nom du serveur de licences",
+            "correct": false
+          },
+          {
+            "text": "L'outil de monitoring des casques",
+            "correct": false
+          },
+          {
+            "text": "La voix-guide qui s'adresse aux visiteurs",
+            "correct": true
+          },
+          {
+            "text": "La mascotte du comité Team Building",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "fc62ef76cd15",
+        "type": "choice",
+        "text": "Dans les releases et les bugtracks, à quelle expérience correspond le code « LC » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Carcassonne",
+            "correct": false
+          },
+          {
+            "text": "L'Infini",
+            "correct": false
+          },
+          {
+            "text": "Le Trésor des Bâtisseurs",
+            "correct": false
+          },
+          {
+            "text": "Les Mondes Disparus",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a8ffd4a45923",
+        "type": "choice",
+        "text": "Janvier 2019 : le musée du Louvre sollicite l'équipe pour un projet VR autour de Léonard de Vinci. Quelle œuvre est citée dans la demande ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Cène",
+            "correct": true
+          },
+          {
+            "text": "L'Homme de Vitruve",
+            "correct": false
+          },
+          {
+            "text": "La Vierge aux rochers",
+            "correct": false
+          },
+          {
+            "text": "La Dame à l'hermine",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "28bdd9f801e5",
+        "type": "choice",
+        "text": "Le Comité Team Building a annoncé pour le mercredi 25 novembre « Le Grand Quiz … II ». Quel mot manque ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Emiscurio",
+            "correct": true
+          },
+          {
+            "text": "Excurissimo",
+            "correct": false
+          },
+          {
+            "text": "Curiosity",
+            "correct": false
+          },
+          {
+            "text": "Emissix",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a3c8413d48f6",
+        "type": "choice",
+        "text": "Dans le lexique de la plateforme (wiki), comment appelle-t-on l'utilisateur de l'application ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Player",
+            "correct": false
+          },
+          {
+            "text": "Visiteur",
+            "correct": false
+          },
+          {
+            "text": "Avatar",
+            "correct": false
+          },
+          {
+            "text": "Explorer",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "91ad525f9a6a",
+        "type": "choice",
+        "text": "Quelle activité a inauguré le canal « Bureau des sports » au printemps 2024 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Un beach-volley",
+            "correct": true
+          },
+          {
+            "text": "Un five de foot",
+            "correct": false
+          },
+          {
+            "text": "Une session d'escalade",
+            "correct": false
+          },
+          {
+            "text": "Un tournoi de badminton",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "41f5dbe072ae",
+        "type": "choice",
+        "text": "D'après le wiki de la plateforme, à quoi sert surtout le Mode Spectateur ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "À surveiller les visiteurs depuis l'accueil",
+            "correct": false
+          },
+          {
+            "text": "À tester une build sans casque",
+            "correct": false
+          },
+          {
+            "text": "À filmer une session aux mouvements lissés, pour le Marketing",
+            "correct": true
+          },
+          {
+            "text": "À diffuser l'expérience en direct sur les réseaux sociaux",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "59a804ead641",
+        "type": "choice",
+        "text": "Pendant les vacances de Noël 2023, nos Expéditions Immersives sont passées dans une émission de France 4, héritière de celle de Fred, Jamy et Sabine. Laquelle ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Monde de Jamy",
+            "correct": false
+          },
+          {
+            "text": "C'est toujours pas sorcier",
+            "correct": true
+          },
+          {
+            "text": "Ça commence aujourd'hui",
+            "correct": false
+          },
+          {
+            "text": "E=M6",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7432cccffd2c",
+        "type": "choice",
+        "text": "En avril 2023, que prévoyait le projet d'aménagement du 1 rue de Metz au N-2 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Un « studio » pour les mocaps, les tests, les drinks et les party, plus du stockage",
+            "correct": true
+          },
+          {
+            "text": "La cafétéria",
+            "correct": false
+          },
+          {
+            "text": "Une salle de sport",
+            "correct": false
+          },
+          {
+            "text": "La salle des serveurs",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a019acf45903",
+        "type": "choice",
+        "text": "Quand a eu lieu le déménagement rue de Metz ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Avril 2023",
+            "correct": false
+          },
+          {
+            "text": "Septembre 2023",
+            "correct": false
+          },
+          {
+            "text": "Janvier 2024",
+            "correct": true
+          },
+          {
+            "text": "Juin 2024",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "66c2f2497d71",
+        "type": "choice",
+        "text": "Emissive a été créée un 23 novembre : en quelle année ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "2002",
+            "correct": false
+          },
+          {
+            "text": "2003",
+            "correct": false
+          },
+          {
+            "text": "2004",
+            "correct": false
+          },
+          {
+            "text": "2005",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "92c14db3e5f2",
+        "type": "choice",
+        "text": "En quelle année les Head of ont-ils été nommés ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "2012",
+            "correct": false
+          },
+          {
+            "text": "2019",
+            "correct": false
+          },
+          {
+            "text": "2023",
+            "correct": true
+          },
+          {
+            "text": "2009",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6af12f266353",
+        "type": "choice",
+        "text": "Quelle expérience est à l'origine de nos Expéditions Immersives ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Pyrates",
+            "correct": false
+          },
+          {
+            "text": "Le Trésor des Bâtisseurs",
+            "correct": false
+          },
+          {
+            "text": "Les Impressionnistes",
+            "correct": false
+          },
+          {
+            "text": "The Enemy",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "091e7240df63",
+        "type": "choice",
+        "text": "En quelle année a eu lieu notre première levée de fonds ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "2019",
+            "correct": false
+          },
+          {
+            "text": "2020",
+            "correct": true
+          },
+          {
+            "text": "2015",
+            "correct": false
+          },
+          {
+            "text": "2005",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d68350d2ba38",
+        "type": "choice",
+        "text": "Quelle était la première adresse d'Emissive ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Rue de Metz",
+            "correct": false
+          },
+          {
+            "text": "Boulevard de l'Hôpital",
+            "correct": true
+          },
+          {
+            "text": "Rue Oberkampf",
+            "correct": false
+          },
+          {
+            "text": "Avenue de France",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "98c8a62bbccd",
+        "type": "choice",
+        "text": "Quelle est la superficie du showroom ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "56 m²",
+            "correct": false
+          },
+          {
+            "text": "68 m²",
+            "correct": true
+          },
+          {
+            "text": "49 m²",
+            "correct": false
+          },
+          {
+            "text": "77 m²",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "489acb6126b5",
+        "type": "choice",
+        "text": "Dans l'expérience Les Mondes Disparus, en quelle année commence l'aventure ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "2023",
+            "correct": false
+          },
+          {
+            "text": "-4000000000",
+            "correct": false
+          },
+          {
+            "text": "2123",
+            "correct": false
+          },
+          {
+            "text": "2223",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8bb2519409f7",
+        "type": "choice",
+        "text": "Quel est le point commun entre une steproom et un client avec lequel Excurio a travaillé ? (un seul mot)",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Wandering",
+            "correct": false
+          },
+          {
+            "text": "Zone",
+            "correct": false
+          },
+          {
+            "text": "Orange",
+            "correct": true
+          },
+          {
+            "text": "MNHN",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "911dd1204cdd",
+    "title": "Dinosaures",
+    "questions": [
+      {
+        "id": "85cd70fb9097",
+        "type": "choice",
+        "text": "Quel dinosaure carnivore porte un nom qui signifie « roi des lézards tyrans » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Vélociraptor",
+            "correct": false
+          },
+          {
+            "text": "Le Spinosaure",
+            "correct": false
+          },
+          {
+            "text": "Le Tyrannosaurus rex",
+            "correct": true
+          },
+          {
+            "text": "L'Allosaure",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "fd0a84fbc312",
+        "type": "choice",
+        "text": "Quel dinosaure herbivore portait trois cornes sur la tête ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Tricératops",
+            "correct": true
+          },
+          {
+            "text": "Le Stégosaure",
+            "correct": false
+          },
+          {
+            "text": "L'Ankylosaure",
+            "correct": false
+          },
+          {
+            "text": "Le Diplodocus",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "971509b0b4d4",
+        "type": "choice",
+        "text": "Quel dinosaure avait de grandes plaques osseuses sur le dos et une queue à pointes ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Brachiosaure",
+            "correct": false
+          },
+          {
+            "text": "Le Parasaurolophus",
+            "correct": false
+          },
+          {
+            "text": "Le Tricératops",
+            "correct": false
+          },
+          {
+            "text": "Le Stégosaure",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6799ee52ec6b",
+        "type": "choice",
+        "text": "Comment appelle-t-on le scientifique qui étudie les fossiles de dinosaures ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'archéologue",
+            "correct": false
+          },
+          {
+            "text": "Le paléontologue",
+            "correct": true
+          },
+          {
+            "text": "Le géologue",
+            "correct": false
+          },
+          {
+            "text": "L'entomologiste",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b98389c999fc",
+        "type": "number",
+        "text": "En quelle année sort le film Jurassic Park de Steven Spielberg ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "value": 1993,
+        "tolerance": 3,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "960c0c7de650",
+        "type": "choice",
+        "text": "Que signifie le mot « dinosaure » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "« Grand reptile »",
+            "correct": false
+          },
+          {
+            "text": "« Lézard terrible »",
+            "correct": true
+          },
+          {
+            "text": "« Oiseau ancien »",
+            "correct": false
+          },
+          {
+            "text": "« Dragon des mers »",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "827b2e4117a2",
+        "type": "choice",
+        "text": "Quelle est la cause la plus probable de l'extinction des dinosaures non aviens ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Une glaciation soudaine",
+            "correct": false
+          },
+          {
+            "text": "Une grande épidémie",
+            "correct": false
+          },
+          {
+            "text": "La chasse par les premiers humains",
+            "correct": false
+          },
+          {
+            "text": "La chute d'un astéroïde géant",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "13894a72509d",
+        "type": "choice",
+        "text": "Quels animaux actuels descendent directement des dinosaures ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les oiseaux",
+            "correct": true
+          },
+          {
+            "text": "Les crocodiles",
+            "correct": false
+          },
+          {
+            "text": "Les lézards",
+            "correct": false
+          },
+          {
+            "text": "Les tortues",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3b6ff7d2da4c",
+        "type": "choice",
+        "text": "Le vrai Velociraptor était bien plus petit que dans Jurassic Park : il avait à peu près la taille…",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "d'un cheval",
+            "correct": false
+          },
+          {
+            "text": "d'un éléphant",
+            "correct": false
+          },
+          {
+            "text": "d'une dinde",
+            "correct": true
+          },
+          {
+            "text": "d'un chat",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7e2958aa72ae",
+        "type": "choice",
+        "text": "Lequel de ces animaux préhistoriques n'était PAS un dinosaure ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Ptéranodon",
+            "correct": true
+          },
+          {
+            "text": "Le Tricératops",
+            "correct": false
+          },
+          {
+            "text": "Le Brachiosaure",
+            "correct": false
+          },
+          {
+            "text": "L'Iguanodon",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1013c27c0da4",
+        "type": "choice",
+        "text": "À quelle période vivait le Tyrannosaurus rex ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Permien",
+            "correct": false
+          },
+          {
+            "text": "Le Trias",
+            "correct": false
+          },
+          {
+            "text": "Le Jurassique",
+            "correct": false
+          },
+          {
+            "text": "Le Crétacé",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "190c6cfdeba4",
+        "type": "choice",
+        "text": "Dans quel pays a été décrit en 1824 le Megalosaurus, premier dinosaure nommé scientifiquement ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La France",
+            "correct": false
+          },
+          {
+            "text": "Les États-Unis",
+            "correct": false
+          },
+          {
+            "text": "L'Angleterre",
+            "correct": true
+          },
+          {
+            "text": "L'Allemagne",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "cf1ac6ae3efa",
+        "type": "choice",
+        "text": "Quel dinosaure carnivore, doté d'une grande voile sur le dos, était encore plus long que le T. rex ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Spinosaure",
+            "correct": true
+          },
+          {
+            "text": "Le Giganotosaure",
+            "correct": false
+          },
+          {
+            "text": "L'Allosaure",
+            "correct": false
+          },
+          {
+            "text": "Le Carnotaure",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "32b514b6162a",
+        "type": "choice",
+        "text": "Quel naturaliste britannique a inventé le mot « dinosaure » en 1842 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Charles Darwin",
+            "correct": false
+          },
+          {
+            "text": "Gideon Mantell",
+            "correct": false
+          },
+          {
+            "text": "William Buckland",
+            "correct": false
+          },
+          {
+            "text": "Richard Owen",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "dfd7c1ffda77",
+    "title": "Football",
+    "questions": [
+      {
+        "id": "8c0d2e35f6f8",
+        "type": "number",
+        "text": "En quelle année la France remporte-t-elle sa première Coupe du monde ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "value": 1998,
+        "tolerance": 2,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "34eb2901ec19",
+        "type": "choice",
+        "text": "Combien de joueurs chaque équipe compte-t-elle sur le terrain ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "9",
+            "correct": false
+          },
+          {
+            "text": "10",
+            "correct": false
+          },
+          {
+            "text": "11",
+            "correct": true
+          },
+          {
+            "text": "12",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "25b96f7cadc2",
+        "type": "choice",
+        "text": "Quel club joue ses matchs à domicile au Parc des Princes ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Olympique de Marseille",
+            "correct": false
+          },
+          {
+            "text": "Le Paris Saint-Germain",
+            "correct": true
+          },
+          {
+            "text": "L'Olympique lyonnais",
+            "correct": false
+          },
+          {
+            "text": "Le Paris FC",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d7689853632d",
+        "type": "choice",
+        "text": "Comment appelle-t-on la faute d'un attaquant placé derrière le dernier défenseur au moment de la passe ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le penalty",
+            "correct": false
+          },
+          {
+            "text": "Le corner",
+            "correct": false
+          },
+          {
+            "text": "La touche",
+            "correct": false
+          },
+          {
+            "text": "Le hors-jeu",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5154f070f78c",
+        "type": "choice",
+        "text": "Quel capitaine argentin a soulevé la Coupe du monde 2022 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Lionel Messi",
+            "correct": true
+          },
+          {
+            "text": "Diego Maradona",
+            "correct": false
+          },
+          {
+            "text": "Gabriel Batistuta",
+            "correct": false
+          },
+          {
+            "text": "Sergio Agüero",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d69cd74da574",
+        "type": "choice",
+        "text": "Quel pays a remporté la Coupe du monde en 1958, 1962 et 1970 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Italie",
+            "correct": false
+          },
+          {
+            "text": "L'Allemagne",
+            "correct": false
+          },
+          {
+            "text": "Le Brésil",
+            "correct": true
+          },
+          {
+            "text": "L'Uruguay",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2d16deffcc8c",
+        "type": "choice",
+        "text": "Quel club détient le record de victoires en Ligue des champions ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Real Madrid",
+            "correct": true
+          },
+          {
+            "text": "L'AC Milan",
+            "correct": false
+          },
+          {
+            "text": "Le Bayern Munich",
+            "correct": false
+          },
+          {
+            "text": "Liverpool",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "37c4677fee6a",
+        "type": "choice",
+        "text": "Quel club français a remporté la Ligue des champions en 1993 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Paris Saint-Germain",
+            "correct": false
+          },
+          {
+            "text": "L'AS Monaco",
+            "correct": false
+          },
+          {
+            "text": "Les Girondins de Bordeaux",
+            "correct": false
+          },
+          {
+            "text": "L'Olympique de Marseille",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "ba7045a75ba3",
+        "type": "choice",
+        "text": "Quel joueur a marqué un triplé en finale de la Coupe du monde 2022 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Lionel Messi",
+            "correct": false
+          },
+          {
+            "text": "Kylian Mbappé",
+            "correct": true
+          },
+          {
+            "text": "Olivier Giroud",
+            "correct": false
+          },
+          {
+            "text": "Julián Álvarez",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "3ed37fddf8e5",
+        "type": "choice",
+        "text": "Quels pays co-organisent la Coupe du monde 2026 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Espagne, Portugal et Maroc",
+            "correct": false
+          },
+          {
+            "text": "Brésil et Argentine",
+            "correct": false
+          },
+          {
+            "text": "États-Unis, Canada et Mexique",
+            "correct": true
+          },
+          {
+            "text": "Australie et Nouvelle-Zélande",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9af8d2d8291b",
+        "type": "choice",
+        "text": "Quel Français a gagné la Coupe du monde comme joueur (1998) puis comme sélectionneur (2018) ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Zinédine Zidane",
+            "correct": false
+          },
+          {
+            "text": "Laurent Blanc",
+            "correct": false
+          },
+          {
+            "text": "Bixente Lizarazu",
+            "correct": false
+          },
+          {
+            "text": "Didier Deschamps",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "75d7a56d0274",
+        "type": "choice",
+        "text": "Qui est le joueur le plus sélectionné de l'histoire de l'équipe de France (145 sélections) ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Hugo Lloris",
+            "correct": true
+          },
+          {
+            "text": "Lilian Thuram",
+            "correct": false
+          },
+          {
+            "text": "Antoine Griezmann",
+            "correct": false
+          },
+          {
+            "text": "Olivier Giroud",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "76deb6513f95",
+        "type": "choice",
+        "text": "Dans quelle ville la FIFA a-t-elle été fondée en 1904 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Zurich",
+            "correct": false
+          },
+          {
+            "text": "Paris",
+            "correct": true
+          },
+          {
+            "text": "Londres",
+            "correct": false
+          },
+          {
+            "text": "Genève",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "22ae93919315",
+        "type": "choice",
+        "text": "Quel club italien est surnommé « la Vieille Dame » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'AC Milan",
+            "correct": false
+          },
+          {
+            "text": "L'Inter Milan",
+            "correct": false
+          },
+          {
+            "text": "La Juventus",
+            "correct": true
+          },
+          {
+            "text": "L'AS Roma",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "72f6038c8b20",
+        "type": "choice",
+        "text": "Qui a marqué le but en or de la France en finale de l'Euro 2000 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Sylvain Wiltord",
+            "correct": false
+          },
+          {
+            "text": "David Trezeguet",
+            "correct": true
+          },
+          {
+            "text": "Thierry Henry",
+            "correct": false
+          },
+          {
+            "text": "Zinédine Zidane",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "9ca78c464524",
+    "title": "Géographie",
+    "questions": [
+      {
+        "id": "ffab49192730",
+        "type": "choice",
+        "text": "Quelle est la capitale du Canada ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Toronto",
+            "correct": false
+          },
+          {
+            "text": "Ottawa",
+            "correct": true
+          },
+          {
+            "text": "Montréal",
+            "correct": false
+          },
+          {
+            "text": "Vancouver",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "cb6fa64ac64a",
+        "type": "choice",
+        "text": "Quel est le plus long fleuve de France ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Seine",
+            "correct": false
+          },
+          {
+            "text": "Le Rhône",
+            "correct": false
+          },
+          {
+            "text": "La Garonne",
+            "correct": false
+          },
+          {
+            "text": "La Loire",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f50a4254eb6c",
+        "type": "choice",
+        "text": "Quel est le plus grand océan du monde ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'océan Pacifique",
+            "correct": true
+          },
+          {
+            "text": "L'océan Atlantique",
+            "correct": false
+          },
+          {
+            "text": "L'océan Indien",
+            "correct": false
+          },
+          {
+            "text": "L'océan Arctique",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0ef6567ead1a",
+        "type": "choice",
+        "text": "Quel pays a la forme d'une botte ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Grèce",
+            "correct": false
+          },
+          {
+            "text": "Le Portugal",
+            "correct": false
+          },
+          {
+            "text": "L'Italie",
+            "correct": true
+          },
+          {
+            "text": "La Croatie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7e399c27445e",
+        "type": "choice",
+        "text": "Quelle est la plus haute montagne du monde ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Everest",
+            "correct": true
+          },
+          {
+            "text": "Le K2",
+            "correct": false
+          },
+          {
+            "text": "Le mont Blanc",
+            "correct": false
+          },
+          {
+            "text": "Le Kilimandjaro",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9c966c2affa1",
+        "type": "choice",
+        "text": "Quel pays est le plus peuplé du monde depuis 2023 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Chine",
+            "correct": false
+          },
+          {
+            "text": "Les États-Unis",
+            "correct": false
+          },
+          {
+            "text": "L'Indonésie",
+            "correct": false
+          },
+          {
+            "text": "L'Inde",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "94b7073edb6a",
+        "type": "choice",
+        "text": "Quel est le plus petit pays du monde ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Monaco",
+            "correct": false
+          },
+          {
+            "text": "Le Vatican",
+            "correct": true
+          },
+          {
+            "text": "Saint-Marin",
+            "correct": false
+          },
+          {
+            "text": "Le Liechtenstein",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "73b99ea24a4d",
+        "type": "choice",
+        "text": "Avec combien de pays la France métropolitaine partage-t-elle une frontière terrestre ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "6",
+            "correct": false
+          },
+          {
+            "text": "7",
+            "correct": false
+          },
+          {
+            "text": "8",
+            "correct": true
+          },
+          {
+            "text": "9",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "72289ccb43eb",
+        "type": "choice",
+        "text": "Quel est le plus grand désert chaud du monde ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Gobi",
+            "correct": false
+          },
+          {
+            "text": "Le Kalahari",
+            "correct": false
+          },
+          {
+            "text": "Le Sahara",
+            "correct": true
+          },
+          {
+            "text": "L'Atacama",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8db7be54c202",
+        "type": "choice",
+        "text": "Avec la Bolivie, quel pays se partage le lac Titicaca ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Chili",
+            "correct": false
+          },
+          {
+            "text": "L'Équateur",
+            "correct": false
+          },
+          {
+            "text": "L'Argentine",
+            "correct": false
+          },
+          {
+            "text": "Le Pérou",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c0555abd7758",
+        "type": "choice",
+        "text": "Quelle est la capitale de la Turquie ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ankara",
+            "correct": true
+          },
+          {
+            "text": "Istanbul",
+            "correct": false
+          },
+          {
+            "text": "Izmir",
+            "correct": false
+          },
+          {
+            "text": "Antalya",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c6225ad8c6dd",
+        "type": "choice",
+        "text": "Quel est le plus grand pays d'Afrique par sa superficie ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La République démocratique du Congo",
+            "correct": false
+          },
+          {
+            "text": "L'Algérie",
+            "correct": true
+          },
+          {
+            "text": "Le Soudan",
+            "correct": false
+          },
+          {
+            "text": "La Libye",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0cb3949224c4",
+        "type": "choice",
+        "text": "Quel fleuve européen traverse ou longe le plus de pays (dix au total) ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Rhin",
+            "correct": false
+          },
+          {
+            "text": "L'Elbe",
+            "correct": false
+          },
+          {
+            "text": "Le Danube",
+            "correct": true
+          },
+          {
+            "text": "Le Rhône",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5fbff75245ed",
+        "type": "choice",
+        "text": "Quelle est la capitale du Kazakhstan ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Almaty",
+            "correct": false
+          },
+          {
+            "text": "Astana",
+            "correct": true
+          },
+          {
+            "text": "Bichkek",
+            "correct": false
+          },
+          {
+            "text": "Tachkent",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7d7f0805d8fa",
+        "type": "choice",
+        "text": "Quel pays compte le plus de fuseaux horaires, territoires d'outre-mer compris ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Russie",
+            "correct": false
+          },
+          {
+            "text": "Les États-Unis",
+            "correct": false
+          },
+          {
+            "text": "Le Royaume-Uni",
+            "correct": false
+          },
+          {
+            "text": "La France",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "264abecf59c3",
+    "title": "Histoire",
+    "questions": [
+      {
+        "id": "8ac02acfe5ff",
+        "type": "choice",
+        "text": "En 911, le traité de Saint-Clair-sur-Epte, signé entre le roi Charles III et le chef viking Rollon, donne naissance à quelle province ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Bretagne",
+            "correct": false
+          },
+          {
+            "text": "La Normandie",
+            "correct": true
+          },
+          {
+            "text": "La Picardie",
+            "correct": false
+          },
+          {
+            "text": "La Flandre",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6037905623da",
+        "type": "choice",
+        "text": "Quelle phrase Jules César aurait-il prononcée après sa victoire éclair de Zéla, en 47 av. J.-C. ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Alea jacta est",
+            "correct": false
+          },
+          {
+            "text": "Tu quoque, mi fili",
+            "correct": false
+          },
+          {
+            "text": "Veni, vidi, vici",
+            "correct": true
+          },
+          {
+            "text": "Carpe diem",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d0e550110d73",
+        "type": "choice",
+        "text": "Quel conflit oppose la France et l'Angleterre de 1337 à 1453 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La guerre de Cent Ans",
+            "correct": true
+          },
+          {
+            "text": "La guerre de Trente Ans",
+            "correct": false
+          },
+          {
+            "text": "La guerre de Sept Ans",
+            "correct": false
+          },
+          {
+            "text": "Les guerres d'Italie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5a1b39649605",
+        "type": "choice",
+        "text": "Quelle série télévisée a popularisé Ragnar Lothbrok, incarné par Travis Fimmel ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Game of Thrones",
+            "correct": false
+          },
+          {
+            "text": "The Last Kingdom",
+            "correct": false
+          },
+          {
+            "text": "Norsemen",
+            "correct": false
+          },
+          {
+            "text": "Vikings",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b506f948e4c5",
+        "type": "choice",
+        "text": "Comment surnomme-t-on les journées révolutionnaires des 27, 28 et 29 juillet 1830 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Fronde",
+            "correct": false
+          },
+          {
+            "text": "La Semaine sanglante",
+            "correct": false
+          },
+          {
+            "text": "Les Cent-Jours",
+            "correct": false
+          },
+          {
+            "text": "Les Trois Glorieuses",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f9f38034eed4",
+        "type": "choice",
+        "text": "En 1831, quels ouvriers se révoltent à Lyon pour faire appliquer le tarif minimum qu'ils viennent d'obtenir ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les mineurs",
+            "correct": false
+          },
+          {
+            "text": "Les dockers",
+            "correct": false
+          },
+          {
+            "text": "Les canuts",
+            "correct": true
+          },
+          {
+            "text": "Les cheminots",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5cfdfd88bd4c",
+        "type": "choice",
+        "text": "Quel Viking, fils d'Erik le Rouge, serait le premier Européen connu à avoir atteint l'Amérique, qu'il baptisa Vinland ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Leif Erikson",
+            "correct": true
+          },
+          {
+            "text": "Björn Côtes-de-Fer",
+            "correct": false
+          },
+          {
+            "text": "Knut le Grand",
+            "correct": false
+          },
+          {
+            "text": "Harald Hardrada",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f2bae14f7942",
+        "type": "choice",
+        "text": "Vainqueur de la bataille de Tannenberg en 1914, quel président de la république de Weimar nomme Hitler chancelier en 1933 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Gustav Stresemann",
+            "correct": false
+          },
+          {
+            "text": "Paul von Hindenburg",
+            "correct": true
+          },
+          {
+            "text": "Friedrich Ebert",
+            "correct": false
+          },
+          {
+            "text": "Erich Ludendorff",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f5e4b9b7ea24",
+        "type": "choice",
+        "text": "Quel président de la IIIe République est assassiné en 1932 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Paul Deschanel",
+            "correct": false
+          },
+          {
+            "text": "Raymond Poincaré",
+            "correct": false
+          },
+          {
+            "text": "Paul Doumer",
+            "correct": true
+          },
+          {
+            "text": "Sadi Carnot",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "eb89cb4a46bb",
+        "type": "choice",
+        "text": "Qui pilotait l'Enola Gay, le bombardier qui a largué la bombe atomique sur Hiroshima ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Paul Tibbets",
+            "correct": true
+          },
+          {
+            "text": "Charles Lindbergh",
+            "correct": false
+          },
+          {
+            "text": "Chuck Yeager",
+            "correct": false
+          },
+          {
+            "text": "Charles Sweeney",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0e77014d6eb7",
+        "type": "choice",
+        "text": "Quel roi de Norvège, vaincu et tué à Stamford Bridge en 1066, voit sa mort marquer la fin de l'ère viking ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Knut le Grand",
+            "correct": false
+          },
+          {
+            "text": "Harald à la Dent bleue",
+            "correct": false
+          },
+          {
+            "text": "Olaf II Haraldsson",
+            "correct": false
+          },
+          {
+            "text": "Harald Hardrada",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "dd911ebfb6df",
+        "type": "choice",
+        "text": "Pourquoi la révolte paysanne de l'Ariège (1829-1832) a-t-elle été baptisée « guerre des Demoiselles » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Elle était menée par des religieuses",
+            "correct": false
+          },
+          {
+            "text": "Les insurgés se déguisaient en femmes",
+            "correct": true
+          },
+          {
+            "text": "Elle visait les filles de la noblesse locale",
+            "correct": false
+          },
+          {
+            "text": "Elle a éclaté pendant un bal",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "d2d233414b48",
+        "type": "choice",
+        "text": "Quelle guerre, lancée par Louis XIV contre une puissance économique rivale, s'achève par les traités de Nimègue en 1678 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La guerre de Dévolution",
+            "correct": false
+          },
+          {
+            "text": "La guerre de la Ligue d'Augsbourg",
+            "correct": false
+          },
+          {
+            "text": "La guerre de Hollande",
+            "correct": true
+          },
+          {
+            "text": "La guerre de Succession d'Espagne",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f625621896a7",
+        "type": "choice",
+        "text": "Quel chef d'origine suédoise passe pour le fondateur légendaire de la première dynastie de Russie, premier prince de Novgorod ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Rollon",
+            "correct": false
+          },
+          {
+            "text": "Olaf II",
+            "correct": false
+          },
+          {
+            "text": "Riourik",
+            "correct": true
+          },
+          {
+            "text": "Sven à la Barbe fourchue",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9e8b192b71bb",
+        "type": "choice",
+        "text": "Quelle science auxiliaire de l'histoire étudie les ordres, les décorations et les insignes de distinction ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La sigillographie",
+            "correct": false
+          },
+          {
+            "text": "La vexillologie",
+            "correct": false
+          },
+          {
+            "text": "La numismatique",
+            "correct": false
+          },
+          {
+            "text": "La phaléristique",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "01c5399a6560",
+    "title": "Mode",
+    "questions": [
+      {
+        "id": "2bdb3c8a68f7",
+        "type": "choice",
+        "text": "Quelle créatrice française a popularisé la « petite robe noire » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Jeanne Lanvin",
+            "correct": false
+          },
+          {
+            "text": "Coco Chanel",
+            "correct": true
+          },
+          {
+            "text": "Elsa Schiaparelli",
+            "correct": false
+          },
+          {
+            "text": "Madeleine Vionnet",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "89635a4bca0c",
+        "type": "choice",
+        "text": "Quelles villes accueillent les quatre grandes Fashion Weeks ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Paris, Rome, Berlin et Tokyo",
+            "correct": false
+          },
+          {
+            "text": "Milan, Madrid, Moscou et Los Angeles",
+            "correct": false
+          },
+          {
+            "text": "Londres, Bruxelles, Genève et Sydney",
+            "correct": false
+          },
+          {
+            "text": "Paris, Milan, Londres et New York",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1d136d7bbcab",
+        "type": "choice",
+        "text": "Dans quel tissu taille-t-on traditionnellement un jean ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le denim",
+            "correct": true
+          },
+          {
+            "text": "Le tweed",
+            "correct": false
+          },
+          {
+            "text": "Le velours",
+            "correct": false
+          },
+          {
+            "text": "La soie",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "64cc583b0c2a",
+        "type": "choice",
+        "text": "Qu'est-ce que Louis Vuitton fabriquait à ses débuts, au XIXe siècle ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Des chaussures",
+            "correct": false
+          },
+          {
+            "text": "Des parfums",
+            "correct": false
+          },
+          {
+            "text": "Des malles de voyage",
+            "correct": true
+          },
+          {
+            "text": "Des montres",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9934929384cc",
+        "type": "choice",
+        "text": "Quelle marque a pour logo une virgule, le « swoosh » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Nike",
+            "correct": true
+          },
+          {
+            "text": "Adidas",
+            "correct": false
+          },
+          {
+            "text": "Puma",
+            "correct": false
+          },
+          {
+            "text": "Reebok",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "64a69f154847",
+        "type": "number",
+        "text": "En quelle année Christian Dior présente-t-il sa collection « New Look » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "value": 1947,
+        "tolerance": 5,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "e41625add4e5",
+        "type": "choice",
+        "text": "Quel couturier a créé « Le Smoking » pour femme en 1966 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Pierre Cardin",
+            "correct": false
+          },
+          {
+            "text": "André Courrèges",
+            "correct": false
+          },
+          {
+            "text": "Paco Rabanne",
+            "correct": false
+          },
+          {
+            "text": "Yves Saint Laurent",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1427145871f4",
+        "type": "choice",
+        "text": "Quelle créatrice britannique a popularisé la minijupe dans les années 1960 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Vivienne Westwood",
+            "correct": false
+          },
+          {
+            "text": "Mary Quant",
+            "correct": true
+          },
+          {
+            "text": "Stella McCartney",
+            "correct": false
+          },
+          {
+            "text": "Twiggy",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "97b705338908",
+        "type": "choice",
+        "text": "Comment appelle-t-on les vêtements fabriqués en série, dans des tailles standard ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le sur-mesure",
+            "correct": false
+          },
+          {
+            "text": "La haute couture",
+            "correct": false
+          },
+          {
+            "text": "Le prêt-à-porter",
+            "correct": true
+          },
+          {
+            "text": "Le bespoke",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1b748b06f801",
+        "type": "choice",
+        "text": "Anna Wintour est célèbre pour avoir dirigé quel magazine de mode américain ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Elle",
+            "correct": false
+          },
+          {
+            "text": "Harper's Bazaar",
+            "correct": false
+          },
+          {
+            "text": "Marie Claire",
+            "correct": false
+          },
+          {
+            "text": "Vogue",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "90cccbf45d4e",
+        "type": "choice",
+        "text": "Quelle maison italienne a pour emblème une tête de Méduse ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Versace",
+            "correct": true
+          },
+          {
+            "text": "Gucci",
+            "correct": false
+          },
+          {
+            "text": "Prada",
+            "correct": false
+          },
+          {
+            "text": "Fendi",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "eba9c985a7ae",
+        "type": "choice",
+        "text": "Quel créateur a été directeur artistique de Chanel de 1983 jusqu'à sa mort en 2019 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Jean Paul Gaultier",
+            "correct": false
+          },
+          {
+            "text": "Karl Lagerfeld",
+            "correct": true
+          },
+          {
+            "text": "Hedi Slimane",
+            "correct": false
+          },
+          {
+            "text": "Alber Elbaz",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "83c74867e3f5",
+        "type": "choice",
+        "text": "Quel couturier a dessiné le bustier à seins coniques de Madonna pour sa tournée de 1990 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Thierry Mugler",
+            "correct": false
+          },
+          {
+            "text": "Christian Lacroix",
+            "correct": false
+          },
+          {
+            "text": "Jean Paul Gaultier",
+            "correct": true
+          },
+          {
+            "text": "Azzedine Alaïa",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "aab524696df6",
+        "type": "choice",
+        "text": "Comment s'appelle le tailleur emblématique du New Look de Dior ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le tailleur Corolle",
+            "correct": false
+          },
+          {
+            "text": "Le tailleur Bar",
+            "correct": true
+          },
+          {
+            "text": "Le tailleur Trapèze",
+            "correct": false
+          },
+          {
+            "text": "Le tailleur Charleston",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "805ced58b1dc",
+        "type": "choice",
+        "text": "Quelle créatrice a imaginé avec Salvador Dalí la robe homard et le chapeau-chaussure ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Coco Chanel",
+            "correct": false
+          },
+          {
+            "text": "Miuccia Prada",
+            "correct": false
+          },
+          {
+            "text": "Donatella Versace",
+            "correct": false
+          },
+          {
+            "text": "Elsa Schiaparelli",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "cb2ff04a7cbc",
+    "title": "Musique",
+    "questions": [
+      {
+        "id": "521dd3f6d6ea",
+        "type": "choice",
+        "text": "De quelle ville sont originaires les Beatles ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Londres",
+            "correct": false
+          },
+          {
+            "text": "Manchester",
+            "correct": false
+          },
+          {
+            "text": "Liverpool",
+            "correct": true
+          },
+          {
+            "text": "Birmingham",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "07de7446c094",
+        "type": "choice",
+        "text": "Quel titre de Queen, sorti en 1975 sur l'album « A Night at the Opera », est un opéra-rock de près de six minutes ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "We Will Rock You",
+            "correct": false
+          },
+          {
+            "text": "Bohemian Rhapsody",
+            "correct": true
+          },
+          {
+            "text": "Radio Ga Ga",
+            "correct": false
+          },
+          {
+            "text": "Under Pressure",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "4e69656d8333",
+        "type": "number",
+        "text": "En quelle année sort « Voyage, voyage », le tube de Desireless ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "value": 1986,
+        "tolerance": 2,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "8e9203f5d203",
+        "type": "choice",
+        "text": "Dans quelle ville est né Georges Brassens ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Marseille",
+            "correct": false
+          },
+          {
+            "text": "Montpellier",
+            "correct": false
+          },
+          {
+            "text": "Toulouse",
+            "correct": false
+          },
+          {
+            "text": "Sète",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a9dcd957ed80",
+        "type": "choice",
+        "text": "Quel boxeur, grand amour d'Édith Piaf disparu en 1949, est associé à « Hymne à l'amour » et à « Mon Dieu » ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Georges Carpentier",
+            "correct": false
+          },
+          {
+            "text": "Alphonse Halimi",
+            "correct": false
+          },
+          {
+            "text": "Marcel Cerdan",
+            "correct": true
+          },
+          {
+            "text": "Jean-Claude Bouttier",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "2a37c38ffbab",
+        "type": "choice",
+        "text": "Qui a écrit « Le Déserteur » (1954), plaidoyer pacifiste longtemps interdit d'antenne ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Boris Vian",
+            "correct": true
+          },
+          {
+            "text": "Jacques Prévert",
+            "correct": false
+          },
+          {
+            "text": "Léo Ferré",
+            "correct": false
+          },
+          {
+            "text": "Georges Brassens",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "cf69e533c407",
+        "type": "choice",
+        "text": "Quel trio londonien des années 60 est considéré comme le premier « supergroupe » de l'histoire du rock ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "The Who",
+            "correct": false
+          },
+          {
+            "text": "The Kinks",
+            "correct": false
+          },
+          {
+            "text": "The Animals",
+            "correct": false
+          },
+          {
+            "text": "Cream",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "be56c4aa9170",
+        "type": "choice",
+        "text": "Dans quel pays « Tombe la neige » (1963) de Salvatore Adamo a-t-elle connu un succès tel qu'il l'a enregistrée dans la langue locale ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le Brésil",
+            "correct": false
+          },
+          {
+            "text": "Le Japon",
+            "correct": true
+          },
+          {
+            "text": "La Turquie",
+            "correct": false
+          },
+          {
+            "text": "Le Canada",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "567f3ac28016",
+        "type": "choice",
+        "text": "Dans quelle ville américaine la house music est-elle née dans les années 1980 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Detroit",
+            "correct": false
+          },
+          {
+            "text": "New York",
+            "correct": false
+          },
+          {
+            "text": "Chicago",
+            "correct": true
+          },
+          {
+            "text": "Miami",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c9e71f8bff18",
+        "type": "choice",
+        "text": "Quel arc musical brésilien accompagne la capoeira ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le cajón",
+            "correct": false
+          },
+          {
+            "text": "Le berimbau",
+            "correct": true
+          },
+          {
+            "text": "La cuíca",
+            "correct": false
+          },
+          {
+            "text": "Le balafon",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "85dc52c85496",
+        "type": "choice",
+        "text": "Quel duo d'écrivains signe les paroles du « Chant des partisans » (1943) ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Louis Aragon et Paul Éluard",
+            "correct": false
+          },
+          {
+            "text": "Maurice Druon et Joseph Kessel",
+            "correct": true
+          },
+          {
+            "text": "Jean Cocteau et Jean Genet",
+            "correct": false
+          },
+          {
+            "text": "Albert Camus et René Char",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "99bb4a662f36",
+        "type": "choice",
+        "text": "Quel membre de Queen a écrit « Another One Bites the Dust », tube célèbre pour sa ligne de basse ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Freddie Mercury",
+            "correct": false
+          },
+          {
+            "text": "Brian May",
+            "correct": false
+          },
+          {
+            "text": "Roger Taylor",
+            "correct": false
+          },
+          {
+            "text": "John Deacon",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c41259454580",
+        "type": "choice",
+        "text": "Quelle chanson de Jacques Brel n'a jamais été enregistrée en studio et ne figure que sur un album en public ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ne me quitte pas",
+            "correct": false
+          },
+          {
+            "text": "Le Plat Pays",
+            "correct": false
+          },
+          {
+            "text": "Amsterdam",
+            "correct": true
+          },
+          {
+            "text": "Quand on n'a que l'amour",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "717fbac31c65",
+        "type": "choice",
+        "text": "Avec quelle chanteuse Philippe Lavil interprète-t-il « Kolé séré » en 1986 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Tanya Saint-Val",
+            "correct": false
+          },
+          {
+            "text": "Jocelyne Béroard",
+            "correct": true
+          },
+          {
+            "text": "Édith Lefel",
+            "correct": false
+          },
+          {
+            "text": "Princess Lover",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0d4ad6136627",
+        "type": "choice",
+        "text": "Le premier 45 tours des Rolling Stones, « Come On » (1963), est la reprise d'un titre de quel artiste ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Chuck Berry",
+            "correct": true
+          },
+          {
+            "text": "Bo Diddley",
+            "correct": false
+          },
+          {
+            "text": "Muddy Waters",
+            "correct": false
+          },
+          {
+            "text": "Buddy Holly",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "279cbf52f182",
+        "type": "choice",
+        "text": "Quelle chanteuse a fait débuter Georges Brassens dans son cabaret en 1952 ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Juliette Gréco",
+            "correct": false
+          },
+          {
+            "text": "Barbara",
+            "correct": false
+          },
+          {
+            "text": "Mireille",
+            "correct": false
+          },
+          {
+            "text": "Patachou",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "54b6ecb9b49f",
+    "title": "Métros parisiens",
+    "questions": [
+      {
+        "id": "908f67756f71",
+        "type": "choice",
+        "text": "Quelle station de métro dessert l'Arc de triomphe ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Concorde",
+            "correct": false
+          },
+          {
+            "text": "Charles de Gaulle – Étoile",
+            "correct": true
+          },
+          {
+            "text": "George V",
+            "correct": false
+          },
+          {
+            "text": "Trocadéro",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "7205c3e43cbb",
+        "type": "choice",
+        "text": "Comment s'appelle la carte de transport rechargeable d'Île-de-France ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Oyster",
+            "correct": false
+          },
+          {
+            "text": "Viva",
+            "correct": false
+          },
+          {
+            "text": "Pass Lutèce",
+            "correct": false
+          },
+          {
+            "text": "Navigo",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f7eaf536597c",
+        "type": "choice",
+        "text": "Quelle est la couleur de la ligne 1 sur le plan du métro ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Jaune",
+            "correct": true
+          },
+          {
+            "text": "Bleu",
+            "correct": false
+          },
+          {
+            "text": "Vert",
+            "correct": false
+          },
+          {
+            "text": "Rouge",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "f22bc9e6ebc5",
+        "type": "choice",
+        "text": "Quel architecte a dessiné les célèbres entrées Art nouveau du métro ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Gustave Eiffel",
+            "correct": false
+          },
+          {
+            "text": "Le Corbusier",
+            "correct": false
+          },
+          {
+            "text": "Hector Guimard",
+            "correct": true
+          },
+          {
+            "text": "Georges-Eugène Haussmann",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "8ca057419601",
+        "type": "choice",
+        "text": "Quelle ligne est entièrement automatique depuis son ouverture en 1998 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ligne 1",
+            "correct": false
+          },
+          {
+            "text": "Ligne 4",
+            "correct": false
+          },
+          {
+            "text": "Ligne 6",
+            "correct": false
+          },
+          {
+            "text": "Ligne 14",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b2e5a6a22602",
+        "type": "number",
+        "text": "En quelle année ouvre la première ligne du métro parisien ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "value": 1900,
+        "tolerance": 5,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "064b73f53e5a",
+        "type": "choice",
+        "text": "Quelle ligne aérienne traverse la Seine sur le pont de Bir-Hakeim ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ligne 2",
+            "correct": false
+          },
+          {
+            "text": "Ligne 5",
+            "correct": false
+          },
+          {
+            "text": "Ligne 6",
+            "correct": true
+          },
+          {
+            "text": "Ligne 10",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1f9aaf16c0ee",
+        "type": "choice",
+        "text": "Quelle station est décorée de reproductions d'œuvres du Louvre ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Louvre – Rivoli",
+            "correct": true
+          },
+          {
+            "text": "Concorde",
+            "correct": false
+          },
+          {
+            "text": "Tuileries",
+            "correct": false
+          },
+          {
+            "text": "Saint-Paul",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b3f86639dbed",
+        "type": "choice",
+        "text": "Combien de lignes de métro desservent la station Châtelet ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "3",
+            "correct": false
+          },
+          {
+            "text": "4",
+            "correct": false
+          },
+          {
+            "text": "5",
+            "correct": true
+          },
+          {
+            "text": "6",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "69e5e151decd",
+        "type": "choice",
+        "text": "Comment surnomme-t-on les stations fermées au public, comme Saint-Martin ou Arsenal ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Les stations dormantes",
+            "correct": false
+          },
+          {
+            "text": "Les stations murées",
+            "correct": false
+          },
+          {
+            "text": "Les stations oubliées",
+            "correct": false
+          },
+          {
+            "text": "Les stations fantômes",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "0ef14994b730",
+        "type": "choice",
+        "text": "Que signifie le sigle RATP ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Réseau automatique des trains parisiens",
+            "correct": false
+          },
+          {
+            "text": "Régie autonome des transports parisiens",
+            "correct": true
+          },
+          {
+            "text": "Régie administrative des transports publics",
+            "correct": false
+          },
+          {
+            "text": "Réseau autonome de transport de Paris",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "24017f677273",
+        "type": "choice",
+        "text": "Quelle ligne a été la première à être automatisée alors qu'elle était déjà en service (2012) ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ligne 1",
+            "correct": true
+          },
+          {
+            "text": "Ligne 4",
+            "correct": false
+          },
+          {
+            "text": "Ligne 6",
+            "correct": false
+          },
+          {
+            "text": "Ligne 9",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9e529f8f4c92",
+        "type": "choice",
+        "text": "Sur quelle ligne se trouve le quai d'Arts et Métiers habillé de cuivre comme le Nautilus de Jules Verne ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ligne 3",
+            "correct": false
+          },
+          {
+            "text": "Ligne 7",
+            "correct": false
+          },
+          {
+            "text": "Ligne 11",
+            "correct": true
+          },
+          {
+            "text": "Ligne 13",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "be5aaa16b596",
+        "type": "choice",
+        "text": "Quel ingénieur est surnommé le « père du métro » parisien ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Hector Guimard",
+            "correct": false
+          },
+          {
+            "text": "Gustave Eiffel",
+            "correct": false
+          },
+          {
+            "text": "Fulgence Bienvenüe",
+            "correct": true
+          },
+          {
+            "text": "Jean-Baptiste Berlier",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5ba1b46eb77f",
+        "type": "choice",
+        "text": "Sur quelle ligne se trouve Cluny – La Sorbonne, dont le plafond reproduit des signatures d'écrivains et de savants ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Ligne 4",
+            "correct": false
+          },
+          {
+            "text": "Ligne 10",
+            "correct": true
+          },
+          {
+            "text": "Ligne 12",
+            "correct": false
+          },
+          {
+            "text": "Ligne 13",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "cb9769a2d155",
+    "title": "Pokémon",
+    "questions": [
+      {
+        "id": "37cb6a1caedc",
+        "type": "choice",
+        "text": "Quel Pokémon accompagne Sacha depuis le tout premier épisode de l'anime ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Salamèche",
+            "correct": false
+          },
+          {
+            "text": "Pikachu",
+            "correct": true
+          },
+          {
+            "text": "Évoli",
+            "correct": false
+          },
+          {
+            "text": "Rondoudou",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6766c01ba2b5",
+        "type": "choice",
+        "text": "Quel jeu mobile sorti en 2016 permet de capturer des Pokémon dans la rue, en réalité augmentée ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Pokémon Unite",
+            "correct": false
+          },
+          {
+            "text": "Pokémon Sleep",
+            "correct": false
+          },
+          {
+            "text": "Pokémon Café Mix",
+            "correct": false
+          },
+          {
+            "text": "Pokémon GO",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "923aa7239c7e",
+        "type": "choice",
+        "text": "Comment s'appelle le trio de méchants qui poursuit Sacha avec Miaouss ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Team Rocket",
+            "correct": true
+          },
+          {
+            "text": "La Team Magma",
+            "correct": false
+          },
+          {
+            "text": "La Team Galaxie",
+            "correct": false
+          },
+          {
+            "text": "La Team Plasma",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "430f58aa1eac",
+        "type": "choice",
+        "text": "Combien de Pokémon compte le Pokédex de la première génération ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "100",
+            "correct": false
+          },
+          {
+            "text": "151",
+            "correct": true
+          },
+          {
+            "text": "251",
+            "correct": false
+          },
+          {
+            "text": "386",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "1e8f59ba04e4",
+        "type": "choice",
+        "text": "Quel Pokémon rose chante une berceuse qui endort tout le monde… puis se vexe ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Mélofée",
+            "correct": false
+          },
+          {
+            "text": "Togepi",
+            "correct": false
+          },
+          {
+            "text": "Rondoudou",
+            "correct": true
+          },
+          {
+            "text": "Psykokwak",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a45fd301b1c2",
+        "type": "choice",
+        "text": "En quoi Salamèche évolue-t-il en premier ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Reptincel",
+            "correct": true
+          },
+          {
+            "text": "Dracaufeu",
+            "correct": false
+          },
+          {
+            "text": "Feunard",
+            "correct": false
+          },
+          {
+            "text": "Galopa",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "30d55e9c3db7",
+        "type": "choice",
+        "text": "Quel Pokémon endormi bloque la route et ne se réveille qu'au son de la Poké Flûte ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Lokhlass",
+            "correct": false
+          },
+          {
+            "text": "Porygon",
+            "correct": false
+          },
+          {
+            "text": "Kangourex",
+            "correct": false
+          },
+          {
+            "text": "Ronflex",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "761cacb1a2cb",
+        "type": "number",
+        "text": "En quelle année sortent au Japon les premiers jeux Pokémon, Rouge et Vert ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "value": 1996,
+        "tolerance": 5,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "e9ccc310b3e2",
+        "type": "choice",
+        "text": "Quel professeur remet son premier Pokémon au joueur dans la région de Kanto ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le professeur Orme",
+            "correct": false
+          },
+          {
+            "text": "Le professeur Chen",
+            "correct": true
+          },
+          {
+            "text": "Le professeur Seko",
+            "correct": false
+          },
+          {
+            "text": "Le professeur Platane",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "6b4bdf62a6a0",
+        "type": "choice",
+        "text": "Quelle pierre fait évoluer Évoli en Pyroli ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "La Pierre Eau",
+            "correct": false
+          },
+          {
+            "text": "La Pierre Foudre",
+            "correct": false
+          },
+          {
+            "text": "La Pierre Feu",
+            "correct": true
+          },
+          {
+            "text": "La Pierre Lune",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "82afee76ac0b",
+        "type": "choice",
+        "text": "Quel Pokémon légendaire a été créé en laboratoire à partir de l'ADN de Mew ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Lugia",
+            "correct": false
+          },
+          {
+            "text": "Celebi",
+            "correct": false
+          },
+          {
+            "text": "Arceus",
+            "correct": false
+          },
+          {
+            "text": "Mewtwo",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "42c8047106e0",
+        "type": "choice",
+        "text": "Quel Pokémon porte le numéro 001 du Pokédex national ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Bulbizarre",
+            "correct": true
+          },
+          {
+            "text": "Pikachu",
+            "correct": false
+          },
+          {
+            "text": "Mew",
+            "correct": false
+          },
+          {
+            "text": "Arceus",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c49bc61b332b",
+        "type": "choice",
+        "text": "Dans quelle ville se trouve l'arène de Pierre, premier champion de Kanto ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Azuria",
+            "correct": false
+          },
+          {
+            "text": "Argenta",
+            "correct": true
+          },
+          {
+            "text": "Carmin sur Mer",
+            "correct": false
+          },
+          {
+            "text": "Céladopole",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "a341c5202770",
+        "type": "choice",
+        "text": "Quel type d'attaque est super efficace contre les Pokémon de type Spectre ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Normal",
+            "correct": false
+          },
+          {
+            "text": "Combat",
+            "correct": false
+          },
+          {
+            "text": "Ténèbres",
+            "correct": true
+          },
+          {
+            "text": "Psy",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "79ab1924d6b5",
+        "type": "choice",
+        "text": "Selon une célèbre rumeur de cour de récré, quel Pokémon se cachait sous le camion garé près du S.S. Anne ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Mewtwo",
+            "correct": false
+          },
+          {
+            "text": "Mew",
+            "correct": true
+          },
+          {
+            "text": "Ronflex",
+            "correct": false
+          },
+          {
+            "text": "Lokhlass",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
+  },
+  {
+    "id": "82adf1bd2405",
+    "title": "Réalité virtuelle",
+    "questions": [
+      {
+        "id": "c39098f23aa0",
+        "type": "choice",
+        "text": "Que signifie le sigle VR ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Video Rendering",
+            "correct": false
+          },
+          {
+            "text": "Virtual Reality",
+            "correct": true
+          },
+          {
+            "text": "Visual Range",
+            "correct": false
+          },
+          {
+            "text": "Vision Rapide",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5a61cb81145f",
+        "type": "choice",
+        "text": "Quelle entreprise a racheté Oculus en 2014 ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Google",
+            "correct": false
+          },
+          {
+            "text": "Microsoft",
+            "correct": false
+          },
+          {
+            "text": "Sony",
+            "correct": false
+          },
+          {
+            "text": "Facebook (aujourd'hui Meta)",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "c592fdaa875e",
+        "type": "choice",
+        "text": "Comment s'appelle le casque de réalité virtuelle de Sony pour la PlayStation ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "PlayStation VR",
+            "correct": true
+          },
+          {
+            "text": "Vive",
+            "correct": false
+          },
+          {
+            "text": "Quest",
+            "correct": false
+          },
+          {
+            "text": "Index",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "9547f3a583cc",
+        "type": "choice",
+        "text": "En réalité augmentée, que voit l'utilisateur ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Un monde 100 % virtuel",
+            "correct": false
+          },
+          {
+            "text": "Un film en 3D",
+            "correct": false
+          },
+          {
+            "text": "Le monde réel enrichi d'éléments virtuels",
+            "correct": true
+          },
+          {
+            "text": "Un hologramme sans écran",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "47f6acb76b12",
+        "type": "choice",
+        "text": "Dans quel jeu VR tranche-t-on des blocs en rythme avec deux sabres lumineux ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Beat Saber",
+            "correct": true
+          },
+          {
+            "text": "Just Dance",
+            "correct": false
+          },
+          {
+            "text": "Guitar Hero",
+            "correct": false
+          },
+          {
+            "text": "Rock Band",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "bbb47e4e1198",
+        "type": "choice",
+        "text": "Quel casque autonome, sans PC ni câble, Oculus a-t-il lancé en 2019 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Oculus Rift",
+            "correct": false
+          },
+          {
+            "text": "Le HTC Vive",
+            "correct": false
+          },
+          {
+            "text": "Le Valve Index",
+            "correct": false
+          },
+          {
+            "text": "L'Oculus Quest",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "e0cda5f2d44f",
+        "type": "choice",
+        "text": "Comment appelle-t-on le mal des transports (nausées) que certains ressentent en VR ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'acouphène",
+            "correct": false
+          },
+          {
+            "text": "La cinétose",
+            "correct": true
+          },
+          {
+            "text": "La photophobie",
+            "correct": false
+          },
+          {
+            "text": "Le syndrome de Ménière",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "5c7465250faf",
+        "type": "choice",
+        "text": "Quelle marque taïwanaise a conçu le casque Vive avec Valve en 2016 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Asus",
+            "correct": false
+          },
+          {
+            "text": "Acer",
+            "correct": false
+          },
+          {
+            "text": "HTC",
+            "correct": true
+          },
+          {
+            "text": "Lenovo",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "bcdb5f94c6ec",
+        "type": "choice",
+        "text": "Quel casque Apple a-t-il lancé en 2024 ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "L'Apple Glass",
+            "correct": false
+          },
+          {
+            "text": "L'iSight VR",
+            "correct": false
+          },
+          {
+            "text": "L'Apple Reality One",
+            "correct": false
+          },
+          {
+            "text": "L'Apple Vision Pro",
+            "correct": true
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "74b20ef01230",
+        "type": "choice",
+        "text": "Combien de degrés de liberté (DoF) offre un casque qui suit à la fois la rotation et les déplacements de la tête ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "3",
+            "correct": false
+          },
+          {
+            "text": "4",
+            "correct": false
+          },
+          {
+            "text": "6",
+            "correct": true
+          },
+          {
+            "text": "9",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "880d00ea51e9",
+        "type": "choice",
+        "text": "Quel jeu VR de Valve, sorti en 2020, se déroule dans l'univers de Half-Life ?",
+        "image": "",
+        "points": 200,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Half-Life: Alyx",
+            "correct": true
+          },
+          {
+            "text": "Portal VR",
+            "correct": false
+          },
+          {
+            "text": "Half-Life 3",
+            "correct": false
+          },
+          {
+            "text": "Black Mesa VR",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "b97516029ab5",
+        "type": "number",
+        "text": "En quelle année Ivan Sutherland présente-t-il le premier casque de réalité virtuelle, surnommé « l'Épée de Damoclès » ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "value": 1968,
+        "tolerance": 10,
+        "unit": "",
+        "mode": "tolerance"
+      },
+      {
+        "id": "738c00e7e488",
+        "type": "choice",
+        "text": "Qui a fondé Oculus et conçu le prototype du Rift ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "John Carmack",
+            "correct": false
+          },
+          {
+            "text": "Palmer Luckey",
+            "correct": true
+          },
+          {
+            "text": "Gabe Newell",
+            "correct": false
+          },
+          {
+            "text": "Mark Zuckerberg",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "05a1de167297",
+        "type": "choice",
+        "text": "Comment appelle-t-on la technique qui calcule en haute définition seulement la zone regardée par l'œil ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "Le ray tracing",
+            "correct": false
+          },
+          {
+            "text": "L'anticrénelage",
+            "correct": false
+          },
+          {
+            "text": "Le rendu fovéal",
+            "correct": true
+          },
+          {
+            "text": "Le mip-mapping",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      },
+      {
+        "id": "06e33bab7f5e",
+        "type": "choice",
+        "text": "Quel romancier a inventé le mot « métavers » dans Le Samouraï virtuel (1992) ?",
+        "image": "",
+        "points": 300,
+        "time": 30,
+        "trap": false,
+        "choices": [
+          {
+            "text": "William Gibson",
+            "correct": false
+          },
+          {
+            "text": "Neal Stephenson",
+            "correct": true
+          },
+          {
+            "text": "Philip K. Dick",
+            "correct": false
+          },
+          {
+            "text": "Ernest Cline",
+            "correct": false
+          }
+        ],
+        "multi": false,
+        "partial": false
+      }
+    ],
+    "updatedAt": "2026-11-25T17:51:56.149Z"
   }
 ]
