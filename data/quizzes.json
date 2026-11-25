@@ -3611,6 +3611,51 @@
         "sliderStep": 50
       },
       {
+        "id": "a9c3bcde66b8",
+        "type": "number",
+        "text": "Combien d’espèces animales et végétales sont reconstituées dans l’Expédition Immersive « Mondes Disparus » ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "value": 162,
+        "tolerance": 10,
+        "mode": "tolerance",
+        "unit": "espèces",
+        "sliderMin": null,
+        "sliderMax": null,
+        "sliderStep": null
+      },
+      {
+        "id": "ff42edf8a46c",
+        "type": "choice",
+        "text": "Dans « Mission : ScanPyramids », quelle technologie utilise les particules cosmiques pour voir à travers la pierre de la pyramide de Khéops ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "multi": false,
+        "partial": false,
+        "choices": [
+          {
+            "text": "La radiographie",
+            "correct": false
+          },
+          {
+            "text": "La spectrographie",
+            "correct": false
+          },
+          {
+            "text": "L’échographie",
+            "correct": false
+          },
+          {
+            "text": "La muographie",
+            "correct": true
+          }
+        ]
+      },
+      {
         "id": "4a5b2d2cc163",
         "type": "choice",
         "text": "Quel minuscule animal est capable de survivre dans l'espace ?",
@@ -3669,6 +3714,6 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795601271241
+    "updatedAt": 1795620051396
   }
 ]
