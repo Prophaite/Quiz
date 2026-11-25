@@ -82,15 +82,26 @@
     return { min: clean(min, step), max: clean(max, step), step, auto: true };
   }
 
-  /** Plage d'une question : min / max fixés par l'animateur s'ils sont valides, sinon automatique. */
+  /** Plage d'une question : min / max / pas fixés par l'animateur s'ils sont valides, sinon automatiques. */
   function forQuestion(q) {
     const lo = q.sliderMin, hi = q.sliderMax;
     const v = Number(q.value) || 0;
+    const set = (x) => x !== null && x !== undefined && x !== '' && Number.isFinite(Number(x));
     let r;
-    if (lo !== null && lo !== undefined && lo !== '' && hi !== null && hi !== undefined && hi !== '' && Number(hi) > Number(lo)) {
+    if (set(lo) && set(hi) && Number(hi) > Number(lo)) {
       const min = Number(lo), max = Number(hi);
       r = { min, max, step: Math.min(stepFor(max - min, v), precision(min)), auto: false };
     } else r = auto(v, q.tolerance, q.id);
+    // Pas fixé par l'animateur (ex. 50) : utilisé tel quel s'il tient dans la plage
+    const st = Number(q.sliderStep);
+    if (set(q.sliderStep) && st > 0 && st <= r.max - r.min) {
+      r.step = st;
+      if (r.auto) { // bornes automatiques recalées sur la grille de ce pas
+        r.min = clean(Math.floor(r.min / st + 1e-9) * st, st);
+        r.max = clean(Math.ceil(r.max / st - 1e-9) * st, st);
+      }
+      r.fixedStep = true;
+    }
     // contains : la réponse est dans la plage ; exact : on peut l'atteindre exactement avec le pas
     return { ...r, contains: v >= r.min && v <= r.max, exact: reachable(r, v) };
   }

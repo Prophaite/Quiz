@@ -68,6 +68,11 @@
   .slider-box input[type=range]::-moz-range-progress { height: 12px; border-radius: 99px; background: #ffd34d; }
   .slider-box input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 36px; height: 36px; margin-top: -12px; border-radius: 50%; background: #fff; border: 4px solid #ffd34d; box-shadow: 0 3px 8px rgba(0,0,0,.35); }
   .slider-box input[type=range]::-moz-range-thumb { width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 4px solid #ffd34d; box-shadow: 0 3px 8px rgba(0,0,0,.35); }
+  /* Zone tactile posée sur le curseur : c'est elle qui gère le glissement (vite = suit le doigt, lent = précis) */
+  .slider-track { position: relative; }
+  .slider-track input[type=range] { pointer-events: none; }
+  .slider-touch { position: absolute; inset: -8px 0; touch-action: none; cursor: pointer; }
+  .slider-tip { text-align: center; font-size: 13px; opacity: .75; margin-top: -8px; }
   .slider-scale { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; opacity: .75; margin-top: -6px; }
   .slider-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .slider-btns button { font: inherit; font-size: 26px; font-weight: 900; padding: 6px; border-radius: 12px; border: 0; background: rgba(255,255,255,.18); color: #fff; cursor: pointer; touch-action: manipulation; user-select: none; }
@@ -732,7 +737,11 @@ function renderSlider(s, head) {
   $('#main').innerHTML = `${head}
     <div class="slider-box">
       <div class="slider-val"><span id="sval"></span>${q.unit ? ` <small>${esc(q.unit)}</small>` : ''}</div>
-      <input type="range" id="slider" min="${min}" max="${max}" step="${step}" value="${snap((min + max) / 2)}" aria-label="Ta valeur">
+      <div class="slider-track">
+        <input type="range" id="slider" min="${min}" max="${max}" step="${step}" value="${snap((min + max) / 2)}" aria-label="Ta valeur" tabindex="-1">
+        <div class="slider-touch" id="sliderTouch"></div>
+      </div>
+      <div class="slider-tip">Glisse lentement pour régler finement</div>
       <div class="slider-scale"><span>${show(min)}</span><span>${show(max)}</span></div>
       <div class="slider-btns"><button type="button" data-d="-1" aria-label="Moins">−</button><button type="button" data-d="1" aria-label="Plus">+</button></div>
     </div>
@@ -746,6 +755,41 @@ function renderSlider(s, head) {
   };
   slider.oninput = update;
   update();
+  // Glissement : le curseur suit le doigt quand on va vite, et devient de plus en plus précis
+  // quand on ralentit (jusqu'à ~10 fois moins sensible), sans passer par les boutons −/+.
+  // Toucher la barre loin du rond y saute directement ; toucher le rond le reprend où il est.
+  const THUMB = 18; // demi-largeur du rond (px)
+  let drag = null;
+  const touch = $('#sliderTouch');
+  touch.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    const r = slider.getBoundingClientRect();
+    const usable = Math.max(1, r.width - 2 * THUMB);
+    const perPx = (max - min) / usable;
+    const cur = Number(slider.value);
+    const thumbX = r.left + THUMB + ((cur - min) / (max - min)) * usable;
+    const raw = Math.abs(e.clientX - thumbX) > THUMB + 6 ? Math.min(max, Math.max(min, min + (e.clientX - r.left - THUMB) * perPx)) : cur;
+    drag = { id: e.pointerId, raw, perPx, x: e.clientX, t: e.timeStamp };
+    try { touch.setPointerCapture(e.pointerId); } catch {} // le doigt peut sortir de la barre sans lâcher le curseur
+    slider.value = snap(raw);
+    update();
+  });
+  touch.addEventListener('pointermove', (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x;
+    const dt = Math.max(1, e.timeStamp - drag.t);
+    drag.x = e.clientX;
+    drag.t = e.timeStamp;
+    if (!dx) return;
+    const speed = Math.abs(dx) / dt; // px / ms
+    const gain = speed <= 0.08 ? 0.1 : speed >= 0.5 ? 1 : 0.1 + (0.9 * (speed - 0.08)) / 0.42;
+    drag.raw = Math.min(max, Math.max(min, drag.raw + dx * drag.perPx * gain));
+    slider.value = snap(drag.raw);
+    update();
+  });
+  const endDrag = (e) => { if (drag && e.pointerId === drag.id) drag = null; };
+  touch.addEventListener('pointerup', endDrag);
+  touch.addEventListener('pointercancel', endDrag);
   // −/+ : un cran par appui, et défilement de plus en plus rapide si on garde le doigt dessus
   document.querySelectorAll('[data-d]').forEach((b) => {
     let timer = null;

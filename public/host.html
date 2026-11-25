@@ -491,9 +491,10 @@ function sliderHint(q) {
   const r = QSlider.forQuestion(q);
   const u = q.unit ? ' ' + esc(q.unit) : '';
   let h = `🎚 Les joueurs répondent avec un curseur de <b>${fmt(r.min)}${u}</b> à <b>${fmt(r.max)}${u}</b> (pas de ${fmt(r.step)})`;
-  h += r.auto ? ', calculé automatiquement d’après la valeur. Laissez min et max vides, ou fixez-les vous-même.' : '.';
+  h += r.auto ? ', calculé automatiquement d’après la valeur. Laissez min, max et pas vides, ou fixez-les vous-même.' : '.';
+  h += ' Les joueurs peuvent aussi taper un nombre précis.';
   if (!r.contains) h += ' <b style="color:var(--ko)">⚠ La valeur exacte est en dehors de cette plage !</b>';
-  else if (!r.exact) h += ' <span style="color:var(--warn)">⚠ Le curseur ne permet pas de tomber pile sur la valeur : prévoyez une tolérance ou le mode « le plus proche ».</span>';
+  else if (!r.exact) h += ' <span style="color:var(--warn)">ℹ Le curseur ne tombe pas pile sur la valeur (il faut la taper) : une tolérance ou le mode « le plus proche » aide ceux qui utilisent le curseur.</span>';
   return h;
 }
 
@@ -561,6 +562,7 @@ function questionCard(q, i) {
       </label>
       <label class="field">Curseur : min<input type="number" step="any" data-q="${i}" data-f="sliderMin" value="${q.sliderMin ?? ''}" placeholder="auto"></label>
       <label class="field">Curseur : max<input type="number" step="any" data-q="${i}" data-f="sliderMax" value="${q.sliderMax ?? ''}" placeholder="auto"></label>
+      <label class="field">Curseur : pas<input type="number" step="any" min="0" data-q="${i}" data-f="sliderStep" value="${q.sliderStep ?? ''}" placeholder="auto"></label>
     </div>
     <p class="hint" data-sliderhint="${i}">${sliderHint(q)}</p></div>`;
   }
@@ -603,7 +605,7 @@ qbox.addEventListener('input', (e) => {
     else if (f === 'fuzzy') q.fuzzy = el.checked;
     else if (f === 'trap') { q.trap = el.checked; el.closest('.qcard').classList.toggle('trap', el.checked); }
     else if (f === 'multimode') return; // géré par l'événement « change »
-    else if (f === 'sliderMin' || f === 'sliderMax') q[f] = el.value === '' ? null : Number(el.value); // vide = automatique
+    else if (f === 'sliderMin' || f === 'sliderMax' || f === 'sliderStep') q[f] = el.value === '' ? null : Number(el.value); // vide = automatique
     else if (['points', 'time', 'value', 'tolerance', 'maxKm'].includes(f)) {
       q[f] = el.value === '' ? 0 : Number(el.value);
       if (q.type === 'map') editorMaps.get(q.id)?.refresh();

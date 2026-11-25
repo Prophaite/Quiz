@@ -256,6 +256,7 @@ function cleanQuestion(q = {}) {
     const bound = (x) => (x === null || x === undefined || x === '' || !Number.isFinite(Number(x)) ? null : num(x, -1e15, 1e15, 0));
     out.sliderMin = bound(q.sliderMin);
     out.sliderMax = bound(q.sliderMax);
+    out.sliderStep = bound(q.sliderStep) > 0 ? bound(q.sliderStep) : null; // pas du curseur (vide = automatique)
   }
   return out;
 }

@@ -3595,6 +3595,22 @@
         "partial": false
       },
       {
+        "id": "2663b40e66ed",
+        "type": "number",
+        "text": "Combien de commits compte le projet Pyrates ?",
+        "image": "",
+        "points": 100,
+        "time": 30,
+        "trap": false,
+        "value": 11768,
+        "tolerance": 300,
+        "mode": "tolerance",
+        "unit": "commits",
+        "sliderMin": 6000,
+        "sliderMax": 19000,
+        "sliderStep": 50
+      },
+      {
         "id": "4a5b2d2cc163",
         "type": "choice",
         "text": "Quel minuscule animal est capable de survivre dans l'espace ?",
@@ -3653,6 +3669,6 @@
         "partial": false
       }
     ],
-    "updatedAt": 1795600760720
+    "updatedAt": 1795601271241
   }
 ]
